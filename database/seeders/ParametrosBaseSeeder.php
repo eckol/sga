@@ -27,6 +27,9 @@ class ParametrosBaseSeeder extends Seeder
 
         // 6. Ciclos
         $this->importarCsv('ciclos', 'ciclos.csv', ['id', 'ciclo']);
+
+        // 7. Grados y Cursos
+        $this->importarCsv('gc', 'gc.csv', ['id', 'grado_curso', 'turno', 'ciclo_id']);
     }
 
     private function importarCsv($tabla, $archivo, $columnas)
