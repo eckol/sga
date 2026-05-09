@@ -1,0 +1,839 @@
+﻿fecha;anio_lect;cid_alumno;gc_id;procede;fpago;madres.nombre;padres.nombre;encargados.nombre;parentezco;arancel;aut_mochila;aut_foto
+09/12/2025;2026;8002330;15;C.S.T.;Mensual;Nilda Mabel González;Francisco González;--;--;6300000;Sí;Sí
+09/12/2025;2026;8909077;7;C.S.T.;Mensual;Deisy Gissella Gamarra Aguilar;Jorge Ariel Arce Ramírez;--;--;6300000;Sí;Sí
+09/12/2025;2026;8945432;7;C.S.T.;Mensual;Alejandra Raquel Cano Díaz;Juan Carlos Pérez Dipp;--;--;6300000;Sí;Sí
+09/12/2025;2026;8559414;10;C.S.T.;Mensual;Patricia Lorena Villalba Candia;José Emilio López Cañete;--;--;6300000;Sí;Sí
+09/12/2025;2026;7301182;25;C.S.T.;Mensual;Cynthia Carolina García Ibarra;--;--;--;7000000;Sí;Sí
+09/12/2025;2026;8656723;9;C.S.T.;Mensual;Catalina Feltez Domínguez;Christian Agustín Rodas Armoa;--;--;6300000;Sí;Sí
+09/12/2025;2026;9211563;5;C.S.T.;Mensual;Catalina Feltez Domínguez;Christian Agustín Rodas Armoa;--;--;6300000;Sí;Sí
+09/12/2025;2026;6509723;27;C.S.T.;Mensual;María Angélica Ocampos de Agüero;Aldo Marcel Agüero Falcón;--;--;7000000;Sí;Sí
+09/12/2025;2026;8010346;15;C.S.T.;Mensual;Cinthia Paola Vera de Parra;Jhonnattan Parra Villasboa;--;--;6300000;Sí;Sí
+09/12/2025;2026;6300000;27;C.S.T.;Mensual;Cinthia Paola Vera de Parra;Jhonnattan Parra Villasboa;--;--;7000000;Sí;Sí
+09/12/2025;2026;8366104;12;C.S.T.;Mensual;Silvia Mendoza;Sergio Resquín;--;--;6300000;Sí;Sí
+09/12/2025;2026;6529052;27;C.S.T.;Mensual;Diana Carolina Salcedo Caballero;Robert Teodulo Salinas Guerreño;--;--;7000000;Sí;Sí
+09/12/2025;2026;7200688;23;C.S.T.;Mensual;Malbi Natalia Amarilla de Rotela;Elvio Anastasio Rotela;--;--;7000000;Sí;Sí
+09/12/2025;2026;9208034;4;--;Mensual;Patricia Graciela Noguera Martínez;José María Orué Gamarra;--;--;6300000;Sí;Sí
+09/12/2025;2026;8042305;15;C.S.T.;Mensual;Sara Alarcón;Guillermo Aquino;--;--;6300000;Sí;Sí
+09/12/2025;2026;8800852;5;C.S.T.;Mensual;Silvana Raquel Ramírez Araújo;Diego Arnaldo Gavilán Burgos;--;--;6300000;Sí;Sí
+09/12/2025;2026;9109219;1;--;Mensual;Diana Vallejos;Pablo Sanabria;--;--;6300000;Sí;Sí
+09/12/2025;2026;7775414;19;C.S.T.;Mensual;Diana Vallejos;Pablo Sanabria;--;--;7000000;Sí;Sí
+09/12/2025;2026;8213844;15;C.S.T.;Mensual;Diana Vallejos;Pablo Sanabria;--;--;6300000;Sí;Sí
+09/12/2025;2026;8435580;9;C.S.T.;Mensual;Claudia Vanessa Galeano Graupera;--;--;--;6300000;Sí;Sí
+09/12/2025;2026;8896825;3;C.S.T.;Mensual;Graciela Vera Méndez;Juan Arnaldo Mareco;--;--;6300000;Sí;Sí
+09/12/2025;2026;6940905;23;C.S.T.;Mensual;Marta Raquel Rodríguez Brítos;José Williams Dionisio Duarte Báez;--;--;7000000;Sí;Sí
+09/12/2025;2026;8664173;8;C.S.T.;Mensual;Lilia Gisselle Zárate Benítez;Juan Fernando Villalba;--;--;6300000;Sí;Sí
+09/12/2025;2026;9304105;4;--;Mensual;Lilia Gisselle Zárate Benítez;Juan Fernando Villalba;--;--;6300000;Sí;Sí
+09/12/2025;2026;8756449;12;C.S.T.;Mensual;Quelly Karina Romero Jara;Agustín Ariel Armoa Benítez;--;--;6300000;Sí;Sí
+09/12/2025;2026;7735258;18;C.S.T.;Mensual;Quelly Karina Romero Jara;Agustín Ariel Armoa Benítez;--;--;6300000;Sí;Sí
+09/12/2025;2026;7745359;23;C.S.T.;Mensual;Luz Teresita Benítez;Rodolfo Enrique Rodríguez;--;--;7000000;Sí;Sí
+09/12/2025;2026;8965274;2;--;Mensual;Luz Teresita Benítez;Rodolfo Enrique Rodríguez;--;--;6300000;Sí;Sí
+09/12/2025;2026;7202470;28;C.S.T.;Mensual;María Mercedes Ibáñez Miranda;--;Lucina Miranda Vda. De Ibáñez;Abuela;7000000;Sí;Sí
+09/12/2025;2026;8351372;11;C.S.T.;Mensual;Ana Alarcón;Diego Almeida;--;--;6300000;Sí;Sí
+09/12/2025;2026;7344531;23;C.S.T.;Mensual;Nury Oscarina Barrios Acosta;Jorge Velázquez;Estela Acosta González;Abuela;7000000;Sí;Sí
+09/12/2025;2026;8761617;5;C.S.T.;Mensual;Albina Bazán;Christian Alberto Ramírez Pane;--;--;6300000;Sí;Sí
+09/12/2025;2026;8898696;3;C.S.T.;Mensual;Verónica Rosabel Ortíz de López;Fabio Daniel López Areco;--;--;6300000;Sí;Sí
+09/12/2025;2026;8048207;21;C.S.T.;Mensual;Adelaida Cañete Ojeda;--;María Espínola;Encargado/a;7000000;Sí;Sí
+09/12/2025;2026;7722447;23;C.S.T.;Mensual;Bárbara Jimena Ledesma;Carmelo Bernal Galeano;--;--;7000000;Sí;Sí
+09/12/2025;2026;9246665;6;C.S.T.;Mensual;Berelice Aracely González Chamorro;Carlos Emmanuel Rivas Gómez;Sergia Gómez García;Abuela;6300000;Sí;Sí
+09/12/2025;2026;8990013;3;C.S.T.;Mensual;Adriana Cuevas Mendoza;Fernando David Peralta Torres;--;--;6300000;Sí;Sí
+09/12/2025;2026;6865913;26;C.S.T.;Mensual;Daisy Brizuela Medina;Mauro Guillén;--;--;7000000;Sí;Sí
+09/12/2025;2026;8229434;16;C.S.T.;Mensual;Silvia Romina Garcia de Urra;Jose Manuel Urra Fernandez;--;--;6300000;Sí;Sí
+09/12/2025;2026;7738684;20;C.S.T.;Mensual;Silvia Romina Garcia de Urra;Jose Manuel Urra Fernandez;--;--;7000000;Sí;Sí
+09/12/2025;2026;8895774;4;--;Mensual;Silvia Romina Garcia de Urra;Jose Manuel Urra Fernandez;--;--;6300000;Sí;Sí
+09/12/2025;2026;7615533;20;C.S.T.;Mensual;Tania Fernández;César Sequeira;--;--;7000000;Sí;Sí
+09/12/2025;2026;8056069;16;C.S.T.;Mensual;Silvina Mariel Salinas Quiroga;Alcides Vera Amarilla;--;--;6300000;Sí;Sí
+09/12/2025;2026;8517551;9;C.S.T.;Mensual;Tania Fernández;César Sequeira;--;--;6300000;Sí;Sí
+09/12/2025;2026;9047340;8;C.S.T.;Mensual;Fabiola Meaurio de Seferaj;Fatjon Seferaj de Meaurio;--;--;6300000;Sí;Sí
+09/12/2025;2026;7322284;21;C.S.T.;Mensual;Patricia Beatriz Ravinovich de Ortega;Nestor Fabián Ortega Ortíz;--;--;7000000;Sí;Sí
+09/12/2025;2026;6881519;29;C.S.T.;Mensual;--;Angel Andrés Quintana Dávalos;--;--;7000000;Sí;Sí
+09/12/2025;2026;8994488;6;C.S.T.;Mensual;Dalmacia Elizabeth González Chamorro;Danilo Ramón López Peralta;Ariadna Sofía González Chamorro;Hermana;6300000;Sí;Sí
+09/12/2025;2026;7298159;26;C.S.T.;Mensual;Liz Concepción Martínez Fariña;Bartolomé Garcete Rojas;--;--;7000000;Sí;Sí
+09/12/2025;2026;8368049;14;C.S.T.;Mensual;Liz Concepción Martínez Fariña;Bartolomé Garcete Rojas;--;--;6300000;Sí;Sí
+09/12/2025;2026;7999088;18;C.S.T.;Mensual;Liz Concepción Martínez Fariña;Bartolomé Garcete Rojas;--;--;6300000;Sí;Sí
+09/12/2025;2026;9046646;4;C.S.T.;Mensual;Liz Concepción Martínez Fariña;Bartolomé Garcete Rojas;--;--;6300000;Sí;Sí
+09/12/2025;2026;6625522;28;C.S.T.;Mensual;Natalia Fabiola Martínez;Pablo Daniel Santos Díaz;--;--;7000000;Sí;Sí
+09/12/2025;2026;7464236;22;C.S.T.;Mensual;Natalia Fabiola Martínez;Pablo Daniel Santos Díaz;--;--;7000000;Sí;Sí
+09/12/2025;2026;8095206;16;C.S.T.;Mensual;Natalia Fabiola Martínez;Pablo Daniel Santos Díaz;--;--;6300000;Sí;Sí
+09/12/2025;2026;9102907;1;--;Mensual;Leticia Elizabeth Cabrera Insfrán;Dennis Gómez Giménez;--;--;6300000;Sí;Sí
+09/12/2025;2026;8639945;10;C.S.T.;Mensual;Mónica Rosanna Robledo Miranda;--;María Elena Miranda Estigarribia;Abuela;6300000;Sí;Sí
+09/12/2025;2026;8839643;4;C.S.T.;Mensual;Mónica Rosanna Robledo Miranda;--;--;--;6300000;Sí;Sí
+09/12/2025;2026;8224770;14;C.S.T.;Mensual;Lucero Belén Rojas;Carlos Raúl Britos;--;--;6300000;Sí;Sí
+09/12/2025;2026;8829710;6;C.S.T.;Mensual;Lucero Belén Rojas;Carlos Raúl Britos;--;--;6300000;Sí;Sí
+10/12/2025;2026;8725889;5;C.S.T.;Mensual;Silvanna Analía Ramírez de Benítez;Eduardo Aníbal Benítez Irazusta;--;--;6300000;Sí;Sí
+10/12/2025;2026;8375116;11;C.S.T.;Mensual;Silvanna Analía Ramírez de Benítez;Eduardo Aníbal Benítez Irazusta;--;--;6300000;Sí;Sí
+10/12/2025;2026;7768790;18;C.S.T.;Mensual;Sandra Cuevas;Raúl Arias;--;--;6300000;Sí;Sí
+10/12/2025;2026;7183528;23;C.S.T.;Mensual;Myrian Beatriz Peña Martínez;Silvio Roberto González Balbuena;--;--;7000000;Sí;Sí
+10/12/2025;2026;8064528;16;C.S.T.;Mensual;Ana Leguizamón;Gustavo Marín;--;--;6300000;Sí;Sí
+10/12/2025;2026;9084673;1;--;Mensual;Ana Leguizamón;Gustavo Marín;--;--;6300000;Sí;Sí
+10/12/2025;2026;8336826;12;C.S.T.;Mensual;Nathalia Aracelly Paniagua Ojeda;César Giuliano Páez Morel;--;--;6300000;Sí;Sí
+10/12/2025;2026;7443218;23;C.S.T.;Mensual;Ana María Celeste Aranda de Arrellaga;Emilio Gustavo Arréllaga Martínez;--;--;7000000;Sí;Sí
+10/12/2025;2026;8749326;7;C.S.T.;Mensual;Marlene Graciela Peralta Fretes;Carlos Benigno Sartori Rodríguez;--;--;6300000;Sí;Sí
+10/12/2025;2026;6325453;29;C.S.T.;Mensual;Teresa Feltes de Molina;Cirilo Ramón Molinas Villanueva;--;--;7000000;Sí;Sí
+10/12/2025;2026;7433550;24;C.S.T.;Mensual;Reineria Gasparina Noguera Ruíz;Richard Jorge Antúnez Agüero;--;--;7000000;Sí;Sí
+10/12/2025;2026;8654971;13;C.S.T.;Mensual;Erika Tatihana Benítez De Mora;Angel David Mora Monges;--;--;6300000;Sí;Sí
+10/12/2025;2026;7873756;17;C.S.T.;Mensual;Erika Tatihana Benítez De Mora;Angel David Mora Monges;--;--;6300000;Sí;Sí
+10/12/2025;2026;6517723;30;C.S.T.;Mensual;Martha Estigarribia;Héctor Amarilla;--;--;7000000;Sí;Sí
+10/12/2025;2026;7027884;25;C.S.T.;Mensual;Claudia Patricia Jara;Pablo César Karabia Jara;--;--;7000000;Sí;Sí
+10/12/2025;2026;9018270;3;--;Mensual;Claudia Patricia Jara;Pablo César Karabia Jara;--;--;6300000;Sí;Sí
+10/12/2025;2026;7746840;22;C.S.T.;Mensual;Rebeca Arminda Komjati de Miño;Hugo Miguel Miño Zayas;--;--;7000000;Sí;Sí
+10/12/2025;2026;9287031;6;C.S.T.;Mensual;Daisy Rocío Fernández Saucedo;Alfredo Isidro Ramírez Falcón;--;--;6300000;Sí;Sí
+10/12/2025;2026;6545737;29;C.S.T.;Mensual;Fabiola Elisa Amabile Montiel;Jorge Montiel Meza;--;--;7000000;Sí;Sí
+10/12/2025;2026;7438325;23;C.S.T.;Mensual;Milka Adela Rodi Portilla;Edgar Osmar Marín Villar;--;--;7000000;Sí;Sí
+10/12/2025;2026;7671411;20;C.S.T.;Mensual;Claudia Riquelme;Luis Miguel Almada;--;--;7000000;Sí;Sí
+10/12/2025;2026;7583517;19;C.S.T.;Mensual;Lorena Rojas;Victor Amarilla;--;--;7000000;Sí;Sí
+10/12/2025;2026;7571160;22;C.S.T.;Mensual;Gladys Elizabeth Meza Villalba;--;Gloria Concepción Meza de Portillo;Tía;7000000;Sí;Sí
+10/12/2025;2026;7487477;21;C.S.T.;Mensual;Alejandra Toñanes;Hernán José Gómez Coronel;--;--;7000000;Sí;Sí
+10/12/2025;2026;7685154;20;C.S.T.;Mensual;Laura Patricia Morilla Sanabria;Adid Gamal Aluan Arias;--;--;7000000;Sí;Sí
+10/12/2025;2026;8225936;14;C.S.T.;Mensual;Leticia Denisse Rojas Cáceres;José Gabriel Melot Scura;Hellen Johanna Rojas Cáceres;Tía;6300000;Sí;Sí
+10/12/2025;2026;8566477;9;C.S.T.;Mensual;Fátima Belén Peralta Riquelme;Pablo Daniel Spaini Gaona;--;--;6300000;Sí;Sí
+10/12/2025;2026;8210434;29;C.S.T.;Mensual;Verónica Espínola Bogado;Apolonio Gayoso;Karen Nicole Gayoso Espínola;Hermana;7000000;Sí;Sí
+10/12/2025;2026;8468587;15;C.S.T.;Mensual;Liliana Estela Olmedo de Da Silva;Jair Aniceto Da Silva;--;--;6300000;Sí;Sí
+10/12/2025;2026;9116933;1;C.S.T.;Mensual;Marta Teresa Romero;Rodrigo Lugo Villar;--;--;6300000;Sí;Sí
+10/12/2025;2026;8261007;16;C.S.T.;Mensual;Karen Patricia Peralta Torres;Alan Roger Baer Contreras;--;--;6300000;Sí;Sí
+10/12/2025;2026;7663492;24;C.S.T.;Mensual;Karen Patricia Peralta Torres;Alan Roger Baer Contreras;--;--;7000000;Sí;Sí
+10/12/2025;2026;8436385;9;C.S.T.;Mensual;María Lourdes Gigena Folli;Aibar Rafael González Domínguez;--;--;6300000;Sí;No
+10/12/2025;2026;7997723;15;C.S.T.;Mensual;María Lourdes Gigena Folli;Aibar Rafael González Domínguez;--;--;6300000;Sí;No
+10/12/2025;2026;8617536;10;C.S.T.;Mensual;Micaela Montserrat Monges Gutiérrez;Eduardo Enrique Ojeda Chica;--;--;6300000;Sí;Sí
+10/12/2025;2026;7702945;22;C.S.T.;Mensual;Rossana Baruja;José Luis Ibáñez Meranda;--;--;7000000;Sí;Sí
+10/12/2025;2026;9004711;4;C.S.T.;Mensual;Micaela Montserrat Monges Gutiérrez;Eduardo Enrique Ojeda Chica;--;--;6300000;Sí;Sí
+10/12/2025;2026;8760310;6;C.S.T.;Mensual;Laura Patricia Martínez Fariña;David Emanuel Cristaldo;--;--;6300000;Sí;Sí
+10/12/2025;2026;7537787;21;C.S.T.;Mensual;Noelia Benítez Friedl;Hugo Gilberto Aranda Chamorro;--;--;7000000;Sí;Sí
+10/12/2025;2026;8342183;14;C.S.T.;Mensual;Liliana María Flores Blaires;Fernando Javier Irrazábal Estigarribia;--;--;6300000;Sí;Sí
+10/12/2025;2026;8408178;11;C.S.T.;Mensual;María Angélica Méndez Sandoval;Víctor Santiago Blasser González;--;--;6300000;Sí;Sí
+10/12/2025;2026;7682352;19;C.S.T.;Mensual;María Angélica Méndez Sandoval;Víctor Santiago Blasser González;--;--;7000000;Sí;Sí
+10/12/2025;2026;8330768;11;C.S.T.;Mensual;Liz Analía Falcón Cardozo;Jonathan David Schaffer Colmán;--;--;6300000;Sí;Sí
+10/12/2025;2026;7380169;21;C.S.T.;Mensual;Liz Analía Falcón Cardozo;Jonathan David Schaffer Colmán;--;--;7000000;Sí;Sí
+10/12/2025;2026;6892588;25;C.S.T.;Mensual;Rosa Esther Morón Villalba;--;Antulio Nirván Bohbout Mongelós;Encargado/a;7000000;Sí;Sí
+10/12/2025;2026;7885575;18;C.S.T.;Mensual;Rosa Esther Morón Villalba;Antulio Nirván Bohbout Mongelós;--;--;6300000;Sí;Sí
+10/12/2025;2026;8260338;12;C.S.T.;Mensual;Marcia Elena Cuevas Villalba;Mario Ramón Fernández Jacquet;--;--;6300000;Sí;Sí
+10/12/2025;2026;8878453;4;C.S.T.;Mensual;Mónica Andrea Duarte González;Miguel Angel Pereira Villamayor;--;--;6300000;Sí;Sí
+10/12/2025;2026;6652917;28;C.S.T.;Mensual;Ana Velgara;Ananio Benítez;--;--;7000000;Sí;Sí
+10/12/2025;2026;7471268;25;C.S.T.;Mensual;Cecilia Marlene Benítez de Wagener;Marcos Antonio Wagener Benítez;--;--;7000000;Sí;Sí
+10/12/2025;2026;8922861;6;C.S.T.;Mensual;Gabriela López Viveros;Rubén Darío Gauto Zárate;--;--;6300000;Sí;Sí
+10/12/2025;2026;9216125;2;C.S.T.;Mensual;Gabriela López Viveros;Rubén Darío Gauto Zárate;--;--;6300000;Sí;Sí
+10/12/2025;2026;8883469;4;C.S.T.;Mensual;Lucía Barboza;Claudio Grande;--;--;6300000;Sí;Sí
+10/12/2025;2026;8514220;10;C.S.T.;Mensual;Lucía Barboza;Claudio Grande;--;--;6300000;Sí;Sí
+10/12/2025;2026;8501133;9;C.S.T.;Mensual;Macarena Morínigo Martínez;Guillermo Humberto Fernández Estigarribia;--;--;6300000;Sí;Sí
+10/12/2025;2026;7695713;17;C.S.T.;Mensual;Macarena Morínigo Martínez;Guillermo Humberto Fernández Estigarribia;--;--;6300000;Sí;Sí
+10/12/2025;2026;7711420;17;C.S.T.;Mensual;Griselda González;Ariel Gómez;--;--;6300000;Sí;Sí
+10/12/2025;2026;6991691;26;C.S.T.;Mensual;Griselda González;Ariel Gómez;--;--;7000000;Sí;Sí
+11/12/2025;2026;7888928;16;C.S.T.;Mensual;Hilda Gabriela Chica Méndez;Carlos Alberto Martínez Sánchez;--;--;6300000;Sí;Sí
+11/12/2025;2026;8649502;8;C.S.T.;Mensual;María Mercedes Gómez de Moreno;Moisés Moreno Moreno;--;--;6300000;Sí;Sí
+11/12/2025;2026;8820548;3;C.S.T.;Mensual;Jessica Elena Prieto Romero;Elías José Cantero Díaz;--;--;6300000;Sí;Sí
+11/12/2025;2026;7959019;16;C.S.T.;Mensual;Leticia María Coronel Marín;Dennys Domingo Bareiro Ortiz;--;--;6300000;Sí;Sí
+11/12/2025;2026;7740397;18;C.S.T.;Mensual;Leticia María Coronel Marín;Dennys Domingo Bareiro Ortiz;--;--;6300000;Sí;Sí
+11/12/2025;2026;6773108;30;C.S.T.;Mensual;Estela Marys Rodríguez;Hugo René Núñez Acosta;--;--;7000000;Sí;Sí
+11/12/2025;2026;8339189;14;C.S.T.;Mensual;Marina Navarro Meza;Juan Bernal;--;--;6300000;Sí;Sí
+11/12/2025;2026;6858387;29;C.S.T.;Mensual;Lilian Elisabeth Escobar Ibarra;Rubén Alejandro Konjati Riquelme;--;--;7000000;Sí;Sí
+11/12/2025;2026;7655284;21;Colegio Aurora;Mensual;Lilian Elisabeth Escobar Ibarra;Rubén Alejandro Konjati Riquelme;--;--;7000000;Sí;Sí
+11/12/2025;2026;9022304;7;C.S.T.;Mensual;Diana Beatríz López Martínez;Héctor Rodrigo Alonso Flecha;--;--;6300000;Sí;Sí
+11/12/2025;2026;8170089;15;C.S.T.;Mensual;Rosa Elena Weseluk;Armando Livio González Sforza;--;--;6300000;Sí;Sí
+11/12/2025;2026;7415328;23;C.S.T.;Mensual;Rosa Elena Weseluk;Armando Livio González Sforza;--;--;7000000;Sí;Sí
+11/12/2025;2026;8399326;11;C.S.T.;Mensual;Norma Gómez Bordón;Alberto Duarte Cáceres;--;--;6300000;Sí;Sí
+11/12/2025;2026;7911510;17;C.S.T.;Mensual;Norma Gómez Bordón;Alberto Duarte Cáceres;--;--;6300000;Sí;Sí
+11/12/2025;2026;8419396;12;C.S.T.;Mensual;Norma Analía Usher Escobar;Francisco Javier Román Rolón;--;--;6300000;Sí;Sí
+11/12/2025;2026;8806927;5;C.S.T.;Mensual;Mercedes Jara;Andrés Meza;--;--;6300000;Sí;Sí
+11/12/2025;2026;7778349;17;C.S.T.;Mensual;Andrea Macarena Núñez Benítez;Dennis Gómez Giménez;--;--;6300000;Sí;Sí
+11/12/2025;2026;6575849;27;C.S.T.;Mensual;Élida Ovelar;Juan Fredy Maciel Recalde;--;--;7000000;Sí;Sí
+11/12/2025;2026;24139818;25;C.S.T.;Mensual;--;Antonio De Padua Rodigues Junior;--;--;7000000;Sí;Sí
+11/12/2025;2026;7348316;27;C.S.T.;Mensual;Blanca Elisabel Romero Molinas;Gustavo Alfredo González Diarte;--;--;7000000;Sí;Sí
+11/12/2025;2026;7486777;24;C.S.T.;Mensual;Gloria Beatriz Ramírez Ovando;Ever Enrique Mazier Silvera;--;--;7000000;Sí;Sí
+11/12/2025;2026;8810077;4;C.S.T.;Mensual;Paola Cristina Gauto Escobar;Ricardo Javier Benini Cardozo;--;--;6300000;Sí;Sí
+11/12/2025;2026;8621089;7;C.S.T.;Mensual;María Isabel Núñez González;Francisco Mendel Kopankski Duré;--;--;6300000;Sí;Sí
+11/12/2025;2026;6263724;30;C.S.T.;Mensual;Mabel Rocío Galeano Ríos;Javier David Barreto Penayo;--;--;7000000;Sí;Sí
+11/12/2025;2026;8672109;12;C.S.T.;Mensual;Diana Raquel Orué Oviedo;Ramón González;--;--;6300000;Sí;Sí
+11/12/2025;2026;8850408;3;C.S.T.;Mensual;María Milagros Medina Martínez;David Díaz Torales;--;--;6300000;Sí;Sí
+11/12/2025;2026;8610947;9;C.S.T.;Mensual;María Milagros Medina Martínez;David Díaz Torales;--;--;6300000;Sí;Sí
+11/12/2025;2026;8251829;13;C.S.T.;Mensual;María Milagros Medina Martínez;David Díaz Torales;--;--;6300000;Sí;Sí
+11/12/2025;2026;8694924;8;C.S.T.;Mensual;Lorena Angélica Aveiro Martínez;Gerardo Cayetano Pérez Maciel;--;--;6300000;Sí;Sí
+11/12/2025;2026;8545388;10;C.S.T.;Mensual;Sofía Villalba;Ricardo Sánchez Gaona;--;--;6300000;Sí;Sí
+11/12/2025;2026;8123212;14;C.S.T.;Mensual;Nélida E. Rotela Montiel;Jorge Fernández Mareco;Sofía Villalba;Hermana;6300000;Sí;Sí
+11/12/2025;2026;7831864;16;C.S.T.;Mensual;Nélida E. Rotela Montiel;Jorge Fernández Mareco;Sofía Villalba;Hermana;6300000;Sí;Sí
+11/12/2025;2026;7616937;18;C.S.T.;Mensual;Gladys Mercedes Cano Huerta;Pablo Ariel Noguera;--;--;6300000;Sí;Sí
+11/12/2025;2026;7858660;17;C.S.T.;Mensual;Marta Dominga Agüero Fernández;Aníbal Arsenio Cardozo Benítez;--;--;6300000;Sí;Sí
+11/12/2025;2026;9006337;5;C.S.T.;Mensual;Marta Dominga Agüero Fernández;Aníbal Arsenio Cardozo Benítez;--;--;6300000;Sí;Sí
+11/12/2025;2026;8106988;13;C.S.T.;Mensual;Lourdes Leticia Lezcano;Gustavo Paredes;--;--;6300000;Sí;Sí
+11/12/2025;2026;6282782;30;C.S.T.;Mensual;Montserrat Vera Cattebeke;Rubén Darío Rojas Martínez;--;--;7000000;Sí;Sí
+11/12/2025;2026;8906865;7;C.S.T.;Mensual;Patricia Carolina Ramírez Ovando;Juan Andrés Sisa Acosta;--;--;6300000;Sí;Sí
+11/12/2025;2026;7486814;24;C.S.T.;Mensual;Patricia Carolina Ramírez Ovando;Juan Andrés Sisa Acosta;--;--;7000000;Sí;Sí
+11/12/2025;2026;8598931;11;C.S.T.;Mensual;Zunilda Estela Vera Silguero;Sandro Erich Lindomar Walter;--;--;6300000;Sí;Sí
+11/12/2025;2026;7608343;23;C.S.T.;Mensual;Zunilda Estela Vera Silguero;Sandro Erich Lindomar Walter;--;--;7000000;Sí;Sí
+11/12/2025;2026;6532735;29;C.S.T.;Mensual;Zunilda Estela Vera Silguero;Sandro Erich Lindomar Walter;--;--;7000000;Sí;Sí
+11/12/2025;2026;7598227;19;C.S.T.;Mensual;--;Rodrigo Rodrigues Maldonado Charruff;Herminio Maldonado Charruff;Abuelo;7000000;Sí;Sí
+11/12/2025;2026;7598199;19;C.S.T.;Mensual;--;Rodrigo Rodrigues Maldonado Charruff;Herminio Maldonado Charruff;Abuelo;7000000;Sí;Sí
+11/12/2025;2026;7940224;17;C.S.T.;Mensual;Synthia Concepción Bareiro de Colmán;Osvaldo Ramón Colmán Olmedo;--;--;6300000;Sí;Sí
+11/12/2025;2026;7273049;29;C.S.T.;Mensual;Synthia Concepción Bareiro de Colmán;Osvaldo Ramón Colmán Olmedo;--;--;7000000;Sí;Sí
+11/12/2025;2026;8747569;6;C.S.T.;Mensual;Alba Rocío Acosta;Darío Antonio Pereira Ramírez;--;--;6300000;Sí;Sí
+11/12/2025;2026;7914136;16;C.S.T.;Mensual;Claudia Selene Elenice Villalba Gómez;Antonio Escobar Benítez;Mari Estela Benítez Chamorro;Abuela;6300000;Sí;Sí
+11/12/2025;2026;8524833;10;C.S.T.;Mensual;Claudia Selene Elenice Villalba Gómez;Antonio Escobar Benítez;Mari Estela Benítez Chamorro;Abuela;6300000;Sí;Sí
+11/12/2025;2026;7312246;22;C.S.T.;Mensual;Mabel Teresita Servín;Cristian Aranda Sosa;--;--;7000000;Sí;Sí
+11/12/2025;2026;8874546;7;C.S.T.;Mensual;Silvia Dávalos;Marcelo Alarcón;--;--;6300000;Sí;Sí
+11/12/2025;2026;8490390;11;C.S.T.;Mensual;Felicia Ríos de Cáceres;Ariel Cáceres Ortíz;--;--;6300000;Sí;Sí
+11/12/2025;2026;7739006;20;C.S.T.;Mensual;Felicia Ríos de Cáceres;Ariel Cáceres Ortíz;--;--;7000000;Sí;Sí
+11/12/2025;2026;7294185;23;C.S.T.;Mensual;María Leticia Rojas Maidana;Raúl Demetrio Rotela Riveros;--;--;7000000;Sí;Sí
+11/12/2025;2026;8167103;18;C.S.T.;Mensual;Frida Carrero;Arquímedes Rojas;--;--;6300000;Sí;Sí
+11/12/2025;2026;8521911;10;C.S.T.;Mensual;Frida Carrero;Arquímedes Rojas;--;--;6300000;Sí;Sí
+11/12/2025;2026;7336008;22;C.S.T.;Mensual;Frida Carrero;Arquímedes Rojas;--;--;7000000;Sí;Sí
+11/12/2025;2026;8274457;11;C.S.T.;Mensual;Alicia Montserrat Melgarejo Lezcano;Carlos Luis Coronel Gómez;--;--;6300000;Sí;Sí
+11/12/2025;2026;7695885;19;C.S.T.;Mensual;Griselda Beatriz Britoz Carreras;--;--;--;7000000;Sí;Sí
+11/12/2025;2026;7109232;29;C.S.T.;Mensual;Karina Marlene Chávez Caballero;Humberto David Fleitas Valiente;--;--;7000000;Sí;Sí
+11/12/2025;2026;7948825;15;C.S.T.;Mensual;Valeria Raquel Peralta Núñez;Enrique Adolfo González Abente;--;--;6300000;Sí;Sí
+11/12/2025;2026;7969436;16;C.S.T.;Mensual;Andrea Letizia Ayala Grunce;Luis Miguel Arellano Giménez;--;--;6300000;Sí;Sí
+11/12/2025;2026;7747941;20;C.S.T.;Mensual;Andrea Letizia Ayala Grunce;Luis Miguel Arellano Giménez;--;--;7000000;Sí;Sí
+11/12/2025;2026;7221072;24;C.S.T.;Mensual;Andrea Letizia Ayala Grunce;Luis Miguel Arellano Giménez;--;--;7000000;Sí;Sí
+11/12/2025;2026;8835986;6;C.S.T.;Mensual;Ana María Gómez Bordón;Derlis Ismael Vera Núñez;Mirna Rocío Vera Núñez;Tía;6300000;Sí;Sí
+11/12/2025;2026;8834432;8;C.S.T.;Mensual;Ana María Gómez Bordón;Derlis Ismael Vera Núñez;Mirna Rocío Vera Núñez;Tía;6300000;Sí;Sí
+11/12/2025;2026;8275386;12;C.S.T.;Mensual;Mónica Alicia Maldonado;Marco Antonio Román;--;--;6300000;Sí;Sí
+11/12/2025;2026;8626019;8;C.S.T.;Mensual;Wilma Díaz;Cristhian Chávez;--;--;6300000;Sí;Sí
+11/12/2025;2026;9079017;2;--;Mensual;Wilma Díaz;Cristhian Chávez;--;--;6300000;Sí;Sí
+11/12/2025;2026;8231351;15;C.S.T.;Mensual;Larizza Carolina Benítez Ramírez;Iván Alejandro Aquino Rodríguez;--;--;6300000;Sí;Sí
+11/12/2025;2026;8037061;18;C.S.T.;Mensual;Ruth Natalia Fernández Guerrero;Carlos Alberto Rolón Molinas;Justa Guerrero;Abuela;6300000;Sí;Sí
+11/12/2025;2026;6762843;28;C.S.T.;Mensual;Blanca Nieves Goncalvez Santa Cruz;Herman Augusto Schmidke Schebela;--;--;7000000;Sí;Sí
+11/12/2025;2026;8769904;5;C.S.T.;Mensual;Blanca Nieves Goncalvez Santa Cruz;Herman Augusto Schmidke Schebela;--;--;6300000;Sí;Sí
+11/12/2025;2026;8235440;14;C.S.T.;Mensual;Sady Mercedes Elizaur Aguirre;Enrique Damián Insfrán Miranda;--;--;6300000;Sí;Sí
+11/12/2025;2026;8479092;10;C.S.T.;Mensual;Sady Mercedes Elizaur Aguirre;Enrique Damián Insfrán Miranda;--;--;6300000;Sí;Sí
+11/12/2025;2026;8938536;9;C.S.T.;Mensual;Dolly Noelia Aveiro Morales;Eduardo Javier Ramírez Navarro;--;--;6300000;Sí;Sí
+11/12/2025;2026;8038312;15;C.S.T.;Mensual;Dolly Noelia Aveiro Morales;Eduardo Javier Ramírez Navarro;--;--;6300000;Sí;Sí
+11/12/2025;2026;7440015;21;C.S.T.;Mensual;Dolly Noelia Aveiro Morales;Eduardo Javier Ramírez Navarro;--;--;7000000;Sí;Sí
+11/12/2025;2026;7684001;20;C.S.T.;Mensual;Nancy Del Carmen Gómez Benítez;Fernando Enrique Gorman Benítez;--;--;7000000;Sí;Sí
+11/12/2025;2026;8830333;7;C.S.T.;Mensual;Analicia Raquel Rolón Rojas;Victor Eulogio Jacquet Olmedo;--;--;6300000;Sí;Sí
+11/12/2025;2026;8968240;6;C.S.T.;Mensual;Angie Anahí Basaldúa de Assalto;Gaetano Assalto;--;--;6300000;Sí;Sí
+11/12/2025;2026;8619373;10;C.S.T.;Mensual;Angie Anahí Basaldúa de Assalto;Gaetano Assalto;--;--;6300000;Sí;Sí
+11/12/2025;2026;8441722;10;C.S.T.;Mensual;Yolanda Teresita González Osorio;Rodrigo Jorge Luis;María Teresa Osorio de González;Abuela;6300000;Sí;Sí
+11/12/2025;2026;7975452;18;C.S.T.;Mensual;Yolanda Teresita González Osorio;Rodrigo Jorge Luis;María Teresa Osorio de González;Abuela;6300000;Sí;Sí
+11/12/2025;2026;8900395;3;C.S.T.;Mensual;Laura Magalí Cáceres Fleitas;Juan Raúl Ramón Noldin Riquelme;--;--;6300000;Sí;Sí
+11/12/2025;2026;8348509;12;C.S.T.;Mensual;Marlene Carolina Ovelar Duarte;Marcelo Campanini;--;--;6300000;Sí;Sí
+11/12/2025;2026;8087158;14;C.S.T.;Mensual;Marlene Carolina Ovelar Duarte;Marcelo Campanini;--;--;6300000;Sí;Sí
+11/12/2025;2026;8947357;6;C.S.T.;Mensual;Paola Andrea Pintos Noceda;Andrés Alonso;--;--;6300000;Sí;Sí
+11/12/2025;2026;7735394;26;C.S.T.;Mensual;Liliana María Boy de Flores;José Flores Méndez;--;--;7000000;Sí;Sí
+11/12/2025;2026;9010804;4;--;Mensual;Liliana María Boy de Flores;José Flores Méndez;--;--;6300000;Sí;Sí
+11/12/2025;2026;8144050;14;C.S.T.;Mensual;María Cecilia Grutter;Gustavo Daniel Cañete Marecos;--;--;6300000;Sí;Sí
+12/12/2025;2026;8316608;13;C.S.T.;Mensual;Liliana Jara;Jorge Fretes;--;--;6300000;Sí;Sí
+12/12/2025;2026;8808904;5;C.S.T.;Mensual;Lilian Sebastiana Jara Benítez;Enrique Eduardo Endler Resquín;--;--;6300000;Sí;Sí
+12/12/2025;2026;7920061;15;C.S.T.;Mensual;Lilian Sebastiana Jara Benítez;Enrique Eduardo Endler Resquín;--;--;6300000;Sí;Sí
+12/12/2025;2026;8021386;13;C.S.T.;Mensual;María Leticia Arguello González;Sebastián René Ávila;--;--;6300000;Sí;Sí
+12/12/2025;2026;6540440;27;C.S.T.;Mensual;María Leticia Arguello González;Sebastián René Ávila;--;--;7000000;Sí;Sí
+12/12/2025;2026;8807519;7;C.S.T.;Mensual;Patricia Maria Elena Parini Fernandez;Juan José Sanchez Gómez;--;--;6300000;Sí;Sí
+12/12/2025;2026;8208647;13;C.S.T.;Mensual;Patricia Maria Elena Parini Fernandez;Juan José Sanchez Gómez;--;--;6300000;Sí;Sí
+12/12/2025;2026;8367450;12;C.S.T.;Mensual;Diana Benítez;Miguel Angel Daniel León Esteche;--;--;6300000;Sí;Sí
+12/12/2025;2026;7404365;22;C.S.T.;Mensual;Diana Benítez;Miguel Angel Daniel León Esteche;--;--;7000000;Sí;Sí
+12/12/2025;2026;8443096;9;C.S.T.;Mensual;Aramí Peralta;Nicolás Onieva;--;--;6300000;Sí;Sí
+12/12/2025;2026;8837373;5;C.S.T.;Mensual;Sofía Lorena Leguizamón Velgara;Oscar José Moreno Rodas;--;--;6300000;Sí;Sí
+12/12/2025;2026;8334849;15;C.S.T.;Mensual;Carmen Enciso Cáceres;Blas Fernández;--;--;6300000;Sí;Sí
+12/12/2025;2026;7105104;25;C.S.T.;Mensual;Carmen Enciso Cáceres;Blas Fernández;--;--;7000000;Sí;Sí
+12/12/2025;2026;8490082;9;C.S.T.;Mensual;Araselis Monserrat Recalde Bareiro;Cristian Eduardo Ramos Aguilar;--;--;6300000;Sí;Sí
+12/12/2025;2026;7126545;23;C.S.T.;Mensual;Araselis Monserrat Recalde Bareiro;Cristian Eduardo Ramos Aguilar;--;--;7000000;Sí;Sí
+12/12/2025;2026;8881061;5;C.S.T.;Mensual;Caterina Barreto;Milciades Raúl Battilana Fernández;--;--;6300000;Sí;Sí
+12/12/2025;2026;8791421;5;C.S.T.;Mensual;Sara Noeliz Torres Alfonzo;Raúl Orlando Alen Barrios;Elizabeth Alfonzo de Torres;Abuela;6300000;Sí;Sí
+12/12/2025;2026;7416457;22;C.S.T.;Mensual;Aurelia María Mercedes Reyes;Abel Trinidad Duarte;--;--;7000000;Sí;Sí
+12/12/2025;2026;8558157;10;C.S.T.;Mensual;María de Lourdes Ríos Mariño;Christian Alexander Peña;--;--;6300000;Sí;Sí
+12/12/2025;2026;8760419;6;C.S.T.;Mensual;Gloria Mariela Sanabria Martínez;Rodney José Manuel Ruiz Díaz Ayala;--;--;6300000;Sí;Sí
+12/12/2025;2026;6528868;30;C.S.T.;Mensual;Adriana Cardozo;Alvaro Cuevas;--;--;7000000;Sí;Sí
+12/12/2025;2026;6619056;27;C.S.T.;Mensual;Karina Etter;Pedro Alberto Lugo Villalba;--;--;7000000;Sí;Sí
+12/12/2025;2026;6517461;27;C.S.T.;Mensual;--;--;Marisa Riveros Oviedo;Abuela;7000000;Sí;Sí
+12/12/2025;2026;7989425;20;C.S.T.;Mensual;Liz Adriana Ruíz Zorrilla;Enrique Fabián Bordón Martínucci;--;--;7000000;Sí;Sí
+12/12/2025;2026;8885335;6;C.S.T.;Mensual;Bárbara Liz Villalba Godoy;Rolando Javier Mercado Escobar;--;--;6300000;Sí;Sí
+12/12/2025;2026;6843354;26;C.S.T.;Mensual;Sofía Inés Bramante Cáceres;Gustavo González Pane;--;--;7000000;Sí;Sí
+12/12/2025;2026;7887685;17;C.S.T.;Mensual;Zulma Elizabeth Ruíz Díaz Galeano;Francisco Solano Orué Riquelme;--;--;6300000;Sí;Sí
+12/12/2025;2026;8652407;9;C.S.T.;Mensual;María Laura Soto;Juan Miguel Jara Fernández;--;--;6300000;Sí;Sí
+12/12/2025;2026;8631026;9;C.S.T.;Mensual;Verónica Gabriela Portillo Ríos;Pablo Esteban Araújo;--;--;6300000;Sí;Sí
+12/12/2025;2026;7857417;15;C.S.T.;Mensual;Lucía Mabel Torres Oliveira;Virginio Ruíz Coronel;--;--;6300000;Sí;Sí
+12/12/2025;2026;7715554;17;C.S.T.;Mensual;Noelia María Bóveda;Nelson Nicolás Rojas;--;--;6300000;Sí;Sí
+12/12/2025;2026;7460620;22;C.S.T.;Mensual;Laura María Delvalle;José Roberto Gómez;--;--;7000000;Sí;Sí
+12/12/2025;2026;6791609;25;C.S.T.;Mensual;Maira Auxiliadora Cáceres del Padre;Nelson Fabián Penayo Chena;--;--;7000000;Sí;Sí
+12/12/2025;2026;9123480;2;C.S.T.;Mensual;Micaela Ayala;Felipe Galeano;--;--;6300000;Sí;Sí
+12/12/2025;2026;8768450;8;C.S.T.;Mensual;Micaela Ayala;Felipe Galeano;--;--;6300000;Sí;Sí
+12/12/2025;2026;7041172;28;C.S.T.;Mensual;Gloria Beatriz Barreto Franco;Jorge Ramón Romero Acosta;--;--;7000000;Sí;Sí
+12/12/2025;2026;8627734;10;C.S.T.;Mensual;Fátima González Jiménez;Diego Falcón Sanabria;--;--;6300000;Sí;Sí
+12/12/2025;2026;9201628;4;C.S.T.;Mensual;Fátima González Jiménez;Diego Falcón Sanabria;--;--;6300000;Sí;Sí
+12/12/2025;2026;8583715;8;C.S.T.;Mensual;Fátima Emilce Franco Berra;Rubén Darío Rivero Ledesma;--;--;6300000;Sí;Sí
+12/12/2025;2026;8765080;5;C.S.T.;Mensual;Yanina Belén Velázquez Duarte;José Damián Méndez Gómez;--;--;6300000;Sí;Sí
+12/12/2025;2026;8429240;9;C.S.T.;Mensual;Andrea Leiva;Emilio Daniel Pérez Martínez;--;--;6300000;Sí;Sí
+12/12/2025;2026;8701735;6;C.S.T.;Mensual;Susana González Osorio;Diego Mora Díaz;--;--;6300000;Sí;Sí
+12/12/2025;2026;8467980;10;C.S.T.;Mensual;Susana González Osorio;Diego Mora Díaz;--;--;6300000;Sí;Sí
+12/12/2025;2026;7944376;18;C.S.T.;Mensual;María Belén Lezcano Heyn;Manuel García;Luisa Verónica Heyn;Abuela;6300000;Sí;Sí
+12/12/2025;2026;7282313;26;C.S.T.;Mensual;María Belén Lezcano Heyn;--;Luisa Verónica Heyn;Abuela;7000000;Sí;Sí
+12/12/2025;2026;8343945;11;C.S.T.;Mensual;Jessica Beatriz Chamorro Rivas;Juan Ricardo Torres Cristaldo;--;--;6300000;Sí;Sí
+12/12/2025;2026;8762990;7;C.S.T.;Mensual;Emilce Angélica González;Juan José Azuaga;--;--;6300000;Sí;Sí
+12/12/2025;2026;8500778;12;C.S.T.;Mensual;Silvia Araújo;David Saldívar;--;--;6300000;Sí;Sí
+12/12/2025;2026;7327097;23;C.S.T.;Mensual;Lilian Patricia Espínola;José Aníbal Franco;--;--;7000000;Sí;Sí
+12/12/2025;2026;7391743;21;C.S.T.;Mensual;Verónica González Franco;José Luis Ramírez Noldin;--;--;7000000;Sí;Sí
+12/12/2025;2026;8615227;8;C.S.T.;Mensual;Nora María Moreno Díaz;Armando Emmanuel Valiente Barboza;--;--;6300000;Sí;Sí
+12/12/2025;2026;8299924;13;C.S.T.;Mensual;Gabriela Barreto;Guillermo Paiva;--;--;6300000;Sí;Sí
+12/12/2025;2026;9213216;1;C.S.T.;Mensual;Gabriela Barreto;Guillermo Paiva;--;--;6300000;Sí;Sí
+12/12/2025;2026;7064047;25;C.S.T.;Mensual;María Elba Rojas;Roque Figueredo;--;--;7000000;Sí;Sí
+12/12/2025;2026;8886533;6;C.S.T.;Mensual;Natalia Maripaz Mellone Roa;Heriberto Vera Barreto;--;--;6300000;Sí;Sí
+15/12/2025;2026;9214694;1;C.S.T.;Mensual;María Elena Franco Fariña;Iván Augusto Rivas Constantino;--;--;6300000;Sí;Sí
+15/12/2025;2026;8716539;7;C.S.T.;Mensual;Marcia Guadalupe Velázquez Fernández;Jorge Daniel Fanego Fretes;--;--;6300000;Sí;Sí
+15/12/2025;2026;7966433;15;C.S.T.;Mensual;Marcia Guadalupe Velázquez Fernández;Jorge Daniel Fanego Fretes;--;--;6300000;Sí;Sí
+15/12/2025;2026;9040219;1;C.S.T.;Mensual;Liza Belén Agüero Giménez;Matías Alberto Franco González;--;--;6300000;Sí;Sí
+15/12/2025;2026;8836447;3;--;Mensual;Olga Lorena Villar;Gustavo Sostoa;--;--;6300000;Sí;Sí
+15/12/2025;2026;7804170;18;Col. Torrefuerte;Mensual;María Noelia Noldin Almirón;Raúl Andrés Bogado Leguizamón;--;--;6300000;Sí;Sí
+15/12/2025;2026;8500041;9;Manuel Domínguez;Mensual;María Noelia Noldin Almirón;Raúl Andrés Bogado Leguizamón;--;--;6300000;Sí;Sí
+15/12/2025;2026;8294815;14;C.S.T.;Mensual;Johana María Josefina López García;Hugo David Arestivo Torres;--;--;6300000;Sí;Sí
+15/12/2025;2026;8898350;4;--;Mensual;Luján Elizabeth Pereira Matto;Miguel Angel Mencia Amarilla;--;--;6300000;Sí;Sí
+15/12/2025;2026;17200877;16;México;Mensual;Midory Carrasco Navarrete;--;--;--;6300000;Sí;Sí
+15/12/2025;2026;8981885;2;--;Mensual;Yennifer Garay;Gustavo Ortíz;--;--;6300000;Sí;Sí
+15/12/2025;2026;8890595;3;--;Mensual;Laura Letizia Flor Amarilla;Edgar Daniel Gauna Díaz;--;--;6300000;Sí;Sí
+15/12/2025;2026;9039013;2;--;Mensual;Nadia Luján Samudio Villagra;Juan Fernando Añazco Roa;--;--;6300000;Sí;Sí
+15/12/2025;2026;6866990;25;SAN IGNACIO DE LUQUE;Mensual;Romina Belén Recalde Aguilar;Jorge Rodrigo Tiozzo Cuenca;--;--;7000000;Sí;Sí
+15/12/2025;2026;7485952;21;SAN IGNACIO DE LUQUE;Mensual;Romina Belén Recalde Aguilar;Jorge Rodrigo Tiozzo Cuenca;--;--;7000000;Sí;Sí
+15/12/2025;2026;8727723;9;C.S.T.;Mensual;Lourdes Lara;David Benítez;--;--;6300000;Sí;Sí
+15/12/2025;2026;6801495;27;C.S.T.;Mensual;María Estela Ojeda de Aguilar;Joel Enrique Aguilar;--;--;7000000;Sí;Sí
+15/12/2025;2026;7223776;23;C.S.T.;Mensual;Lucía Guerrero de Gómez;Aristides Alejandro Gómez González;--;--;7000000;Sí;Sí
+15/12/2025;2026;9081007;1;--;Mensual;Rosa Beatriz Alfonso de García;Javier Emanuel García Alonzo;--;--;6300000;Sí;Sí
+15/12/2025;2026;9043662;1;--;Mensual;Lucía Mabel Torres Oliveira;Virginio Ruíz Coronel;--;--;6300000;Sí;Sí
+15/12/2025;2026;8852975;6;--;Mensual;María José Noguera;--;--;--;6300000;Sí;Sí
+15/12/2025;2026;6524066;30;C.S.T.;Mensual;Claudia Noemí Resquín Cañete;Santiago Joaquín Gómez García;--;--;7000000;Sí;Sí
+15/12/2025;2026;8922746;4;--;Mensual;Rocío Elizabeth Gauto Zárate;Luis Fernando Domínguez Cristaldo;--;--;6300000;Sí;Sí
+15/12/2025;2026;8749537;8;--;Mensual;Sandra Scappini Silva;Diego Andrés López Trigo;--;--;6300000;Sí;Sí
+15/12/2025;2026;9332473;2;--;Mensual;María Mílagros Méndez Maldonado;José Nicolás González Ortega;--;--;6300000;Sí;Sí
+15/12/2025;2026;9180974;3;--;Mensual;Emilce Angélica González;Juan José Azuaga;--;--;6300000;Sí;Sí
+15/12/2025;2026;7546236;20;C.S.T.;Mensual;Sandra Patricia Villaba Cano;Cristhian José Martínez Leguizamón;--;--;7000000;Sí;Sí
+15/12/2025;2026;8857823;4;--;Mensual;Lucía Concepción Acosta Tintel;Emmanuel Angel Antonio Arguello Escobar;--;--;6300000;Sí;Sí
+15/12/2025;2026;8934643;2;--;Mensual;Myrian Ayala;Sebastián Ingolotti;--;--;6300000;Sí;Sí
+15/12/2025;2026;8929823;4;--;Mensual;Viviana Sabaté;--;Esteban Sabaté;Abuelo;6300000;Sí;Sí
+15/12/2025;2026;8939883;4;--;Mensual;Luz María Riquelme Isasi;Alejandro Sanabria Bazán;--;--;6300000;Sí;Sí
+15/12/2025;2026;8953214;1;--;Mensual;Dahiana Andrea Alonzo Leguizamón;Elías Sebastián Ruíz Díaz Domínguez;--;--;6300000;Sí;Sí
+15/12/2025;2026;8777960;5;--;Mensual;Dahiana Andrea Alonzo Leguizamón;Elías Sebastián Ruíz Díaz Domínguez;--;--;6300000;Sí;Sí
+15/12/2025;2026;9106162;1;--;Mensual;Gianina Tamara Noldin Méndez;Carlos Federico Agüero Flores;--;--;6300000;Sí;Sí
+15/12/2025;2026;7471026;22;C.S.T.;Mensual;María Belén Orrego Irrazábal;Amado José María Acosta Gaona;--;--;7000000;Sí;Sí
+16/12/2025;2026;9213835;2;--;Mensual;Milagros Anahí Fretes Cabrera;Walter Emilio Llano Pereira;--;--;6300000;Sí;Sí
+16/12/2025;2026;7316911;21;C.S.T.;Mensual;Alba María Ojeda Vallejos;Víctor Delgado;Aparicio Ojeda;Abuelo;7000000;Sí;Sí
+16/12/2025;2026;7734111;17;C.S.T.;Mensual;Dora Benítez;Orlando Mena;--;--;6300000;Sí;Sí
+16/12/2025;2026;7535635;20;Cristiano Arte;Mensual;Silvia Lorena Ávalos Cabrera;Hector Fernando Samaniego Portillo;--;--;7000000;Sí;Sí
+16/12/2025;2026;8965040;3;--;Mensual;Rocío Belén Arce Chaparro;Rodrigo David Moguilner Cardozo;--;--;6300000;Sí;Sí
+16/12/2025;2026;7442719;28;Santa Clara;Mensual;Rocío Elena Baibé Jara;Rolando Patricio Ortíz Bernal;--;--;7000000;Sí;Sí
+16/12/2025;2026;6779074;28;C.S.T.;Mensual;Patricia Graciela Noguera Martínez;José María Orué Gamarra;--;--;7000000;Sí;Sí
+16/12/2025;2026;8883560;3;--;Mensual;Elena Karabia;Francisco Pérez;--;--;6300000;Sí;Sí
+16/12/2025;2026;7771056;28;Manuel Domínguez;Mensual;Edith Luz Marina Orrego;Fredy Fernando Romero;--;--;7000000;Sí;Sí
+16/12/2025;2026;9021252;1;--;Mensual;Alicia Leonora Rotela López;Victor Hugo Ramírez Báez;--;--;6300000;Sí;Sí
+16/12/2025;2026;8709533;5;C.S.T.;Mensual;Mirta Carolina Mena de Martinez;Enzo Rodrigo Martinez Cristaldo;--;--;6300000;Sí;Sí
+16/12/2025;2026;7909929;15;C.S.T.;Mensual;Mirta Carolina Mena de Martinez;Enzo Rodrigo Martinez Cristaldo;--;--;6300000;Sí;Sí
+16/12/2025;2026;8577281;9;C.S.T.;Mensual;Deisy Chamorro;Osmar Barrios;--;--;6300000;Sí;Sí
+16/12/2025;2026;8158768;13;C.S.T.;Mensual;Deisy Chamorro;Osmar Barrios;--;--;6300000;Sí;Sí
+16/12/2025;2026;7601309;25;Col. Santa María;Mensual;Pablina Almada Ojeda;Maximino Benítez Gamarra;--;--;7000000;Sí;Sí
+16/12/2025;2026;8625702;9;Trinity School;Mensual;Alicia Leonora Rotela López;Victor Hugo Ramírez Báez;--;--;6300000;Sí;Sí
+16/12/2025;2026;6892733;25;Col. Santa María;Mensual;Larissa Romero;Cristhian Marcelino Parra;--;--;7000000;Sí;Sí
+16/12/2025;2026;7532745;20;Esc. Solar de Artigas;Mensual;Blanca Arcenia Páez Farías;Joel Andrés Sánchez;--;--;7000000;Sí;Sí
+16/12/2025;2026;9004371;1;--;Mensual;Romina Insfrán;Diego Ortíz;--;--;6300000;Sí;Sí
+16/12/2025;2026;8857174;6;--;Mensual;María José Andrada de Escobar;Federico Escobar Páez;--;--;6300000;Sí;Sí
+16/12/2025;2026;6550191;30;C.S.T.;Mensual;Claudelines Luz Yudis Martínez;Luis Cesar Cabrera Cañete;--;--;7000000;Sí;Sí
+16/12/2025;2026;8806538;5;C.S.T.;Mensual;Mariel Ivana Apuril Velgara;Sandro Barone Ponce;--;--;6300000;Sí;Sí
+16/12/2025;2026;6288701;29;C.S.T.;Mensual;Lelis Noelia Morales Clemote;Humberto Martínez Fretes;--;--;7000000;Sí;Sí
+03/02/2026;2026;6539514;29;C.S.T.;Mensual;María José Bareiro Cabrera;Juan José Quintana Cantero;--;--;7000000;Sí;Sí
+03/02/2026;2026;6727834;29;C.S.T.;Mensual;Zulma Edith Ojeda de Duarte;Pedro Ramón Duarte Benítez;--;--;7000000;Sí;Sí
+03/02/2026;2026;8444458;13;C.S.T.;Mensual;Silvia Chamorro;Gustavo González;--;--;6300000;Sí;Sí
+03/02/2026;2026;7162997;23;C.S.T.;Mensual;Silvia Chamorro;Gustavo González;--;--;7000000;Sí;Sí
+03/02/2026;2026;8529696;10;C.S.T.;Mensual;Milena Alexandra Clemotte Canatta;Robin Rodríguez;--;--;6300000;Sí;Sí
+03/02/2026;2026;6603664;27;C.S.T.;Mensual;Milena Alexandra Clemotte Canatta;Robin Rodríguez;--;--;7000000;Sí;Sí
+03/02/2026;2026;8322512;11;C.S.T.;Mensual;Nilsa María Fernández Cabrera;Juan Amado Peralta Núñez;Marta Núñez de Peralta;Abuela;6300000;Sí;Sí
+03/02/2026;2026;7535067;19;C.S.T.;Mensual;Carmen Rosalía Aquino;Jorge Marcelo Andriotti;--;--;7000000;Sí;Sí
+03/02/2026;2026;6919317;24;C.S.T.;Mensual;Aidee Sara Camelli Vda. De Torres;--;--;--;7000000;Sí;Sí
+03/02/2026;2026;9112486;2;--;Mensual;Lucía Raquel Valdéz Cáceres;--;--;--;6300000;Sí;Sí
+03/02/2026;2026;6927157;26;C.S.T.;Mensual;Ana María Zarza Aquino;Francisco Javier Cáceres Galeano;--;--;7000000;Sí;Sí
+03/02/2026;2026;8808901;8;C.S.T.;Mensual;Paola Belén Silva Marecos;Christian Antonio Abrahan Fleitas Morales;--;--;6300000;Sí;Sí
+03/02/2026;2026;8011066;15;C.S.T.;Mensual;Silvia Lorena Enciso;Mario Antonio Colmán Allen;--;--;6300000;Sí;Sí
+03/02/2026;2026;7563751;19;C.S.T.;Mensual;Silvia Lorena Enciso;Mario Antonio Colmán Allen;--;--;7000000;Sí;Sí
+03/02/2026;2026;9203493;7;C.S.T.;Mensual;Andrea Celeste Aveiro;Ángel David Benítez;--;--;6300000;Sí;Sí
+03/02/2026;2026;8164043;13;C.S.T.;Mensual;Andrea Celeste Aveiro;Ángel David Benítez;--;--;6300000;Sí;Sí
+03/02/2026;2026;8976968;3;--;Mensual;Adriana de los Ángeles Rolón Martínez;--;--;--;6300000;Sí;Sí
+03/02/2026;2026;8395726;11;C.S.T.;Mensual;Mirta Jazmín Galeano Mieres;Marcelo González Fiori;--;--;6300000;Sí;Sí
+03/02/2026;2026;8503995;9;C.S.T.;Mensual;Claudia Rocío Bernal Yegros;Horacio Alejandro Pane Speranza;--;--;6300000;Sí;Sí
+03/02/2026;2026;7257597;21;C.S.T.;Mensual;Karen Desireé Leguizamón de Sánchez;Rafael Sánchez Vera;--;--;7000000;Sí;Sí
+03/02/2026;2026;8163590;17;C.S.T.;Mensual;Angélica Beatriz Ruíz Sanabria;Guillermo José Kubina Silvera;--;--;6300000;Sí;Sí
+03/02/2026;2026;7015549;23;C.S.T.;Mensual;María Marta Aurelia Martínez;Miguel Angel Giménez Burguez;--;--;7000000;Sí;Sí
+03/02/2026;2026;6988446;25;C.S.T.;Mensual;Susana María Aguilera Pérez;José Ángel Galeano Marten;--;--;7000000;Sí;Sí
+03/02/2026;2026;8320804;18;C.S.T.;Mensual;María Karina Carballo;Rolando Javier Riquelme Román;--;--;6300000;Sí;Sí
+03/02/2026;2026;8808744;5;C.S.T.;Mensual;Silvana Montserrat Martínez Báez;Nestor Manuel Rotela Martínez;--;--;6300000;Sí;Sí
+03/02/2026;2026;7312538;25;C.S.T.;Mensual;Alice Aponte de Sandoval;Silvino Sandoval;--;--;7000000;Sí;Sí
+03/02/2026;2026;6575298;28;C.S.T.;Mensual;Juana Nora Beatriz Noldin;Alberto Rufino Gaona García;--;--;7000000;Sí;Sí
+03/02/2026;2026;8295998;13;C.S.T.;Mensual;María Luján Ríos;Oscar Marcelo Delvalle;--;--;6300000;Sí;Sí
+03/02/2026;2026;8654208;7;C.S.T.;Mensual;María Liz Vallejos;Marcos Manuel Duarte;--;--;6300000;Sí;Sí
+03/02/2026;2026;8500666;11;C.S.T.;Mensual;María Liz Vallejos;Marcos Manuel Duarte;--;--;6300000;Sí;Sí
+03/02/2026;2026;8652911;7;C.S.T.;Mensual;María Victoria Torres;Christian Coronel;--;--;6300000;Sí;Sí
+03/02/2026;2026;8969376;2;--;Mensual;Marcela del Pilar Pérez Centurión;Pedro Antonio Simonetti Torres;--;--;6300000;Sí;Sí
+03/02/2026;2026;8550462;10;C.S.T.;Mensual;Amelia Solís;Gustavo Domínguez;Brisa Magalí Vera Solís;Hermana;6300000;Sí;Sí
+03/02/2026;2026;6803681;27;C.S.T.;Mensual;Jazmín Soledad Florenciáñez Gaona;Osvaldo Isaac Ympellizzeri;--;--;7000000;Sí;Sí
+03/02/2026;2026;8345473;12;C.S.T.;Mensual;Cynthia Cáceres;Johan Benítez;--;--;6300000;Sí;Sí
+03/02/2026;2026;7577762;20;C.S.T.;Mensual;Cynthia Cáceres;Johan Benítez;--;--;7000000;Sí;Sí
+03/02/2026;2026;8036736;15;C.S.T.;Mensual;Noelia Ramona Agüero Rotela;Fernando Manuel Bobadilla;--;--;6300000;Sí;Sí
+03/02/2026;2026;7533758;19;C.S.T.;Mensual;Noelia Ramona Agüero Rotela;Fernando Manuel Bobadilla;--;--;7000000;Sí;Sí
+03/02/2026;2026;8953275;10;C.S.T.;Mensual;Rosa Soledad Filipponi Ovelar;Igor Cáceres Gallardo;--;--;6300000;Sí;Sí
+03/02/2026;2026;8327586;18;C.S.T.;Mensual;Mirtha Rossana Figueredo de Cabrera;César Darío Cabrera Oviedo;--;--;6300000;Sí;Sí
+03/02/2026;2026;7117848;30;C.S.T.;Mensual;Mirtha Rossana Figueredo de Cabrera;César Darío Cabrera Oviedo;--;--;7000000;Sí;Sí
+03/02/2026;2026;8875553;6;C.S.T.;Mensual;Yessica Soledad Bernal Centurión;Marcos Junior Duarte Valdéz;--;--;6300000;Sí;Sí
+03/02/2026;2026;8303160;15;C.S.T.;Mensual;Viviana Ortíz;Luis Pintos;--;--;6300000;Sí;Sí
+03/02/2026;2026;8126013;21;C.S.T.;Mensual;Ada De Jesús Vega Galeano;Diego Rodolfo Flores López;--;--;7000000;Sí;Sí
+03/02/2026;2026;8868089;3;C.S.T.;Mensual;María Mercedes Peña;Francisco Antonio Jara Duarte;--;--;6300000;Sí;Sí
+03/02/2026;2026;7616502;19;C.S.T.;Mensual;María Mercedes Peña;Francisco Antonio Jara Duarte;--;--;7000000;Sí;Sí
+03/02/2026;2026;7679787;17;C.S.T.;Mensual;Dolly Barrientos;Diego Ortíz;--;--;6300000;Sí;Sí
+03/02/2026;2026;8382026;14;C.S.T.;Mensual;Johana Isasi;Ángel Gabriel Cabrera Benítez;--;--;6300000;Sí;Sí
+03/02/2026;2026;9053093;6;C.S.T.;Mensual;María José Martínez de Garcete;José Garcete;--;--;6300000;Sí;Sí
+03/02/2026;2026;8911737;3;C.S.T.;Mensual;Daisy Carolina Chávez Caballero;Aníbal Ramírez;--;--;6300000;Sí;Sí
+03/02/2026;2026;8500597;16;C.S.T.;Mensual;Vanessa Sanabria;José Antonio Sanabria;--;--;6300000;Sí;Sí
+03/02/2026;2026;7815095;19;C.S.T.;Mensual;Judith Elizabeth Álvarez Alvarenga;--;--;--;7000000;Sí;Sí
+03/02/2026;2026;8250434;13;C.S.T.;Mensual;Mariela Ortíz González;Jorge Osmar Cañete Ozuna;--;--;6300000;Sí;Sí
+03/02/2026;2026;6847770;29;C.S.T.;Mensual;Mariela Ortíz González;--;--;--;7000000;Sí;Sí
+03/02/2026;2026;8483959;17;C.S.T.;Mensual;Estefanía Epifania Maciel Álvarez;Victor Manuel Duarte Vázquez;--;--;6300000;Sí;Sí
+03/02/2026;2026;7570155;26;C.S.T.;Mensual;Estefanía Epifania Maciel Álvarez;Victor Manuel Duarte Vázquez;--;--;7000000;Sí;Sí
+03/02/2026;2026;8681874;7;C.S.T.;Mensual;Nadia Rosa Jara;Gustavo Adolfo Vázquez;--;--;6300000;Sí;Sí
+03/02/2026;2026;7708541;19;C.S.T.;Mensual;Nadia Rosa Jara;Gustavo Adolfo Vázquez;--;--;7000000;Sí;Sí
+03/02/2026;2026;7188660;25;C.S.T.;Mensual;Nadia Rosa Jara;Gustavo Adolfo Vázquez;--;--;7000000;Sí;Sí
+03/02/2026;2026;7725135;19;C.S.T.;Mensual;Mónica Eugenia Peralta de Kubina;Daniel Eduardo Kubina Silveira;--;--;7000000;Sí;Sí
+03/02/2026;2026;8813103;6;C.S.T.;Mensual;María José Brítez Laurent;Faustino Ramón González Álvarez;--;--;6300000;Sí;Sí
+03/02/2026;2026;8563325;8;C.S.T.;Mensual;María Estela Ruíz;Juan Lorenzo Monges;--;--;6300000;Sí;Sí
+03/02/2026;2026;8075281;14;C.S.T.;Mensual;María Estela Ruíz;Juan Lorenzo Monges;--;--;6300000;Sí;Sí
+03/02/2026;2026;9216009;8;C.S.T.;Mensual;Johanna Arévalo;Adilson Gaona;--;--;6300000;Sí;Sí
+03/02/2026;2026;8749026;14;C.S.T.;Mensual;Johanna Arévalo;Adilson Gaona;--;--;6300000;Sí;Sí
+03/02/2026;2026;9053444;3;C.S.T.;Mensual;Lia María Jazmín Casco Cantero;Isaac Jhonatan Centurión Mas;--;--;6300000;Sí;Sí
+03/02/2026;2026;9076050;5;;Mensual;Gabriela Morel;Enmanuel Jesús Fernando Rivarola Benítez;--;--;6300000;Sí;Sí
+03/02/2026;2026;7814493;20;C.S.T.;Mensual;Janisse Fiorella Giangrego Benítez;--;Dino Giangreco;Abuelo;7000000;Sí;Sí
+03/02/2026;2026;8791544;7;C.S.T.;Mensual;Tamara Jazmín Torres Duarte;Fernando Delvalle Lopacher;--;--;6300000;Sí;Sí
+03/02/2026;2026;7251254;21;C.S.T.;Mensual;Tamara Jazmín Torres Duarte;Fernando Delvalle Lopacher;--;--;7000000;Sí;Sí
+03/02/2026;2026;7173026;23;C.S.T.;Mensual;Rossana Cirila Helman Armoa;Jorge Daniel Melgarejo Cantero;--;--;7000000;Sí;Sí
+03/02/2026;2026;7636209;19;C.S.T.;Mensual;Fátima Belén Ocampos Chávez;Oscar Alberto Bejarano Leguizamón;--;--;7000000;Sí;Sí
+03/02/2026;2026;7201963;27;C.S.T.;Mensual;Ylirica Lucía Cabañas de León;Alfredo Javier Fernández García;--;--;7000000;Sí;Sí
+03/02/2026;2026;8458527;9;C.S.T.;Mensual;Liz Paola Chávez Rotela;Luis Enrique León Agüero;--;--;6300000;Sí;Sí
+03/02/2026;2026;8675363;10;C.S.T.;Mensual;María Ana Balbuena Castillo;Cirilo Piris Coronel;--;--;6300000;Sí;Sí
+03/02/2026;2026;6194552;30;C.S.T.;Mensual;María Ana Balbuena Castillo;Cirilo Piris Coronel;--;--;7000000;Sí;Sí
+03/02/2026;2026;8385541;12;C.S.T.;Mensual;Ilder Maribel Sosa López;José del Rosario González Sanabria;--;--;6300000;Sí;Sí
+03/02/2026;2026;273210;4;C.S.T.;Mensual;Angélica Analiz Lugo Agüero;Aníbal Marcelo Moreno Díaz;--;--;6300000;Sí;Sí
+03/02/2026;2026;8329443;14;C.S.T.;Mensual;Angélica Analiz Lugo Agüero;Aníbal Marcelo Moreno Díaz;--;--;6300000;Sí;Sí
+03/02/2026;2026;8314647;11;C.S.T.;Mensual;Violeta Dahiana González Perdomo;Néstor Amado Gamarra Flecha;--;--;6300000;Sí;Sí
+03/02/2026;2026;7633637;17;C.S.T.;Mensual;Violeta Dahiana González Perdomo;Néstor Amado Gamarra Flecha;--;--;6300000;Sí;Sí
+03/02/2026;2026;6829100;25;C.S.T.;Mensual;Violeta Dahiana González Perdomo;Néstor Amado Gamarra Flecha;--;--;7000000;Sí;Sí
+03/02/2026;2026;8575511;11;C.S.T.;Mensual;María Paula Benítez Guggiari;Arnaldo Javier Leiva Chenu;--;--;6300000;Sí;Sí
+03/02/2026;2026;7071863;26;C.S.T.;Mensual;Benita Asunción Ortíz Colmán;Carlos Luis Vergara Giménez;--;--;7000000;Sí;Sí
+03/02/2026;2026;8021588;22;C.S.T.;Mensual;Darcy Idalina Peralta Acosta;Jorge David Maldonado Agüero;--;--;7000000;Sí;Sí
+03/02/2026;2026;8146571;16;C.S.T.;Mensual;María Ramona Ríos Florentín;Nestor Fabián Benítez Torres;--;--;6300000;Sí;Sí
+03/02/2026;2026;7002628;24;C.S.T.;Mensual;Cynthia Benítez de Marín;Víctor Aníbal Marín Godoy;--;--;7000000;Sí;Sí
+03/02/2026;2026;7008890;26;C.S.T.;Mensual;Romina Palacios Alfoso;César Albino Rodirguez Sisa;--;--;7000000;Sí;Sí
+03/02/2026;2026;8315140;14;C.S.T.;Mensual;Aida Lorena Urunaga de Martínez;Marcos Ernesto Martínez;--;--;6300000;Sí;Sí
+03/02/2026;2026;9055636;4;C.S.T.;Mensual;Patricia CarolinaDomínguez Llamas;Andrés Darío León Villalba;--;--;6300000;Sí;Sí
+03/02/2026;2026;9055635;6;C.S.T.;Mensual;Patricia CarolinaDomínguez Llamas;Andrés Darío León Villalba;--;--;6300000;Sí;Sí
+03/02/2026;2026;8341384;13;C.S.T.;Mensual;Dahiana Rolón;Luis Paolo Escobar;--;--;6300000;Sí;Sí
+03/02/2026;2026;8941811;4;C.S.T.;Mensual;Cynthia Mabel Sanabria Talavera;Ariel Mercedes Galeano Franco;--;--;6300000;Sí;Sí
+03/02/2026;2026;8083113;18;C.S.T.;Mensual;Alexis Vanessa Ferreira;Ariel Alberto Argüello Bejarano;Yamile Arguello Bejarano;Tía;6300000;Sí;Sí
+03/02/2026;2026;8660253;7;C.S.T.;Mensual;Noelia Stephany Schaffer Colmán;Fernando Antonio Arce Román;--;--;6300000;Sí;Sí
+04/02/2026;2026;7445982;22;C.S.T.;Mensual;Noelia Verenize Villalba Ferrari;Vicente Fabián Cáceres Orrego;--;--;7000000;Sí;Sí
+04/02/2026;2026;7929299;18;C.S.T.;Mensual;Noelia Verenize Villalba Ferrari;Vicente Fabián Cáceres Orrego;--;--;6300000;Sí;Sí
+04/02/2026;2026;8030467;15;C.S.T.;Mensual;Jessica Elizabeth Báez Benegas;Diego Martín Giménez Cardozo;--;--;6300000;Sí;Sí
+04/02/2026;2026;6260446;29;C.S.T.;Mensual;Cinthia Leticia Fernández de López;Miguel Angel López Ramírez;--;--;7000000;Sí;Sí
+04/02/2026;2026;8693388;7;C.S.T.;Mensual;Marta Villani;Edson Arévalo;--;--;6300000;Sí;Sí
+04/02/2026;2026;8129788;13;C.S.T.;Mensual;Marta Villani;Edson Arévalo;--;--;6300000;Sí;Sí
+04/02/2026;2026;7216372;24;C.S.T.;Mensual;Marta Villani;Edson Arévalo;--;--;7000000;Sí;Sí
+04/02/2026;2026;7919079;15;C.S.T.;Mensual;Fabiola María Coronel Solalinde;Enrique Insfrán Reyes;--;--;6300000;Sí;Sí
+04/02/2026;2026;7904121;20;Madre Rosa Santaeugenia;Mensual;Berta Alexandra Bejarano;José Luis Larangeira;--;--;7000000;Sí;Sí
+04/02/2026;2026;7971736;19;C.S.T.;Mensual;Eugenia Mercedes Troche Benítez;--;--;--;7000000;Sí;Sí
+04/02/2026;2026;8872717;5;C.S.T.;Mensual;María Elisa Zelaya Octavo;Blas Emilio Mora Giménez;--;--;6300000;Sí;Sí
+04/02/2026;2026;7581420;19;C.S.T.;Mensual;María Elisa Zelaya Octavo;Blas Emilio Mora Giménez;--;--;7000000;Sí;Sí
+04/02/2026;2026;6997055;24;C.S.T.;Mensual;María Elisa Zelaya Octavo;Blas Emilio Mora Giménez;--;--;7000000;Sí;Sí
+04/02/2026;2026;7487085;22;Col. Cristiano Bethania;Mensual;Jessica Patricia Domínguez Alvarenga;Rodolfo Javier Cubilla Vázquez;--;--;7000000;Sí;Sí
+04/02/2026;2026;8202244;17;C.S.T.;Mensual;Sara Belén Flores Méndez;Luis Villalba;--;--;6300000;Sí;Sí
+04/02/2026;2026;8822658;7;C.S.T.;Mensual;Liz Mariela Maidana Sánchez;Ulises Tadeo Mena Castillo;--;--;6300000;Sí;Sí
+04/02/2026;2026;8290677;11;C.S.T.;Mensual;Liz Mariela Maidana Sánchez;Ulises Tadeo Mena Castillo;--;--;6300000;Sí;Sí
+04/02/2026;2026;8257259;14;C.S.T.;Mensual;Amanda Rocío Ferrara {Avalos;Diego Gabriel González Pane;--;--;6300000;Sí;Sí
+04/02/2026;2026;8160853;16;C.S.T.;Mensual;Analia Maria Cabrera Acosta;Jose Luis Pane Ferrari;--;--;6300000;Sí;Sí
+04/02/2026;2026;8110636;13;C.S.T.;Mensual;Laura Ayala Hermosilla;Osvaldo Arrúa;--;--;6300000;Sí;Sí
+04/02/2026;2026;8750540;14;C.S.T.;Mensual;Rita Monserrat Duarte Ruiz;Francisco Raul Araújo Sosa;--;--;6300000;Sí;Sí
+04/02/2026;2026;9409723;4;--;Mensual;Rosa Soledad Filipponi Ovelar;Igor Cáceres Gallardo;--;--;6300000;Sí;Sí
+04/02/2026;2026;8895314;10;C.S.T.;Mensual;Rumilda Teodocia Casco Morel;Fabio Crispín Candia Melgarejo;--;--;6300000;Sí;Sí
+04/02/2026;2026;7987860;16;C.S.T.;Mensual;Rumilda Teodocia Casco Morel;Fabio Crispín Candia Melgarejo;--;--;6300000;Sí;Sí
+04/02/2026;2026;8728563;8;C.S.T.;Mensual;María José Martínez Cantero;Raúl Enrique Duarte Pereira;--;--;6300000;Sí;Sí
+04/02/2026;2026;8299754;12;C.S.T.;Mensual;María José Martínez Cantero;Raúl Enrique Duarte Pereira;--;--;6300000;Sí;Sí
+04/02/2026;2026;7541571;20;C.S.T.;Mensual;María José Martínez Cantero;Raúl Enrique Duarte Pereira;--;--;7000000;Sí;Sí
+04/02/2026;2026;8537305;9;C.S.T.;Mensual;Jessica Fiori;Alejandro Esteban Recalde;--;--;6300000;Sí;Sí
+04/02/2026;2026;6503226;30;C.S.T.;Mensual;Jessica Fiori;Alejandro Esteban Recalde;--;--;7000000;Sí;Sí
+04/02/2026;2026;8832644;7;C.S.T.;Mensual;Delia Elizabeth Belotto Leguizamón;Javier Arturo Leiva Villagra;--;--;6300000;Sí;Sí
+04/02/2026;2026;8650581;8;C.S.T.;Mensual;María Viviana Brizuela Rivas;Carlos Oscar Rodi Lagrave;--;--;6300000;Sí;Sí
+04/02/2026;2026;8067183;16;C.S.T.;Mensual;María Viviana Brizuela Rivas;Carlos Oscar Rodi Lagrave;--;--;6300000;Sí;Sí
+04/02/2026;2026;8755406;7;C.S.T.;Mensual;Sandy Mabel Acosta Bogado;Gustavo Miguel Cabañas González;--;--;6300000;Sí;Sí
+04/02/2026;2026;6985271;26;C.S.T.;Mensual;Fátima Rosaly Leiva;Jawdat Ali Jouni;--;--;7000000;Sí;Sí
+04/02/2026;2026;8788070;6;C.S.T.;Mensual;Yrma Adelina Zárate Vera;José Félix Olmedo Benítez;--;--;6300000;Sí;Sí
+04/02/2026;2026;7358117;21;C.S.T.;Mensual;Diana Fabiola Vera;Patricio Núñez;--;--;7000000;Sí;Sí
+04/02/2026;2026;6710502;29;C.S.T.;Mensual;Diana Fabiola Vera;Angel Patricio Núñez;--;--;7000000;Sí;Sí
+04/02/2026;2026;8716089;8;C.S.T.;Mensual;María Luján Pérez González;Wilson Daniel Arce Chaparro;Blanca Ignacia González Otazo;Abuela;6300000;Sí;Sí
+04/02/2026;2026;7858551;20;C.S.T.;Mensual;Liz Rossana Garay Martínez;--;--;--;7000000;Sí;Sí
+04/02/2026;2026;8346245;13;C.S.T.;Mensual;Daisy María Marta Galeano García;Julio José Rivas Caló;--;--;6300000;Sí;Sí
+04/02/2026;2026;6781678;27;C.S.T.;Mensual;Rossana Mendieta Santander;--;--;--;7000000;Sí;Sí
+04/02/2026;2026;7670715;17;C.S.T.;Mensual;Claudia Marisa Barslund;Hugo Ramón Domínguez Rojas;--;--;6300000;Sí;Sí
+04/02/2026;2026;7249411;21;C.S.T.;Mensual;Claudia Marisa Barslund;Hugo Ramón Domínguez Rojas;--;--;7000000;Sí;Sí
+04/02/2026;2026;7872081;16;C.S.T.;Mensual;Claudia Analía Salinas Morales;Gustavo Ismael Lezcano Olmedo;--;--;6300000;Sí;Sí
+04/02/2026;2026;7113929;23;C.S.T.;Mensual;Lucía Isabel Helman de Morales;Darwin Raúl Morales Burgos;--;--;7000000;Sí;Sí
+04/02/2026;2026;8917716;10;C.S.T.;Mensual;Claudia María Grommeck Pereira;Alfredo Javier Almirón Kurth;--;--;6300000;Sí;Sí
+04/02/2026;2026;8461895;10;C.S.T.;Mensual;Daysy Escobar;Andrés Zurita;--;--;6300000;Sí;Sí
+04/02/2026;2026;9100755;2;--;Mensual;María Ester Rodríguez Rolón;Gerardo Morel Valiente;Gladys Elizabeth Valiente de Monges;Tía;6300000;Sí;Sí
+04/02/2026;2026;8365877;12;C.S.T.;Mensual;Rafaela Bonani;--;Claudia Bonani;Abuela;6300000;Sí;Sí
+04/02/2026;2026;8828150;12;C.S.T.;Mensual;Magdalena Ruíz;Luis Alberto Brítez Ramírez;--;--;6300000;Sí;Sí
+04/02/2026;2026;6341046;27;C.S.T.;Mensual;--;Jorge Luis Casaccia Guerrero;--;--;7000000;Sí;Sí
+04/02/2026;2026;8166945;13;C.S.T.;Mensual;Marta Teresa Romero;Rodrigo Lugo Villar;--;--;6300000;Sí;Sí
+04/02/2026;2026;8462349;9;C.S.T.;Mensual;Marcia Pamela Flecha Ovelar;Ramón Daniel Fariña Benítez;--;--;6300000;Sí;Sí
+04/02/2026;2026;7304995;24;C.S.T.;Mensual;Elena María Núñez Ferreira;Omar Santiago Enciso;--;--;7000000;Sí;Sí
+04/02/2026;2026;8702881;8;C.S.T.;Mensual;Alma López;Brígido Apodaca;--;--;6300000;Sí;Sí
+04/02/2026;2026;8871307;5;C.S.T.;Mensual;Nilda Rossana Rodriguez Martinez;Juan Ramón Mareco;--;--;6300000;Sí;Sí
+04/02/2026;2026;7429837;24;C.S.T.;Mensual;Nilda Rossana Rodriguez Martinez;Juan Ramón Mareco;--;--;7000000;Sí;Sí
+04/02/2026;2026;6855461;26;C.S.T.;Mensual;Viviana Mabel Pereira Leguizamón;--;--;--;7000000;Sí;Sí
+05/02/2026;2026;7179244;23;C.S.T.;Mensual;María Mercedes Romero Villalba;Eduardo Daniel Rojas Silva Gerasi;--;--;7000000;Sí;Sí
+05/02/2026;2026;8510413;12;C.S.T.;Mensual;María Laura Ledesma Ruíz Díaz;José Miguel Galeano Dávalos;--;--;6300000;Sí;Sí
+05/02/2026;2026;7902769;16;C.S.T.;Mensual;María Laura Ledesma Ruíz Díaz;José Miguel Galeano Dávalos;--;--;6300000;Sí;Sí
+05/02/2026;2026;8880088;9;C.S.T.;Mensual;Patricia Ayala de García;Jorge García Britos;--;--;6300000;Sí;Sí
+05/02/2026;2026;7436475;28;C.S.T.;Mensual;Patricia Ayala de García;Jorge García Britos;--;--;7000000;Sí;Sí
+05/02/2026;2026;8704246;7;C.S.T.;Mensual;Carmen Raquel Ibáñez Oviedo;Miguel Angel Jara Adorno;--;--;6300000;Sí;Sí
+05/02/2026;2026;7837581;17;C.S.T.;Mensual;Carmen Raquel Ibáñez Oviedo;Miguel Angel Jara Adorno;--;--;6300000;Sí;Sí
+05/02/2026;2026;6783410;26;C.S.T.;Mensual;Blanca Mercedes Núñez;Bernardino Fernández;--;--;7000000;Sí;Sí
+05/02/2026;2026;8190524;13;C.S.T.;Mensual;Sonia Susana Servín Ortíz;Victor Manuel Villalba Pedrozza;--;--;6300000;Sí;Sí
+05/02/2026;2026;7357791;23;C.S.T.;Mensual;Sonia Susana Servín Ortíz;Victor Manuel Villalba Pedrozza;--;--;7000000;Sí;Sí
+05/02/2026;2026;8492833;9;C.S.T.;Mensual;Jessica Cardozo;Victor Antonio Acevedo Barahona;--;--;6300000;Sí;Sí
+05/02/2026;2026;7026854;26;C.S.T.;Mensual;Fanny Esmeralda Marín de Halke;Carlos Alberto Halke Rosso;--;--;7000000;Sí;Sí
+05/02/2026;2026;8881761;12;C.S.T.;Mensual;Noelia Rolón;Juan Antonio Espínola;--;--;6300000;Sí;Sí
+05/02/2026;2026;7651972;22;C.S.T.;Mensual;Cynthia Mariela Benítez Escobar;Diosnel López Origuela;--;--;7000000;Sí;Sí
+05/02/2026;2026;8222666;13;C.S.T.;Mensual;Elena María Araújo Silva;Cecilio Cuevas Mendoza;--;--;6300000;Sí;Sí
+05/02/2026;2026;7932921;16;C.S.T.;Mensual;Fátima Rosaly Leiva;Marco Antonio Domínguez Rivarol;--;--;6300000;Sí;Sí
+05/02/2026;2026;8816507;4;C.S.T.;Mensual;Lidia Beatriz Vallejos Rodas;Alcides Iván Parini Noguera;--;--;6300000;Sí;Sí
+05/02/2026;2026;8879338;10;C.S.T.;Mensual;María Liliana Ruíz Díaz;Favio Ulises Oliver Benítez;--;--;6300000;Sí;Sí
+05/02/2026;2026;8373548;16;C.S.T.;Mensual;Sirley Analía Báez Rojas;--;María Isabel Rojas Díaz;Abuela;6300000;Sí;Sí
+05/02/2026;2026;9098531;6;C.S.T.;Mensual;Sirley Analía Báez Rojas;--;--;--;6300000;Sí;Sí
+05/02/2026;2026;7044725;26;C.S.T.;Mensual;Luz María Ortíz Ramírez;Osvaldo Orrego;Osvaldo Orrego Armoa;Abuelo;7000000;Sí;Sí
+05/02/2026;2026;7530823;22;C.S.T.;Mensual;María Isabel Ramos Rojas;Emilio Alfonzo Zárate;Alejandra Alfonzo;Hermana;7000000;Sí;Sí
+05/02/2026;2026;8170257;15;C.S.T.;Mensual;Rossana Avalos;Ariel Amarilla;--;--;6300000;Sí;Sí
+05/02/2026;2026;6515605;28;C.S.T.;Mensual;Erika Pankow;Jorge Milciades Galeano;--;--;7000000;Sí;Sí
+05/02/2026;2026;8354739;17;C.S.T.;Mensual;Susana Isabel Abreu Goncálves;Juvenal Eduardo Escalante Montoya;--;--;6300000;Sí;Sí
+05/02/2026;2026;8354738;23;C.S.T.;Mensual;Susana Isabel Abreu Goncálves;Juvenal Eduardo Escalante Montoya;--;--;7000000;Sí;Sí
+05/02/2026;2026;8401299;11;C.S.T.;Mensual;María Belén Cardenas Vera;--;--;--;6300000;Sí;Sí
+05/02/2026;2026;56483059;11;C.S.T.;Mensual;Vanesa Centurión Leguizamón;Martín González;--;--;6300000;Sí;Sí
+05/02/2026;2026;8803124;8;C.S.T.;Mensual;Diana María Amarilla Martínez;--;--;--;6300000;Sí;Sí
+05/02/2026;2026;55814168;13;C.S.T.;Mensual;Rocío Klinchuk;Joselo Fabián Da Rosa;--;;6300000;Sí;Sí
+05/02/2026;2026;53293266;20;C.S.T.;Mensual;Rocío Klinchuk;Joselo Fabián Da Rosa;--;--;7000000;Sí;Sí
+05/02/2026;2026;48576595;30;C.S.T.;Mensual;Rocío Klinchuk;Joselo Fabián Da Rosa;--;--;7000000;Sí;Sí
+05/02/2026;2026;7537411;22;C.S.T.;Mensual;Ana María Orrego;Jorge Grisetti;Enzo Giulianno Grisetti Orrego;Hermano;7000000;Sí;Sí
+05/02/2026;2026;6523182;30;C.S.T.;Mensual;Ana María Orrego;Jorge Grisetti;Enzo Giulianno Grisetti Orrego;Hermano;7000000;Sí;Sí
+05/02/2026;2026;7900457;24;C.S.T.;Mensual;Lourdes Carolina Ruiz de Duarte;Roberto Ramón Duarte Aguilera;--;--;7000000;Sí;Sí
+05/02/2026;2026;6504997;30;C.S.T.;Mensual;Lourdes Carolina Ruiz de Duarte;Roberto Ramón Duarte Aguilera;--;--;7000000;Sí;Sí
+05/02/2026;2026;7639572;25;C.S.T.;Mensual;Sabrina Russomando;Luis Mario Irrazábal Báez;--;--;7000000;Sí;Sí
+05/02/2026;2026;6710122;28;C.S.T.;Mensual;Alicia Raquel Silva Sánchez de Riego;Gustavo Adolfo Riego Volpe;--;--;7000000;Sí;Sí
+05/02/2026;2026;8748235;8;C.S.T.;Mensual;Laura Aquino;Anthony Chen;Olga Sánchez de Chen;Abuela;6300000;Sí;Sí
+05/02/2026;2026;6882203;25;C.S.T.;Mensual;Francisca Ortíz Colmán;--;Iván Francisco Ortíz Colmán;Hermano;7000000;Sí;Sí
+05/02/2026;2026;6598328;29;C.S.T.;Mensual;Noelia Soledad Almada;Gregorio Martín Arrúa Rupcic;Aniano Gregorio Arrúa Maldonado;Tío;7000000;Sí;Sí
+05/02/2026;2026;8089223;19;C.S.T.;Mensual;María Victoria Sánchez González;Domingo Ramón González Sosa;--;--;7000000;Sí;Sí
+05/02/2026;2026;9054450;2;--;Mensual;Leidy Mereles;Luis Manuel Cáceres;--;--;6300000;Sí;Sí
+05/02/2026;2026;7138498;23;C.S.T.;Mensual;Amalia Beatriz Cuevas de Sugastti;Carlos Ramón Sugastti Ojeda;--;--;7000000;Sí;Sí
+05/02/2026;2026;6920692;26;C.S.T.;Mensual;Iris Romina Figueredo;Rodrigo Esquivel;--;--;7000000;Sí;Sí
+05/02/2026;2026;8186248;13;C.S.T.;Mensual;Laura Viviana Barrios González;José Domingo Irala Duarte;--;--;6300000;Sí;Sí
+05/02/2026;2026;8057265;17;C.S.T.;Mensual;Laura Viviana Barrios González;José Domingo Irala Duarte;--;--;6300000;Sí;Sí
+05/02/2026;2026;7357826;22;C.S.T.;Mensual;Angelina Bordón Salinas;Aladino Daniel Rotela Gómez;--;--;7000000;Sí;Sí
+05/02/2026;2026;8064709;16;C.S.T.;Mensual;Angelina Bordón Salinas;Aladino Daniel Rotela Gómez;--;--;6300000;Sí;Sí
+05/02/2026;2026;8666382;11;C.S.T.;Mensual;Erika González;Christian Salinas;--;--;6300000;Sí;Sí
+05/02/2026;2026;7489217;20;C.S.T.;Mensual;Daiana Ayala Grunce;Walter Leonardi Mereles Prieto;--;--;7000000;Sí;Sí
+05/02/2026;2026;6851318;29;C.S.T.;Mensual;Lida Doncel de López;--;Susana Noemí Santacruz Enciso;Tía;7000000;Sí;Sí
+05/02/2026;2026;8880456;12;C.S.T.;Mensual;Guadalupe Fleitas de Duarte;Bladimiro Duarte;--;--;6300000;Sí;Sí
+05/02/2026;2026;7663264;24;C.S.T.;Mensual;Guadalupe Fleitas de Duarte;Bladimiro Duarte Cañete;--;--;7000000;Sí;Sí
+05/02/2026;2026;8625961;10;C.S.T.;Mensual;Clara Patricia Recalde Villalba;Luis Alberto Aquino Méndez;--;--;6300000;Sí;Sí
+05/02/2026;2026;8421986;12;C.S.T.;Mensual;Graciela Elizabeth Leguizamón Talavera;Américo Ramón Ayala Saucedo;--;--;6300000;Sí;Sí
+05/02/2026;2026;7988969;20;C.S.T.;Mensual;Carina Vargas Demasi;Edward Raúl Segovia Rojas;--;--;7000000;Sí;Sí
+05/02/2026;2026;8162189;13;C.S.T.;Mensual;Susana Gómez Cáceres;Nildo Medeiro Jara;--;--;6300000;Sí;Sí
+05/02/2026;2026;7974651;19;C.S.T.;Mensual;Verónica Gómez;Luis Antonio Insfrán;--;--;7000000;Sí;Sí
+05/02/2026;2026;8639869;14;C.S.T.;Mensual;María Auxiliadora Ibarrola;René Espínola;--;--;6300000;Sí;Sí
+05/02/2026;2026;8111018;20;C.S.T.;Mensual;María Auxiliadora Ibarrola;René Espínola;--;--;7000000;Sí;Sí
+05/02/2026;2026;6587273;30;C.S.T.;Mensual;Adriana Elizabeth Sosa Rojas;Luis Marcelo Insfrán Ponti;--;--;7000000;Sí;Sí
+05/02/2026;2026;8816419;5;C.S.T.;Mensual;Liz Marilé Falcón Ayala;Luis Fernando Galeano Zaputovich;--;--;6300000;Sí;Sí
+05/02/2026;2026;8021573;15;C.S.T.;Mensual;Liz Marilé Falcón Ayala;--;--;--;6300000;Sí;Sí
+05/02/2026;2026;7255676;21;C.S.T.;Mensual;Venus Raquel Maldonado Rolón;Rafael Adalberto Acosta Alonso;--;--;7000000;Sí;Sí
+05/02/2026;2026;8968968;5;C.S.T.;Mensual;Erika Pankow;Rafael Adalberto Acosta Alonso;--;--;6300000;Sí;Sí
+05/02/2026;2026;6217461;29;C.S.T.;Mensual;Esther Celeste Peralta de Insfrán;Héctor René Insfrán Giménez;--;--;7000000;Sí;Sí
+05/02/2026;2026;6584160;29;C.S.T.;Mensual;Laura Ávalos Bareiro;Blas Ignacio Cano;--;--;7000000;Sí;Sí
+06/02/2026;2026;8500223;18;C.S.T.;Mensual;Patricia Carolina Esteche Colmán;Juan Carlos Arrúa Antúnez;--;--;6300000;Sí;Sí
+06/02/2026;2026;7750384;19;C.S.T.;Mensual;Liz Viviana Noguera Burgos;Ricardo Alexander Bogado Sánchez;--;--;7000000;Sí;Sí
+06/02/2026;2026;6883865;26;C.S.T.;Mensual;Liz Viviana Noguera Burgos;Ricardo Alexander Bogado Sánchez;--;--;7000000;Sí;Sí
+06/02/2026;2026;8343421;16;C.S.T.;Mensual;Cynthia Jeanette Ortíz Flor;Julio Penayo;--;--;6300000;Sí;Sí
+06/02/2026;2026;6989068;26;C.S.T.;Mensual;Cynthia Jeanette Ortíz Flor;Julio Penayo;--;--;7000000;Sí;Sí
+06/02/2026;2026;9032985;1;--;Mensual;Laura Romina Mendoza Morales;Richard Carlile;--;--;6300000;Sí;Sí
+06/02/2026;2026;8765150;11;C.S.T.;Mensual;Cynthia Legal;Cristhian González;Gustavo Adolfo Bogado Largo;Padrastro;6300000;Sí;Sí
+06/02/2026;2026;8871101;5;C.S.T.;Mensual;Susi Marlene Barreto Oliveira;José María Aranda;--;--;6300000;Sí;Sí
+06/02/2026;2026;7506113;19;C.S.T.;Mensual;Susi Marlene Barreto Oliveira;José María Aranda;--;--;7000000;Sí;Sí
+06/02/2026;2026;8314999;15;C.S.T.;Mensual;Liz Viviana Noguera Burgos;Ricardo Alexander Bogado Sánchez;--;--;6300000;Sí;Sí
+06/02/2026;2026;7462164;30;C.S.T.;Mensual;Leticia Mabel Ortíz Martínez;--;César Edgar Blaires Coronel;Padrastro;7000000;Sí;Sí
+06/02/2026;2026;8502304;10;C.S.T.;Mensual;Vanessa María Violeta Rivas Caló;Bruno Ariel Peña Núñez;--;--;6300000;Sí;Sí
+06/02/2026;2026;7548347;20;C.S.T.;Mensual;Vanessa María Violeta Rivas Caló;Bruno Ariel Peña Núñez;--;--;7000000;Sí;Sí
+06/02/2026;2026;7686273;18;C.S.T.;Mensual;María Ángela Vera Aranda;Andrés Acosta;Gisselle Acosta Vera;Hermana;6300000;Sí;Sí
+06/02/2026;2026;7887029;17;C.S.T.;Mensual;Romina Aracelli Núñez Benítez;Christian David Irala Escobar;--;--;6300000;Sí;Sí
+06/02/2026;2026;8685814;10;C.S.T.;Mensual;Rossana Beatriz Duarte González;Yooyi Alberto Eiwa Cañete;--;--;6300000;Sí;Sí
+06/02/2026;2026;9028689;7;C.S.T.;Mensual;Alicia Verónica De Mestral De Robles;Osvaldo Moises Robles Benitez;--;--;6300000;Sí;Sí
+06/02/2026;2026;8135072;15;C.S.T.;Mensual;Alicia Verónica De Mestral De Robles;Osvaldo Moises Robles Benitez;--;--;6300000;Sí;Sí
+06/02/2026;2026;7742751;17;C.S.T.;Mensual;Alicia Verónica De Mestral De Robles;Osvaldo Moises Robles Benitez;--;--;6300000;Sí;Sí
+06/02/2026;2026;7522373;25;C.S.T.;Mensual;Alicia Verónica De Mestral De Robles;Osvaldo Moises Robles Benitez;--;--;7000000;Sí;Sí
+06/02/2026;2026;7745254;26;C.S.T.;Mensual;Karina Maribel Aguilera Hermosilla;Pedro Pablo Martínez Mosqueira;--;--;7000000;Sí;Sí
+06/02/2026;2026;8078732;14;C.S.T.;Mensual;María Laura Cortés Ponce;Augusto Fonseca;--;--;6300000;Sí;Sí
+06/02/2026;2026;8882781;4;--;Mensual;María Laura Cortés Ponce;Augusto Fonseca;--;--;6300000;Sí;Sí
+06/02/2026;2026;7944645;20;C.S.T.;Mensual;Valeria Jara Berra;Alfredo Daniel Rodas;--;--;7000000;Sí;Sí
+06/02/2026;2026;7703869;26;C.S.T.;Mensual;Norma Beatriz Ramos Rojas;--;--;--;7000000;Sí;Sí
+06/02/2026;2026;7758918;29;C.S.T.;Mensual;Liz Aurora González Hernández;--;Oscar Antonio Eisemann González;Hermano;7000000;Sí;Sí
+06/02/2026;2026;8856420;9;C.S.T.;Mensual;Nilsa Cabrera;Blas Ever Castillo Benítez;--;--;6300000;Sí;Sí
+06/02/2026;2026;8744606;7;C.S.T.;Mensual;Nilce Mariel Cabrera Roa;Milciades Rolando Ortega Báez;--;--;6300000;Sí;Sí
+06/02/2026;2026;7848963;20;C.S.T.;Mensual;Lourdes Lorena Romero Méndez;Ricardo benítez Guerin;--;--;7000000;Sí;Sí
+06/02/2026;2026;8076970;13;C.S.T.;Mensual;Mónica Park;Matías González;--;--;6300000;Sí;Sí
+06/02/2026;2026;7131276;23;C.S.T.;Mensual;Denisse Margarita Gómez Benítez;Alcides Manuel García Arce;--;--;7000000;Sí;Sí
+06/02/2026;2026;7492338;30;C.S.T.;Mensual;Laura Analía Gómez;Víctor César Villalba Ramírez;--;--;7000000;Sí;Sí
+06/02/2026;2026;7488528;25;Presbiteriano del Paraguay;Mensual;Patricia Chamorro;José Carlos Benítez Orué;--;--;7000000;Sí;Sí
+06/02/2026;2026;8888485;5;C.S.T.;Mensual;Mayra González de Sclaroff;Eduardo Sclaroff;--;--;6300000;Sí;Sí
+06/02/2026;2026;7766908;17;C.S.T.;Mensual;Mayra González de Sclaroff;Eduardo Sclaroff;--;--;6300000;Sí;Sí
+06/02/2026;2026;8755165;16;C.S.T.;Mensual;María Lucía Teles Da Silva;Eduardo Antonio De Araújo;--;--;6300000;Sí;Sí
+06/02/2026;2026;6791248;30;C.S.T.;Mensual;María Guadalupe Ruíz Estigarribia;Francisco Ruíz Díaz Adorno;--;--;7000000;Sí;Sí
+06/02/2026;2026;8124069;14;C.S.T.;Mensual;Alba Natividad Mancuello Hurtado;Gustavo Rojas Brítez;--;--;6300000;Sí;Sí
+06/02/2026;2026;8605518;14;C.S.T.;Mensual;Nilda Nathalia Melot Díaz;--;Sara Díaz Santacruz;Abuela;6300000;Sí;Sí
+06/02/2026;2026;7759581;18;C.S.T.;Mensual;Nilda Nathalia Melot Díaz;Diego Armando Barreto;Sara Díaz Santacruz;Abuela;6300000;Sí;Sí
+06/02/2026;2026;7855876;22;C.S.T.;Mensual;Marta María Inés Leiva Villagra;Carlos Magno Veloso Ferloni;--;--;7000000;Sí;Sí
+06/02/2026;2026;6548066;28;C.S.T.;Mensual;Claudia Gumercinda Valdéz Medina;Jaime Javier Valiente Cuevas;--;--;7000000;Sí;Sí
+06/02/2026;2026;6778901;28;C.S.T.;Mensual;Teresa Brizuela Fariña;Arnaldo Andrés Giménez Jara;--;--;7000000;Sí;Sí
+06/02/2026;2026;8128798;15;C.S.T.;Mensual;Tamara Maidana;Mario López;--;--;6300000;Sí;Sí
+06/02/2026;2026;7675146;24;C.S.T.;Mensual;Claudia Alice Arriola de González;Jorge Daniel González Torres;--;--;7000000;Sí;Sí
+06/02/2026;2026;7308423;24;C.S.T.;Mensual;María Elena Agüero Cabrera;Pablo Luis Cáceres Mármol;--;--;7000000;Sí;Sí
+06/02/2026;2026;8335797;13;C.S.T.;Mensual;Cynthia Sanabria;Marcos Diarte;--;--;6300000;Sí;Sí
+06/02/2026;2026;7638728;23;C.S.T.;Mensual;Cynthia Sanabria;Marcos Diarte;--;--;7000000;Sí;Sí
+06/02/2026;2026;8485699;11;C.S.T.;Mensual;Mónica Elisa Riveros López;Antonio Daniel Danei;--;--;6300000;Sí;Sí
+09/02/2026;2026;7339370;26;C.S.T.;Mensual;María Lourdes Falcón de Delgado;Hugo Rolando Delgado;--;--;7000000;Sí;Sí
+09/02/2026;2026;8652475;7;C.S.T.;Mensual;Rebeca Xoana Gauto;Rubén Berselius Samaniego Orrego;--;--;6300000;Sí;Sí
+09/02/2026;2026;8120098;15;C.S.T.;Mensual;Rebeca Xoana Gauto;Rubén Berselius Samaniego Orrego;--;--;6300000;Sí;Sí
+09/02/2026;2026;7831859;17;C.S.T.;Mensual;Rebeca Xoana Gauto;Rebecca Zoana Gauto;--;--;6300000;Sí;Sí
+09/02/2026;2026;8007533;15;C.S.T.;Mensual;Gabriela Belén Villalba Paredes;--;Aldo Adrián Orué Delvalle;Padrastro;6300000;Sí;Sí
+09/02/2026;2026;8235765;13;C.S.T.;Mensual;Maricela Beatriz Chávez Caballero;--;Daisy Carolina Chávez Caballero;Tía;6300000;Sí;Sí
+09/02/2026;2026;8249311;13;C.S.T.;Mensual;Johanna Escobar;Jorge Duarte;--;--;6300000;Sí;Sí
+09/02/2026;2026;7906543;15;C.S.T.;Mensual;Johanna Escobar;Jorge Duarte;--;--;6300000;Sí;Sí
+09/02/2026;2026;7938155;30;C.S.T.;Mensual;Patricia Karolina Ozuna González;Sergio Daniel Morel Franco;--;--;7000000;Sí;Sí
+09/02/2026;2026;8518031;13;C.S.T.;Mensual;Viviana Noemí Noguera Rivarola;Raúl Natalicio Escobeiro Bernal;--;--;6300000;Sí;Sí
+09/02/2026;2026;7193314;24;C.S.T.;Mensual;Vanessa Alexandra Coronel Fernández;Acelo Fabián Garcete González;--;--;7000000;Sí;Sí
+09/02/2026;2026;7487641;21;C.S.T.;Mensual;Verónica Beatriz Villalba Candia;Iván Andrés González Irala;--;--;7000000;Sí;Sí
+09/02/2026;2026;8315606;11;C.S.T.;Mensual;Carolina Ortega;José Luis Antebi;--;--;6300000;Sí;Sí
+09/02/2026;2026;8704396;6;C.S.T.;Mensual;María Luján González Trivero;Fabián Ignacio Rodríguez Ferreira;--;--;6300000;Sí;Sí
+09/02/2026;2026;7791911;21;C.S.T.;Mensual;Carolina Ortega;José Luis Antebi;--;--;7000000;Sí;Sí
+09/02/2026;2026;8228145;14;C.S.T.;Mensual;Karina Aquino;Luis Fernando González;--;--;6300000;Sí;Sí
+09/02/2026;2026;7190451;27;C.S.T.;Mensual;Marlene Raquel González;Omar Wilfrido Rolón Samudio;--;--;7000000;Sí;Sí
+09/02/2026;2026;7891952;19;C.S.T.;Mensual;Tamara Pfeiffer;Dario Antonio Echeverria Fleitas;--;--;7000000;Sí;Sí
+09/02/2026;2026;8205171;14;C.S.T.;Mensual;Natalia Viveros;Hirán Roberto Turo;--;--;6300000;Sí;Sí
+09/02/2026;2026;48681069;30;C.S.T.;Mensual;María Antonela Gómez;--;--;--;7000000;Sí;Sí
+09/02/2026;2026;8667138;8;C.S.T.;Mensual;Marlene Doralis Vargas Carballo;Benicio Méndez Fernández;--;--;6300000;Sí;Sí
+09/02/2026;2026;7099506;24;C.S.T.;Mensual;Marlene Doralis Vargas Carballo;Benicio Méndez Fernández;--;--;7000000;Sí;Sí
+09/02/2026;2026;8982998;3;--;Mensual;Elisa Lutunske;Camilo Rolón;--;--;6300000;Sí;Sí
+09/02/2026;2026;8317901;14;C.S.T.;Mensual;Liliana Beatriz Flores;Aníbal Javier Caballero Aquino;Luis Enrique Cáceres;Tío;6300000;Sí;Sí
+09/02/2026;2026;8875643;4;C.S.T.;Mensual;María Antonela Gómez;René Agustín Romero Pineda;--;--;6300000;Sí;Sí
+09/02/2026;2026;7215266;28;C.S.T.;Mensual;Lilian Adriana Paredes Díaz;--;--;--;7000000;Sí;Sí
+09/02/2026;2026;7478020;20;C.S.T.;Mensual;María Carolina Suárez Velázquez;Marcos Simón Blanco Bellacq;--;--;7000000;Sí;Sí
+09/02/2026;2026;7044009;24;C.S.T.;Mensual;María Carolina Suárez Velázquez;Marcos Simón Blanco Bellacq;--;--;7000000;Sí;Sí
+09/02/2026;2026;7986794;16;C.S.T.;Mensual;María Carolina Suárez Velázquez;Marcos Simón Blanco Bellacq;--;--;6300000;Sí;Sí
+09/02/2026;2026;7057967;29;C.S.T.;Mensual;Venancia Graciela Vargas;Joel Gerardo Cabrera Ayala;--;--;7000000;Sí;Sí
+09/02/2026;2026;8892996;3;--;Mensual;Daisy María Patricia Ramírez Galeano;Jorge Eugenio Terzin Kuhner;--;--;6300000;Sí;Sí
+09/02/2026;2026;6908986;26;C.S.T.;Mensual;Maria de los Angeles Vidal Lara;--;--;--;7000000;Sí;Sí
+09/02/2026;2026;6909008;26;C.S.T.;Mensual;Maria de los Angeles Vidal Lara;--;--;--;7000000;Sí;Sí
+09/02/2026;2026;8093317;16;C.S.T.;Mensual;Maria de los Angeles Vidal Lara;Angel Horacio Urbieta;--;--;6300000;Sí;Sí
+09/02/2026;2026;7421192;22;C.S.T.;Mensual;Maria de los Angeles Vidal Lara;Angel Horacio Urbieta;--;--;7000000;Sí;Sí
+09/02/2026;2026;7900809;29;C.S.T.;Mensual;Vanesa Centurión Leguizamón;Carlos Alberto Téllez Rodríguez;--;--;7000000;Sí;Sí
+09/02/2026;2026;9053443;1;C.S.T.;Mensual;Lia María Jazmín Casco Cantero;Isaac Jhonatan Centurión Mas;--;--;6300000;Sí;Sí
+09/02/2026;2026;8159306;26;C.S.T.;Mensual;Natalia Noemí Gómez Aquino;--;Claudia Raquel Gómez Aquino;Tía;7000000;Sí;Sí
+09/02/2026;2026;7356286;25;C.S.T.;Mensual;María Gloria González Báez;Jorge Helmut Guerrero Behne;--;--;7000000;Sí;Sí
+09/02/2026;2026;8664231;12;C.S.T.;Mensual;Cynthia Natalia Aquino Prieto;Rafael Rubén García;--;--;6300000;Sí;Sí
+09/02/2026;2026;7362940;22;C.S.T.;Mensual;Cynthia Natalia Aquino Prieto;Rafael Rubén García;--;--;7000000;Sí;Sí
+09/02/2026;2026;7328707;24;C.S.T.;Mensual;Liz Melissa Nüñez Monjagatta;--;Estela Monjagatta de Núñez;Abuela;7000000;Sí;Sí
+09/02/2026;2026;7027924;29;C.S.T.;Mensual;Lorena Natalia Núñez Mazacotte;Nestor Candido Riquelme Rodriguez;--;--;7000000;Sí;Sí
+09/02/2026;2026;7618223;19;C.S.T.;Mensual;Yenni Elizabeth Cuevas Vera;Enrique Velázquez;--;--;7000000;Sí;Sí
+09/02/2026;2026;9021534;3;C.S.T.;Mensual;María Fernanda Blaires Mosqueira;Pedro José Gómez Silva;--;--;6300000;Sí;Sí
+09/02/2026;2026;8260298;11;C.S.T.;Mensual;Claudia Patricia Maldonado de Martínez;Celso Daniel Villamayor Méndez;--;--;6300000;Sí;Sí
+09/02/2026;2026;7695156;17;C.S.T.;Mensual;Claudia Patricia Maldonado de Martínez;Celso Daniel Villamayor Méndez;--;--;6300000;Sí;Sí
+09/02/2026;2026;8482738;11;C.S.T.;Mensual;Ada Carolina Florentín;Perseverando Candia;--;--;6300000;Sí;Sí
+09/02/2026;2026;8109874;23;C.S.T.;Mensual;Ana Paula Da Silva Mendonca;Cleber De Souza Ribeiro;--;--;7000000;Sí;Sí
+09/02/2026;2026;8427071;12;C.S.T.;Mensual;Ariana Leticia Aguirre González;Salvador Alejandro Jara;--;--;6300000;Sí;Sí
+09/02/2026;2026;8553176;7;Kinder La Aurora;Mensual;Claudia Carolina Ramos Corvalán;Juan Carlos Fernández Valiente;--;--;6300000;Sí;Sí
+09/02/2026;2026;8346049;12;C.S.T.;Mensual;Mirna Ramírez;Derlis Aníbal Fleitas;--;--;6300000;Sí;Sí
+09/02/2026;2026;7236980;28;C.S.T.;Mensual;Lorena Andrea Palma León;Néstor Abel Torres Riveros;--;--;7000000;Sí;Sí
+09/02/2026;2026;7948807;18;C.S.T.;Mensual;Alejandra Daniela Rodríguez Díaz;Rodrigo Domínguez Rolón;--;--;6300000;Sí;Sí
+09/02/2026;2026;8643703;8;C.S.T.;Mensual;Lida Margarita Paredes Navarro;Diego Manuel Peña Núñez;--;--;6300000;Sí;Sí
+09/02/2026;2026;8643518;8;C.S.T.;Mensual;Lida Margarita Paredes Navarro;Diego Manuel Peña Núñez;--;--;6300000;Sí;Sí
+09/02/2026;2026;7007144;28;C.S.T.;Mensual;Clarise Reyes Vázquez;--;--;--;7000000;Sí;Sí
+09/02/2026;2026;8639179;7;C.S.T.;Mensual;Tania Benítez Maciel;Ariel Pereira Leguizamón;--;--;6300000;Sí;Sí
+09/02/2026;2026;6981671;24;C.S.T.;Mensual;Tania Benítez Maciel;Ariel Pereira Leguizamón;--;--;7000000;Sí;Sí
+09/02/2026;2026;7706505;19;C.S.T.;Mensual;Nathalia Belén Alvarenga Giménez;Sebastián Salinas González;--;--;7000000;Sí;Sí
+09/02/2026;2026;8973593;1;C.S.T.;Mensual;Liz Claudelina Cattebeke Núñez;Alex Hernán Cantero Corbalán;--;--;6300000;Sí;Sí
+09/02/2026;2026;8364811;11;C.S.T.;Mensual;Patricia María Gaona;Alexis Carlos Espínola Orrego;--;--;6300000;Sí;Sí
+09/02/2026;2026;8806331;10;C.S.T.;Mensual;Camila Monges;--;--;--;6300000;Sí;Sí
+09/02/2026;2026;8477887;9;C.S.T.;Mensual;Silvana Dafne Coll de Alarcón;Diego Alarcón;--;--;6300000;Sí;Sí
+09/02/2026;2026;7837735;17;C.S.T.;Mensual;Silvana Dafne Coll de Alarcón;Diego Alarcón;--;--;6300000;Sí;Sí
+09/02/2026;2026;7003879;30;C.S.T.;Mensual;Natalia Luisa Barboza Servín;Eduardo Alfredo Barrios Cáceres;--;--;7000000;Sí;Sí
+09/02/2026;2026;6940806;29;C.S.T.;Mensual;Laura Andrea Laterra;Gabriel Fraulob;--;--;7000000;Sí;Sí
+09/02/2026;2026;8897769;3;C.S.T.;Mensual;Laura Andrea Laterra;Gabriel Fraulob;--;--;6300000;Sí;Sí
+09/02/2026;2026;6717749;28;C.S.T.;Mensual;Cynthia Andrea Mattos Vera;Roberto Eugenio Gómez Silva;--;--;7000000;Sí;Sí
+10/02/2026;2026;8165748;15;C.S.T.;Mensual;Verónica Beatriz Villalba Candia;Iván Andrés González Irala;--;--;6300000;Sí;Sí
+10/02/2026;2026;8524683;16;C.S.T.;Mensual;Claudia Beatriz Brítez Ramirez;Ricardo Iván Maldonado Leguizamón;--;--;6300000;Sí;Sí
+10/02/2026;2026;7471362;22;C.S.T.;Mensual;Claudia Beatriz Brítez Ramirez;Ricardo Iván Maldonado Leguizamón;--;--;7000000;Sí;Sí
+10/02/2026;2026;8845542;5;C.S.T.;Mensual;Leticia Geraldine Bogado de Giménez;Mauricio Alvaro Giménez Lesme;--;--;6300000;Sí;Sí
+10/02/2026;2026;7734363;19;C.S.T.;Mensual;Leticia Geraldine Bogado de Giménez;Mauricio Alvaro Giménez Lesme;--;--;7000000;Sí;Sí
+10/02/2026;2026;7732145;19;C.S.T.;Mensual;Karina Mariela Arzamendia Núñez;Daniel Antonio Carreras Vázquez;--;--;7000000;Sí;Sí
+10/02/2026;2026;7352786;23;C.S.T.;Mensual;Karina Mariela Arzamendia Núñez;Daniel Antonio Carreras Vázquez;--;--;7000000;Sí;Sí
+10/02/2026;2026;8890379;4;C.S.T.;Mensual;Andrea Ramírez;Diego Armando Espínola Rojas;--;--;6300000;Sí;Sí
+10/02/2026;2026;7246022;28;C.S.T.;Mensual;Laura Alicia Bobadilla Luna;--;Gloria Luna de Bobadilla;Abuela;7000000;Sí;Sí
+10/02/2026;2026;6710545;30;C.S.T.;Mensual;Olga Beatriz Camelli Santander;Gilberto Fleitas Larroza;--;--;7000000;Sí;Sí
+10/02/2026;2026;7201597;24;C.S.T.;Mensual;Laura Damiana Ruíz de García;Blas Alberto García Etcheverry;--;--;7000000;Sí;Sí
+10/02/2026;2026;7185416;21;C.S.T.;Mensual;Nelly Graciela Vega Orué;Jorge Claro González Álvarez;--;--;7000000;Sí;Sí
+10/02/2026;2026;6288398;29;C.S.T.;Mensual;Nelly Graciela Vega Orué;Jorge Claro González Álvarez;--;--;7000000;Sí;Sí
+10/02/2026;2026;6858360;26;C.S.T.;Mensual;Paola Andrea Ruíz Díaz Ayala;Pedro Juan Medina Villasanti;--;--;7000000;Sí;Sí
+10/02/2026;2026;6724465;30;C.S.T.;Mensual;Paola Andrea Ruíz Díaz Ayala;Pedro Juan Medina Villasanti;--;--;7000000;Sí;Sí
+10/02/2026;2026;7760330;26;C.S.T.;Mensual;Claudia Galea no Balbuena;Miguel Angel Carmona Fernández;--;--;7000000;Sí;Sí
+10/02/2026;2026;7198952;30;C.S.T.;Mensual;Silvia Andrea Domínguez Cáceres;Fernando Ramiro González Reyes;--;--;7000000;Sí;Sí
+10/02/2026;2026;8171173;15;C.S.T.;Mensual;Nora María Ortíz de Sánchez;Arsenio Gabriel Sánchez Carrillo;--;--;6300000;Sí;Sí
+10/02/2026;2026;7691997;19;C.S.T.;Mensual;Nora María Ortíz de Sánchez;Arsenio Gabriel Sánchez Carrillo;--;--;7000000;Sí;Sí
+10/02/2026;2026;6757739;29;C.S.T.;Mensual;Nora María Ortíz de Sánchez;Arsenio Gabriel Sánchez Carrillo;--;--;7000000;Sí;Sí
+10/02/2026;2026;7769268;27;C.S.T.;Mensual;Mahiesi Colmán Ávalos;Joel Caballero;--;--;7000000;Sí;Sí
+10/02/2026;2026;8807792;3;C.S.T.;Mensual;María Belén Aguilar Brítez;Erwin David Franco Benítez;--;--;6300000;Sí;Sí
+10/02/2026;2026;7490886;21;C.S.T.;Mensual;Rachidi Karimi Colmán Ávalos;Jorge Ibarrola;Blas Darío Araújo Domínguez;Padrastro;7000000;Sí;Sí
+10/02/2026;2026;8829631;10;C.S.T.;Mensual;Jessica Caballero;Gian Trotte;--;--;6300000;Sí;Sí
+10/02/2026;2026;8505372;13;C.S.T.;Mensual;Julia Emilce Paredes Montiel;Jeremías José Ferreira Rojas;--;--;6300000;Sí;Sí
+10/02/2026;2026;7838893;17;C.S.T.;Mensual;María Yrene Brizuela Montiel;Alberto Antonio Recalde;Julia Emilce Paredes Montiel;Tía;6300000;Sí;Sí
+10/02/2026;2026;6641226;27;C.S.T.;Mensual;María Gloria Josefina Fernández Jacquet;--;--;--;7000000;Sí;Sí
+10/02/2026;2026;7759323;23;C.S.T.;Mensual;Lilian Cristina Bogarín Genes;Isidro Emiliano Ruíz Díaz Garay;--;--;7000000;Sí;Sí
+10/02/2026;2026;7752620;26;C.S.T.;Mensual;Graciela Paredes López;Rufino Aveiro Bogado;--;--;7000000;Sí;Sí
+10/02/2026;2026;8478401;11;C.S.T.;Mensual;Adriana Díaz;Mario Aveiro;--;--;6300000;Sí;Sí
+10/02/2026;2026;8310770;11;C.S.T.;Mensual;Lissette Tamara Olmedo;Alcides Ramón Recalde;María Belén Rodríguez Cáceres;Tía;6300000;Sí;Sí
+10/02/2026;2026;6627265;28;Damas Salesianas - Caaguazú;Mensual;Gladys Liliana Riveros Rolón;Edgar Inocente Vargas Giménez;--;--;7000000;Sí;Sí
+10/02/2026;2026;7777808;18;C.S.T.;Mensual;Gladys Liliana Riveros Rolón;Edgar Inocente Vargas Giménez;--;--;6300000;Sí;Sí
+10/02/2026;2026;7287650;24;C.S.T.;Mensual;María del Rocío Tortella González;Félix Daniel Martínez Aranda;--;--;7000000;Sí;Sí
+10/02/2026;2026;7800421;17;C.S.T.;Mensual;Cinthia Raquel Jara;--;Marina Jara de Benítez;Tía;6300000;Sí;Sí
+10/02/2026;2026;8018581;18;C.S.T.;Mensual;Yeinilda Marlene Céspedes Castillo;Ricardo Julián Paredes Rodríguez;--;--;6300000;Sí;Sí
+10/02/2026;2026;6797134;26;C.S.T.;Mensual;Yeinilda Marlene Céspedes Castillo;Ricardo Julián Paredes Rodríguez;--;--;7000000;Sí;Sí
+10/02/2026;2026;6917726;27;C.S.T.;Mensual;Andrea Celeste Mendieta;Marcelo José Rojas Orué;--;--;7000000;Sí;Sí
+10/02/2026;2026;7680737;20;C.S.T.;Mensual;--;Guillermo Rafael María Benítez Olmedo;Ercilia Olmedo;Abuela;7000000;Sí;Sí
+10/02/2026;2026;8304798;17;C.S.T.;Mensual;Sandra Elizabeth González;Ruben Arsenio Pino Garcete;--;--;6300000;Sí;Sí
+10/02/2026;2026;7639302;25;C.S.T.;Mensual;Sandra Elizabeth González;Ruben Arsenio Pino Garcete;--;--;7000000;Sí;Sí
+10/02/2026;2026;8894526;5;C.S.T.;Mensual;María Luján Rodríguez Burgos;Elías Emanuel Arce Estigarribia;--;--;6300000;Sí;Sí
+10/02/2026;2026;8880188;16;C.S.T.;Mensual;Larizza Zorrilla;--;Daniel Zorrilla;Abuelo;6300000;Sí;Sí
+10/02/2026;2026;6644334;30;C.S.T.;Mensual;María Alicia Escario Estigarribia;Fernando Carballo;--;--;7000000;Sí;Sí
+10/02/2026;2026;6779573;25;C.S.T.;Mensual;Mirna Duarte Samaniego;Algirio Díaz Giménez;--;--;7000000;Sí;Sí
+10/02/2026;2026;8165555;17;C.S.T.;Mensual;María Teresa Sosa Fernández;Edgar Ramón Etcheverry Insfrán;--;--;6300000;Sí;Sí
+10/02/2026;2026;7040430;25;C.S.T.;Mensual;María Teresa Sosa Fernández;Edgar Ramón Etcheverry Insfrán;--;--;7000000;Sí;Sí
+10/02/2026;2026;6605470;28;C.S.T.;Mensual;Leticia Lird;Amilcar Dotto;--;--;7000000;Sí;Sí
+10/02/2026;2026;8327285;13;C.S.T.;Mensual;Rosana Ríos Vega;Roberto Viedma Falcón;--;--;6300000;Sí;Sí
+10/02/2026;2026;7136255;25;Manuel Domínguez;Mensual;Maridel Benítez;Manuel Antonio Salinas;--;--;7000000;Sí;Sí
+10/02/2026;2026;7984675;27;C.S.T.;Mensual;Yulianela Trujillo Quintero;Alain Cortiza Sardiñas;--;--;7000000;Sí;Sí
+10/02/2026;2026;8648759;12;C.S.T.;Mensual;Camila Noemí Rodríguez;Alan Aymar Ayala Do Santos;--;--;6300000;Sí;Sí
+10/02/2026;2026;7082727;29;C.S.T.;Mensual;Dulce Jazmín Martínez Persano;Gustavo Augusto Acuña Corvalán;--;--;7000000;Sí;Sí
+10/02/2026;2026;8842311;7;C.S.T.;Mensual;Andrea Karina Vera Ferreira;Julio Marcelo Toledo González;--;--;6300000;Sí;Sí
+10/02/2026;2026;8351613;13;C.S.T.;Mensual;Jessica Arce;Francisco Manuel Almirón Arce;--;--;6300000;Sí;Sí
+10/02/2026;2026;8032810;19;C.S.T.;Mensual;Jessica Arce;Francisco Manuel Almirón Arce;--;--;7000000;Sí;Sí
+10/02/2026;2026;7617891;20;C.S.T.;Mensual;Hellen Johanna Rojas Cáceres;Luis Enrique Duarte Adorno;--;--;7000000;Sí;Sí
+10/02/2026;2026;8547495;16;C.S.T.;Mensual;María Laura Orrego Irrazábal;--;--;--;6300000;Sí;Sí
+10/02/2026;2026;8844507;8;C.S.T.;Mensual;Karalaini Weisheimer;Carlos Manuel Mellid Cáceres;--;--;6300000;Sí;Sí
+10/02/2026;2026;8346985;12;C.S.T.;Mensual;Rocío Aydeé Rodríguez Esquivel;Antonio Ramón Galeano García;--;--;6300000;Sí;Sí
+10/02/2026;2026;8097375;16;C.S.T.;Mensual;Mónica Andrea Duarte González;Miguel Angel Pereira Villamayor;--;--;6300000;Sí;Sí
+10/02/2026;2026;8398393;14;C.S.T.;Mensual;Patricia Marlene Acuña Corvalan;Enzo Juan Arce;--;--;6300000;Sí;Sí
+10/02/2026;2026;8354917;21;C.S.T.;Mensual;Arminda Concepción Álvarez Giménez;--;--;--;7000000;Sí;Sí
+10/02/2026;2026;6967827;26;C.S.T.;Mensual;Carolina Chávez Gracia;--;--;--;7000000;Sí;Sí
+10/02/2026;2026;8990406;5;C.S.T.;Mensual;Camila Alfonzo;Pablo Rubén Bachen Delvalle;--;--;6300000;Sí;Sí
+10/02/2026;2026;7803689;23;C.S.T.;Mensual;Giselle Paola Méndez Riveros;Pablo Rubén Bachen Delvalle;--;--;7000000;Sí;Sí
+10/02/2026;2026;7663121;28;C.S.T.;Mensual;Marlene B. Sabaté;--;--;--;7000000;Sí;Sí
+10/02/2026;2026;7799928;19;C.S.T.;Mensual;María Leticia Haedo Cabrera;Ever Nicolás Vera Martínez;--;--;7000000;Sí;Sí
+10/02/2026;2026;8353972;11;C.S.T.;Mensual;María Paula Acosta Duarte;--;Martha Karenina Duarte Espínola;Abuela;6300000;Sí;Sí
+10/02/2026;2026;8714745;5;--;Mensual;Larizza Carolina Benítez Ramírez;Enzo Onieva;--;--;6300000;Sí;Sí
+10/02/2026;2026;8620187;8;C.S.T.;Mensual;Mónica Galeano;Manuel Castelo;--;--;6300000;Sí;Sí
+10/02/2026;2026;8280299;14;C.S.T.;Mensual;Mónica Galeano;Manuel Castelo;--;--;6300000;Sí;Sí
+10/02/2026;2026;7721164;22;C.S.T.;Mensual;Diana Larissa Cabrera Arce;Francisco Germán Laws Sosa;--;--;7000000;Sí;Sí
+10/02/2026;2026;6617645;30;C.S.T.;Mensual;Marly Martínez Colmán;José Alfredo Ruggeri;--;--;7000000;Sí;Sí
+10/02/2026;2026;8155425;14;C.S.T.;Mensual;Lorena Julia María Balbuena Maciel;Eladio Raúl Gómez Duarte;--;--;6300000;Sí;Sí
+10/02/2026;2026;6359857;27;C.S.T.;Mensual;--;Enrique Raúl Snead Álvarez;Sonia Snead;Tía;7000000;Sí;Sí
+10/02/2026;2026;8331377;11;C.S.T.;Mensual;Martha Karenina Duarte Espínola;Walter Ramón Gamarra González;--;--;6300000;Sí;Sí
+10/02/2026;2026;7535547;26;C.S.T.;Mensual;Ana Karina Vern González;Manuel Andrés Franco Casamayouret;--;--;7000000;Sí;Sí
+10/02/2026;2026;6517143;30;C.S.T.;Mensual;Ana Karina Vern González;Manuel Andrés Franco Casamayouret;--;--;7000000;Sí;Sí
+10/02/2026;2026;8660738;16;C.S.T.;Mensual;Alejandra Quintana;Pablo Martínez;--;--;6300000;Sí;Sí
+11/02/2026;2026;9023143;6;C.S.T.;Mensual;Alejandra Quintana;Pablo Martínez;--;--;6300000;Sí;Sí
+11/02/2026;2026;7156274;27;C.S.T.;Mensual;Elizabeth Karina García;--;--;--;7000000;Sí;Sí
+11/02/2026;2026;8363024;11;C.S.T.;Mensual;Andrea Ramírez;Diego Armando Espínola Rojas;--;--;6300000;Sí;Sí
+11/02/2026;2026;8343460;12;C.S.T.;Mensual;Karen Noemí Alcaraz Gray;Luis Alberto Vergara Vera;--;--;6300000;Sí;Sí
+11/02/2026;2026;9034450;2;--;Mensual;Karen Noemí Alcaraz Gray;Luis Alberto Vergara Vera;--;--;6300000;Sí;Sí
+11/02/2026;2026;8971842;1;C.S.T.;Mensual;Alejandra Beatriz Fretes López;Marcelo Alejandro Frutos Acosta;--;--;6300000;Sí;Sí
+11/02/2026;2026;6963769;24;C.S.T.;Mensual;Daisy Patricia Armoa Chaparro;Sergio Stevens Valiente Cabrera;--;--;7000000;Sí;Sí
+11/02/2026;2026;8285643;14;C.S.T.;Mensual;Laura Daiana Villalba López;Peter David Kennedy González;--;--;6300000;Sí;Sí
+11/02/2026;2026;6988335;23;C.S.T.;Mensual;Carina Soledad León Medina;Brígido Daniel Cañete Aguilera;Clara Mabel Florenciáñez;Tía;7000000;Sí;Sí
+11/02/2026;2026;7536134;19;C.S.T.;Mensual;Carina Soledad León Medina;Brígido Daniel Cañete Aguilera;Clara Mabel Florenciáñez;Tía;7000000;Sí;Sí
+11/02/2026;2026;6505199;28;C.S.T.;Mensual;Carina Soledad León Medina;Brígido Daniel Cañete Aguilera;Clara Mabel Florenciáñez;Tía;7000000;Sí;Sí
+11/02/2026;2026;8523112;12;C.S.T.;Mensual;Melissa Beatriz Gaona Ynsfrán;José Manuel Achucarro Gill;--;--;6300000;Sí;Sí
+11/02/2026;2026;7317099;23;C.S.T.;Mensual;Rosana Elizabeth Parra de Martínez;Roberto Javier Martínez Pérez;--;--;7000000;Sí;Sí
+11/02/2026;2026;7317101;23;C.S.T.;Mensual;Rosana Elizabeth Parra de Martínez;Roberto Javier Martínez Pérez;--;--;7000000;Sí;Sí
+11/02/2026;2026;6619634;27;C.S.T.;Mensual;Mercedes Hermenegilda Peralta Guerrero;--;Héctor René Insfrán Giménez;Encargado/a;7000000;Sí;Sí
+11/02/2026;2026;8161676;14;C.S.T.;Mensual;Ariadna Medina;Carlos Álvarez;--;--;6300000;Sí;Sí
+11/02/2026;2026;8474433;17;C.S.T.;Mensual;Mercedes Hermenegilda Peralta Guerrero;--;Héctor René Insfrán Giménez;Tío;6300000;Sí;Sí
+11/02/2026;2026;8439107;18;C.S.T.;Mensual;Cindy Martínez;Elías Jara;--;--;6300000;Sí;Sí
+11/02/2026;2026;9201453;2;C.S.T.;Mensual;Naida Carolina Arrúa González;Martín Esteban Díaz;--;--;6300000;Sí;Sí
+11/02/2026;2026;8319562;12;C.S.T.;Mensual;Aida Mariza Barreto Oliveira;--;Katrin Belén Ferrari Barreto;Hermana;6300000;Sí;Sí
+11/02/2026;2026;9204629;3;--;Mensual;Jazmín Araceli Colmán Martínez;Isaías Giuliano Benítez Montanaro;--;--;6300000;Sí;Sí
+11/02/2026;2026;8461823;17;C.S.T.;Mensual;Jessica Dahiana Valenzuela;Hernán David Fleitas Garay;--;--;6300000;Sí;Sí
+11/02/2026;2026;6292790;28;C.S.T.;Mensual;Claudelina Rolón Gómez;Fausto Aníbal Martínez Sánchez;--;--;7000000;Sí;Sí
+11/02/2026;2026;7471619;24;La Aurora;Mensual;Graciela Dejesús Cabrera Laguardia;José Remigio Miranda Sosa;--;--;7000000;Sí;Sí
+11/02/2026;2026;8501823;12;C.S.T.;Mensual;Zunilda María Belén Acosta;Christian Guasp;Amado José María Acosta Gaona;Tío;6300000;Sí;Sí
+11/02/2026;2026;6885764;25;Carlota Palmerola;Mensual;Sonia Acosta;Armando Emmanuel Valiente Barboza;--;--;7000000;Sí;Sí
+11/02/2026;2026;6500037;27;Soldados de la Guerra del Chaco;Mensual;Patricia Lorena Lugo Moreno;Adriano Samaniego;--;--;7000000;Sí;Sí
+11/02/2026;2026;6816111;28;C.S.T.;Mensual;María Josefina Ortíz Bernal;--;--;--;7000000;Sí;Sí
+11/02/2026;2026;9045495;2;--;Mensual;Camila Monges;Blas Marcelo Díaz Velázquez;--;--;6300000;Sí;Sí
+11/02/2026;2026;7442332;22;C.S.T.;Mensual;Soraya Analía Fretes Santacruz;Carlos Alberto Alcaráz Machuca;--;--;7000000;Sí;Sí
+11/02/2026;2026;9109815;2;--;Mensual;Nilsa María Fernández Cabrera;Juan Amado Peralta Núñez;--;--;6300000;Sí;Sí
+11/02/2026;2026;7991322;24;C.S.T.;Mensual;Gladys Diana Rodríguez Escurra;José Antonio Rodríguez Quiñónez;--;--;7000000;Sí;Sí
+11/02/2026;2026;7579973;21;C.S.T.;Mensual;Fátima López Rivas;Luis Joaquín Báez Portaluppi;--;--;7000000;Sí;Sí
+11/02/2026;2026;6111047;27;C.S.T.;Mensual;María Luisa Barreto de Blanco;Wilson Rafael Blanco Barrios;--;--;7000000;Sí;Sí
+11/02/2026;2026;7321332;24;C.S.T.;Mensual;Lize Marlene Rodríguez Barrios;Walter Hernán Sosa Amarilla;--;--;7000000;Sí;Sí
+11/02/2026;2026;8381305;18;C.S.T.;Mensual;Fátima María Gamarra Vera;Wildo Sarabia;--;--;6300000;Sí;Sí
+11/02/2026;2026;6875176;29;C.S.T.;Mensual;Margarita Brunilde Baez Portaluppi;Daniel Hernan Del Valle;--;--;7000000;Sí;Sí
+11/02/2026;2026;6731070;27;C.S.T.;Mensual;María Gabriela Montserrat Cazal;--;Margarita Navarro;Abuela;7000000;Sí;Sí
+11/02/2026;2026;7840043;17;C.S.T.;Mensual;María Lidia Mendoza Escurra;Freddy Gustavo López Palacios;--;--;6300000;Sí;Sí
+03/02/2026;2026;8441888;12;C.S.T.;Mensual;Viviana Núñez;David Segovia;--;--;6300000;Sí;Sí
+13/02/2026;2026;7315529;22;C.S.T.;Mensual;Nuria Letizia Benítez de Díaz;Paolo Romeo Díaz Fiorotto;--;--;7000000;Sí;Sí
+13/02/2026;2026;53305393;20;C.S.T.;Mensual;Liza Analía Morel;Gustavo Manuel Insfrán;--;Seleccione;7000000;Sí;Sí
+13/02/2026;2026;52620977;21;C.S.T.;Mensual;Liza Analía Morel;Gustavo Manuel Insfrán;--;--;7000000;Sí;Sí
+13/02/2026;2026;8791798;10;C.S.T.;Mensual;Tatiana Pereira;Edgard René Martínez;--;--;6300000;Sí;Sí
+13/02/2026;2026;9071244;3;C.S.T.;Mensual;María Paula Acosta Duarte;--;--;--;6300000;Sí;Sí
+13/02/2026;2026;9115721;1;--;Mensual;María de la Paz Orrego Figueredo;Alejandro Sebastián Chamorro Cardozo;--;--;6300000;Sí;Sí
+13/02/2026;2026;9216194;8;C.S.T.;Mensual;Luz María Ortíz Ramírez;Diego Aguayo;--;--;6300000;Sí;Sí
+13/02/2026;2026;8500839;11;C.S.T.;Mensual;Patricia Servín;Alexis Valdéz;--;--;6300000;Sí;Sí
+13/02/2026;2026;8244356;15;Col. Alberto Schweitzer;Mensual;Nadia Carolina López Fernández;Gustavo Zárate Delvalle;--;--;6300000;Sí;Sí
+13/02/2026;2026;9207856;2;--;Mensual;Indra Belén Noguera Vera;Alberto Rodrigo Pane Mereles;--;--;6300000;Sí;Sí
+13/02/2026;2026;8828039;7;C.S.T.;Mensual;Alicia Elizabeth Aliendre González;Nelson Román Arce;--;--;6300000;Sí;Sí
+13/02/2026;2026;7919974;19;C.S.T.;Mensual;Alicia Elizabeth Aliendre González;Nelson Román Arce;--;--;7000000;Sí;Sí
+13/02/2026;2026;7179247;23;C.S.T.;Mensual;Alicia Elizabeth Aliendre González;Nelson Román Arce;--;--;7000000;Sí;Sí
+13/02/2026;2026;9200977;4;--;Mensual;Guadalupe Fernández Sacco;Richard Kailar Orué;--;--;6300000;Sí;Sí
+13/02/2026;2026;8878791;5;C.S.T.;Mensual;Ada Carolina Florentín;Perseverando Candia;--;--;6300000;Sí;Sí
+13/02/2026;2026;9009557;1;--;Mensual;Leticia Paola Ortíz Insfrán;Edgar Siro González Guerrero;--;--;6300000;Sí;Sí
+16/02/2026;2026;7586103;20;C.S.T.;Mensual;Gloria Ortíz;Diego Vázquez;--;--;7000000;Sí;Sí
+16/02/2026;2026;7425571;24;C.S.T.;Mensual;Gloria Ortíz;Diego Vázquez;--;--;7000000;Sí;Sí
+16/02/2026;2026;1042728;28;C.S.T.;Mensual;Alida Brítez;--;Sergio Murto;Encargado/a;7000000;Sí;Sí
+16/02/2026;2026;7629704;18;C.S.T.;Mensual;Araceli Servín de López;Rodrigo Javier López Ocampos;--;--;6300000;Sí;Sí
+16/02/2026;2026;7296453;24;C.S.T.;Mensual;Araceli Servín de López;Rodrigo Javier López Ocampos;--;--;7000000;Sí;Sí
+16/02/2026;2026;7527724;25;Centro Educ. La Esperanza;Mensual;--;Camilo Rolón;Nereide Martins De Oliveira;Abuela;7000000;Sí;Sí
+16/02/2026;2026;7286113;30;C.S.T.;Mensual;Blásida Cristina Rolón Fretes;Oscar Miguel Torres Grosslin;--;--;7000000;Sí;Sí
+16/02/2026;2026;8760747;6;C.S.T.;Mensual;Cledima Lopes Soares;Jorge Octavio Cáceres Menchaca;--;--;6300000;Sí;Sí
+16/02/2026;2026;8308873;14;C.S.T.;Mensual;Silvana Silvero Troche;René Soto;--;--;6300000;Sí;Sí
+16/02/2026;2026;8913647;4;C.S.T.;Mensual;Mayra Alejandra Álvarez Alvarenga;Juan Manuel Romero Báez;--;--;6300000;Sí;Sí
+16/02/2026;2026;9217249;8;C.S.T.;Mensual;María Belén Carballo;Ruben Darío Noguera Rivarola;--;--;6300000;Sí;Sí
+16/02/2026;2026;8522437;16;C.S.T.;Mensual;María Belén Carballo;Ruben Darío Noguera Rivarola;--;--;6300000;Sí;Sí
+16/02/2026;2026;6526804;30;C.S.T.;Mensual;María Belén Carballo;Ruben Darío Noguera Rivarola;--;--;7000000;Sí;Sí
+17/02/2026;2026;8377562;13;C.S.T.;Mensual;Marisa Mendoza Villega;Rodolfo Daniel Ledesma Vallejo;--;--;6300000;Sí;Sí
+17/02/2026;2026;7654111;25;C.E. María Auxiliadora;Mensual;Nabila María Matilde Yambay Marecos;Hugo Ricardo Insfrán Cardozo;--;--;7000000;Sí;Sí
+17/02/2026;2026;6605264;28;C.S.T.;Mensual;Romina Rosalba Almeida Roa;Ricardo Zacarías Zarza;--;--;7000000;Sí;Sí
+17/02/2026;2026;8508467;18;C.S.T.;Mensual;Laura María Paola Gamarra;Federico Lovera;--;--;6300000;Sí;Sí
+17/02/2026;2026;6246747;30;C.S.T.;Mensual;Laura María Paola Gamarra;Federico Lovera;--;--;7000000;Sí;Sí
+18/02/2026;2026;7129157;26;C.S.T.;Mensual;Nidia Medina Medina;José Alberto Giménez Galeano;--;--;7000000;Sí;Sí
+18/02/2026;2026;7549482;19;C.S.T.;Mensual;Erica Alejandra Irala Bareiro;Alberto Contrera;--;--;7000000;Sí;Sí
+18/02/2026;2026;7549484;24;C.S.T.;Mensual;Erica Alejandra Irala Bareiro;Alberto Contrera;--;--;7000000;Sí;Sí
+18/02/2026;2026;6997341;25;C.S.T.;Mensual;Dalila Dahiana Quintana Cabrera;Vicente Fernando Quiñónez Vergara;--;--;7000000;Sí;Sí
+18/02/2026;2026;8800087;6;C.S.T.;Mensual;María Josefina Ortíz Bernal;Christian Manuel Plett;--;--;6300000;Sí;Sí
+18/02/2026;2026;8410014;10;C.S.T.;Mensual;María Josefina Ortíz Bernal;Christian Manuel Plett;--;--;6300000;Sí;Sí
+18/02/2026;2026;8278102;12;Teodoro S. Mongelós;Mensual;Nidia Pintos Benítez;Amado Andrés Chávez Fernández;--;--;6300000;Sí;Sí
+19/02/2026;2026;7382496;22;C.S.T.;Mensual;María Cristina Bernal Centurión;Carlos Medina;--;--;7000000;Sí;Sí
+20/02/2026;2026;7242620;22;C.S.T.;Mensual;Susana Concepción Pérez Rodríguez;--;--;--;7000000;Sí;Sí
+20/02/2026;2026;6707394;25;María Auxiliadora;Mensual;Marta Beatriz Villalba de Ramírez;Emigdio Enrique Ramírez;--;--;7000000;Sí;Sí
+20/02/2026;2026;6911369;25;C.S.T.;Mensual;Rosa Virginia Villalba de Zilli;Pablo Daniel Zilli Caballero;--;--;7000000;Sí;Sí
+20/02/2026;2026;8256100;15;San Miguel Arcángel;Mensual;María Alejandra Del Barco;Arnaldo Andrés Hermosilla Mongelós;--;--;6300000;Sí;Sí
+20/02/2026;2026;8860604;9;San Miguel Arcángel;Mensual;María Alejandra Del Barco;Arnaldo Andrés Hermosilla Mongelós;--;--;6300000;Sí;Sí
+20/02/2026;2026;8860601;3;San Miguel Arcángel;Mensual;María Alejandra Del Barco;Arnaldo Andrés Hermosilla Mongelós;--;--;6300000;Sí;Sí
+24/02/2026;2026;14659362;25;C.S.T.;Mensual;María Ruth Aguilar Tellez;--;--;--;7000000;Sí;Sí
+24/02/2026;2026;8031622;16;C.S.T.;Mensual;Evelyn Alma María Stegen Cursi;Fabián Giménez Giménez;Marcelo Galeano;Tío;6300000;Sí;Sí
+24/02/2026;2026;7700700;21;Bautista de Encarnación;Mensual;Daiana Ávalos Cabral;Hugo Rubén Martínez Rodríguez;--;--;7000000;Sí;Sí
+24/02/2026;2026;79365858;24;C.S.T.;Mensual;Nancy Beatriz Brizuela Pereira;José Ramón Renovales Aldana;--;--;7000000;Sí;Sí
+24/02/2026;2026;8830148;6;Santa María;Mensual;Cecilia Noemí Villalba Coronel;Jorge Daniel Ramírez Pane;--;--;6300000;Sí;Sí
+25/02/2026;2026;9130723;12;Ebenezer - P.J.Caballero;Mensual;María José Rojas Casco;Alfredo Adrián Ayala Dos Santos;--;--;6300000;Sí;Sí
+26/02/2026;2026;6659353;27;C.S.T.;Mensual;Marisa Mendoza Villega;Rodolfo Daniel Ledesma Vallejo;--;--;7000000;Sí;Sí
+27/02/2026;2026;7039306;29;Trinity School;Mensual;Verónica Gómez;Luis Antonio Insfrán;--;--;7000000;Sí;Sí
+27/02/2026;2026;7500261;21;C.S.T.;Mensual;Lis Antonia Castillo Barua;Hugo David Gómez Canatta;--;--;7000000;Sí;Sí
