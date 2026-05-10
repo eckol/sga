@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('rol'); // admin, docente, padre, etc.
+            $table->string('rol')->unique(); // admin, docente, padre, etc.
             $table->timestamps();
         });
         // Agregamos el campo role_id a la tabla users existente

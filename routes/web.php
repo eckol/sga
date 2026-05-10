@@ -4,6 +4,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CiudadController;
 use App\Http\Controllers\CicloController;
+use App\Http\Controllers\SexoController;
+use App\Http\Controllers\NacionalidadController;
+use App\Http\Controllers\ParentescoController;
+use App\Http\Controllers\ViveConController;
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/', function () {
     //return view('welcome');
@@ -23,6 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('ciudades', CiudadController::class)->except(['create', 'show', 'edit']);
     Route::resource('ciclos', CicloController::class)->except(['create', 'show', 'edit']);
+    Route::resource('sexos', SexoController::class)->except(['create', 'show', 'edit']);
+    Route::resource('nacionalidades', NacionalidadController::class)->except(['create', 'show', 'edit']);
+    Route::resource('parentescos', ParentescoController::class)->except(['create', 'show', 'edit']);
+    Route::resource('vivecon', ViveConController::class)->except(['create', 'show', 'edit']);
+    Route::resource('roles', RolController::class)->except(['create', 'show', 'edit']);
+    Route::resource('usuarios', UserController::class)->except(['create', 'show', 'edit']);
 });
 
 require __DIR__ . '/auth.php';

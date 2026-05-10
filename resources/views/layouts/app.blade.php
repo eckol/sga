@@ -158,14 +158,14 @@
                 <a href="{{ route('ciclos.index') }}" class="nav-link">Ciclos Académicos</a>
                 <a href="#" class="nav-link">Grados y Cursos (GC)</a>
                 <a href="{{ route('ciudades.index') }}" class="nav-link">Ciudades</a>
-                <a href="#" class="nav-link">Nacionalidades</a>
-                <a href="#" class="nav-link">Sexos</a>
-                <a href="#" class="nav-link">Parentescos</a>
-                <a href="#" class="nav-link">Vive con</a>
+                <a href="{{ route('nacionalidades.index') }}" class="nav-link">Nacionalidades</a>
+                <a href="{{ route('sexos.index') }}" class="nav-link">Sexos</a>
+                <a href="{{ route('parentescos.index') }}" class="nav-link">Parentescos</a>
+                <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
 
                 <div class="menu-header">Seguridad</div>
-                <a href="#" class="nav-link">Usuarios</a>
-                <a href="#" class="nav-link">Roles</a>
+                <a href="{{ route('usuarios.index') }}" class="nav-link">Usuarios</a>
+                <a href="{{ route('roles.index') }}" class="nav-link">Roles</a>
             </div>
         </nav>
 
@@ -213,16 +213,16 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script>
         // Manejo del menú colapsable en móviles
         document.getElementById('sidebarCollapse')?.addEventListener('click', function () {
             document.getElementById('sidebar').classList.toggle('active');
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 </body>
 
 </html>

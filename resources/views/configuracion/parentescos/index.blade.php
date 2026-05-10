@@ -1,32 +1,32 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Ciudades</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Parentescos</h2>
     </x-slot>
 
     <div class="card card-body p-2">
         <div class="d-flex justify-content-between mb-2">
             <h6 class="fw-bold"></h6>
             <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nueva Ciudad</button>
+                data-bs-target="#modalCrear">+ Nuevo Parentesco</button>
         </div>
 
-        <table id="tabla-ciudades" class="table table-sm table-hover table-bordered table-xs">
+        <table id="tabla-parentescos" class="table table-sm table-hover table-bordered table-xs">
             <thead class="table-light">
                 <tr>
                     <th width="50">ID</th>
-                    <th>Ciudad</th>
+                    <th>Parentesco</th>
                     <th width="150" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($ciudades as $ciudad)
+                @foreach($parentescos as $parentesco)
                     <tr>
-                        <td>{{ $ciudad->id }}</td>
-                        <td>{{ $ciudad->ciudad }}</td>
+                        <td>{{ $parentesco->id }}</td>
+                        <td>{{ $parentesco->parentesco }}</td>
                         <td class="text-center">
                             <button class="btn btn-primary btn-xs py-0 px-1" style="font-size: 0.65rem;">Editar</button>
 
-                            <form action="{{ route('ciudades.destroy', $ciudad) }}" method="POST" class="d-inline">
+                            <form action="{{ route('parentescos.destroy', $parentesco) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">Borrar</button>
@@ -40,7 +40,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#tabla-ciudades').DataTable({
+            $('#tabla-parentescos').DataTable({
                 "order": [[0, "asc"]], // Ordenar por la primera columna (ID) de forma ascendente
                 "pageLength": 10,
                 "language": {
@@ -52,14 +52,14 @@
 
     <div class="modal fade" id="modalCrear" tabindex="-1">
         <div class="modal-dialog modal-sm">
-            <form action="{{ route('ciudades.store') }}" method="POST" class="modal-content">
+            <form action="{{ route('parentescos.store') }}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header p-2">
-                    <h6 class="modal-title">Nueva Ciudad</h6>
+                    <h6 class="modal-title">Nuevo Parentesco</h6>
                 </div>
                 <div class="modal-body p-2">
-                    <input type="text" name="ciudad" class="form-control form-control-sm"
-                        placeholder="Nombre de la ciudad" required>
+                    <input type="text" name="parentesco" class="form-control form-control-sm"
+                        placeholder="Nombre del parentesco" required>
                 </div>
                 <div class="modal-footer p-1">
                     <button type="submit" class="btn btn-success btn-sm">Guardar</button>

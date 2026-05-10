@@ -13,20 +13,22 @@ class UsuariosSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear Roles
-        $adminRole = \App\Models\Role::create(['rol' => 'admin']);
-        \App\Models\Role::create(['rol' => 'directivo']);
-        \App\Models\Role::create(['rol' => 'profeguia']);
-        \App\Models\Role::create(['rol' => 'evaluador']);
-        \App\Models\Role::create(['rol' => 'orientador']);
-        \App\Models\Role::create(['rol' => 'responsable']);
+        // Usamos firstOrCreate: Si ya existe el nombre, no lo crea, solo lo recupera
+        $adminRole = \App\Models\Rol::firstOrCreate(['rol' => 'admin']);
+        \App\Models\Rol::firstOrCreate(['rol' => 'directivo']);
+        \App\Models\Rol::firstOrCreate(['rol' => 'profeguia']);
+        \App\Models\Rol::firstOrCreate(['rol' => 'evaluador']);
+        \App\Models\Rol::firstOrCreate(['rol' => 'orientador']);
+        \App\Models\Rol::firstOrCreate(['rol' => 'responsable']);
 
-        // Crear Usuario Admin
-        \App\Models\User::create([
-            'name' => 'Hector Luis Viola',
-            'email' => 'hlviola@cst.edu.py', // Cambie esto por su correo real
-            'password' => Hash::make('Sga2026!'), // Una contraseña segura inicial
-            'role_id' => $adminRole->id,
-        ]);
+        // Para el usuario, hacemos lo mismo con el email
+        \App\Models\User::firstOrCreate(
+            ['email' => 'hlviola@cst.edu.py'], // Si este email existe...
+            [
+                'name' => 'Hector Luis Viola',
+                'password' => \Illuminate\Support\Facades\Hash::make('Sga2026!'),
+                'role_id' => $adminRole->id,
+            ]
+        );
     }
 }

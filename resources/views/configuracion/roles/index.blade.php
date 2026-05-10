@@ -1,33 +1,32 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Nacionalidades</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Roles</h2>
     </x-slot>
 
     <div class="card card-body p-2">
         <div class="d-flex justify-content-between mb-2">
             <h6 class="fw-bold"></h6>
             <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nueva Nacionalidad</button>
+                data-bs-target="#modalCrear">+ Nuevo Rol</button>
         </div>
 
-        <table id="tabla-nacionalidades" class="table table-sm table-hover table-bordered table-xs">
+        <table id="tabla-roles" class="table table-sm table-hover table-bordered table-xs">
             <thead class="table-light">
                 <tr>
                     <th width="50">ID</th>
-                    <th>Nacionalidad</th>
+                    <th>Rol</th>
                     <th width="150" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($nacionalidades as $nacionalidad)
+                @foreach($roles as $rol)
                     <tr>
-                        <td>{{ $nacionalidad->id }}</td>
-                        <td>{{ $nacionalidad->nacionalidad }}</td>
+                        <td>{{ $rol->id }}</td>
+                        <td>{{ $rol->rol }}</td>
                         <td class="text-center">
                             <button class="btn btn-primary btn-xs py-0 px-1" style="font-size: 0.65rem;">Editar</button>
 
-                            <form action="{{ route('nacionalidades.destroy', $nacionalidad) }}" method="POST"
-                                class="d-inline">
+                            <form action="{{ route('roles.destroy', $rol->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">Borrar</button>
@@ -41,7 +40,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#tabla-nacionalidades').DataTable({
+            $('#tabla-roles').DataTable({
                 "order": [[0, "asc"]], // Ordenar por la primera columna (ID) de forma ascendente
                 "pageLength": 10,
                 "language": {
@@ -53,14 +52,14 @@
 
     <div class="modal fade" id="modalCrear" tabindex="-1">
         <div class="modal-dialog modal-sm">
-            <form action="{{ route('nacionalidades.store') }}" method="POST" class="modal-content">
+            <form action="{{ route('roles.store') }}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header p-2">
-                    <h6 class="modal-title">Nueva Nacionalidad</h6>
+                    <h6 class="modal-title">Nuevo Rol</h6>
                 </div>
                 <div class="modal-body p-2">
-                    <input type="text" name="nacionalidad" class="form-control form-control-sm"
-                        placeholder="Nombre de la nacionalidad" required>
+                    <input type="text" name="rol" class="form-control form-control-sm" placeholder="Nombre del rol"
+                        required>
                 </div>
                 <div class="modal-footer p-1">
                     <button type="submit" class="btn btn-success btn-sm">Guardar</button>
