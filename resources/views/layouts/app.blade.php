@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
     <style>
         /* Estilos Generales Compactos XS */
@@ -154,12 +155,13 @@
                 <a href="#" class="nav-link">Observaciones</a>
 
                 <div class="menu-header">Configuración</div>
-                <a href="#" class="nav-link">Ciclos Académicos</a>
+                <a href="{{ route('ciclos.index') }}" class="nav-link">Ciclos Académicos</a>
                 <a href="#" class="nav-link">Grados y Cursos (GC)</a>
-                <a href="#" class="nav-link">Ciudades</a>
+                <a href="{{ route('ciudades.index') }}" class="nav-link">Ciudades</a>
                 <a href="#" class="nav-link">Nacionalidades</a>
-                <a href="#" class="nav-link">Parámetros Generales</a>
                 <a href="#" class="nav-link">Sexos</a>
+                <a href="#" class="nav-link">Parentescos</a>
+                <a href="#" class="nav-link">Vive con</a>
 
                 <div class="menu-header">Seguridad</div>
                 <a href="#" class="nav-link">Usuarios</a>
@@ -218,6 +220,9 @@
             document.getElementById('sidebar').classList.toggle('active');
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 </body>
 
 </html>
