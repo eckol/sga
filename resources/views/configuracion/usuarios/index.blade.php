@@ -1,4 +1,48 @@
 <x-app-layout>
+
+    <style>
+        /* Forzar tamaño XS en selectores y sus opciones */
+        .form-select-sm,
+        .form-select-sm option {
+            font-size: 0.75rem !important;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+        }
+
+        /* Forzar tamaño XS en elementos de DataTables */
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            font-size: 0.75rem !important;
+        }
+
+        /* Redondear campos de búsqueda y selectores */
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input,
+        .form-select-sm,
+        .form-control-sm {
+            border-radius: 8px !important;
+        }
+
+        /* Botones de paginación más compactos */
+        .page-link {
+            padding: 0.25rem 0.5rem !important;
+            font-size: 0.75rem !important;
+        }
+
+        /* Ajuste específico para que el select de registros no se vea recto */
+        select[name="tabla-usuarios_length"] {
+            border-radius: 5px !important;
+        }
+
+        /* Color naranja personalizado para el SGA */
+        .bg-violeta {
+            background-color: #5b01afff !important;
+            color: white !important;
+        }
+    </style>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Usuarios</h2>
     </x-slot>
@@ -132,48 +176,7 @@
             </form>
         </div>
     </div>
-    <style>
-        /* Forzar tamaño XS en selectores y sus opciones */
-        .form-select-sm,
-        .form-select-sm option {
-            font-size: 0.75rem !important;
-            padding-top: 0.2rem;
-            padding-bottom: 0.2rem;
-        }
 
-        /* Forzar tamaño XS en elementos de DataTables */
-        .dataTables_wrapper .dataTables_length select,
-        .dataTables_wrapper .dataTables_filter input,
-        .dataTables_wrapper .dataTables_info,
-        .dataTables_wrapper .dataTables_paginate {
-            font-size: 0.75rem !important;
-        }
-
-        /* Redondear campos de búsqueda y selectores */
-        .dataTables_wrapper .dataTables_length select,
-        .dataTables_wrapper .dataTables_filter input,
-        .form-select-sm,
-        .form-control-sm {
-            border-radius: 8px !important;
-        }
-
-        /* Botones de paginación más compactos */
-        .page-link {
-            padding: 0.25rem 0.5rem !important;
-            font-size: 0.75rem !important;
-        }
-
-        /* Ajuste específico para que el select de registros no se vea recto */
-        select[name="tabla-usuarios_length"] {
-            border-radius: 5px !important;
-        }
-
-        /* Color naranja personalizado para el SGA */
-        .bg-violeta {
-            background-color: #5b01afff !important;
-            color: white !important;
-        }
-    </style>
     <script>
         // Usamos una función que espera a que TODO el documento y las librerías estén cargadas
         window.onload = function () {

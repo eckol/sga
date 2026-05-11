@@ -16,19 +16,23 @@ class CiudadController extends Controller
     public function store(Request $request)
     {
         $request->validate(['ciudad' => 'required|string|max:255']);
-        Ciudad::create($request->all());
+        // Solo creamos con el campo 'ciudad', ignorando el token
+        Ciudad::create($request->only('ciudad'));
         return redirect()->back()->with('success', 'Ciudad creada.');
     }
 
-    public function update(Request $request, Ciudad $ciudad)
+    // Aquí está el truco: usamos el ID directamente para no pelear con el nombre que Laravel inventa
+    public function update(Request $request, $id)
     {
         $request->validate(['ciudad' => 'required|string|max:255']);
-        $ciudad->update($request->all());
+        $ciudad = Ciudad::findOrFail($id);
+        $ciudad->update($request->only('ciudad'));
         return redirect()->back()->with('success', 'Ciudad actualizada.');
     }
 
-    public function destroy(Ciudad $ciudad)
+    public function destroy($id)
     {
+        $ciudad = Ciudad::findOrFail($id);
         $ciudad->delete();
         return redirect()->back()->with('success', 'Ciudad eliminada.');
     }
