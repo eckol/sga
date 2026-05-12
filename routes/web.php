@@ -10,7 +10,7 @@ use App\Http\Controllers\ParentescoController;
 use App\Http\Controllers\ViveConController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\ResponsableController;
 
 Route::get('/', function () {
     //return view('welcome');
@@ -36,6 +36,25 @@ Route::middleware('auth')->group(function () {
     Route::resource('vivecon', ViveConController::class)->except(['create', 'show', 'edit']);
     Route::resource('roles', RolController::class)->except(['create', 'show', 'edit']);
     Route::resource('usuarios', UserController::class)->except(['create', 'show', 'edit']);
+
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::prefix('rrhh')->group(function () {
+        // Vista principal (Listado)
+        Route::get('responsables/{tipo}', [ResponsableController::class, 'index'])
+            ->name('responsables.index');
+
+        Route::post('responsables/{tipo}', [ResponsableController::class, 'store'])
+            ->name('responsables.store');
+
+        Route::put('responsables/{tipo}/{id}', [ResponsableController::class, 'update'])
+            ->name('responsables.update');
+
+        Route::delete('responsables/{tipo}/{id}', [ResponsableController::class, 'destroy'])
+            ->name('responsables.destroy');
+    });
 });
 
 require __DIR__ . '/auth.php';

@@ -196,7 +196,6 @@
                         "infoFiltered": "(filtrado de _MAX_ registros)",
                         "zeroRecords": "No se encontraron registros",
                         "emptyTable": "No hay datos disponibles en la tabla"
-
                     },
                     // Estructura de la tabla: l=selector, f=filtro, t=tabla, i=info, p=paginación
                     "dom": "<'row mb-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +

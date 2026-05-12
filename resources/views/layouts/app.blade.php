@@ -140,9 +140,9 @@
 
                 <div class="menu-header">Alumnado</div>
                 <a href="#" class="nav-link">Alumnos</a>
-                <a href="#" class="nav-link">Padres</a>
-                <a href="#" class="nav-link">Madres</a>
-                <a href="#" class="nav-link">Encargados</a>
+                <a href="{{ route('responsables.index', ['tipo' => 'padres']) }}" class="nav-link">Padres</a>
+                <a href="{{ route('responsables.index', ['tipo' => 'madres']) }}" class="nav-link">Madres</a>
+                <a href="{{ route('responsables.index', ['tipo' => 'encargados']) }}" class="nav-link">Encargados</a>
 
                 <div class="menu-header">Gestión Académica</div>
                 <a href="#" class="nav-link">Asignaturas</a>
