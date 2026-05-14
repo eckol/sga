@@ -35,6 +35,54 @@
         select[name="tabla-alumnos_length"] {
             border-radius: 5px !important;
         }
+
+        /* Switch Activo/Matriculado */
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 38px;
+            height: 22px;
+            margin-top: 4px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 22px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #198754;
+            /* Bootstrap Success color */
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(16px);
+        }
     </style>
 
     <x-slot name="header">
@@ -132,12 +180,27 @@
                 // Listener para abrir modal de edición
                 $(document).on('click', '.btn-editar', function () {
                     var d = $(this).data('json');
-                    $('#formEditar').attr('action', '/alumnos/' + d.id);
+                    $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
 
                     // Mapeo dinámico de campos al modal
                     Object.keys(d).forEach(key => {
-                        $(`#edit_${key}`).val(d[key]);
+                        let el = $(`#edit_${key}`);
+                        if (el.length > 0) {
+                            if (el.attr('type') === 'checkbox') {
+                                el.prop('checked', d[key] === 'Sí' || d[key] === 1 || d[key] === true);
+                            } else {
+                                el.val(d[key]);
+                            }
+                        }
                     });
+
+                    // Update la foto
+                    let fotoPreview = document.getElementById('preview_foto_editar');
+                    if (d['foto']) {
+                        fotoPreview.src = "{{ asset('img/alumnos/') }}/" + d['foto'];
+                    } else {
+                        fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
+                    }
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
                     myModal.show();

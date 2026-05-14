@@ -26,10 +26,34 @@ class AlumnoController extends Controller
     }
 
     public function store(Request $request)
-    { /* Lógica similar a GC */
+    {
+        $data = $request->except(['_token', '_method', 'foto']);
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('img/alumnos'), $filename);
+            $data['foto'] = $filename;
+        }
+
+        Alumno::create($data);
+        return back();
     }
+
     public function update(Request $request, $id)
-    { /* Lógica similar a GC */
+    {
+        $alumno = Alumno::findOrFail($id);
+        $data = $request->except(['_token', '_method', 'foto']);
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('img/alumnos'), $filename);
+            $data['foto'] = $filename;
+        }
+
+        $alumno->update($data);
+        return back();
     }
     public function destroy($id)
     {
