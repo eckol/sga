@@ -51,4 +51,10 @@ class Alumno extends Model
     {
         return $this->belongsTo(ViveCon::class, 'vivecon_id', 'id');
     }
+    // Relación con las inscripciones
+    public function inscripciones()
+    {
+        // Un alumno tiene muchas inscripciones, vinculadas por el CID
+        return $this->hasMany(Inscripcion::class, 'alumno_cid', 'cid');
+    }
 }

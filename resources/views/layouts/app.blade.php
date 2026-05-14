@@ -206,7 +206,7 @@
                 </button>
                 <div class="menu-links" id="menuInscripciones">
                     <a href="{{ route('aranceles.index') }}" class="nav-link">Aranceles</a>
-                    <a href="#" class="nav-link">Inscripciones</a>
+                    <a href="{{ route('inscripciones.index') }}" class="nav-link">Inscripciones</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuConfiguracion')">
@@ -341,6 +341,30 @@
             }
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session("success") }}',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#198754'
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session("error") }}',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#dc3545'
+            });
+        </script>
+    @endif
 </body>
 
 </html>

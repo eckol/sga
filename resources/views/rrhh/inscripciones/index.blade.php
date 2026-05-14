@@ -32,7 +32,7 @@
         }
 
         /* Ajuste específico para que el select de registros no se vea recto */
-        select[name="tabla-alumnos_length"] {
+        select[name="tabla-inscripciones_length"] {
             border-radius: 5px !important;
         }
 
@@ -86,64 +86,49 @@
     </style>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Alumnos</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Inscripciones</h2>
     </x-slot>
 
     <div class="card card-body p-2 shadow-sm">
         <div class="d-flex justify-content-between mb-2">
-            <h6 class="fw-bold text-secondary"></h6>
-            <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nuevo Alumno</button>
+            <h6 class="fw-bold text-secondary">Listado de Inscripciones</h6>
         </div>
 
-        <table id="tabla-alumnos" class="table table-sm table-hover table-bordered table-xs">
+        <table id="tabla-inscripciones" class="table table-sm table-hover table-bordered table-xs w-100">
             <thead class="table-light">
                 <tr>
-                    <th width="50">ID</th>
-                    <th>Apellidos</th>
-                    <th>Nombres</th>
-                    <th>Cédula Id.</th>
-                    <th>Nacionalidad</th>
-                    <th>Teléfono</th>
-                    <th class="text-center">Gmaps</th>
-                    <th width="150" class="text-center">Acciones</th>
+                    <th>ID</th>
+                    <th width="60">Fecha</th>
+                    <th>Año</th>
+                    <th width="70">C.I. Alumno</th>
+                    <th>Alumno</th>
+                    <th>Grado/Curso</th>
+                    <th>Firmante</th>
+                    <th>Rol</th>
+                    <th width="100" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($alumnos as $al)
+                @foreach($inscripciones as $ins)
                     <tr>
-                        <td>{{ $al->id }}</td>
-                        <td>{{ $al->apellidos }}</td>
-                        <td>{{ $al->nombres }}</td>
-                        <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
-                        <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
-                        <td>{{ $al->telefono ?? '-' }}</td>
-                        <td class="text-center align-middle">
-                            {{-- DESPUÉS --}}
-                            @php $gmaps = trim((string) $al->gmaps); @endphp
-                            @if($gmaps !== '' && $gmaps !== null)
-                                @php
-                                    $gmap_url = str_starts_with($gmaps, 'http')
-                                        ? $gmaps
-                                        : 'https://' . $gmaps;
-                                @endphp
-                                <a href="{{ $gmap_url }}" target="_blank" class="text-danger" title="Ver ubicación">
-                                    <i class="fas fa-map-marker-alt fa-lg"></i>
-                                </a>
-                            @else
-                                <span class="text-muted">-</span>
-                            @endif
-                        </td>
+                        <td>{{ $ins->id }}</td>
+                        <td data-sort="{{ $ins->fecha }}">{{ \Carbon\Carbon::parse($ins->fecha)->format('d/m/Y') }}</td>
+                        <td class="text-center">{{ $ins->anio_lectivo }}</td>
+                        <td>{{ number_format((int) $ins->alumno_cid, 0, ',', '.') }}</td>
+                        <td>{{ $ins->alumno->apellidos ?? '' }}, {{ $ins->alumno->nombres ?? '' }}</td>
+                        <td>{{ $ins->grado->gradocurso ?? '' }}</td>
+                        <td>{{ $ins->firmante_nombre }}</td>
+                        <td>{{ $ins->firmante_rol }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
-                                style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
+                                style="font-size: 0.65rem;" data-id="{{ $ins->id }}" data-json='{{ json_encode($ins) }}'>
                                 Editar
                             </button>
 
-                            <form action="{{ route('alumnos.destroy', $al->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('inscripciones.destroy', $ins->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar Inscripción permanentemente?')">Borrar</button>
                             </form>
                         </td>
                     </tr>
@@ -152,15 +137,14 @@
         </table>
     </div>
 
-    @include('rrhh.alumnos.modales')
+    @include('rrhh.inscripciones.modales')
 
     <script>
         window.onload = function () {
             if (window.jQuery) {
 
-                // Inicializar DataTable
-                $('#tabla-alumnos').DataTable({
-                    "order": [[1, "asc"]], // Ordenar por apellido por defecto
+                $('#tabla-inscripciones').DataTable({
+                    "order": [[1, "desc"]], // Ordenar por fecha descendiente
                     "pageLength": 10,
                     "language": {
                         "search": "Buscar:",
@@ -177,10 +161,9 @@
                         "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
                 });
 
-                // Listener para abrir modal de edición
                 $(document).on('click', '.btn-editar', function () {
                     var d = $(this).data('json');
-                    $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
+                    $('#formEditarIns').attr('action', "{{ url('rrhh/inscripciones') }}/" + d.id);
 
                     // Mapeo dinámico de campos al modal
                     Object.keys(d).forEach(key => {
@@ -194,15 +177,12 @@
                         }
                     });
 
-                    // Update la foto
-                    let fotoPreview = document.getElementById('preview_foto_editar');
-                    if (d['foto']) {
-                        fotoPreview.src = "{{ asset('img/alumnos/') }}/" + d['foto'];
-                    } else {
-                        fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
+                    // Mostrar info de lectura extra
+                    if (d.alumno) {
+                        $('#edit_alumno_nombre').val(d.alumno.apellidos + ', ' + d.alumno.nombres);
                     }
 
-                    var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
+                    var myModal = new bootstrap.Modal(document.getElementById('modalEditarIns'));
                     myModal.show();
                 });
 
@@ -211,5 +191,4 @@
             }
         };
     </script>
-
 </x-app-layout>

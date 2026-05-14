@@ -339,6 +339,71 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalInscribir" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('inscripciones.store') }}" method="POST" class="modal-content">
+            @csrf
+            <div class="modal-header bg-success text-white p-2">
+                <h6 class="modal-title">Inscripción: <span id="ins_nombre_alumno"></span></h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-3">
+                <input type="hidden" name="alumno_cid" id="ins_alumno_cid">
+                <input type="hidden" name="fecha" value="{{ date('Y-m-d') }}">
+
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <label class="form-label">Año Lectivo</label>
+                        <select name="anio_lectivo" class="form-select form-select-sm">
+                            @foreach($anios as $a)
+                                <option value="{{ $a }}" {{ $a > date('Y') ? 'selected' : '' }}>{{ $a }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label text-primary">Grado Actual</label>
+                        <input type="text" id="inscribir_grado_actual" class="form-control form-control-sm bg-light"
+                            readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Grado/Curso a Inscribir</label>
+                        <select name="grado_curso_id" id="select_grado_nuevo" class="form-select form-select-sm"
+                            required>
+                            @foreach($grados as $g)
+                                <option value="{{ $g->id }}">{{ $g->gradocurso }} ({{ $g->turno }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Quién firma el contrato</label>
+                        <select name="firmante_rol" id="select_firmante" class="form-select form-select-sm" required>
+                            <option value="Padre">Padre</option>
+                            <option value="Madre">Madre</option>
+                            <option value="Encargado">Encargado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="aut_mochila" value="Sí" id="mochila">
+                            <label class="form-check-label" for="mochila">Autoriza revisión mochila</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="aut_foto" value="Sí" id="foto">
+                            <label class="form-check-label" for="foto">Autoriza uso de imagen</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer p-1">
+                <button type="submit" class="btn btn-success btn-sm w-100">Finalizar Inscripción e Imprimir</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <script>
     function irGmaps(inputId) {
         let val = document.getElementById(inputId).value.trim();

@@ -111,42 +111,48 @@
             </thead>
             <tbody>
                 @foreach($alumnos as $al)
-                    <tr>
-                        <td>{{ $al->id }}</td>
-                        <td>{{ $al->apellidos }}</td>
-                        <td>{{ $al->nombres }}</td>
-                        <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
-                        <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
-                        <td>{{ $al->telefono ?? '-' }}</td>
-                        <td class="text-center align-middle">
-                            {{-- DESPUÉS --}}
-                            @php $gmaps = trim((string) $al->gmaps); @endphp
-                            @if($gmaps !== '' && $gmaps !== null)
-                                @php
-                                    $gmap_url = str_starts_with($gmaps, 'http')
-                                        ? $gmaps
-                                        : 'https://' . $gmaps;
-                                @endphp
-                                <a href="{{ $gmap_url }}" target="_blank" class="text-danger" title="Ver ubicación">
-                                    <i class="fas fa-map-marker-alt fa-lg"></i>
-                                </a>
-                            @else
-                                <span class="text-muted">-</span>
-                            @endif
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
-                                style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
-                                Editar
-                            </button>
-
-                            <form action="{{ route('alumnos.destroy', $al->id) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $al->id }}</td>
+                    <td>{{ $al->apellidos }}</td>
+                    <td>{{ $al->nombres }}</td>
+                    <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
+                    <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
+                    <td>{{ $al->telefono ?? '-' }}</td>
+                    <td class="text-center align-middle">
+                        {{-- DESPUÉS --}}
+                        @php $gmaps = trim((string) $al->gmaps); @endphp
+                        @if($gmaps !== '' && $gmaps !== null)
+                        @php
+                        $gmap_url = str_starts_with($gmaps, 'http')
+                        ? $gmaps
+                        : 'https://' . $gmaps;
+                        @endphp
+                        <a href="{{ $gmap_url }}" target="_blank" class="text-danger" title="Ver ubicación">
+                            <i class="fas fa-map-marker-alt fa-lg"></i>
+                        </a>
+                        @else
+                        <span class="text-muted">-</span>
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
+                            Editar
+                        </button>
+                        <form action="{{ route('alumnos.destroy', $al->id) }}" method="POST" class="d-inline">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
+                                onclick="return confirm('¿Borrar?')">Borrar</button>
+                        </form>
+                        <button type="button" class="btn btn-success btn-xs py-0 px-1 btn-inscribir"
+                            style="font-size: 0.65rem;" data-cid="{{ $al->cid }}"
+                            data-nombre="{{ $al->apellidos }}, {{ $al->nombres }}" data-madre="{{ $al->cid_madre }}"
+                            data-padre="{{ $al->cid_padre }}" data-encargado="{{ $al->cid_encargado }} "
+                            data-grado-nombre="{{ $gradoActualNombre }}" data-grado-id="{{ $gradoActualId }}">
+                            Inscribir
+                        </button>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
@@ -203,6 +209,24 @@
                     }
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
+                    myModal.show();
+                });
+
+                // Listener para abrir el modal de inscripción
+                $(document).on('click', '.btn-inscribir', function () {
+                    var id = $(this).data('id');
+                    var cid = $(this).data('cid');
+                    var nombre = $(this).data('nombre');
+                    var grado = $(this).data('grado'); // Capturamos el grado actual
+
+                    // Llenar los campos en el modalInscribir
+                    $('#inscribir_alumno_id').val(id);
+                    $('#inscribir_cid').val(cid);
+                    $('#inscribir_nombre').val(nombre);
+                    $('#inscribir_grado_actual').val(grado); // Lo ponemos en el input del modal
+
+                    // Abrir el modal manualmente
+                    var myModal = new bootstrap.Modal(document.getElementById('modalInscribir'));
                     myModal.show();
                 });
 

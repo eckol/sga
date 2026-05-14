@@ -14,28 +14,15 @@ class AlumnoController extends Controller
 {
     public function index()
     {
-        // Traemos al alumno con su última inscripción para saber su grado actual
-        $alumnos = Alumno::with([
-            'ciudad',
-            'sexo',
-            'nacionalidad',
-            'inscripciones' => function ($q) {
-                $q->latest()->limit(1);
-            },
-            'inscripciones.grado'
-        ])->get();
-
+        $alumnos = Alumno::with(['ciudad', 'sexo', 'nacionalidad'])->get();
+        // Datos para los modales
         $ciudades = Ciudad::orderBy('ciudad')->get();
         $nacionalidades = Nacionalidad::all();
         $sexos = Sexo::all();
         $vivecon = ViveCon::all();
         $parentescos = Parentesco::all();
 
-        $grados = \App\Models\GradoCurso::orderBy('id')->get(); // Ordenar por ID es clave para el "siguiente"
-        $anio_actual = date('Y');
-        $anios = [$anio_actual, $anio_actual + 1];
-
-        return view('rrhh.alumnos.index', compact('alumnos', 'ciudades', 'nacionalidades', 'sexos', 'vivecon', 'parentescos', 'grados', 'anios'));
+        return view('rrhh.alumnos.index', compact('alumnos', 'ciudades', 'nacionalidades', 'sexos', 'vivecon', 'parentescos'));
     }
 
     public function store(Request $request)
@@ -50,7 +37,7 @@ class AlumnoController extends Controller
         }
 
         Alumno::create($data);
-        return back()->with('success', 'Alumno registrado correctamente.');
+        return back();
     }
 
     public function update(Request $request, $id)
@@ -66,11 +53,11 @@ class AlumnoController extends Controller
         }
 
         $alumno->update($data);
-        return back()->with('success', 'Alumno actualizado correctamente.');
+        return back();
     }
     public function destroy($id)
     {
         Alumno::destroy($id);
-        return back()->with('success', 'Alumno eliminado correctamente.');
+        return back();
     }
 }

@@ -139,12 +139,24 @@
                                 style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
                                 Editar
                             </button>
-
                             <form action="{{ route('alumnos.destroy', $al->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">Borrar</button>
                             </form>
+                            @php
+                                $ultimaIns = $al->inscripciones->first();
+                                $gradoActualNombre = $ultimaIns ? $ultimaIns->grado->gradocurso : 'No inscripto';
+                                $gradoActualId = $ultimaIns ? $ultimaIns->grado->id : '';
+                            @endphp
+
+                            <button type="button" class="btn btn-success btn-xs py-0 px-1 btn-inscribir"
+                                style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-cid="{{ $al->cid }}"
+                                data-nombre="{{ $al->apellidos }}, {{ $al->nombres }}" data-madre="{{ $al->cid_madre }}"
+                                data-padre="{{ $al->cid_padre }}" data-encargado="{{ $al->cid_encargado }}"
+                                data-grado-nombre="{{ $gradoActualNombre }}" data-grado-id="{{ $gradoActualId }}">
+                                Inscribir
+                            </button>
                         </td>
                     </tr>
                 @endforeach
@@ -203,6 +215,39 @@
                     }
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
+                    myModal.show();
+                });
+
+                // Listener para abrir el modal de inscripción
+                $(document).on('click', '.btn-inscribir', function () {
+                    const d = $(this).data();
+
+                    // Llenar datos básicos
+                    $('#ins_alumno_cid').val(d.cid);
+                    $('#ins_nombre_alumno').text(d.nombre);
+                    $('#inscribir_grado_actual').val(d.gradoNombre);
+
+                    // Lógica inteligente: Seleccionar el siguiente grado
+                    if (d.gradoId) {
+                        // Obtenemos la última letra (A o B) del grado actual
+                        const seccionActual = d.gradoNombre.slice(-1);
+
+                        // Buscamos en el select de grados el primero que sea mayor al ID actual y tenga la misma letra
+                        let encontrado = false;
+                        $('#select_grado_nuevo option').each(function () {
+                            let idOpcion = $(this).val();
+                            let textoOpcion = $(this).text();
+
+                            // Si el ID es mayor y la sección coincide
+                            if (parseInt(idOpcion) > parseInt(d.gradoId) && textoOpcion.endsWith(seccionActual)) {
+                                $('#select_grado_nuevo').val(idOpcion);
+                                encontrado = true;
+                                return false; // Rompe el loop de each
+                            }
+                        });
+                    }
+
+                    var myModal = new bootstrap.Modal(document.getElementById('modalInscribir'));
                     myModal.show();
                 });
 
