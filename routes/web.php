@@ -11,13 +11,12 @@ use App\Http\Controllers\ViveConController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResponsableController;
+use App\Http\Controllers\ArancelController;
+use App\Http\Controllers\GradoCursoController;
+use App\Http\Controllers\AlumnoController;
 
 Route::get('/', function () {
-    //return view('welcome');
-    //esta línea me lleva directamente a la página del login
-    Route::get('/', function () {
-        return redirect()->route('login');
-    });
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
@@ -36,7 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('vivecon', ViveConController::class)->except(['create', 'show', 'edit']);
     Route::resource('roles', RolController::class)->except(['create', 'show', 'edit']);
     Route::resource('usuarios', UserController::class)->except(['create', 'show', 'edit']);
-
+    Route::resource('aranceles', ArancelController::class)->except(['create', 'show', 'edit']);
+    Route::resource('gradoscursos', GradoCursoController::class)->except(['create', 'show', 'edit']);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -54,6 +54,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::delete('responsables/{tipo}/{id}', [ResponsableController::class, 'destroy'])
             ->name('responsables.destroy');
+
+        Route::get('alumnos', [AlumnoController::class, 'index'])->name('alumnos.index');
+        Route::post('alumnos', [AlumnoController::class, 'store'])->name('alumnos.store');
+        Route::put('alumnos/{id}', [AlumnoController::class, 'update'])->name('alumnos.update');
+        Route::delete('alumnos/{id}', [AlumnoController::class, 'destroy'])->name('alumnos.destroy');
     });
 });
 

@@ -20,15 +20,17 @@ class CicloController extends Controller
         return redirect()->back()->with('success', 'Ciclo creado.');
     }
 
-    public function update(Request $request, Ciclo $ciclo)
+    public function update(Request $request, $id)
     {
         $request->validate(['ciclo' => 'required|string|max:255']);
-        $ciclo->update($request->all());
+        $ciclo = Ciclo::findOrFail($id);
+        $ciclo->update($request->only('ciclo'));
         return redirect()->back()->with('success', 'Ciclo actualizado.');
     }
 
-    public function destroy(Ciclo $ciclo)
+    public function destroy($id)
     {
+        $ciclo = Ciclo::findOrFail($id);
         $ciclo->delete();
         return redirect()->back()->with('success', 'Ciclo eliminado.');
     }

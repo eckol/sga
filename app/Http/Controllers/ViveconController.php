@@ -25,20 +25,22 @@ class ViveconController extends Controller
             ->with('success', 'Vivecon creado exitosamente.');
     }
 
-    public function update(Request $request, Vivecon $vivecon)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'vive_con' => 'required|string|max:100',
         ]);
 
-        $vivecon->update($request->all());
+        $vivecon = Vivecon::findOrFail($id);
+        $vivecon->update($request->only('vive_con'));
 
         return redirect()->route('vivecon.index')
             ->with('success', 'Vivecon actualizado exitosamente.');
     }
 
-    public function destroy(Vivecon $vivecon)
+    public function destroy($id)
     {
+        $vivecon = Vivecon::findOrFail($id);
         $vivecon->delete();
 
         return redirect()->route('vivecon.index')

@@ -25,20 +25,22 @@ class ParentescoController extends Controller
             ->with('success', 'Parentesco creado exitosamente.');
     }
 
-    public function update(Request $request, Parentesco $parentesco)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'parentesco' => 'required|string|max:50',
         ]);
 
-        $parentesco->update($request->all());
+        $parentesco = Parentesco::findOrFail($id);
+        $parentesco->update($request->only('parentesco'));
 
         return redirect()->route('parentescos.index')
             ->with('success', 'Parentesco actualizado exitosamente.');
     }
 
-    public function destroy(Parentesco $parentesco)
+    public function destroy($id)
     {
+        $parentesco = Parentesco::findOrFail($id);
         $parentesco->delete();
 
         return redirect()->route('parentescos.index')

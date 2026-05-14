@@ -1,7 +1,6 @@
 <x-app-layout>
 
     <style>
-        /* Forzar tamaño XS en selectores y sus opciones */
         .form-select-sm,
         .form-select-sm option {
             font-size: 0.75rem !important;
@@ -9,7 +8,6 @@
             padding-bottom: 0.2rem;
         }
 
-        /* Forzar tamaño XS en elementos de DataTables */
         .dataTables_wrapper .dataTables_length select,
         .dataTables_wrapper .dataTables_filter input,
         .dataTables_wrapper .dataTables_info,
@@ -17,7 +15,6 @@
             font-size: 0.75rem !important;
         }
 
-        /* Redondear campos de búsqueda y selectores */
         .dataTables_wrapper .dataTables_length select,
         .dataTables_wrapper .dataTables_filter input,
         .form-select-sm,
@@ -25,20 +22,18 @@
             border-radius: 8px !important;
         }
 
-        /* Botones de paginación más compactos */
         .page-link {
             padding: 0.25rem 0.5rem !important;
             font-size: 0.75rem !important;
         }
 
-        /* Ajuste específico para que el select de registros no se vea recto */
         select[name="tabla-vivecon_length"] {
             border-radius: 5px !important;
         }
     </style>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión del Responsables</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Vive Con</h2>
     </x-slot>
 
     <div class="card card-body p-2">
@@ -52,20 +47,24 @@
             <thead class="table-light">
                 <tr>
                     <th width="50">ID</th>
-                    <th>Vive con</th>
+                    <th>Vive Con</th>
                     <th width="150" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($vivecon as $vivecon)
+                @foreach($vivecon as $item)
                     <tr>
-                        <td>{{ $vivecon->id }}</td>
-                        <td>{{ $vivecon->vive_con }}</td>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->vive_con }}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary btn-xs py-0 px-1" style="font-size: 0.65rem;">Editar</button>
+                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                                style="font-size: 0.65rem;" data-id="{{ $item->id }}" data-vive_con="{{ $item->vive_con }}">
+                                Editar
+                            </button>
 
-                            <form action="{{ route('vivecon.destroy', $vivecon) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
+                            <form action="{{ route('vivecon.destroy', $item->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">Borrar</button>
                             </form>
@@ -81,26 +80,48 @@
             <form action="{{ route('vivecon.store') }}" method="POST" class="modal-content">
                 @csrf
                 <div class="modal-header p-2">
-                    <h6 class="modal-title">Nuevo Vive con</h6>
+                    <h6 class="modal-title">Nuevo Vive Con</h6>
                 </div>
                 <div class="modal-body p-2">
-                    <input type="text" name="vivecon" class="form-control form-control-sm"
-                        placeholder="Nombre de Vive con" required>
+                    <input type="text" name="vive_con" class="form-control form-control-sm" placeholder="Ej: Solo"
+                        required>
                 </div>
                 <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success btn-sm">Guardar</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <div class="modal fade" id="modalEditarViveCon" tabindex="-1">
+        <div class="modal-dialog">
+            <form id="formEditar" method="POST" class="modal-content">
+                @csrf @method('PATCH')
+                <div class="modal-header p-2 bg-primary text-white">
+                    <h6 class="modal-title">Modificar Vive Con</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3">
+                    <div class="mb-2">
+                        <label class="form-label mb-0 fw-bold">Vive Con</label>
+                        <input type="text" name="vive_con" id="edit_vive_con" class="form-control form-control-sm"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Usamos una función que espera a que TODO el documento y las librerías estén cargadas
         window.onload = function () {
             if (window.jQuery) {
                 console.log("SGA: jQuery cargado correctamente");
 
-                // Inicializar DataTable
                 var table = $('#tabla-vivecon').DataTable({
                     "order": [[0, "asc"]],
                     "pageLength": 10,
@@ -113,32 +134,23 @@
                         "infoFiltered": "(filtrado de _MAX_ registros)",
                         "zeroRecords": "No se encontraron registros",
                         "emptyTable": "No hay datos disponibles en la tabla"
-
                     },
-                    // Estructura de la tabla: l=selector, f=filtro, t=tabla, i=info, p=paginación
                     "dom": "<'row mb-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
                 });
 
-                // ESCUCHADOR DE CLIC (Versión ultra-compatible)
                 $(document).on('click', '.btn-editar', function (e) {
                     e.preventDefault();
                     console.log("SGA: Clic detectado en botón editar");
 
                     var id = $(this).data('id');
-                    var name = $(this).data('name');
-                    var email = $(this).data('email');
-                    var role = $(this).data('role');
+                    var vive_con = $(this).data('vive_con');
 
-                    // Llenar campos
-                    $('#formEditar').attr('action', '/usuarios/' + id);
-                    $('#edit_name').val(name);
-                    $('#edit_email').val(email);
-                    $('#edit_role_id').val(role);
+                    $('#formEditar').attr('action', '/vivecon/' + id);
+                    $('#edit_vive_con').val(vive_con);
 
-                    // Forzar apertura del modal
-                    var myModal = new bootstrap.Modal(document.getElementById('modalEditarUsuario'));
+                    var myModal = new bootstrap.Modal(document.getElementById('modalEditarViveCon'));
                     myModal.show();
                 });
             } else {
@@ -146,6 +158,5 @@
             }
         };
     </script>
-
 
 </x-app-layout>

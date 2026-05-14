@@ -32,42 +32,67 @@
         }
 
         /* Ajuste específico para que el select de registros no se vea recto */
-        select[name="tabla-ciclos_length"] {
+        select[name="tabla-alumnos_length"] {
             border-radius: 5px !important;
         }
     </style>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Ciclos Académicos</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Alumnos</h2>
     </x-slot>
 
     <div class="card card-body p-2 shadow-sm">
         <div class="d-flex justify-content-between mb-2">
             <h6 class="fw-bold text-secondary"></h6>
             <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nuevo Ciclo</button>
+                data-bs-target="#modalCrear">+ Nuevo Alumno</button>
         </div>
 
-        <table id="tabla-ciclos" class="table table-sm table-hover table-bordered table-xs">
+        <table id="tabla-alumnos" class="table table-sm table-hover table-bordered table-xs">
             <thead class="table-light">
                 <tr>
                     <th width="50">ID</th>
-                    <th>Ciclo</th>
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Cédula Id.</th>
+                    <th>Nacionalidad</th>
+                    <th>Teléfono</th>
+                    <th class="text-center">Gmaps</th>
                     <th width="150" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($ciclos as $ciclo)
+                @foreach($alumnos as $al)
                     <tr>
-                        <td>{{ $ciclo->id }}</td>
-                        <td>{{ $ciclo->ciclo }}</td>
+                        <td>{{ $al->id }}</td>
+                        <td>{{ $al->apellidos }}</td>
+                        <td>{{ $al->nombres }}</td>
+                        <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
+                        <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
+                        <td>{{ $al->telefono ?? '-' }}</td>
+                        <td class="text-center align-middle">
+                            {{-- DESPUÉS --}}
+                            @php $gmaps = trim((string) $al->gmaps); @endphp
+                            @if($gmaps !== '' && $gmaps !== null)
+                                @php
+                                    $gmap_url = str_starts_with($gmaps, 'http')
+                                        ? $gmaps
+                                        : 'https://' . $gmaps;
+                                @endphp
+                                <a href="{{ $gmap_url }}" target="_blank" class="text-danger" title="Ver ubicación">
+                                    <i class="fas fa-map-marker-alt fa-lg"></i>
+                                </a>
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar-ciclo"
-                                style="font-size: 0.65rem;" data-id="{{ $ciclo->id }}" data-ciclo="{{ $ciclo->ciclo }}">
+                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                                style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
                                 Editar
                             </button>
 
-                            <form action="{{ route('ciclos.destroy', $ciclo->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('alumnos.destroy', $al->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">Borrar</button>
@@ -79,54 +104,15 @@
         </table>
     </div>
 
-    {{-- Modal Crear --}}
-    <div class="modal fade" id="modalCrear" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <form action="{{ route('ciclos.store') }}" method="POST" class="modal-content">
-                @csrf
-                <div class="modal-header p-2 bg-primary text-white">
-                    <h6 class="modal-title">Nuevo Ciclo</h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-2">
-                    <label class="form-label mb-0 fw-bold">Nombre del Ciclo</label>
-                    <input type="text" name="ciclo" class="form-control form-control-sm" placeholder="Ej: 2025-I"
-                        required>
-                </div>
-                <div class="modal-footer p-1">
-                    <button type="submit" class="btn btn-success btn-sm">Guardar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    {{-- Modal Editar --}}
-    <div class="modal fade" id="modalEditar" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <form id="formEditarCiclo" method="POST" class="modal-content">
-                @csrf @method('PATCH')
-                <div class="modal-header p-2 bg-primary text-white">
-                    <h6 class="modal-title">Modificar Ciclo</h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-2">
-                    <label class="form-label mb-0 fw-bold">Nombre del Ciclo</label>
-                    <input type="text" name="ciclo" id="edit_ciclo" class="form-control form-control-sm" required>
-                </div>
-                <div class="modal-footer p-1">
-                    <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    @include('rrhh.alumnos.modales')
 
     <script>
         window.onload = function () {
             if (window.jQuery) {
 
                 // Inicializar DataTable
-                $('#tabla-ciclos').DataTable({
-                    "order": [[0, "asc"]],
+                $('#tabla-alumnos').DataTable({
+                    "order": [[1, "asc"]], // Ordenar por apellido por defecto
                     "pageLength": 10,
                     "language": {
                         "search": "Buscar:",
@@ -144,12 +130,14 @@
                 });
 
                 // Listener para abrir modal de edición
-                $(document).on('click', '.btn-editar-ciclo', function () {
-                    var id = $(this).data('id');
-                    var ciclo = $(this).data('ciclo');
+                $(document).on('click', '.btn-editar', function () {
+                    var d = $(this).data('json');
+                    $('#formEditar').attr('action', '/alumnos/' + d.id);
 
-                    $('#formEditarCiclo').attr('action', '/ciclos/' + id);
-                    $('#edit_ciclo').val(ciclo);
+                    // Mapeo dinámico de campos al modal
+                    Object.keys(d).forEach(key => {
+                        $(`#edit_${key}`).val(d[key]);
+                    });
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
                     myModal.show();

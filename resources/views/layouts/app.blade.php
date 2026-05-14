@@ -12,6 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         /* Estilos Generales Compactos XS */
@@ -24,10 +25,12 @@
         /* 1. Barra lateral más angosta (200px) */
         .sidebar {
             min-height: 100vh;
+            max-height: 100vh;
             width: 200px;
             background: #2c3e50;
             color: white;
             transition: all 0.3s;
+            overflow-y: auto;
         }
 
         /* 2. Logo centrado y texto SGA-CST más grande */
@@ -53,16 +56,44 @@
             color: #ecf0f1;
         }
 
-        /* 3. Títulos de menú en celeste claro, negrita y más grandes */
+        /* 3. Títulos de menú colapsables */
         .menu-header {
-            padding: 15px 15px 5px;
+            padding: 8px 15px 5px;
             font-weight: bold;
             font-size: 0.75rem;
-            /* Un punto más grande */
             color: #a0d8ef !important;
-            /* Celeste claro */
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .menu-header .menu-arrow {
+            font-size: 0.6rem;
+            transition: transform 0.25s ease;
+            display: inline-block;
+        }
+
+        .menu-header.open .menu-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Panel de enlaces: oculto por defecto con max-height */
+        .menu-links {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .menu-links.open {
+            max-height: 400px;
         }
 
         .sidebar .nav-link {
@@ -134,38 +165,67 @@
                 <div class="brand-text">SGA - CST</div>
             </div>
 
-            <div class="mt-3">
-                <div class="menu-header">Principal</div>
+            <div class="mt-3" id="sidebarAccordion">
+                <div class="menu-header" style="cursor:default;">Principal</div>
                 <a href="{{ route('dashboard') }}" class="nav-link active">Dashboard</a>
 
-                <div class="menu-header">Alumnado</div>
-                <a href="#" class="nav-link">Alumnos</a>
-                <a href="{{ route('responsables.index', ['tipo' => 'padres']) }}" class="nav-link">Padres</a>
-                <a href="{{ route('responsables.index', ['tipo' => 'madres']) }}" class="nav-link">Madres</a>
-                <a href="{{ route('responsables.index', ['tipo' => 'encargados']) }}" class="nav-link">Encargados</a>
+                <button class="menu-header" onclick="toggleMenu(this, 'menuAlumnado')">
+                    Alumnado <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuAlumnado">
+                    <a href="{{ route('alumnos.index') }}" class="nav-link">Alumnos</a>
+                    <a href="{{ route('responsables.index', ['tipo' => 'padres']) }}" class="nav-link">Padres</a>
+                    <a href="{{ route('responsables.index', ['tipo' => 'madres']) }}" class="nav-link">Madres</a>
+                    <a href="{{ route('responsables.index', ['tipo' => 'encargados']) }}"
+                        class="nav-link">Encargados</a>
+                </div>
 
-                <div class="menu-header">Gestión Académica</div>
-                <a href="#" class="nav-link">Asignaturas</a>
-                <a href="#" class="nav-link">Horarios</a>
-                <a href="#" class="nav-link">Calificaciones</a>
-                <a href="#" class="nav-link">Asistencia</a>
+                <button class="menu-header" onclick="toggleMenu(this, 'menuAcademica')">
+                    Gestión Académica <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuAcademica">
+                    <a href="#" class="nav-link">Asignaturas</a>
+                    <a href="#" class="nav-link">Horarios</a>
+                    <a href="#" class="nav-link">Calificaciones</a>
+                    <a href="#" class="nav-link">Asistencia</a>
+                </div>
 
-                <div class="menu-header">Gabinete</div>
-                <a href="#" class="nav-link">Entrevistas</a>
-                <a href="#" class="nav-link">Observaciones</a>
+                <button class="menu-header" onclick="toggleMenu(this, 'menuGabinete')">
+                    Gabinete <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuGabinete">
+                    <a href="#" class="nav-link">Entrevistas</a>
+                    <a href="#" class="nav-link">Observaciones</a>
+                </div>
 
-                <div class="menu-header">Configuración</div>
-                <a href="{{ route('ciclos.index') }}" class="nav-link">Ciclos Académicos</a>
-                <a href="#" class="nav-link">Grados y Cursos (GC)</a>
-                <a href="{{ route('ciudades.index') }}" class="nav-link">Ciudades</a>
-                <a href="{{ route('nacionalidades.index') }}" class="nav-link">Nacionalidades</a>
-                <a href="{{ route('sexos.index') }}" class="nav-link">Sexos</a>
-                <a href="{{ route('parentescos.index') }}" class="nav-link">Parentescos</a>
-                <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
+                <button class="menu-header" onclick="toggleMenu(this, 'menuInscripciones')">
+                    Inscripciones <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuInscripciones">
+                    <a href="{{ route('aranceles.index') }}" class="nav-link">Aranceles</a>
+                    <a href="#" class="nav-link">Inscripciones</a>
+                </div>
 
-                <div class="menu-header">Seguridad</div>
-                <a href="{{ route('usuarios.index') }}" class="nav-link">Usuarios</a>
-                <a href="{{ route('roles.index') }}" class="nav-link">Roles</a>
+                <button class="menu-header" onclick="toggleMenu(this, 'menuConfiguracion')">
+                    Configuración <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuConfiguracion">
+                    <a href="{{ route('ciclos.index') }}" class="nav-link">Ciclos Académicos</a>
+                    <a href="{{ route('gradoscursos.index') }}" class="nav-link">Grados y Cursos (GC)</a>
+                    <a href="{{ route('ciudades.index') }}" class="nav-link">Ciudades</a>
+                    <a href="{{ route('nacionalidades.index') }}" class="nav-link">Nacionalidades</a>
+                    <a href="{{ route('sexos.index') }}" class="nav-link">Sexos</a>
+                    <a href="{{ route('parentescos.index') }}" class="nav-link">Parentescos</a>
+                    <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
+                </div>
+
+                <button class="menu-header" onclick="toggleMenu(this, 'menuSeguridad')">
+                    Seguridad <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuSeguridad">
+                    <a href="{{ route('usuarios.index') }}" class="nav-link">Usuarios</a>
+                    <a href="{{ route('roles.index') }}" class="nav-link">Roles</a>
+                </div>
             </div>
         </nav>
 
@@ -218,9 +278,64 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        // Manejo del menú colapsable en móviles
+        // Menú móvil
         document.getElementById('sidebarCollapse')?.addEventListener('click', function () {
             document.getElementById('sidebar').classList.toggle('active');
+        });
+
+        // ── Acordeón del sidebar ──────────────────────────────────────────
+        var STORAGE_KEY = 'sga_sidebar_open';
+
+        function openPanel(panelId) {
+            var panel = document.getElementById(panelId);
+            if (!panel) return;
+            var btn = document.querySelector('[onclick="toggleMenu(this, \'' + panelId + '\')"]');
+            panel.classList.add('open');
+            if (btn) btn.classList.add('open');
+        }
+
+        function closeAll() {
+            document.querySelectorAll('.menu-links.open').forEach(function (p) { p.classList.remove('open'); });
+            document.querySelectorAll('.menu-header.open').forEach(function (b) { b.classList.remove('open'); });
+        }
+
+        function toggleMenu(btn, panelId) {
+            var panel = document.getElementById(panelId);
+            var isOpen = panel.classList.contains('open');
+            closeAll();
+            if (!isOpen) {
+                panel.classList.add('open');
+                btn.classList.add('open');
+                localStorage.setItem(STORAGE_KEY, panelId);
+            } else {
+                localStorage.removeItem(STORAGE_KEY);
+            }
+        }
+
+        // ── Al cargar: detectar ruta activa y restaurar estado ────────────
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.href;
+            var activePanel = null;
+
+            // 1. Buscar enlace activo dentro de los paneles colapsables
+            document.querySelectorAll('.menu-links a.nav-link').forEach(function (link) {
+                var href = link.getAttribute('href');
+                if (href && href !== '#' && currentUrl.indexOf(href) !== -1) {
+                    link.classList.add('active');
+                    var parentPanel = link.closest('.menu-links');
+                    if (parentPanel) activePanel = parentPanel.id;
+                }
+            });
+
+            // 2. Ruta activa tiene prioridad sobre localStorage
+            if (activePanel) {
+                openPanel(activePanel);
+                localStorage.setItem(STORAGE_KEY, activePanel);
+            } else {
+                // 3. Sin ruta activa: restaurar último panel guardado
+                var saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) openPanel(saved);
+            }
         });
     </script>
 </body>

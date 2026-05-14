@@ -20,15 +20,17 @@ class NacionalidadController extends Controller
         return redirect()->back()->with('success', 'Nacionalidad creada.');
     }
 
-    public function update(Request $request, Nacionalidad $nacionalidad)
+    public function update(Request $request, $id)
     {
         $request->validate(['nacionalidad' => 'required|string|max:255']);
-        $nacionalidad->update($request->all());
+        $nacionalidad = Nacionalidad::findOrFail($id);
+        $nacionalidad->update($request->only('nacionalidad'));
         return redirect()->back()->with('success', 'Nacionalidad actualizada.');
     }
 
-    public function destroy(Nacionalidad $nacionalidad)
+    public function destroy($id)
     {
+        $nacionalidad = Nacionalidad::findOrFail($id);
         $nacionalidad->delete();
         return redirect()->back()->with('success', 'Nacionalidad eliminada.');
     }

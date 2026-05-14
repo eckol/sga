@@ -32,7 +32,7 @@
         }
 
         /* Ajuste específico para que el select de registros no se vea recto */
-        select[name="tabla-vivecon_length"] {
+        select[name="tabla-nacionalidades_length"] {
             border-radius: 5px !important;
         }
     </style>
@@ -62,11 +62,16 @@
                         <td>{{ $nacionalidad->id }}</td>
                         <td>{{ $nacionalidad->nacionalidad }}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary btn-xs py-0 px-1" style="font-size: 0.65rem;">Editar</button>
+                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                                style="font-size: 0.65rem;" data-id="{{ $nacionalidad->id }}"
+                                data-nacionalidad="{{ $nacionalidad->nacionalidad }}">
+                                Editar
+                            </button>
 
-                            <form action="{{ route('nacionalidades.destroy', $nacionalidad) }}" method="POST"
+                            <form action="{{ route('nacionalidades.destroy', $nacionalidad->id) }}" method="POST"
                                 class="d-inline">
-                                @csrf @method('DELETE')
+                                @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">Borrar</button>
                             </form>
@@ -89,7 +94,31 @@
                         placeholder="Nombre de la nacionalidad" required>
                 </div>
                 <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEditarNacionalidad" tabindex="-1">
+        <div class="modal-dialog">
+            <form id="formEditar" method="POST" class="modal-content">
+                @csrf @method('PATCH')
+                <div class="modal-header p-2 bg-primary text-white">
+                    <h6 class="modal-title">Modificar Nacionalidad</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3">
+                    <div class="mb-2">
+                        <label class="form-label mb-0 fw-bold">Nacionalidad</label>
+                        <input type="text" name="nacionalidad" id="edit_nacionalidad"
+                            class="form-control form-control-sm" required>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
                 </div>
             </form>
         </div>
@@ -128,18 +157,14 @@
                     console.log("SGA: Clic detectado en botón editar");
 
                     var id = $(this).data('id');
-                    var name = $(this).data('name');
-                    var email = $(this).data('email');
-                    var role = $(this).data('role');
+                    var nacionalidad = $(this).data('nacionalidad');
 
                     // Llenar campos
-                    $('#formEditar').attr('action', '/usuarios/' + id);
-                    $('#edit_name').val(name);
-                    $('#edit_email').val(email);
-                    $('#edit_role_id').val(role);
+                    $('#formEditar').attr('action', '/nacionalidades/' + id);
+                    $('#edit_nacionalidad').val(nacionalidad);
 
                     // Forzar apertura del modal
-                    var myModal = new bootstrap.Modal(document.getElementById('modalEditarUsuario'));
+                    var myModal = new bootstrap.Modal(document.getElementById('modalEditarNacionalidad'));
                     myModal.show();
                 });
             } else {
