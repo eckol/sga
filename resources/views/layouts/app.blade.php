@@ -28,7 +28,9 @@
         /* 1. Barra lateral más angosta (200px) */
         .sidebar {
             min-height: 100vh;
-            max-height: 100vh;
+            height: 100vh;
+            position: sticky;
+            top: 0;
             width: 200px;
             background: #2c3e50;
             color: white;
@@ -187,7 +189,7 @@
                     Gestión Académica <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAcademica">
-                    <a href="#" class="nav-link">Alumnos por Grado/Curso</a>
+                    <a href="{{ route('academica.alumnos-grado') }}" class="nav-link">Alumnos por Grado/Curso</a>
                     <a href="#" class="nav-link">Asignaturas</a>
                     <a href="#" class="nav-link">Horarios</a>
                     <a href="#" class="nav-link">Calificaciones</a>
@@ -281,6 +283,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    @stack('scripts')
     <script>
         // Menú móvil
         document.getElementById('sidebarCollapse')?.addEventListener('click', function () {

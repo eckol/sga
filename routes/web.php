@@ -62,6 +62,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('alumnos/{id}', [AlumnoController::class, 'update'])->name('alumnos.update');
         Route::delete('alumnos/{id}', [AlumnoController::class, 'destroy'])->name('alumnos.destroy');
     });
+
+    Route::prefix('academica')->group(function () {
+        Route::get('alumnos-grado', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'index'])->name('academica.alumnos-grado');
+        Route::post('alumnos/{id}/toggle', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'toggleEstado'])->name('academica.alumnos.toggle');
+    });
 });
 
 require __DIR__ . '/auth.php';
