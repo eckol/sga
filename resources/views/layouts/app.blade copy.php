@@ -145,6 +145,7 @@
                 <a href="{{ route('responsables.index', ['tipo' => 'encargados']) }}" class="nav-link">Encargados</a>
 
                 <div class="menu-header">Gestión Académica</div>
+                <a href="#" class="nav-link">Alumnos por Grado/Curso</a>
                 <a href="#" class="nav-link">Asignaturas</a>
                 <a href="#" class="nav-link">Horarios</a>
                 <a href="#" class="nav-link">Calificaciones</a>
@@ -205,9 +206,9 @@
 
             <main class="p-3">
                 @isset($header)
-                    <div class="mb-3">
-                        <h5 class="fw-bold mb-0">{{ $header }}</h5>
-                    </div>
+                <div class="mb-3">
+                    <h5 class="fw-bold mb-0">{{ $header }}</h5>
+                </div>
                 @endisset
 
                 <div class="container-fluid">

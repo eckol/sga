@@ -19,7 +19,7 @@ class InscripcionController extends Controller
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
 
-        return view('rrhh.inscripciones.index', compact('inscripciones', 'grados', 'anios'));
+        return view('inscripciones.index', compact('inscripciones', 'grados', 'anios'));
     }
 
     public function store(Request $request)

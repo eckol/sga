@@ -187,6 +187,7 @@
                     Gestión Académica <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAcademica">
+                    <a href="#" class="nav-link">Alumnos por Grado/Curso</a>
                     <a href="#" class="nav-link">Asignaturas</a>
                     <a href="#" class="nav-link">Horarios</a>
                     <a href="#" class="nav-link">Calificaciones</a>
