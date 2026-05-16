@@ -224,6 +224,7 @@
                     <a href="{{ route('parentescos.index') }}" class="nav-link">Parentescos</a>
                     <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
                     <a href="{{ route('horas.index') }}" class="nav-link">Horas</a>
+                    <a href="{{ route('estadosciviles.index') }}" class="nav-link">Estados Civiles</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuSeguridad')">
