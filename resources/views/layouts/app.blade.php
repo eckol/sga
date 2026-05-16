@@ -191,7 +191,7 @@
                 <div class="menu-links" id="menuAcademica">
                     <a href="{{ route('academica.alumnos-grado') }}" class="nav-link">Alumnos por Grado/Curso</a>
                     <a href="#" class="nav-link">Asignaturas</a>
-                    <a href="#" class="nav-link">Horarios</a>
+                    <a href="#" class="nav-link">Horarios de clase</a>
                     <a href="#" class="nav-link">Calificaciones</a>
                     <a href="#" class="nav-link">Asistencia</a>
                 </div>
@@ -223,6 +223,7 @@
                     <a href="{{ route('sexos.index') }}" class="nav-link">Sexos</a>
                     <a href="{{ route('parentescos.index') }}" class="nav-link">Parentescos</a>
                     <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
+                    <a href="{{ route('horas.index') }}" class="nav-link">Horas</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuSeguridad')">

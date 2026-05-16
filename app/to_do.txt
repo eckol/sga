@@ -1,0 +1,14 @@
+PENDIENTES
+1. en la vista resources/views/alumnos/index.blade.php:
+    a. agregar grado o curso del alumno luego del campo gmaps. 
+    b. agregar slider "activo" y "matriculado". 
+    c. Prever que pudiera haber egresado. Establacer un nuevo grado "EGRESADO" y "SALIDO".
+2. de la vista alumnos-grado, solamente mostrar los registros con matriculados en "Sí".
+3. en el modal de edición de alumnos:
+    a. agregar el campo grado o curso del alumno. Prever que pudiera haber egresado.
+    b. ver posibilidad de hacer una ficha con solapas para datos de histórico de inscripciones, académicos, entrevistas, etc.
+    c. agregar botones para imprimir ficha del alumno, con datos de inscripción y académicos.
+4. En el modal "modalInscribir": 
+    a. configurar botón para imprimir dos copias del contrato. 
+    b. Ver opción para generar un PDF, cuyo nombre sea el apellido y nombre del alumno, un guión y el año lectivo, que lo muestre en el navegador y se pueda imprimir.
+5. empezar con la vista de colaboradores.

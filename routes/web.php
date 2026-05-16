@@ -15,6 +15,7 @@ use App\Http\Controllers\ArancelController;
 use App\Http\Controllers\GradoCursoController;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\HoraController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('aranceles', ArancelController::class)->except(['create', 'show', 'edit']);
     Route::resource('gradoscursos', GradoCursoController::class)->except(['create', 'show', 'edit']);
     Route::resource('inscripciones', InscripcionController::class)->except(['create', 'show', 'edit']);
+    Route::resource('horas', HoraController::class)->except(['create', 'show', 'edit']);
 });
 
 Route::middleware(['auth'])->group(function () {
