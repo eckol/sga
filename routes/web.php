@@ -19,6 +19,7 @@ use App\Http\Controllers\HoraController;
 use App\Http\Controllers\EstadoCivilController;
 use App\Http\Controllers\TipoColaboradorController;
 use App\Http\Controllers\AsignaturaController;
+use App\Http\Controllers\ColaboradorController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -69,6 +70,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('alumnos', [AlumnoController::class, 'store'])->name('alumnos.store');
         Route::put('alumnos/{id}', [AlumnoController::class, 'update'])->name('alumnos.update');
         Route::delete('alumnos/{id}', [AlumnoController::class, 'destroy'])->name('alumnos.destroy');
+
+        Route::get('colaboradores', [ColaboradorController::class, 'index'])->name('colaboradores.index');
+        Route::post('colaboradores', [ColaboradorController::class, 'store'])->name('colaboradores.store');
+        Route::put('colaboradores/{id}', [ColaboradorController::class, 'update'])->name('colaboradores.update');
+        Route::delete('colaboradores/{id}', [ColaboradorController::class, 'destroy'])->name('colaboradores.destroy');
     });
 
     Route::prefix('academica')->group(function () {

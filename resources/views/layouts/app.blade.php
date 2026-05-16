@@ -188,7 +188,7 @@
                     Colaboradores <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuColaboradores">
-
+                    <a href="{{ route('colaboradores.index') }}" class="nav-link">Colaboradores</a>
                 </div>
                 <button class="menu-header" onclick="toggleMenu(this, 'menuAcademica')">
                     Gestión Académica <span class="menu-arrow">&#9660;</span>
