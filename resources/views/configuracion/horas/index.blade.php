@@ -79,7 +79,7 @@
         <div class="modal-dialog modal-sm">
             <form action="{{ route('horas.store') }}" method="POST" class="modal-content">
                 @csrf
-                <div class="modal-header p-2 bg-dark text-white">
+                <div class="modal-header p-2 bg-primary text-white">
                     <h6 class="modal-title">Nuevo Módulo</h6>
                 </div>
                 <div class="modal-body p-2">

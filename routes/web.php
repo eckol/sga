@@ -17,6 +17,8 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\HoraController;
 use App\Http\Controllers\EstadoCivilController;
+use App\Http\Controllers\TipoColaboradorController;
+use App\Http\Controllers\AsignaturaController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -43,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('inscripciones', InscripcionController::class)->except(['create', 'show', 'edit']);
     Route::resource('horas', HoraController::class)->except(['create', 'show', 'edit']);
     Route::resource('estadosciviles', EstadoCivilController::class)->except(['create', 'show', 'edit']);
+    Route::resource('tiposcolaboradores', TipoColaboradorController::class)->except(['create', 'show', 'edit']);
+    Route::resource('asignaturas', AsignaturaController::class)->except(['create', 'show', 'edit']);
 });
 
 Route::middleware(['auth'])->group(function () {

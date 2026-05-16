@@ -86,7 +86,7 @@
         <div class="modal-dialog modal-sm">
             <form action="{{ route('nacionalidades.store') }}" method="POST" class="modal-content">
                 @csrf
-                <div class="modal-header p-2">
+                <div class="modal-header p-2 bg-primary text-white">
                     <h6 class="modal-title">Nueva Nacionalidad</h6>
                 </div>
                 <div class="modal-body p-2">

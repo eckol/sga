@@ -184,7 +184,12 @@
                     <a href="{{ route('responsables.index', ['tipo' => 'encargados']) }}"
                         class="nav-link">Encargados</a>
                 </div>
+                <button class="menu-header" onclick="toggleMenu(this, 'menuColaboradores')">
+                    Colaboradores <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuColaboradores">
 
+                </div>
                 <button class="menu-header" onclick="toggleMenu(this, 'menuAcademica')">
                     Gestión Académica <span class="menu-arrow">&#9660;</span>
                 </button>
@@ -225,6 +230,8 @@
                     <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
                     <a href="{{ route('horas.index') }}" class="nav-link">Horas</a>
                     <a href="{{ route('estadosciviles.index') }}" class="nav-link">Estados Civiles</a>
+                    <a href="{{ route('tiposcolaboradores.index') }}" class="nav-link">Tipos de Colaboradores</a>
+                    <a href="{{ route('asignaturas.index') }}" class="nav-link">Asignaturas</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuSeguridad')">

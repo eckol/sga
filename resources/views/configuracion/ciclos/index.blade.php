@@ -94,6 +94,7 @@
                         required>
                 </div>
                 <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success btn-sm">Guardar</button>
                 </div>
             </form>

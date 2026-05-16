@@ -96,7 +96,7 @@
                 <div class="modal-body p-2">
                     <label class="form-label mb-0 fw-bold">Nombre del Grado/Curso</label>
                     <input type="text" name="gradocurso" class="form-control form-control-sm mb-2"
-                        placeholder="Ej: 1ro Básico" required>
+                        placeholder="Ej: 8VO. GRADO A" required>
 
                     <label class="form-label mb-0 fw-bold">Turno</label>
                     <select name="turno" class="form-select form-select-sm mb-2" required>
@@ -112,6 +112,7 @@
                     </select>
                 </div>
                 <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success btn-sm">Guardar</button>
                 </div>
             </form>
