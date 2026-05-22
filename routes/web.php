@@ -20,6 +20,9 @@ use App\Http\Controllers\EstadoCivilController;
 use App\Http\Controllers\TipoColaboradorController;
 use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\ColaboradorController;
+use App\Http\Controllers\PeriodoLaboralController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\IndicadoresFaltasController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -48,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('estadosciviles', EstadoCivilController::class)->except(['create', 'show', 'edit']);
     Route::resource('tiposcolaboradores', TipoColaboradorController::class)->except(['create', 'show', 'edit']);
     Route::resource('asignaturas', AsignaturaController::class)->except(['create', 'show', 'edit']);
+    Route::resource('indicadores_faltas', IndicadoresFaltasController::class)->except(['create', 'show', 'edit']);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -75,11 +79,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('colaboradores', [ColaboradorController::class, 'store'])->name('colaboradores.store');
         Route::put('colaboradores/{id}', [ColaboradorController::class, 'update'])->name('colaboradores.update');
         Route::delete('colaboradores/{id}', [ColaboradorController::class, 'destroy'])->name('colaboradores.destroy');
+        Route::resource('periodos-laborales', PeriodoLaboralController::class)->except(['create', 'show', 'edit']);
     });
 
     Route::prefix('academica')->group(function () {
         Route::get('alumnos-grado', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'index'])->name('academica.alumnos-grado');
         Route::post('alumnos/{id}/toggle', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'toggleEstado'])->name('academica.alumnos.toggle');
+        Route::get('horarios', [HorarioController::class, 'index'])->name('horarios.index');
+        Route::put('horarios/{id}', [HorarioController::class, 'update'])->name('horarios.update');
     });
 });
 

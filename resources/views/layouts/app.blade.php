@@ -189,6 +189,7 @@
                 </button>
                 <div class="menu-links" id="menuColaboradores">
                     <a href="{{ route('colaboradores.index') }}" class="nav-link">Colaboradores</a>
+                    <a href="{{ route('periodos-laborales.index') }}" class="nav-link">Períodos Laborales</a>
                 </div>
                 <button class="menu-header" onclick="toggleMenu(this, 'menuAcademica')">
                     Gestión Académica <span class="menu-arrow">&#9660;</span>
@@ -196,7 +197,7 @@
                 <div class="menu-links" id="menuAcademica">
                     <a href="{{ route('academica.alumnos-grado') }}" class="nav-link">Alumnos por Grado/Curso</a>
                     <a href="#" class="nav-link">Asignaturas</a>
-                    <a href="#" class="nav-link">Horarios de clase</a>
+                    <a href="{{ route('horarios.index') }}" class="nav-link">Horarios de clase</a>
                     <a href="#" class="nav-link">Calificaciones</a>
                     <a href="#" class="nav-link">Asistencia</a>
                 </div>
@@ -232,6 +233,7 @@
                     <a href="{{ route('estadosciviles.index') }}" class="nav-link">Estados Civiles</a>
                     <a href="{{ route('tiposcolaboradores.index') }}" class="nav-link">Tipos de Colaboradores</a>
                     <a href="{{ route('asignaturas.index') }}" class="nav-link">Asignaturas</a>
+                    <a href="{{ route('indicadores_faltas.index') }}" class="nav-link">Faltas</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuSeguridad')">

@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="row g-2 mt-2">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Estado Civil</label>
                         <select name="estado_civil_id" class="form-select form-select-sm" required>
                             @foreach($estadosciviles as $ec)
@@ -87,11 +87,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Teléfono</label>
                         <input type="text" name="telefono" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <label class="form-label mb-0 fw-bold">Gmaps Link</label>
                         <input type="text" name="ubicacion" class="form-control form-control-sm">
                     </div>
@@ -107,13 +107,13 @@
                         <label class="form-label mb-0 fw-bold">Passwd</label>
                         <input type="text" name="passwd" id="crear_passwd" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <div class="form-check form-switch mb-1">
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center">Activo</label>
+                        <label class="toggle">
                             <input type="hidden" name="activo" value="No">
-                            <input class="form-check-input" type="checkbox" name="activo" value="Sí" checked
-                                id="crear_activo">
-                            <label class="form-check-label fw-bold" for="crear_activo">Activo</label>
-                        </div>
+                            <input type="checkbox" name="activo" id="crear_activo" value="Sí" checked>
+                            <span class="slider"></span>
+                        </label>
                     </div>
                 </div>
 
@@ -142,13 +142,13 @@
                         <label class="form-label mb-0 fw-bold">G.S.</label>
                         <input type="text" name="gsangre" class="form-control form-control-sm" placeholder="O+">
                     </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <div class="form-check form-switch mb-1">
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center">Enf. Cronica</label>
+                        <label class="toggle">
                             <input type="hidden" name="enf_cronica" value="No">
-                            <input class="form-check-input" type="checkbox" name="enf_cronica" value="Sí"
-                                id="crear_enf">
-                            <label class="form-check-label fw-bold" for="crear_enf">Enf. Cronica</label>
-                        </div>
+                            <input type="checkbox" name="enf_cronica" value="Sí" id="crear_enf">
+                            <span class="slider"></span>
+                        </label>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Reloj</label>
@@ -251,7 +251,7 @@
                 </div>
 
                 <div class="row g-2 mt-2">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Estado Civil</label>
                         <select name="estado_civil_id" id="edit_estado_civil_id" class="form-select form-select-sm"
                             required>
@@ -269,11 +269,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Teléfono</label>
                         <input type="text" name="telefono" id="edit_telefono" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <label class="form-label mb-0 fw-bold">Gmaps Link</label>
                         <input type="text" name="ubicacion" id="edit_ubicacion" class="form-control form-control-sm">
                     </div>
@@ -291,12 +291,13 @@
                         <label class="form-label mb-0 fw-bold">Passwd</label>
                         <input type="text" name="passwd" id="edit_passwd" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <div class="form-check form-switch mb-1">
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center">Activo</label>
+                        <label class="toggle">
                             <input type="hidden" name="activo" value="No">
-                            <input class="form-check-input" type="checkbox" name="activo" value="Sí" id="edit_activo">
-                            <label class="form-check-label fw-bold" for="edit_activo">Activo</label>
-                        </div>
+                            <input type="checkbox" name="activo" id="edit_activo" value="Sí">
+                            <span class="slider"></span>
+                        </label>
                     </div>
                 </div>
 
@@ -326,13 +327,13 @@
                         <label class="form-label mb-0 fw-bold">G.S.</label>
                         <input type="text" name="gsangre" id="edit_gsangre" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <div class="form-check form-switch mb-1">
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center">Enf. Cronica</label>
+                        <label class="toggle">
                             <input type="hidden" name="enf_cronica" value="No">
-                            <input class="form-check-input" type="checkbox" name="enf_cronica" value="Sí"
-                                id="edit_enf_cronica">
-                            <label class="form-check-label fw-bold" for="edit_enf_cronica">Enf. Cronica</label>
-                        </div>
+                            <input type="checkbox" name="enf_cronica" value="Sí" id="edit_enf_cronica">
+                            <span class="slider"></span>
+                        </label>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Reloj</label>
