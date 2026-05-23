@@ -49,12 +49,6 @@
                             <option value="Mensual">Mensual</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label mb-0 fw-bold">Firmante Nombre</label>
-                        <input type="text" name="firmante_nombre" id="edit_firmante_nombre"
-                            class="form-control form-control-sm">
-                    </div>
                     <div class="col-md-6">
                         <label class="form-label mb-0 fw-bold">Firmante Rol</label>
                         <select name="firmante_rol" id="edit_firmante_rol" class="form-select form-select-sm" required>
@@ -64,7 +58,11 @@
                             <option value="No especificado">No especificado</option>
                         </select>
                     </div>
-
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Firmante Nombre</label>
+                        <input type="text" name="firmante_nombre" id="edit_firmante_nombre"
+                            class="form-control form-control-sm">
+                    </div>
                     <div class="col-md-4">
                         <label class="form-label mb-0 fw-bold">Monto Matrícula (Gs)</label>
                         <input type="number" name="monto_matricula" id="edit_monto_matricula"

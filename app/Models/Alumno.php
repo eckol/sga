@@ -56,4 +56,20 @@ class Alumno extends Model
         // Un alumno tiene muchas inscripciones, vinculadas por el CID
         return $this->hasMany(Inscripcion::class, 'alumno_cid', 'cid');
     }
+
+    // Relaciones con los responsables
+    public function madre()
+    {
+        return $this->belongsTo(Madre::class, 'cid_madre', 'cid');
+    }
+
+    public function padre()
+    {
+        return $this->belongsTo(Padre::class, 'cid_padre', 'cid');
+    }
+
+    public function encargado()
+    {
+        return $this->belongsTo(Encargado::class, 'cid_encargado', 'cid');
+    }
 }

@@ -23,6 +23,8 @@ use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\PeriodoLaboralController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\IndicadoresFaltasController;
+use App\Http\Controllers\AsignaturaColaboradorController;
+use App\Http\Controllers\FaltaController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -52,6 +54,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('tiposcolaboradores', TipoColaboradorController::class)->except(['create', 'show', 'edit']);
     Route::resource('asignaturas', AsignaturaController::class)->except(['create', 'show', 'edit']);
     Route::resource('indicadores_faltas', IndicadoresFaltasController::class)->except(['create', 'show', 'edit']);
+    Route::resource('asignaturas-colaboradores', AsignaturaColaboradorController::class)
+        ->only(['index', 'store', 'update', 'destroy'])
+        ->names([
+            'asignaturas-colaboradores.index' => 'asignaturas-colaboradores.index',
+            'asignaturas-colaboradores.store' => 'asignaturas-colaboradores.store',
+            'asignaturas-colaboradores.update' => 'asignaturas-colaboradores.update',
+            'asignaturas-colaboradores.destroy' => 'asignaturas-colaboradores.destroy',
+        ]);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -87,9 +97,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('academica')->group(function () {
         Route::get('alumnos-grado', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'index'])->name('academica.alumnos-grado');
+        Route::get('alumnos/{id}/detalles', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'getDetalles'])->name('academica.alumnos.detalles');
         Route::post('alumnos/{id}/toggle', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'toggleEstado'])->name('academica.alumnos.toggle');
-        Route::get('horarios', [HorarioController::class, 'index'])->name('horarios.index');
-        Route::put('horarios/{id}', [HorarioController::class, 'update'])->name('horarios.update');
+        Route::get('horarios', [HorarioController::class, 'index'])->name('academica.horarios.index');
+        Route::put('horarios/{id}', [HorarioController::class, 'update'])->name('academica.horarios.update');
+        Route::get('docentes-asignatura', [AsignaturaColaboradorController::class, 'index'])->name('academica.docentes-asignatura.index');
+        Route::put('docentes-asignatura/{asignatura}/{grado}', [AsignaturaColaboradorController::class, 'update'])->name('academica.docentes-asignatura.update');
+        Route::get('faltas', [FaltaController::class, 'index'])->name('academica.faltas.index');
+        Route::post('faltas', [FaltaController::class, 'store'])->name('academica.faltas.store');
+        Route::put('faltas/{id}', [FaltaController::class, 'update'])->name('academica.faltas.update');
+        Route::delete('faltas/{id}', [FaltaController::class, 'destroy'])->name('academica.faltas.destroy');
+        Route::get('faltas/alumnos-por-grado/{grado}', [FaltaController::class, 'alumnosPorGrado'])->name('academica.faltas.alumnos-por-grado');
+        Route::get('faltas/asignaturas-por-grado/{grado}', [FaltaController::class, 'asignaturasPorGrado'])->name('academica.faltas.asignaturas-por-grado');
     });
 });
 

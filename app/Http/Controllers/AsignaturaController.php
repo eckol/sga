@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Asignatura;
+use App\Models\AsignaturaColaborador;
+use App\Models\GradoCurso;
+use App\Models\Colaborador;
 
 class AsignaturaController extends Controller
 {

@@ -55,6 +55,37 @@ class AlumnoGradoController extends Controller
         ));
     }
 
+    public function getDetalles($id)
+    {
+        $alumno = \App\Models\Alumno::with([
+            'madre',
+            'padre',
+            'encargado',
+            'inscripciones' => function ($q) {
+                $q->orderBy('fecha', 'desc');
+            },
+            'inscripciones.grado'
+        ])
+            ->findOrFail($id);
+
+        return response()->json([
+            'madre' => $alumno->madre,
+            'padre' => $alumno->padre,
+            'encargado' => $alumno->encargado,
+            'inscripciones' => $alumno->inscripciones->map(function ($ins) {
+                return [
+                    'id' => $ins->id,
+                    'fecha' => \Carbon\Carbon::parse($ins->fecha)->format('d/m/Y'),
+                    'anio_lectivo' => $ins->anio_lectivo,
+                    'grado_curso' => $ins->grado->gradocurso ?? 'N/A',
+                    'firmante_nombre' => $ins->firmante_nombre,
+                    'firmante_rol' => $ins->firmante_rol,
+                    'estado' => $ins->estado
+                ];
+            })
+        ]);
+    }
+
     public function toggleEstado(Request $request, $id)
     {
         $alumno = \App\Models\Alumno::findOrFail($id);

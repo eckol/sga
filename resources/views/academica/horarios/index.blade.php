@@ -151,7 +151,7 @@
                                             <select
                                                 class="select-asignatura"
                                                 data-id="{{ $horario->id }}"
-                                                data-url="{{ route('horarios.update', $horario->id) }}">
+                                                data-url="{{ route('academica.horarios.update', $horario->id) }}">
                                                 <option value="">— Sin asignar —</option>
                                                 @foreach($asignaturas as $asig)
                                                     <option value="{{ $asig->id }}"
@@ -211,7 +211,7 @@
                                             <select
                                                 class="select-asignatura"
                                                 data-id="{{ $horario->id }}"
-                                                data-url="{{ route('horarios.update', $horario->id) }}">
+                                                data-url="{{ route('academica.horarios.update', $horario->id) }}">
                                                 <option value="">— Sin asignar —</option>
                                                 @foreach($asignaturas as $asig)
                                                     <option value="{{ $asig->id }}"

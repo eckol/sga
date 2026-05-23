@@ -279,6 +279,13 @@
                         var d = $(this).data('json');
                         $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
 
+                        // Reset tabs to first one
+                        if (bootstrap.Tab.getInstance($('#modalAlumnoTabs button:first')[0])) {
+                            bootstrap.Tab.getInstance($('#modalAlumnoTabs button:first')[0]).show();
+                        } else {
+                            new bootstrap.Tab($('#modalAlumnoTabs button:first')[0]).show();
+                        }
+
                         // Mapeo dinámico de campos al modal
                         Object.keys(d).forEach(key => {
                             let el = $(`#edit_${key}`);
@@ -298,6 +305,42 @@
                         } else {
                             fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
                         }
+
+                        // Limpiar campos de responsables y tabla de historial
+                        $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
+                        $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
+
+                        // Cargar detalles vía AJAX
+                        $.get("{{ url('academica/alumnos') }}/" + d.id + "/detalles")
+                            .done(function (res) {
+                                // Responsables
+                                $('#info_madre_nombre').val(res.madre ? res.madre.nombre : 'No registrado');
+                                $('#info_padre_nombre').val(res.padre ? res.padre.nombre : 'No registrado');
+                                $('#info_encargado_nombre').val(res.encargado ? res.encargado.nombre : 'No registrado');
+
+                                // Historial de Inscripciones
+                                let html = '';
+                                if (res.inscripciones && res.inscripciones.length > 0) {
+                                    res.inscripciones.forEach(ins => {
+                                        html += `<tr>
+                                                <td>${ins.id}</td>
+                                                <td>${ins.fecha}</td>
+                                                <td>${ins.anio_lectivo}</td>
+                                                <td>${ins.grado_curso}</td>
+                                                <td>${ins.firmante_nombre || ''}</td>
+                                                <td>${ins.firmante_rol || ''}</td>
+                                                <td>${ins.estado}</td>
+                                            </tr>`;
+                                    });
+                                } else {
+                                    html = '<tr><td colspan="7" class="text-center text-muted">Sin historial</td></tr>';
+                                }
+                                $('#table-inscripciones-historial').html(html);
+                            })
+                            .fail(function () {
+                                $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Error al cargar');
+                                $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar historial</td></tr>');
+                            });
 
                         var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
                         myModal.show();

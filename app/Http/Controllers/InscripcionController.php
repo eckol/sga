@@ -12,7 +12,7 @@ class InscripcionController extends Controller
 {
     public function index()
     {
-        $inscripciones = Inscripcion::with(['alumno', 'grado'])->orderBy('fecha', 'desc')->get();
+        $inscripciones = Inscripcion::with(['alumno.madre', 'alumno.padre', 'alumno.encargado', 'grado'])->orderBy('fecha', 'desc')->get();
         $grados = GradoCurso::orderBy('gradocurso')->get();
 
         // Generamos los años para el select (actual y el que viene)

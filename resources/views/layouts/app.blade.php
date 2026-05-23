@@ -196,10 +196,12 @@
                 </button>
                 <div class="menu-links" id="menuAcademica">
                     <a href="{{ route('academica.alumnos-grado') }}" class="nav-link">Alumnos por Grado/Curso</a>
-                    <a href="#" class="nav-link">Asignaturas</a>
-                    <a href="{{ route('horarios.index') }}" class="nav-link">Horarios de clase</a>
-                    <a href="#" class="nav-link">Calificaciones</a>
+                    <a href="{{ route('academica.docentes-asignatura.index') }}" class="nav-link">Asignaturas por
+                        docente</a>
+                    <a href="{{ route('academica.horarios.index') }}" class="nav-link">Horarios de clase</a>
+                    <a href="{{ route('academica.faltas.index') }}" class="nav-link">Faltas</a>
                     <a href="#" class="nav-link">Asistencia</a>
+                    <a href="#" class="nav-link">Calificaciones</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuGabinete')">
@@ -229,7 +231,7 @@
                     <a href="{{ route('sexos.index') }}" class="nav-link">Sexos</a>
                     <a href="{{ route('parentescos.index') }}" class="nav-link">Parentescos</a>
                     <a href="{{ route('vivecon.index') }}" class="nav-link">Vive con</a>
-                    <a href="{{ route('horas.index') }}" class="nav-link">Horas</a>
+                    <a href="{{ route('horas.index') }}" class="nav-link">Horas cátedra</a>
                     <a href="{{ route('estadosciviles.index') }}" class="nav-link">Estados Civiles</a>
                     <a href="{{ route('tiposcolaboradores.index') }}" class="nav-link">Tipos de Colaboradores</a>
                     <a href="{{ route('asignaturas.index') }}" class="nav-link">Asignaturas</a>

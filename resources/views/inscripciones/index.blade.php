@@ -124,8 +124,8 @@
                     <th width="70">C.I. Alumno</th>
                     <th>Alumno</th>
                     <th width="100">Grado/Curso</th>
-                    <th>Firmante</th>
                     <th>Rol</th>
+                    <th>Firmante</th>
                     <th>Estado</th>
                     <th width="90" class="text-center">Acciones</th>
                 </tr>
@@ -139,14 +139,14 @@
                         <td>{{ number_format((int) $ins->alumno_cid, 0, ',', '.') }}</td>
                         <td>{{ $ins->alumno->apellidos ?? '' }}, {{ $ins->alumno->nombres ?? '' }}</td>
                         <td>{{ $ins->grado->gradocurso ?? '' }}</td>
-                        <td>{{ $ins->firmante_nombre }}</td>
                         <td>{{ $ins->firmante_rol }}</td>
+                        <td>{{ $ins->firmante_nombre }}</td>
                         <td class="text-center fw-bold 
-                                @if($ins->estado == 'Matriculado') bg-matriculado 
-                                @elseif($ins->estado == 'Egresado') bg-egresado 
-                                @elseif($ins->estado == 'Trasladado') bg-trasladado 
-                                @elseif($ins->estado == 'Abandono') bg-abandono 
-                                @endif" style="font-size: 0.75rem;">
+                                    @if($ins->estado == 'Matriculado') bg-matriculado 
+                                    @elseif($ins->estado == 'Egresado') bg-egresado 
+                                    @elseif($ins->estado == 'Trasladado') bg-trasladado 
+                                    @elseif($ins->estado == 'Abandono') bg-abandono 
+                                    @endif" style="font-size: 0.75rem;">
                             {{ $ins->estado }}
                         </td>
                         <td class="text-center">
@@ -191,8 +191,11 @@
                         "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
                 });
 
+                let currentInscripcion = null;
+
                 $(document).on('click', '.btn-editar', function () {
                     var d = $(this).data('json');
+                    currentInscripcion = d;
                     $('#formEditarIns').attr('action', "{{ url('inscripciones') }}/" + d.id);
 
                     // Mapeo dinámico de campos al modal
@@ -214,6 +217,21 @@
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditarIns'));
                     myModal.show();
+                });
+
+                $('#edit_firmante_rol').on('change', function () {
+                    if (!currentInscripcion || !currentInscripcion.alumno) return;
+                    const rol = $(this).val();
+                    const a = currentInscripcion.alumno;
+                    let nombre = '';
+
+                    if (rol === 'Madre' && a.madre) nombre = a.madre.nombre;
+                    else if (rol === 'Padre' && a.padre) nombre = a.padre.nombre;
+                    else if (rol === 'Encargado' && a.encargado) nombre = a.encargado.nombre;
+
+                    if (nombre) {
+                        $('#edit_firmante_nombre').val(nombre);
+                    }
                 });
             } else {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
