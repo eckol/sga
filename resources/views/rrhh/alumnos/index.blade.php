@@ -106,7 +106,9 @@
                     <th>Nacionalidad</th>
                     <th>Teléfono</th>
                     <th class="text-center">Gmaps</th>
-                    <th width="150" class="text-center">Acciones</th>
+                    <th>Grado/Curso</th>
+                    <th class="text-center">Estado</th>
+                    <th width="110" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -119,7 +121,6 @@
                         <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
                         <td>{{ $al->telefono ?? '-' }}</td>
                         <td class="text-center align-middle">
-                            {{-- DESPUÉS --}}
                             @php $gmaps = trim((string) $al->gmaps); @endphp
                             @if($gmaps !== '' && $gmaps !== null)
                                 @php
@@ -134,28 +135,44 @@
                                 <span class="text-muted">-</span>
                             @endif
                         </td>
+                        @php
+                            $ultimaIns = $al->inscripciones->first();
+                            $gradoActualNombre = $ultimaIns ? $ultimaIns->grado->gradocurso ?? '—' : '—';
+                            $gradoActualId = $ultimaIns ? $ultimaIns->grado->id ?? '' : '';
+                            $estadoActual = $ultimaIns ? $ultimaIns->estado : null;
+                        @endphp
+                        <td style="font-size:0.72rem">{{ $gradoActualNombre }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            @if($estadoActual === 'Matriculado')
+                                <span class="badge bg-success" style="font-size:0.65rem">{{ $estadoActual }}</span>
+                            @elseif($estadoActual)
+                                <span class="badge bg-secondary" style="font-size:0.65rem">{{ $estadoActual }}</span>
+                            @else
+                                <span class="text-muted" style="font-size:0.7rem">—</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
+                                title="Editar alumno"
                                 style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
                             <form action="{{ route('alumnos.destroy', $al->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                <button type="submit" class="btn btn-danger btn-xs py-0 px-1"
+                                    title="Eliminar alumno"
+                                    style="font-size: 0.65rem;"
+                                    onclick="return confirm('¿Eliminar este alumno?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
-                            @php
-                                $ultimaIns = $al->inscripciones->first();
-                                $gradoActualNombre = $ultimaIns ? $ultimaIns->grado->gradocurso : 'No inscripto';
-                                $gradoActualId = $ultimaIns ? $ultimaIns->grado->id : '';
-                            @endphp
-
                             <button type="button" class="btn btn-success btn-xs py-0 px-1 btn-inscribir"
+                                title="Inscribir alumno"
                                 style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-cid="{{ $al->cid }}"
                                 data-nombre="{{ $al->apellidos }}, {{ $al->nombres }}" data-madre="{{ $al->cid_madre }}"
                                 data-padre="{{ $al->cid_padre }}" data-encargado="{{ $al->cid_encargado }}"
                                 data-grado-nombre="{{ $gradoActualNombre }}" data-grado-id="{{ $gradoActualId }}">
-                                Inscribir
+                                <i class="fas fa-user-graduate"></i>
                             </button>
                         </td>
                     </tr>

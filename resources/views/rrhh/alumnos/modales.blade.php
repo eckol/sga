@@ -131,7 +131,8 @@
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
                         <button type="button" class="btn btn-primary btn-sm w-100"
-                            onclick="abrirModalResponsableEditar('madres', 'crear_cid_madre')" title="Editar">Editar</button>
+                            onclick="abrirModalResponsableEditar('madres', 'crear_cid_madre')"
+                            title="Editar">Editar</button>
                     </div>
 
                     <div class="col-md-2">
@@ -140,7 +141,8 @@
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
                         <button type="button" class="btn btn-primary btn-sm w-100"
-                            onclick="abrirModalResponsableEditar('padres', 'crear_cid_padre')" title="Editar">Editar</button>
+                            onclick="abrirModalResponsableEditar('padres', 'crear_cid_padre')"
+                            title="Editar">Editar</button>
                     </div>
 
                     <div class="col-md-2">
@@ -150,7 +152,8 @@
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
                         <button type="button" class="btn btn-primary btn-sm w-100"
-                            onclick="abrirModalResponsableEditar('encargados', 'crear_cid_encargado')" title="Editar">Editar</button>
+                            onclick="abrirModalResponsableEditar('encargados', 'crear_cid_encargado')"
+                            title="Editar">Editar</button>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Parentesco</label>
@@ -165,7 +168,7 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success btn-sm">Guardar Alumno</button>
+                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save me-1"></i> Guardar</button>
             </div>
         </form>
     </div>
@@ -362,8 +365,8 @@
                                     </div>
                                     <div class="col-md-1 d-flex align-items-end">
                                         <button type="button" class="btn btn-primary btn-sm w-100"
-                                            onclick="abrirModalResponsableEditar('madres', 'edit_cid_madre')" title="Editar"
-                                            style="height: calc(1.5em + 0.5rem + 2px);">Editar</button>
+                                            onclick="abrirModalResponsableEditar('madres', 'edit_cid_madre')"
+                                            title="Editar" style="height: calc(1.5em + 0.5rem + 2px);">Editar</button>
                                     </div>
                                 </div>
                             </div>
@@ -382,8 +385,8 @@
                                     </div>
                                     <div class="col-md-1 d-flex align-items-end">
                                         <button type="button" class="btn btn-success btn-sm w-100"
-                                            onclick="abrirModalResponsableEditar('padres', 'edit_cid_padre')" title="Editar"
-                                            style="height: calc(1.5em + 0.5rem + 2px);">Editar</button>
+                                            onclick="abrirModalResponsableEditar('padres', 'edit_cid_padre')"
+                                            title="Editar" style="height: calc(1.5em + 0.5rem + 2px);">Editar</button>
                                     </div>
                                 </div>
                             </div>
@@ -412,8 +415,8 @@
                                     </div>
                                     <div class="col-md-1 d-flex align-items-end">
                                         <button type="button" class="btn btn-secondary btn-sm w-100"
-                                            onclick="abrirModalResponsableEditar('encargados', 'edit_cid_encargado')" title="Editar"
-                                            style="height: calc(1.5em + 0.5rem + 2px);">Editar</button>
+                                            onclick="abrirModalResponsableEditar('encargados', 'edit_cid_encargado')"
+                                            title="Editar" style="height: calc(1.5em + 0.5rem + 2px);">Editar</button>
                                     </div>
                                 </div>
                             </div>
@@ -449,7 +452,24 @@
 
                     {{-- Tab 5: Faltas --}}
                     <div class="tab-pane fade" id="tab-faltas" role="tabpanel">
-                        <p class="text-muted p-2">Módulo de faltas e indicadores en desarrollo...</p>
+                        <div class="table-responsive">
+                            <table id="tabla-faltas-alumno" class="table table-sm table-bordered table-hover"
+                                style="font-size: 0.75rem;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Fecha</th>
+                                        <th>Falta Cometida</th>
+                                        <th>Grado/Curso</th>
+                                        <th>Asignatura</th>
+                                        <th class="text-center" width="50">Ver</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-faltas-historial">
+                                    {{-- Se cargará vía AJAX --}}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     {{-- Tab 6: Entrevistas --}}
@@ -460,7 +480,8 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>
+                    Actualizar</button>
             </div>
         </form>
     </div>
@@ -542,7 +563,8 @@
                 </div>
             </div>
             <div class="modal-footer p-1">
-                <button type="submit" class="btn btn-success btn-sm w-100">Finalizar Inscripción e Imprimir</button>
+                <button type="submit" class="btn btn-success btn-sm w-100"><i class="fas fa-user-check me-1"></i>
+                    Finalizar Inscripción e Imprimir</button>
             </div>
         </form>
     </div>
@@ -644,7 +666,8 @@
                 <div class="row g-2">
                     <div class="col-md-8">
                         <label class="form-label mb-0 fw-bold">Nombre Completo</label>
-                        <input type="text" name="nombre" id="res_edit_nombre" class="form-control form-control-sm" required>
+                        <input type="text" name="nombre" id="res_edit_nombre" class="form-control form-control-sm"
+                            required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label mb-0 fw-bold">C.I.D.</label>
@@ -656,7 +679,8 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Teléfono 1</label>
-                        <input type="text" name="telefono1" id="res_edit_tel1" class="form-control form-control-sm" required>
+                        <input type="text" name="telefono1" id="res_edit_tel1" class="form-control form-control-sm"
+                            required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Teléfono 2</label>
@@ -664,7 +688,8 @@
                     </div>
                     <div class="col-md-12">
                         <label class="form-label mb-0 fw-bold">Dirección</label>
-                        <input type="text" name="direccion" id="res_edit_direccion" class="form-control form-control-sm" required>
+                        <input type="text" name="direccion" id="res_edit_direccion" class="form-control form-control-sm"
+                            required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label mb-0 fw-bold">Barrio</label>
@@ -680,11 +705,13 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label mb-0 fw-bold">Profesión</label>
-                        <input type="text" name="profesion" id="res_edit_profesion" class="form-control form-control-sm">
+                        <input type="text" name="profesion" id="res_edit_profesion"
+                            class="form-control form-control-sm">
                     </div>
                     <div class="col-md-8">
                         <label class="form-label mb-0 fw-bold">Lugar de Trabajo</label>
-                        <input type="text" name="lugartrabajo" id="res_edit_trabajo" class="form-control form-control-sm">
+                        <input type="text" name="lugartrabajo" id="res_edit_trabajo"
+                            class="form-control form-control-sm">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">RUC</label>
@@ -692,13 +719,15 @@
                     </div>
                     <div class="col-md-1">
                         <label class="form-label mb-0 fw-bold">DV</label>
-                        <input type="text" name="dv" id="res_edit_dv" maxlength="1" class="form-control form-control-sm">
+                        <input type="text" name="dv" id="res_edit_dv" maxlength="1"
+                            class="form-control form-control-sm">
                     </div>
                 </div>
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>
+                    Actualizar</button>
             </div>
         </form>
     </div>
