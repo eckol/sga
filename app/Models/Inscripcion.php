@@ -20,7 +20,10 @@ class Inscripcion extends Model
         'monto_matricula',
         'monto_anualidad',
         'aut_mochila',
-        'aut_foto'
+        'aut_foto',
+        'estado',
+        'fecha_baja',
+        'observaciones'
     ];
 
     public function alumno()

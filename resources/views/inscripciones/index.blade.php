@@ -83,6 +83,27 @@
         input:checked+.slider:before {
             transform: translateX(16px);
         }
+
+        /* Colores para los estados */
+        .bg-matriculado {
+            background-color: #d4edda !important;
+            color: #0f5132 !important;
+        }
+
+        .bg-egresado {
+            background-color: #ecd1f1ff !important;
+            color: #8f0482ff !important;
+        }
+
+        .bg-trasladado {
+            background-color: #fff3cd !important;
+            color: #664d03 !important;
+        }
+
+        .bg-abandono {
+            background-color: #f8d7da !important;
+            color: #842029 !important;
+        }
     </style>
 
     <x-slot name="header">
@@ -102,10 +123,11 @@
                     <th>Año</th>
                     <th width="70">C.I. Alumno</th>
                     <th>Alumno</th>
-                    <th>Grado/Curso</th>
+                    <th width="100">Grado/Curso</th>
                     <th>Firmante</th>
                     <th>Rol</th>
-                    <th width="100" class="text-center">Acciones</th>
+                    <th>Estado</th>
+                    <th width="90" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -119,6 +141,14 @@
                         <td>{{ $ins->grado->gradocurso ?? '' }}</td>
                         <td>{{ $ins->firmante_nombre }}</td>
                         <td>{{ $ins->firmante_rol }}</td>
+                        <td class="text-center fw-bold 
+                                @if($ins->estado == 'Matriculado') bg-matriculado 
+                                @elseif($ins->estado == 'Egresado') bg-egresado 
+                                @elseif($ins->estado == 'Trasladado') bg-trasladado 
+                                @elseif($ins->estado == 'Abandono') bg-abandono 
+                                @endif" style="font-size: 0.75rem;">
+                            {{ $ins->estado }}
+                        </td>
                         <td class="text-center">
                             <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $ins->id }}" data-json='{{ json_encode($ins) }}'>
@@ -185,7 +215,6 @@
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditarIns'));
                     myModal.show();
                 });
-
             } else {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
             }

@@ -55,9 +55,6 @@ class InscripcionController extends Controller
 
         Inscripcion::create($data);
 
-        // Actualizamos estado del alumno
-        $alumno->update(['matriculado' => 'Sí']);
-
         return back()->with('success', 'Inscripción registrada');
     }
 
@@ -75,9 +72,9 @@ class InscripcionController extends Controller
         $inscripcion->delete();
 
         // Verificar si existen otras inscripciones activas
-        $otras = Inscripcion::where('alumno_cid', $alumno_cid)->count();
+        $otras = Inscripcion::where('alumno_cid', $alumno_cid)->where('estado', 'Matriculado')->count();
         if ($otras == 0) {
-            Alumno::where('cid', $alumno_cid)->update(['matriculado' => 'No']);
+            // No need to update matriculado, it has been removed from the alumnos table.
         }
 
         return back()->with('success', 'Inscripción eliminada correctamente.');

@@ -133,7 +133,6 @@
                         <th>Sexo</th>
                         <th>Teléfono</th>
                         <th class="text-center">Activo</th>
-                        <th class="text-center">Matriculado</th>
                         <th width="80" class="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -151,17 +150,10 @@
                                     <span class="slider"></span>
                                 </label>
                             </td>
-                            <td class="text-center align-middle">
-                                <label class="toggle mb-0" style="margin-top:0;">
-                                    <input type="checkbox" class="toggle-estado" data-id="{{ $al->id }}"
-                                        data-campo="matriculado" {{ $al->matriculado == 'Sí' ? 'checked' : '' }}>
-                                    <span class="slider"></span>
-                                </label>
-                            </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                                <button type="button" class="btn btn-success btn-xs py-0 px-1 btn-editar"
                                     style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
-                                    Ver
+                                    Editar
                                 </button>
                             </td>
                         </tr>

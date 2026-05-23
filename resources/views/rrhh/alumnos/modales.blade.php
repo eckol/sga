@@ -107,14 +107,6 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
-                        <label class="form-label mb-1 fw-bold text-center">Matriculado</label>
-                        <label class="toggle">
-                            <input type="hidden" name="matriculado" value="No">
-                            <input type="checkbox" name="matriculado" id="crear_matriculado" value="Sí">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
                     <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Vive Con</label>
                         <select name="vivecon_id" class="form-select form-select-sm" required>
@@ -133,17 +125,32 @@
                         <input type="text" name="observaciones" class="form-control form-control-sm">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Cédula Madre</label>
-                        <input type="number" name="cid_madre" class="form-control form-control-sm">
+                        <input type="number" name="cid_madre" id="crear_cid_madre" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-sm w-100"
+                            onclick="verResponsable('madres', 'crear_cid_madre')" title="Ver">Ver</button>
+                    </div>
+
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Cédula Padre</label>
-                        <input type="number" name="cid_padre" class="form-control form-control-sm">
+                        <input type="number" name="cid_padre" id="crear_cid_padre" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-sm w-100"
+                            onclick="verResponsable('padres', 'crear_cid_padre')" title="Ver">Ver</button>
+                    </div>
+
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Cédula Encargado</label>
-                        <input type="number" name="cid_encargado" class="form-control form-control-sm">
+                        <input type="number" name="cid_encargado" id="crear_cid_encargado"
+                            class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-sm w-100"
+                            onclick="verResponsable('encargados', 'crear_cid_encargado')" title="Ver">Ver</button>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Parentesco</label>
@@ -280,14 +287,6 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
-                        <label class="form-label mb-1 fw-bold text-center">Matriculado</label>
-                        <label class="toggle">
-                            <input type="hidden" name="matriculado" value="No">
-                            <input type="checkbox" name="matriculado" id="edit_matriculado" value="Sí">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
                     <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Vive Con</label>
                         <select name="vivecon_id" id="edit_vivecon_id" class="form-select form-select-sm" required>
@@ -301,24 +300,38 @@
                         <input type="text" name="salud" id="edit_salud" class="form-control form-control-sm">
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-7">
                         <label class="form-label mb-0 fw-bold">Observaciones</label>
                         <input type="text" name="observaciones" id="edit_observaciones"
                             class="form-control form-control-sm">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Cédula Madre</label>
                         <input type="number" name="cid_madre" id="edit_cid_madre" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-sm w-100"
+                            onclick="verResponsable('madres', 'edit_cid_madre')" title="Ver">Ver</button>
+                    </div>
+
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Cédula Padre</label>
                         <input type="number" name="cid_padre" id="edit_cid_padre" class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-sm w-100"
+                            onclick="verResponsable('padres', 'edit_cid_padre')" title="Ver">Ver</button>
+                    </div>
+
+                    <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Cédula Encargado</label>
                         <input type="number" name="cid_encargado" id="edit_cid_encargado"
                             class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary btn-sm w-100"
+                            onclick="verResponsable('encargados', 'edit_cid_encargado')" title="Ver">Ver</button>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Parentesco</label>
@@ -394,6 +407,24 @@
                             <label class="form-check-label" for="foto">Autoriza uso de imagen</label>
                         </div>
                     </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-label mb-0 fw-bold">Estado</label>
+                        <select name="estado" class="form-select form-select-sm">
+                            <option value="Matriculado" selected>Matriculado</option>
+                            <option value="Egresado">Egresado</option>
+                            <option value="Trasladado">Trasladado</option>
+                            <option value="Abandono">Abandono</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-label mb-0 fw-bold">Fecha Baja</label>
+                        <input type="date" name="fecha_baja" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <label class="form-label mb-0 fw-bold">Observaciones</label>
+                        <input type="text" name="observaciones" class="form-control form-control-sm"
+                            placeholder="Opcional...">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer p-1">
@@ -437,4 +468,110 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function verResponsable(tipo, inputId) {
+        const cid = document.getElementById(inputId).value;
+        if (!cid) {
+            Swal.fire('Atención', 'Debe ingresar un número de cédula.', 'warning');
+            return;
+        }
+
+        // Mostrar cargando
+        Swal.fire({
+            title: 'Buscando...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        fetch(`/rrhh/responsables/${tipo}/buscar/${cid}`)
+            .then(response => response.json())
+            .then(res => {
+                Swal.close();
+                if (res.success) {
+                    const d = res.data;
+                    $('#res_ver_titulo').text('Datos de ' + tipo.slice(0, -1));
+                    $('#res_ver_nombre').val(d.nombre);
+                    $('#res_ver_cid').val(d.cid);
+                    $('#res_ver_email').val(d.email);
+                    $('#res_ver_tel1').val(d.telefono1);
+                    $('#res_ver_tel2').val(d.telefono2);
+                    $('#res_ver_direccion').val(d.direccion);
+                    $('#res_ver_barrio').val(d.barrio);
+                    $('#res_ver_profesion').val(d.profesion);
+                    $('#res_ver_trabajo').val(d.lugartrabajo);
+                    $('#res_ver_ruc').val(d.ruc + (d.dv ? '-' + d.dv : ''));
+
+                    var myModal = new bootstrap.Modal(document.getElementById('modalResponsableVer'));
+                    myModal.show();
+                } else {
+                    Swal.fire('No encontrado', 'No existe un registro con esa cédula en la tabla de ' + tipo, 'error');
+                }
+            })
+            .catch(error => {
+                Swal.close();
+                console.error(error);
+                Swal.fire('Error', 'Hubo un problema al buscar los datos.', 'error');
+            });
+    }
 </script>
+
+{{-- Modal para Visualizar Datos del Responsable --}}
+<div class="modal fade" id="modalResponsableVer" tabindex="-1" style="z-index: 1060;">
+    <div class="modal-dialog modal-lg shadow-lg">
+        <div class="modal-content">
+            <div class="modal-header p-2 bg-danger text-white">
+                <h6 class="modal-title" id="res_ver_titulo">Datos del Responsable</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-3" style="font-size: 0.8rem;">
+                <div class="row g-2">
+                    <div class="col-md-8">
+                        <label class="form-label mb-0 fw-bold">Nombre Completo</label>
+                        <input type="text" id="res_ver_nombre" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">C.I.D.</label>
+                        <input type="text" id="res_ver_cid" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Email</label>
+                        <input type="text" id="res_ver_email" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">Teléfono 1</label>
+                        <input type="text" id="res_ver_tel1" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">Teléfono 2</label>
+                        <input type="text" id="res_ver_tel2" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label mb-0 fw-bold">Dirección</label>
+                        <input type="text" id="res_ver_direccion" class="form-control form-control-sm bg-light"
+                            readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Barrio</label>
+                        <input type="text" id="res_ver_barrio" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Profesión</label>
+                        <input type="text" id="res_ver_profesion" class="form-control form-control-sm bg-light"
+                            readonly>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label mb-0 fw-bold">Lugar de Trabajo</label>
+                        <input type="text" id="res_ver_trabajo" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">RUC</label>
+                        <input type="text" id="res_ver_ruc" class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer p-1">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

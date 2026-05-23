@@ -70,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('responsables/{tipo}/{id}', [ResponsableController::class, 'destroy'])
             ->name('responsables.destroy');
 
+        Route::get('responsables/{tipo}/buscar/{cid}', [ResponsableController::class, 'getByCid'])
+            ->name('responsables.buscar');
+
         Route::get('alumnos', [AlumnoController::class, 'index'])->name('alumnos.index');
         Route::post('alumnos', [AlumnoController::class, 'store'])->name('alumnos.store');
         Route::put('alumnos/{id}', [AlumnoController::class, 'update'])->name('alumnos.update');

@@ -23,7 +23,6 @@ class Alumno extends Model
         'email',
         'passwd',
         'activo',
-        'matriculado',
         'vivecon_id',
         'salud',
         'foto',

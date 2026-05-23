@@ -19,10 +19,11 @@ class AlumnoGradoController extends Controller
             $selectedGrado = \App\Models\GradoCurso::find($selectedGradoId);
             $anio_actual = date('Y');
 
-            // Get inscripciones for the selected grado and current year
+            // Get inscripciones for the selected grado, current year, and estado = Matriculado
             $inscripciones = \App\Models\Inscripcion::with(['alumno', 'alumno.nacionalidad'])
                 ->where('grado_curso_id', $selectedGradoId)
                 ->where('anio_lectivo', $anio_actual)
+                ->where('estado', 'Matriculado')
                 ->get();
 
             $alumnos = $inscripciones->map(function ($inscripcion) {
@@ -59,9 +60,6 @@ class AlumnoGradoController extends Controller
         $alumno = \App\Models\Alumno::findOrFail($id);
         if ($request->has('activo')) {
             $alumno->activo = $request->input('activo') == 'true' ? 'Sí' : 'No';
-        }
-        if ($request->has('matriculado')) {
-            $alumno->matriculado = $request->input('matriculado') == 'true' ? 'Sí' : 'No';
         }
         $alumno->save();
         return response()->json(['success' => true]);

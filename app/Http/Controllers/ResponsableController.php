@@ -155,4 +155,22 @@ class ResponsableController extends Controller
             return redirect()->back()->with('error', 'No se puede eliminar: ' . $e->getMessage());
         }
     }
+
+    public function getByCid($tipo, $cid)
+    {
+        $modelo = $this->getModel($tipo);
+        $registro = $modelo::where('cid', $cid)->first();
+
+        if ($registro) {
+            return response()->json([
+                'success' => true,
+                'data' => $registro
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'No se encontró el registro.'
+        ], 404);
+    }
 }

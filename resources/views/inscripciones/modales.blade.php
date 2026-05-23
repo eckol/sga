@@ -94,6 +94,25 @@
                         </label>
                     </div>
 
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">Estado</label>
+                        <select name="estado" id="edit_estado" class="form-select form-select-sm" required>
+                            <option value="Matriculado">MATRICULADO</option>
+                            <option value="Egresado">EGRESADO</option>
+                            <option value="Trasladado">TRASLADADO</option>
+                            <option value="Abandono">ABANDONO</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">Fecha Baja</label>
+                        <input type="date" name="fecha_baja" id="edit_fecha_baja" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Observaciones</label>
+                        <input type="text" name="observaciones" id="edit_observaciones"
+                            class="form-control form-control-sm">
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer p-1">
