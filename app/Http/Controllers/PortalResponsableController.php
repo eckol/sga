@@ -29,7 +29,7 @@ class PortalResponsableController extends Controller
             ->with([
                 'inscripciones' => function ($query) {
                     // Filtramos la inscripción activa del año corriente
-                    $query->where('anio_lectivo', date('Y'))->with('gradoCurso');
+                    $query->where('anio_lectivo', date('Y'))->with('grado');
                 }
             ])
             ->get();

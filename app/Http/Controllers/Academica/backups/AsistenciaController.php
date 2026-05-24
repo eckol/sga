@@ -145,23 +145,17 @@ class AsistenciaController extends Controller
         $mes = (int) $request->input('mes', date('n'));
         $anio = (int) $request->input('anio', date('Y'));
 
-        $alumno = \App\Models\Alumno::with(['madre', 'padre', 'encargado'])
-            ->findOrFail($alumnoId);
-
-        $inscripcion = Inscripcion::where('alumno_cid', $alumno->cid)
+        // Buscamos la inscripción del alumno para el año solicitado
+        $inscripcion = Inscripcion::where(
+            'alumno_cid',
+            \App\Models\Alumno::findOrFail($alumnoId)->cid
+        )
             ->where('anio_lectivo', $anio)
             ->where('estado', 'Matriculado')
             ->first();
 
         if (!$inscripcion) {
-            return response()->json([
-                'alumno' => $alumno,
-                'asistencias' => [],
-                'resumen_anio' => [],
-                'dias_mes' => Carbon::create($anio, $mes)->daysInMonth,
-                'findes' => [],
-                'feriados' => [],
-            ]);
+            return response()->json(['asistencias' => [], 'resumen' => []]);
         }
 
         $asistencias = Asistencia::where('inscripcion_id', $inscripcion->id)
@@ -176,30 +170,17 @@ class AsistenciaController extends Controller
                 'observacion' => $a->observacion,
             ]);
 
-        // Resumen anual
+        // Resumen del año completo (para la vista de calendario anual)
         $resumenAnio = Asistencia::where('inscripcion_id', $inscripcion->id)
             ->whereYear('fecha', $anio)
             ->selectRaw('MONTH(fecha) as mes, estado, COUNT(*) as total')
             ->groupBy('mes', 'estado')
             ->get();
 
-        // Días del mes y fines de semana (los espera el modal del portal)
-        $diasMes = Carbon::create($anio, $mes)->daysInMonth;
-        $findes = [];
-        for ($d = 1; $d <= $diasMes; $d++) {
-            $diaSem = Carbon::create($anio, $mes, $d)->dayOfWeek;
-            if ($diaSem === 0 || $diaSem === 6)
-                $findes[] = $d;
-        }
-
         return response()->json([
-            'alumno' => $alumno,   // <-- madre, padre, encargado incluidos
             'inscripcion_id' => $inscripcion->id,
             'asistencias' => $asistencias,
             'resumen_anio' => $resumenAnio,
-            'dias_mes' => $diasMes,
-            'findes' => $findes,
-            'feriados' => $this->feriadosParaguay($anio),
         ]);
     }
 

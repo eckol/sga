@@ -28,11 +28,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Redirigir responsables directamente a su portal
-        if (auth()->user()->role_id === 6) {
-            return redirect()->route('portal_responsables.index');
-        }
-
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
