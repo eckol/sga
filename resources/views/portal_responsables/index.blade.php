@@ -110,7 +110,7 @@
     </div>
 
     <div class="modal fade" id="modalAlumnoAsist" tabindex="-1" style="z-index: 1060;">
-        <div class="modal-dialog modal-xl" style="max-width: 75vw;">
+        <div class="modal-dialog modal-xl" style="max-width: 95vw;">
             <div class="modal-content">
 
                 <div class="modal-header p-2 bg-primary text-white">
@@ -135,6 +135,18 @@
                             </button>
                         </li>
                         <li class="nav-item">
+                            <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-responsables"
+                                type="button">
+                                <i class="fas fa-people-group me-1"></i>Responsables
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-inscripciones"
+                                type="button">
+                                <i class="fas fa-file-alt me-1"></i>Inscripciones
+                            </button>
+                        </li>
+                        <li class="nav-item">
                             <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-asistencia"
                                 type="button">
                                 <i class="fas fa-calendar-check me-1"></i>Asistencia
@@ -146,56 +158,233 @@
                                 <i class="fas fa-chart-bar me-1"></i>Resumen anual
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-faltas"
+                                type="button">
+                                <i class="fas fa-triangle-exclamation me-1"></i>Faltas
+                            </button>
+                        </li>
                     </ul>
 
                     <div class="tab-content pt-2">
 
-                        {{-- Tab 1: Datos básicos --}}
+                        {{-- Tab 1: Datos Personales --}}
                         <div class="tab-pane fade show active" id="masist-tab-datos">
-                            <div class="row g-2 align-items-center">
-                                <div class="col-md-3 text-center">
+                            <div class="row g-2 align-items-start">
+                                <div class="col-md-2 text-center">
                                     <img id="masist-foto" src="" alt="Foto" class="rounded-circle shadow"
                                         style="width:90px;height:90px;object-fit:cover;">
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <div class="row g-1">
-                                        <div class="col-md-6">
-                                            <label class="form-label mb-0 fw-bold"
-                                                style="font-size:0.72rem">Apellidos</label>
+                                        <div class="col-md-5">
+                                            <label class="form-label mb-0 fw-bold">Apellidos</label>
                                             <input type="text" id="mdatos-apellidos"
                                                 class="form-control form-control-sm bg-light" readonly>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label mb-0 fw-bold" style="font-size:0.72rem">Nombres</label>
+                                        <div class="col-md-5">
+                                            <label class="form-label mb-0 fw-bold">Nombres</label>
                                             <input type="text" id="mdatos-nombres"
                                                 class="form-control form-control-sm bg-light" readonly>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label mb-0 fw-bold" style="font-size:0.72rem">Cédula</label>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Cédula</label>
                                             <input type="text" id="mdatos-cid" class="form-control form-control-sm bg-light"
                                                 readonly>
                                         </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Fecha Nac.</label>
+                                            <input type="text" id="mdatos-fnac"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Sexo</label>
+                                            <input type="text" id="mdatos-sexo"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Nacionalidad</label>
+                                            <input type="text" id="mdatos-nacionalidad"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 fw-bold">Teléfono</label>
+                                            <input type="text" id="mdatos-telefono"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 fw-bold">Email</label>
+                                            <input type="text" id="mdatos-email"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label mb-0 fw-bold">Dirección</label>
+                                            <input type="text" id="mdatos-direccion"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label mb-0 fw-bold">Barrio</label>
+                                            <input type="text" id="mdatos-barrio"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Ciudad</label>
+                                            <input type="text" id="mdatos-ciudad"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Vive Con</label>
+                                            <input type="text" id="mdatos-vivecon"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label mb-0 fw-bold">Salud</label>
+                                            <input type="text" id="mdatos-salud"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label mb-0 fw-bold">Observaciones</label>
+                                            <input type="text" id="mdatos-observaciones"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 mt-1">
-                                    <label class="form-label mb-0 fw-bold" style="font-size:0.72rem">Madre / Tutora</label>
-                                    <input type="text" id="mdatos-madre" class="form-control form-control-sm bg-light"
-                                        readonly>
-                                </div>
-                                <div class="col-md-6 mt-1">
-                                    <label class="form-label mb-0 fw-bold" style="font-size:0.72rem">Padre / Tutor</label>
-                                    <input type="text" id="mdatos-padre" class="form-control form-control-sm bg-light"
-                                        readonly>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label mb-0 fw-bold" style="font-size:0.72rem">Encargado</label>
-                                    <input type="text" id="mdatos-encargado" class="form-control form-control-sm bg-light"
-                                        readonly>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- Tab 2: Asistencia mensual --}}
+                        {{-- Tab 2: Responsables --}}
+                        <div class="tab-pane fade" id="masist-tab-responsables">
+                            <div class="row g-2">
+                                {{-- Madre --}}
+                                <div class="col-md-12">
+                                    <h6 class="text-primary fw-bold border-bottom pb-1" style="font-size:0.78rem;">
+                                        <i class="fas fa-female me-1"></i>Madre / Tutora
+                                    </h6>
+                                    <div class="row g-1">
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Nombre</label>
+                                            <input type="text" id="mdatos-madre-nombre"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Cédula</label>
+                                            <input type="text" id="mdatos-madre-cid"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Teléfono</label>
+                                            <input type="text" id="mdatos-madre-tel"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Email</label>
+                                            <input type="text" id="mdatos-madre-email"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Profesión</label>
+                                            <input type="text" id="mdatos-madre-profesion"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Lugar de Trabajo</label>
+                                            <input type="text" id="mdatos-madre-trabajo"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Padre --}}
+                                <div class="col-md-12 mt-2">
+                                    <h6 class="text-primary fw-bold border-bottom pb-1" style="font-size:0.78rem;">
+                                        <i class="fas fa-male me-1"></i>Padre / Tutor
+                                    </h6>
+                                    <div class="row g-1">
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Nombre</label>
+                                            <input type="text" id="mdatos-padre-nombre"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Cédula</label>
+                                            <input type="text" id="mdatos-padre-cid"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Teléfono</label>
+                                            <input type="text" id="mdatos-padre-tel"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Email</label>
+                                            <input type="text" id="mdatos-padre-email"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Profesión</label>
+                                            <input type="text" id="mdatos-padre-profesion"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Lugar de Trabajo</label>
+                                            <input type="text" id="mdatos-padre-trabajo"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Encargado --}}
+                                <div class="col-md-12 mt-2">
+                                    <h6 class="text-primary fw-bold border-bottom pb-1" style="font-size:0.78rem;">
+                                        <i class="fas fa-person me-1"></i>Encargado
+                                    </h6>
+                                    <div class="row g-1">
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Nombre</label>
+                                            <input type="text" id="mdatos-encargado-nombre"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Cédula</label>
+                                            <input type="text" id="mdatos-encargado-cid"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label mb-0 fw-bold">Teléfono</label>
+                                            <input type="text" id="mdatos-encargado-tel"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label mb-0 fw-bold">Email</label>
+                                            <input type="text" id="mdatos-encargado-email"
+                                                class="form-control form-control-sm bg-light" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Tab 3: Inscripciones --}}
+                        <div class="tab-pane fade" id="masist-tab-inscripciones">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover" style="font-size:0.75rem;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Año</th>
+                                            <th>Fecha</th>
+                                            <th>Grado/Curso</th>
+                                            <th>Firmante</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="masist-inscripciones-body">
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted">Cargando...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {{-- Tab 4: Asistencia mensual --}}
                         <div class="tab-pane fade" id="masist-tab-asistencia">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <button id="masist-btn-prev" type="button"
@@ -223,10 +412,31 @@
                             </div>
                         </div>
 
-                        {{-- Tab 3: Resumen anual --}}
+                        {{-- Tab 5: Resumen anual --}}
                         <div class="tab-pane fade" id="masist-tab-resumen">
                             <div id="masist-resumen">
                                 <p class="text-muted text-center py-2">Cargando...</p>
+                            </div>
+                        </div>
+
+                        {{-- Tab 6: Faltas --}}
+                        <div class="tab-pane fade" id="masist-tab-faltas">
+                            <div class="table-responsive mt-1">
+                                <table class="table table-sm table-bordered table-hover" style="font-size:0.75rem;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Indicador</th>
+                                            <th>Asignatura</th>
+                                            <th>Docente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="masist-faltas-body">
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted">Cargando...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
@@ -326,36 +536,94 @@
                     method: 'GET',
                     data: { mes: mes, anio: anio },
                     success: function (res) {
-                        // 1. Pestaña Datos Básicos
+                        // ── Tab Datos Personales ──
                         if (res.alumno) {
-                            $('#mdatos-apellidos').val(res.alumno.apellidos || '—');
-                            $('#mdatos-nombres').val(res.alumno.nombres || '—');
-                            $('#mdatos-cid').val(res.alumno.cid ? parseInt(res.alumno.cid).toLocaleString('es-PY') : '—');
-                            if (res.alumno.madre) $('#mdatos-madre').val(`${res.alumno.madre.nombre} (Tel: ${res.alumno.madre.telefono1 || '—'})`);
-                            if (res.alumno.padre) $('#mdatos-padre').val(`${res.alumno.padre.nombre} (Tel: ${res.alumno.padre.telefono1 || '—'})`);
-                            if (res.alumno.encargado) $('#mdatos-encargado').val(`${res.alumno.encargado.nombre} (Tel: ${res.alumno.encargado.telefono1 || '—'})`);
+                            const a = res.alumno;
+                            $('#mdatos-apellidos').val(a.apellidos || '—');
+                            $('#mdatos-nombres').val(a.nombres || '—');
+                            $('#mdatos-cid').val(a.cid ? parseInt(a.cid).toLocaleString('es-PY') : '—');
+                            $('#mdatos-fnac').val(a.fnac || '—');
+                            $('#mdatos-sexo').val(a.sexo?.sexo || '—');
+                            $('#mdatos-nacionalidad').val(a.nacionalidad?.nacionalidad || '—');
+                            $('#mdatos-telefono').val(a.telefono || '—');
+                            $('#mdatos-email').val(a.email || '—');
+                            $('#mdatos-direccion').val(a.direccion || '—');
+                            $('#mdatos-barrio').val(a.barrio || '—');
+                            $('#mdatos-ciudad').val(a.ciudad?.ciudad || '—');
+                            $('#mdatos-vivecon').val(a.vivecon?.vive_con || a.vivecon?.vivecon || '—');
+                            $('#mdatos-salud').val(a.salud || '—');
+                            $('#mdatos-observaciones').val(a.observaciones || '—');
 
-                            if (res.alumno.foto) {
-                                $('#masist-foto').attr('src', `{{ asset('img/alumnos') }}/${res.alumno.foto}`);
+                            if (a.foto) {
+                                $('#masist-foto').attr('src', `{{ asset('img/alumnos') }}/${a.foto}`);
                             } else {
-                                $('#masist-foto').attr('src', `{{ asset('images/no-avatar.png') }}`);
+                                $('#masist-foto').attr('src', `{{ asset('img/alumnos/alumno.jpg') }}`);
+                            }
+
+                            // ── Tab Responsables ──
+                            if (a.madre) {
+                                $('#mdatos-madre-nombre').val(a.madre.nombre || '—');
+                                $('#mdatos-madre-cid').val(a.madre.cid || '—');
+                                $('#mdatos-madre-tel').val(a.madre.telefono1 || '—');
+                                $('#mdatos-madre-email').val(a.madre.email || '—');
+                                $('#mdatos-madre-profesion').val(a.madre.profesion || '—');
+                                $('#mdatos-madre-trabajo').val(a.madre.lugartrabajo || '—');
+                            }
+                            if (a.padre) {
+                                $('#mdatos-padre-nombre').val(a.padre.nombre || '—');
+                                $('#mdatos-padre-cid').val(a.padre.cid || '—');
+                                $('#mdatos-padre-tel').val(a.padre.telefono1 || '—');
+                                $('#mdatos-padre-email').val(a.padre.email || '—');
+                                $('#mdatos-padre-profesion').val(a.padre.profesion || '—');
+                                $('#mdatos-padre-trabajo').val(a.padre.lugartrabajo || '—');
+                            }
+                            if (a.encargado) {
+                                $('#mdatos-encargado-nombre').val(a.encargado.nombre || '—');
+                                $('#mdatos-encargado-cid').val(a.encargado.cid || '—');
+                                $('#mdatos-encargado-tel').val(a.encargado.telefono1 || '—');
+                                $('#mdatos-encargado-email').val(a.encargado.email || '—');
+                            }
+
+                            // ── Tab Faltas ──
+                            if (a.faltas && a.faltas.length > 0) {
+                                let htmlFaltas = '';
+                                a.faltas.forEach(f => {
+                                    htmlFaltas += `<tr>
+                                        <td>${f.fecha ? f.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                        <td>${f.indicador_falta?.indicador_falta || '—'}</td>
+                                        <td>${f.asignatura?.asignatura || '—'}</td>
+                                        <td>${f.docente || '—'}</td>
+                                    </tr>`;
+                                });
+                                $('#masist-faltas-body').html(htmlFaltas);
+                            } else {
+                                $('#masist-faltas-body').html('<tr><td colspan="4" class="text-center text-muted">Sin faltas registradas.</td></tr>');
                             }
                         }
 
-                        // 2. Pestaña Asistencia — 10 calendarios mensuales (Feb–Nov) en cuadrícula
+                        // ── Tab Inscripciones ──
+                        if (res.inscripciones && res.inscripciones.length > 0) {
+                            let htmlIns = '';
+                            res.inscripciones.forEach(i => {
+                                htmlIns += `<tr>
+                                    <td>${i.anio_lectivo}</td>
+                                    <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                    <td>${i.grado?.gradocurso || '—'}</td>
+                                    <td>${i.firmante_nombre || '—'}</td>
+                                    <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
+                                        style="font-size:0.65rem;">${i.estado || '—'}</span></td>
+                                </tr>`;
+                            });
+                            $('#masist-inscripciones-body').html(htmlIns);
+                        } else {
+                            $('#masist-inscripciones-body').html('<tr><td colspan="4" class="text-center text-muted">Sin inscripciones.</td></tr>');
+                        }
+
+                        // ── Tab Asistencia — 10 calendarios ──
                         const NOMBRES_MES = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
                         const DIAS_H = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
 
-                        // Convertir array de asistencias a mapa { "YYYY-MM-DD": estado }
-                        const mapaAsist = {};
-                        (res.asistencias || []).forEach(a => {
-                            // a.dia es número, reconstruimos la fecha con el mes/anio actuales
-                            const fechaKey = `${anio}-${String(mes).padStart(2, '0')}-${String(a.dia).padStart(2, '0')}`;
-                            mapaAsist[fechaKey] = a.estado;
-                        });
-
-                        // Pedir los demás meses en paralelo (todos excepto el actual)
                         const mesesTodos = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
                         const promesas = mesesTodos.map(m =>
                             $.get(`${URL_POR_ALUMNO}/${alumnoId}/por-alumno`, { mes: m, anio: anio })
@@ -372,7 +640,7 @@
                                 return { mes: m, asistencias: obj?.asistencias || [], feriados: obj?.feriados || [] };
                             });
 
-                            let htmlWrap = '<div style="display:flex;flex-wrap:wrap;gap:10px;padding:4px;">';
+                            let htmlWrap = '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:4px;">';
 
                             data.forEach(function (item) {
                                 const m = item.mes;
@@ -385,12 +653,12 @@
 
                                 let cp = 0, ca = 0, cj = 0, ct = 0;
 
-                                htmlWrap += `<div style="border:1px solid #dee2e6;border-radius:8px;padding:6px;min-width:180px;flex:1 1 180px;">`;
-                                htmlWrap += `<div style="font-size:0.7rem;font-weight:bold;text-align:center;margin-bottom:4px;color:#495057;">${NOMBRES_MES[m]}</div>`;
-                                htmlWrap += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;font-size:0.6rem;">`;
+                                htmlWrap += `<div style="border:1px solid #dee2e6;border-radius:8px;padding:6px 4px 4px;">`;
+                                htmlWrap += `<div style="font-size:0.65rem;font-weight:700;text-align:center;margin-bottom:4px;color:#495057;text-transform:uppercase;">${NOMBRES_MES[m]}</div>`;
+                                htmlWrap += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;font-size:0.55rem;">`;
 
                                 DIAS_H.forEach(d => {
-                                    htmlWrap += `<div style="text-align:center;color:#6c757d;font-weight:bold;padding:1px;">${d}</div>`;
+                                    htmlWrap += `<div style="text-align:center;color:#adb5bd;font-weight:600;padding-bottom:2px;">${d}</div>`;
                                 });
 
                                 for (let i = 0; i < primerDia; i++) {
@@ -405,35 +673,31 @@
                                     const estado = dMap[d] || '';
 
                                     let bg = '#fff', color = '#212529', fw = 'normal';
-                                    if (esFinde) { bg = '#f8f9fa'; color = '#adb5bd'; }
-                                    else if (esFeriado) { bg = '#fff3cd'; color = '#856404'; }
+                                    if (esFinde) { bg = '#f8f9fa'; color = '#dee2e6'; }
+                                    else if (esFeriado) { bg = '#e9ecef'; color = '#adb5bd'; }
                                     if (estado === 'Presente') { bg = '#198754'; color = '#fff'; fw = 'bold'; cp++; }
                                     else if (estado === 'Ausente') { bg = '#dc3545'; color = '#fff'; fw = 'bold'; ca++; }
                                     else if (estado === 'Justificado') { bg = '#ffc107'; color = '#212529'; fw = 'bold'; cj++; }
                                     else if (estado === 'Tardanza') { bg = '#0dcaf0'; color = '#212529'; fw = 'bold'; ct++; }
 
-                                    htmlWrap += `<div style="text-align:center;padding:2px 1px;border-radius:3px;background:${bg};color:${color};font-weight:${fw};" title="${estado || ''}">${esFinde ? '' : d}</div>`;
+                                    htmlWrap += `<div style="text-align:center;padding:2px 0;border-radius:50%;width:18px;height:18px;line-height:18px;margin:0 auto;background:${bg};color:${color};font-weight:${fw};" title="${estado || ''}">${esFinde ? '' : d}</div>`;
                                 }
 
-                                htmlWrap += `</div>`; // grid
-
-                                // Resumen del mes
-                                htmlWrap += `<div style="display:flex;gap:4px;margin-top:4px;font-size:0.58rem;flex-wrap:wrap;">`;
-                                if (cp) htmlWrap += `<span style="background:#198754;color:#fff;border-radius:4px;padding:1px 4px;">P ${cp}</span>`;
-                                if (ca) htmlWrap += `<span style="background:#dc3545;color:#fff;border-radius:4px;padding:1px 4px;">A ${ca}</span>`;
-                                if (cj) htmlWrap += `<span style="background:#ffc107;color:#212529;border-radius:4px;padding:1px 4px;">J ${cj}</span>`;
-                                if (ct) htmlWrap += `<span style="background:#0dcaf0;color:#212529;border-radius:4px;padding:1px 4px;">T ${ct}</span>`;
-                                if (!cp && !ca && !cj && !ct) htmlWrap += `<span style="color:#adb5bd;">sin datos</span>`;
                                 htmlWrap += `</div>`;
-
-                                htmlWrap += `</div>`; // card mes
+                                htmlWrap += `<div style="display:flex;gap:3px;margin-top:4px;font-size:0.55rem;flex-wrap:wrap;justify-content:center;">`;
+                                if (cp) htmlWrap += `<span style="background:#d1e7dd;color:#0a3622;border-radius:4px;padding:1px 4px;">P ${cp}</span>`;
+                                if (ca) htmlWrap += `<span style="background:#f8d7da;color:#58151c;border-radius:4px;padding:1px 4px;">A ${ca}</span>`;
+                                if (cj) htmlWrap += `<span style="background:#fff3cd;color:#664d03;border-radius:4px;padding:1px 4px;">J ${cj}</span>`;
+                                if (ct) htmlWrap += `<span style="background:#cff4fc;color:#055160;border-radius:4px;padding:1px 4px;">T ${ct}</span>`;
+                                if (!cp && !ca && !cj && !ct) htmlWrap += `<span style="color:#adb5bd;">sin datos</span>`;
+                                htmlWrap += `</div></div>`;
                             });
 
                             htmlWrap += '</div>';
                             $('#masist-calendario').html(htmlWrap);
                         });
 
-                        // 3. Pestaña Resumen Anual
+                        // ── Tab Resumen Anual ──
                         let porMes = {};
                         for (let m = 1; m <= 12; m++) { porMes[m] = { Presente: 0, Ausente: 0, Justificado: 0, Tardanza: 0 }; }
                         if (res.resumen_anio) {
@@ -441,19 +705,18 @@
                                 if (porMes[row.mes]) porMes[row.mes][row.estado] = row.total;
                             });
                         }
-
                         let htmlRes = `<table class="table table-sm table-striped table-hover m-0" style="font-size:0.72rem;">
-                                                    <thead class="table-light">
-                                                        <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
-                                                    </thead><tbody>`;
+                                        <thead class="table-light">
+                                            <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
+                                        </thead><tbody>`;
                         for (let m = 1; m <= 12; m++) {
                             htmlRes += `<tr>
-                                                        <td>${nombreMes(m)}</td>
-                                                        <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
-                                                        <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
-                                                        <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
-                                                        <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
-                                                    </tr>`;
+                                <td>${nombreMes(m)}</td>
+                                <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
+                                <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
+                                <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
+                                <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
+                            </tr>`;
                         }
                         htmlRes += '</tbody></table>';
                         $('#masist-resumen').html(htmlRes);

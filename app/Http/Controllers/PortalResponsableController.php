@@ -27,8 +27,16 @@ class PortalResponsableController extends Controller
                 $q->where('email', $emailUsuario);
             })
             ->with([
+                'madre',
+                'padre',
+                'encargado',
+                'sexo',
+                'nacionalidad',
+                'ciudad',
+                'vivecon',
+                'faltas.indicadorFalta',
+                'faltas.asignatura',
                 'inscripciones' => function ($query) {
-                    // Filtramos la inscripción activa del año corriente
                     $query->where('anio_lectivo', date('Y'))->with('grado');
                 }
             ])

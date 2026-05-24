@@ -145,7 +145,18 @@ class AsistenciaController extends Controller
         $mes = (int) $request->input('mes', date('n'));
         $anio = (int) $request->input('anio', date('Y'));
 
-        $alumno = \App\Models\Alumno::with(['madre', 'padre', 'encargado'])
+        $alumno = \App\Models\Alumno::with([
+            'madre',
+            'padre',
+            'encargado',
+            'sexo',
+            'nacionalidad',
+            'ciudad',
+            'vivecon',
+            'faltas.indicadorFalta',
+            'faltas.asignatura',
+            'inscripciones.grado'
+        ])
             ->findOrFail($alumnoId);
 
         $inscripcion = Inscripcion::where('alumno_cid', $alumno->cid)
@@ -193,7 +204,8 @@ class AsistenciaController extends Controller
         }
 
         return response()->json([
-            'alumno' => $alumno,   // <-- madre, padre, encargado incluidos
+            'alumno' => $alumno,
+            'inscripciones' => $alumno->inscripciones,   // <-- agregar esta línea
             'inscripcion_id' => $inscripcion->id,
             'asistencias' => $asistencias,
             'resumen_anio' => $resumenAnio,
