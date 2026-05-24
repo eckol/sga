@@ -37,7 +37,7 @@
                                 <label class="form-label mb-0 fw-bold">Sexo</label>
                                 <select name="sexo_id" class="form-select form-select-sm" required>
                                     @foreach($sexos as $s)
-                                    <option value="{{ $s->id }}">{{ $s->sexo }}</option>
+                                        <option value="{{ $s->id }}">{{ $s->sexo }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -45,7 +45,7 @@
                                 <label class="form-label mb-0 fw-bold">Nacionalidad</label>
                                 <select name="nacionalidad_id" class="form-select form-select-sm" required>
                                     @foreach($nacionalidades as $n)
-                                    <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
+                                        <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +62,7 @@
                                 <select name="ciudad_id" class="form-select form-select-sm" required>
                                     <option value="">Seleccionar...</option>
                                     @foreach($ciudades as $c)
-                                    <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
+                                        <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -111,7 +111,7 @@
                         <label class="form-label mb-0 fw-bold">Vive Con</label>
                         <select name="vivecon_id" class="form-select form-select-sm" required>
                             @foreach($vivecon as $vc)
-                            <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
+                                <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -160,7 +160,7 @@
                         <select name="parentesco_id" class="form-select form-select-sm">
                             <option value="">Seleccionar...</option>
                             @foreach($parentescos as $p)
-                            <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
+                                <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -219,7 +219,7 @@
                                 class="col-md-3 text-center d-flex flex-column align-items-center justify-content-center">
                                 <img src="{{ asset('img/alumnos/alumno.jpg') }}" alt="Foto" id="preview_foto_editar"
                                     class="rounded-circle shadow mb-2"
-                                    style="width: 125px; height: 125px; object-fit: cover;">
+                                    style="width: 100px; height: 100px; object-fit: cover;">
                                 <input type="file" name="foto" class="form-control form-control-xs mt-1"
                                     accept="image/*" onchange="previewFoto(this, 'preview_foto_editar')"
                                     style="font-size: 0.6rem;">
@@ -251,7 +251,7 @@
                                         <select name="sexo_id" id="edit_sexo_id" class="form-select form-select-sm"
                                             required>
                                             @foreach($sexos as $s)
-                                            <option value="{{ $s->id }}">{{ $s->sexo }}</option>
+                                                <option value="{{ $s->id }}">{{ $s->sexo }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -260,7 +260,7 @@
                                         <select name="nacionalidad_id" id="edit_nacionalidad_id"
                                             class="form-select form-select-sm" required>
                                             @foreach($nacionalidades as $n)
-                                            <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
+                                                <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -280,7 +280,7 @@
                                             required>
                                             <option value="">Seleccionar...</option>
                                             @foreach($ciudades as $c)
-                                            <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
+                                                <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -330,7 +330,7 @@
                                 <select name="vivecon_id" id="edit_vivecon_id" class="form-select form-select-sm"
                                     required>
                                     @foreach($vivecon as $vc)
-                                    <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
+                                        <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -409,7 +409,7 @@
                                             class="form-select form-select-sm">
                                             <option value="">Seleccionar...</option>
                                             @foreach($parentescos as $p)
-                                            <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
+                                                <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -452,7 +452,24 @@
 
                     {{-- Tab 5: Faltas --}}
                     <div class="tab-pane fade" id="tab-faltas" role="tabpanel">
-                        <p class="text-muted p-2">Módulo de faltas e indicadores en desarrollo...</p>
+                        <div class="table-responsive mt-1">
+                            <table id="tabla-faltas-alumno" class="table table-sm table-bordered table-hover"
+                                style="font-size: 0.75rem; width:100%;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 10px;">ID</th>
+                                        <th style="width: 10px;">Fecha</th>
+                                        <th>Indicador</th>
+                                        <th style="width: 10px;">Grado/Curso</th>
+                                        <th style="width: 30%;">Asignatura</th>
+                                        <th class="text-center" style="width:50px;">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- Se cargará vía AJAX --}}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     {{-- Tab 6: Entrevistas --}}
@@ -463,7 +480,8 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>Actualizar
+                    Cambios</button>
             </div>
         </form>
     </div>
@@ -486,7 +504,7 @@
                         <label class="form-label">Año Lectivo</label>
                         <select name="anio_lectivo" class="form-select form-select-sm">
                             @foreach($anios as $a)
-                            <option value="{{ $a }}" {{ $a> date('Y') ? 'selected' : '' }}>{{ $a }}</option>
+                                <option value="{{ $a }}" {{ $a > date('Y') ? 'selected' : '' }}>{{ $a }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -500,7 +518,7 @@
                         <select name="grado_curso_id" id="select_grado_nuevo" class="form-select form-select-sm"
                             required>
                             @foreach($grados as $g)
-                            <option value="{{ $g->id }}">{{ $g->gradocurso }} ({{ $g->turno }})</option>
+                                <option value="{{ $g->id }}">{{ $g->gradocurso }} ({{ $g->turno }})</option>
                             @endforeach
                         </select>
                     </div>
@@ -634,6 +652,83 @@
     }
 </script>
 
+{{-- ════════════════════════════════════════════════ --}}
+{{-- Modal Editar Falta (abierto desde el tab Faltas del modal Alumno) --}}
+{{-- ════════════════════════════════════════════════ --}}
+<div class="modal fade" id="modalEditarFalta" tabindex="-1" style="z-index: 1080;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header p-2 bg-warning">
+                <h6 class="modal-title"><i class="fas fa-edit me-1"></i> Editar Falta</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="formEditarFalta" action="">
+                @csrf
+                @method('PUT')
+                <div class="modal-body" style="font-size: 0.8rem;">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label form-label-sm fw-bold">Fecha <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" name="fecha" id="falta_editar_fecha" class="form-control form-control-sm"
+                                required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label form-label-sm fw-bold">Grado/Curso <span
+                                    class="text-danger">*</span></label>
+                            <select name="grado_curso_id" id="falta_editar_grado" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($grados as $g)
+                                    <option value="{{ $g->id }}">{{ $g->gradocurso }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Alumno <span
+                                    class="text-danger">*</span></label>
+                            <select name="alumno_id" id="falta_editar_alumno" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label form-label-sm fw-bold">Asignatura <span
+                                    class="text-danger">*</span></label>
+                            <select name="asignatura_id" id="falta_editar_asignatura" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="form-label form-label-sm fw-bold">Docente</label>
+                            <input type="text" id="falta_editar_docente" class="form-control form-control-sm" readonly
+                                placeholder="(se completa automáticamente)">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Tipo de Falta <span
+                                    class="text-danger">*</span></label>
+                            <select name="indicador_falta_id" id="falta_editar_indicador"
+                                class="form-select form-select-sm" required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($indicadores as $ind)
+                                    <option value="{{ $ind->id }}">{{ $ind->indicador_falta }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="fas fa-save me-1"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {{-- Modal para Editar Datos del Responsable --}}
 <div class="modal fade" id="modalResponsableEditar" tabindex="-1" style="z-index: 1070;">
     <div class="modal-dialog modal-lg shadow-lg">
@@ -680,7 +775,7 @@
                         <label class="form-label mb-0 fw-bold">Ciudad</label>
                         <select name="ciudad_id" id="res_edit_ciudad_id" class="form-select form-select-sm" required>
                             @foreach($ciudades as $c)
-                            <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
+                                <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
                             @endforeach
                         </select>
                     </div>

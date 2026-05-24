@@ -441,6 +441,145 @@
                     myModal.show();
                 });
 
+                // ── Tab Asistencia: 10 calendarios (Feb–Nov) ────────────────
+                // Se dispara al mostrar el tab de asistencia dentro del modalEditar
+
+                var _asistAlumnoId  = null;
+                var _asistAnio      = parseInt(new Date().getFullYear());
+                var _asistCache     = {}; // cache por "alumnoId|anio"
+
+                // Detectar apertura del tab Asistencia
+                $(document).on('shown.bs.tab', 'button[data-bs-target="#tab-asistencia"]', function () {
+                    if (_asistAlumnoId) {
+                        cargarCalendariosAsistencia(_asistAlumnoId, _asistAnio);
+                    }
+                });
+
+                // Cambio de año en el selector
+                $(document).on('change', '#asist-anio-sel', function () {
+                    _asistAnio = parseInt($(this).val());
+                    _asistCache = {}; // limpiar cache al cambiar año
+                    if (_asistAlumnoId) {
+                        cargarCalendariosAsistencia(_asistAlumnoId, _asistAnio);
+                    }
+                });
+
+                // Guardar el alumno activo cuando se abre el modal
+                $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
+                    _asistAlumnoId = $(this).data('json').id;
+                    _asistCache    = {};
+                });
+
+                function cargarCalendariosAsistencia(alumnoId, anio) {
+                    const cacheKey = `${alumnoId}|${anio}`;
+                    if (_asistCache[cacheKey]) {
+                        renderCalendarios(_asistCache[cacheKey], anio);
+                        return;
+                    }
+
+                    $('#asist-calendarios-wrap').html(
+                        '<div class="spinner-asist"><div class="spinner-border spinner-border-sm me-2" role="status"></div>Cargando asistencia...</div>'
+                    );
+
+                    // Pedir todos los meses en paralelo (Feb=2 a Nov=11)
+                    const meses   = [2,3,4,5,6,7,8,9,10,11];
+                    const promesas = meses.map(m =>
+                        $.get("{{ url('academica/asistencias') }}/" + alumnoId + "/por-alumno", { mes: m, anio: anio })
+                            .then(res => ({ mes: m, asistencias: res.asistencias || [] }))
+                            .catch(()  => ({ mes: m, asistencias: [] }))
+                    );
+
+                    $.when(...promesas).done(function (...resultados) {
+                        // $.when con múltiples Deferreds: cuando hay MÁS de una promesa,
+                        // cada argumento llega como [data, status, xhr].
+                        // Con UNA sola promesa llega el objeto directamente.
+                        // Mapeamos por índice para mantener el orden de `meses`.
+                        const data = meses.map((m, i) => {
+                            const raw = resultados.length === 1 ? resultados[0] : resultados[i];
+                            const obj = Array.isArray(raw) ? raw[0] : raw;
+                            return { mes: m, asistencias: obj?.asistencias || [] };
+                        });
+                        _asistCache[cacheKey] = data;
+                        renderCalendarios(data, anio);
+                    });
+                }
+
+                function renderCalendarios(mesesData, anio) {
+                    const NOMBRES_MES = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                                         'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                    const FERIADOS = [
+                        `${anio}-01-01`,`${anio}-03-01`,`${anio}-05-01`,
+                        `${anio}-05-14`,`${anio}-05-15`,`${anio}-06-12`,
+                        `${anio}-08-15`,`${anio}-09-29`,`${anio}-12-08`,`${anio}-12-25`
+                    ];
+                    const DIAS_H = ['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+
+                    let html = '<div class="cal-asist-wrap">';
+
+                    mesesData.forEach(function(item) {
+                        const mes  = item.mes;
+                        const dMap = {};
+                        (item.asistencias || []).forEach(a => { dMap[parseInt(a.dia)] = a.estado; });
+
+                        const diasEnMes  = new Date(anio, mes, 0).getDate();
+                        const primerDia  = new Date(anio, mes - 1, 1).getDay();
+
+                        // Contadores para el resumen
+                        let cp=0, ca=0, cj=0, ct=0;
+
+                        html += `<div class="cal-asist-card">`;
+                        html += `<div class="cal-asist-title">${NOMBRES_MES[mes]}</div>`;
+                        html += `<div class="cal-asist-grid">`;
+
+                        // Cabecera días semana
+                        DIAS_H.forEach(d => {
+                            html += `<div class="cal-dh">${d}</div>`;
+                        });
+
+                        // Celdas vacías antes del primer día
+                        for (let i = 0; i < primerDia; i++) {
+                            html += `<div class="cal-dc dc-vacio"></div>`;
+                        }
+
+                        for (let d = 1; d <= diasEnMes; d++) {
+                            const diaSem  = new Date(anio, mes - 1, d).getDay();
+                            const esFinde = diaSem === 0 || diaSem === 6;
+                            const fechaStr = `${anio}-${String(mes).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                            const esFer   = FERIADOS.includes(fechaStr);
+                            const estado  = (dMap[d] || '').trim();
+
+                            let cls = '', title = '';
+                            if (esFinde) {
+                                cls = 'dc-finde';
+                            } else if (esFer) {
+                                cls = 'dc-feriado'; title = 'Feriado';
+                            } else if (estado === 'Presente')    { cls = 'dc-presente'; cp++; title = 'Presente'; }
+                              else if (estado === 'Ausente')     { cls = 'dc-ausente';  ca++; title = 'Ausente'; }
+                              else if (estado === 'Justificado') { cls = 'dc-justif';   cj++; title = 'Justificado'; }
+                              else if (estado === 'Tardanza')    { cls = 'dc-tardanza'; ct++; title = 'Tardanza'; }
+
+                            html += `<div class="cal-dc ${cls}" title="${title}">${esFinde ? '' : d}</div>`;
+                        }
+
+                        html += `</div>`; // cal-asist-grid
+
+                        // Resumen del mes
+                        html += `<div class="cal-asist-resumen">`;
+                        if (cp) html += `<span class="cal-res-badge cr-p">P&nbsp;${cp}</span>`;
+                        if (ca) html += `<span class="cal-res-badge cr-a">A&nbsp;${ca}</span>`;
+                        if (cj) html += `<span class="cal-res-badge cr-j">J&nbsp;${cj}</span>`;
+                        if (ct) html += `<span class="cal-res-badge cr-t">T&nbsp;${ct}</span>`;
+                        if (!cp && !ca && !cj && !ct) html += `<span style="color:#adb5bd;font-size:0.58rem">sin datos</span>`;
+                        html += `</div>`;
+
+                        html += `</div>`; // cal-asist-card
+                    });
+
+                    html += '</div>'; // cal-asist-wrap
+                    $('#asist-calendarios-wrap').html(html);
+                }
+                // ── Fin Tab Asistencia ────────────────────────────────────────
+
             } else {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
             }

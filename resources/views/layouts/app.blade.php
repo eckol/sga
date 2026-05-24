@@ -200,7 +200,7 @@
                         docente</a>
                     <a href="{{ route('academica.horarios.index') }}" class="nav-link">Horarios de clase</a>
                     <a href="{{ route('academica.faltas.index') }}" class="nav-link">Faltas</a>
-                    <a href="#" class="nav-link">Asistencia</a>
+                    <a href="{{ route('asistencias.index') }}" class="nav-link">Asistencia</a>
                     <a href="#" class="nav-link">Calificaciones</a>
                 </div>
 
@@ -218,6 +218,13 @@
                 <div class="menu-links" id="menuInscripciones">
                     <a href="{{ route('aranceles.index') }}" class="nav-link">Aranceles</a>
                     <a href="{{ route('inscripciones.index') }}" class="nav-link">Inscripciones</a>
+                </div>
+
+                <button class="menu-header" onclick="toggleMenu(this, 'menuPortalResponsables')">
+                    Portal Responsables <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuPortalResponsables">
+                    <a href="{{ route('portal_responsables.index') }}" class="nav-link">Portal de Responsables</a>
                 </div>
 
                 <button class="menu-header" onclick="toggleMenu(this, 'menuConfiguracion')">

@@ -25,7 +25,8 @@ use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\IndicadoresFaltasController;
 use App\Http\Controllers\AsignaturaColaboradorController;
 use App\Http\Controllers\FaltaController;
-
+use App\Http\Controllers\Academica\AsistenciaController;
+use App\Http\Controllers\PortalResponsableController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -94,6 +95,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('colaboradores/{id}', [ColaboradorController::class, 'update'])->name('colaboradores.update');
         Route::delete('colaboradores/{id}', [ColaboradorController::class, 'destroy'])->name('colaboradores.destroy');
         Route::resource('periodos-laborales', PeriodoLaboralController::class)->except(['create', 'show', 'edit']);
+        // Vista principal del portal (Lista de hijos/tutelados)
+        Route::get('/portal-responsables', [PortalResponsableController::class, 'index'])
+            ->name('portal_responsables.index');
     });
 
     Route::prefix('academica')->group(function () {
@@ -110,6 +114,23 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('faltas/{id}', [FaltaController::class, 'destroy'])->name('academica.faltas.destroy');
         Route::get('faltas/alumnos-por-grado/{grado}', [FaltaController::class, 'alumnosPorGrado'])->name('academica.faltas.alumnos-por-grado');
         Route::get('faltas/asignaturas-por-grado/{grado}', [FaltaController::class, 'asignaturasPorGrado'])->name('academica.faltas.asignaturas-por-grado');
+        // Dentro del grupo Route::prefix('academica')->middleware(['auth'])->group(function () { ... }):
+
+        // Vista principal de la grilla de asistencia por grado
+        Route::get('/asistencias', [AsistenciaController::class, 'index'])->name('asistencias.index');
+
+        // Guardar registro individual (toggle desde la grilla — AJAX)
+        Route::post('/asistencias', [AsistenciaController::class, 'store'])->name('asistencias.store');
+
+        // Guardar el mes completo de un grado (botón "Guardar" — AJAX)
+        Route::post('/asistencias/guardar-grilla', [AsistenciaController::class, 'guardarGrilla'])->name('asistencias.guardarGrilla');
+
+        // Asistencias de un alumno específico por mes/año (tab modal — AJAX)
+        Route::get('/asistencias/{alumno}/por-alumno', [AsistenciaController::class, 'porAlumno'])->name('asistencias.porAlumno');
+
+        // Eliminar un registro puntual
+        Route::delete('/asistencias/{id}', [AsistenciaController::class, 'destroy'])->name('asistencias.destroy');
+
     });
 });
 

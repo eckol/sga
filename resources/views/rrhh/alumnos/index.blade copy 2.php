@@ -117,7 +117,7 @@
                         <td>{{ $al->id }}</td>
                         <td>{{ $al->apellidos }}</td>
                         <td>{{ $al->nombres }}</td>
-                        <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
+                        <td>{{ $al->cid }}</td>
                         <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
                         <td>{{ $al->telefono ?? '-' }}</td>
                         <td class="text-center align-middle">
@@ -206,10 +206,22 @@
                         "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
                 });
 
-                $('#tabla-faltas-alumno').DataTable({
+
+                // Inicializar DataTable de faltas UNA SOLA VEZ (vacía).
+                // Se usará su API (.clear().rows.add().draw()) para repoblarla sin destruirla.
+                var dtFaltas = $('#tabla-faltas-alumno').DataTable({
                     "order": [[1, "desc"]],
                     "pageLength": 5,
                     "lengthMenu": [5, 10, 25],
+                    "autoWidth": false,
+                    "columns": [
+                        { "title": "ID", "width": "10px" },
+                        { "title": "Fecha", "width": "10px" },
+                        { "title": "Indicador", "width": "30%" },
+                        { "title": "Grado/Curso", "width": "10px" },
+                        { "title": "Asignatura", "width": "30%x" },
+                        { "title": "Ver", "orderable": false, "className": "text-center" }
+                    ],
                     "language": {
                         "search": "Buscar:",
                         "lengthMenu": "Mostrar _MENU_",
@@ -224,8 +236,9 @@
                         "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
                 });
 
-                // Listener para abrir modal de edición
-                $(document).on('click', '.btn-editar', function () {
+                // Listener para abrir modal de edición de ALUMNO
+                // Se excluye .btn-editar-falta para evitar colisión de eventos
+                $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
                     var d = $(this).data('json');
                     $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
 
@@ -260,6 +273,9 @@
                     $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
                     $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
 
+                    // Limpiar DataTable de faltas mientras carga
+                    dtFaltas.clear().draw();
+
                     // Cargar detalles vía AJAX
                     $.get("{{ url('academica/alumnos') }}/" + d.id + "/detalles")
                         .done(function (res) {
@@ -287,37 +303,109 @@
                             }
                             $('#table-inscripciones-historial').html(html);
 
-                                
-                            // Historial de Faltas
-                            let htmlFaltas = '';
+                            // Repoblar DataTable de Faltas usando su API (sin destruir/recrear)
+                            dtFaltas.clear();
                             if (res.faltas && res.faltas.length > 0) {
                                 res.faltas.forEach(f => {
-                                    htmlFaltas += `<tr>
-                                        <td>${f.id}</td>
-                                        <td>${f.fecha_falta}</td>
-                                        <td>${f.tipo_falta}</td>
-                                        <td>${f.grado_curso}</td>
-                                        <td>${f.asignatura || '-'}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-sm btn-outline-info btn-ver-falta" 
-                                                    data-json='${JSON.stringify(f)}'>
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </td>
-                                    </tr>`;
+                                    var boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                    style="font-size:0.65rem;"
+                                                    data-id="${f.id}"
+                                                    data-fecha="${f.fecha_raw ?? ''}"
+                                                    data-grado="${f.grado_curso_id}"
+                                                    data-alumno="${f.alumno_id}"
+                                                    data-asignatura="${f.asignatura_id}"
+                                                    data-indicador="${f.indicador_falta_id}"
+                                                    title="Editar falta">
+                                                    <i class="fas fa-edit"></i>
+                                                 </button>`;
+                                    dtFaltas.row.add([
+                                        f.id,
+                                        f.fecha,
+                                        f.falta,
+                                        f.grado_curso,
+                                        f.asignatura || '-',
+                                        boton
+                                    ]);
                                 });
-                            } else {
-                                htmlFaltas = '<tr><td colspan="6" class="text-center text-muted">Sin faltas registradas</td></tr>';
                             }
-                            $('#table-faltas-historial').html(htmlFaltas);
+                            dtFaltas.draw();
                         })
                         .fail(function () {
                             $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Error al cargar');
                             $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar historial</td></tr>');
+                            dtFaltas.clear().draw();
                         });
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
                     myModal.show();
+                });
+
+                // ── Funciones auxiliares para el modal Editar Falta ──
+                function faltaCargarAlumnos(gradoId, selectedId) {
+                    $('#falta_editar_alumno').prop('disabled', true).html('<option>Cargando...</option>');
+                    $.get("{{ url('academica/faltas/alumnos-por-grado') }}/" + gradoId, function (data) {
+                        let opts = '<option value="">— Seleccionar alumno —</option>';
+                        data.forEach(a => {
+                            const sel = (a.id == selectedId) ? 'selected' : '';
+                            opts += `<option value="${a.id}" ${sel}>${a.apellidos}, ${a.nombres}</option>`;
+                        });
+                        $('#falta_editar_alumno').prop('disabled', false).html(opts);
+                    });
+                }
+
+                function faltaCargarAsignaturas(gradoId, selectedId) {
+                    $('#falta_editar_asignatura').prop('disabled', true).html('<option>Cargando...</option>');
+                    $('#falta_editar_docente').val('');
+                    $.get("{{ url('academica/faltas/asignaturas-por-grado') }}/" + gradoId, function (data) {
+                        let opts = '<option value="">— Seleccionar asignatura —</option>';
+                        data.forEach(a => {
+                            const sel = (a.asignatura_id == selectedId) ? 'selected' : '';
+                            opts += `<option value="${a.asignatura_id}" data-docente="${a.docente}" ${sel}>${a.asignatura}</option>`;
+                        });
+                        $('#falta_editar_asignatura').prop('disabled', false).html(opts);
+                        if (selectedId) {
+                            $('#falta_editar_docente').val($('#falta_editar_asignatura option:selected').data('docente') || '');
+                        }
+                    });
+                }
+
+                // Cambio de grado dentro del modal Editar Falta
+                $(document).on('change', '#falta_editar_grado', function () {
+                    faltaCargarAlumnos($(this).val(), null);
+                    faltaCargarAsignaturas($(this).val(), null);
+                });
+
+                // Cambio de asignatura: actualizar docente
+                $(document).on('change', '#falta_editar_asignatura', function () {
+                    $('#falta_editar_docente').val($(this).find('option:selected').data('docente') || '');
+                });
+
+                // ── Abrir modal Editar Falta ──
+                $(document).on('click', '.btn-editar-falta', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+
+                    const faltaId   = $(this).data('id');
+                    const gradoId   = $(this).data('grado');
+                    const alumnoId  = $(this).data('alumno');
+                    const asigId    = $(this).data('asignatura');
+                    const indId     = $(this).data('indicador');
+                    const fecha     = $(this).data('fecha');
+
+                    $('#formEditarFalta').attr('action', "{{ url('academica/faltas') }}/" + faltaId);
+                    $('#falta_editar_fecha').val(fecha);
+                    $('#falta_editar_indicador').val(indId);
+                    $('#falta_editar_grado').val(gradoId);
+
+                    faltaCargarAlumnos(gradoId, alumnoId);
+                    faltaCargarAsignaturas(gradoId, asigId);
+
+                    // Cerrar el modal padre y abrir el de falta
+                    bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
+                    setTimeout(function () {
+                        new bootstrap.Modal(document.getElementById('modalEditarFalta')).show();
+                    }, 300);
                 });
 
                 // Listener para abrir el modal de inscripción
@@ -352,6 +440,138 @@
                     var myModal = new bootstrap.Modal(document.getElementById('modalInscribir'));
                     myModal.show();
                 });
+
+                // ── Tab Asistencia: 10 calendarios (Feb–Nov) ────────────────
+                // Se dispara al mostrar el tab de asistencia dentro del modalEditar
+
+                var _asistAlumnoId  = null;
+                var _asistAnio      = parseInt(new Date().getFullYear());
+                var _asistCache     = {}; // cache por "alumnoId|anio"
+
+                // Detectar apertura del tab Asistencia
+                $(document).on('shown.bs.tab', 'button[data-bs-target="#tab-asistencia"]', function () {
+                    if (_asistAlumnoId) {
+                        cargarCalendariosAsistencia(_asistAlumnoId, _asistAnio);
+                    }
+                });
+
+                // Cambio de año en el selector
+                $(document).on('change', '#asist-anio-sel', function () {
+                    _asistAnio = parseInt($(this).val());
+                    _asistCache = {}; // limpiar cache al cambiar año
+                    if (_asistAlumnoId) {
+                        cargarCalendariosAsistencia(_asistAlumnoId, _asistAnio);
+                    }
+                });
+
+                // Guardar el alumno activo cuando se abre el modal
+                $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
+                    _asistAlumnoId = $(this).data('json').id;
+                    _asistCache    = {};
+                });
+
+                function cargarCalendariosAsistencia(alumnoId, anio) {
+                    const cacheKey = `${alumnoId}|${anio}`;
+                    if (_asistCache[cacheKey]) {
+                        renderCalendarios(_asistCache[cacheKey], anio);
+                        return;
+                    }
+
+                    $('#asist-calendarios-wrap').html(
+                        '<div class="spinner-asist"><div class="spinner-border spinner-border-sm me-2" role="status"></div>Cargando asistencia...</div>'
+                    );
+
+                    // Pedir todos los meses en paralelo (Feb=2 a Nov=11)
+                    const meses   = [2,3,4,5,6,7,8,9,10,11];
+                    const promesas = meses.map(m =>
+                        $.get("{{ url('academica/asistencias') }}/" + alumnoId + "/por-alumno", { mes: m, anio: anio })
+                            .then(res => ({ mes: m, asistencias: res.asistencias || [] }))
+                            .catch(()  => ({ mes: m, asistencias: [] }))
+                    );
+
+                    $.when(...promesas).done(function (...resultados) {
+                        // $.when con múltiples promesas devuelve args individuales
+                        const data = promesas.length === 1 ? [resultados[0]] : resultados;
+                        _asistCache[cacheKey] = data;
+                        renderCalendarios(data, anio);
+                    });
+                }
+
+                function renderCalendarios(mesesData, anio) {
+                    const NOMBRES_MES = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                                         'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                    const FERIADOS = [
+                        `${anio}-01-01`,`${anio}-03-01`,`${anio}-05-01`,
+                        `${anio}-05-14`,`${anio}-05-15`,`${anio}-06-12`,
+                        `${anio}-08-15`,`${anio}-09-29`,`${anio}-12-08`,`${anio}-12-25`
+                    ];
+                    const DIAS_H = ['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+
+                    let html = '<div class="cal-asist-wrap">';
+
+                    mesesData.forEach(function(item) {
+                        const mes  = item.mes;
+                        const dMap = {};
+                        (item.asistencias || []).forEach(a => { dMap[a.dia] = a.estado; });
+
+                        const diasEnMes  = new Date(anio, mes, 0).getDate();
+                        const primerDia  = new Date(anio, mes - 1, 1).getDay();
+
+                        // Contadores para el resumen
+                        let cp=0, ca=0, cj=0, ct=0;
+
+                        html += `<div class="cal-asist-card">`;
+                        html += `<div class="cal-asist-title">${NOMBRES_MES[mes]}</div>`;
+                        html += `<div class="cal-asist-grid">`;
+
+                        // Cabecera días semana
+                        DIAS_H.forEach(d => {
+                            html += `<div class="cal-dh">${d}</div>`;
+                        });
+
+                        // Celdas vacías antes del primer día
+                        for (let i = 0; i < primerDia; i++) {
+                            html += `<div class="cal-dc dc-vacio"></div>`;
+                        }
+
+                        for (let d = 1; d <= diasEnMes; d++) {
+                            const diaSem  = new Date(anio, mes - 1, d).getDay();
+                            const esFinde = diaSem === 0 || diaSem === 6;
+                            const fechaStr = `${anio}-${String(mes).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                            const esFer   = FERIADOS.includes(fechaStr);
+                            const estado  = dMap[d] || '';
+
+                            let cls = '', title = '';
+                            if (esFinde) {
+                                cls = 'dc-finde';
+                            } else if (esFer) {
+                                cls = 'dc-feriado'; title = 'Feriado';
+                            } else if (estado === 'Presente')    { cls = 'dc-presente'; cp++; title = 'Presente'; }
+                              else if (estado === 'Ausente')     { cls = 'dc-ausente';  ca++; title = 'Ausente'; }
+                              else if (estado === 'Justificado') { cls = 'dc-justif';   cj++; title = 'Justificado'; }
+                              else if (estado === 'Tardanza')    { cls = 'dc-tardanza'; ct++; title = 'Tardanza'; }
+
+                            html += `<div class="cal-dc ${cls}" title="${title}">${esFinde ? '' : d}</div>`;
+                        }
+
+                        html += `</div>`; // cal-asist-grid
+
+                        // Resumen del mes
+                        html += `<div class="cal-asist-resumen">`;
+                        if (cp) html += `<span class="cal-res-badge cr-p">P&nbsp;${cp}</span>`;
+                        if (ca) html += `<span class="cal-res-badge cr-a">A&nbsp;${ca}</span>`;
+                        if (cj) html += `<span class="cal-res-badge cr-j">J&nbsp;${cj}</span>`;
+                        if (ct) html += `<span class="cal-res-badge cr-t">T&nbsp;${ct}</span>`;
+                        if (!cp && !ca && !cj && !ct) html += `<span style="color:#adb5bd;font-size:0.58rem">sin datos</span>`;
+                        html += `</div>`;
+
+                        html += `</div>`; // cal-asist-card
+                    });
+
+                    html += '</div>'; // cal-asist-wrap
+                    $('#asist-calendarios-wrap').html(html);
+                }
+                // ── Fin Tab Asistencia ────────────────────────────────────────
 
             } else {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");

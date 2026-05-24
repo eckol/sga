@@ -176,7 +176,7 @@
 
 {{-- Modal Editar --}}
 <div class="modal fade" id="modalEditar" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <form id="formEditar" method="POST" class="modal-content" enctype="multipart/form-data">
             @csrf @method('PUT')
             <div class="modal-header p-2 bg-primary text-white">
@@ -447,7 +447,177 @@
 
                     {{-- Tab 4: Asistencia --}}
                     <div class="tab-pane fade" id="tab-asistencia" role="tabpanel">
-                        <p class="text-muted p-2">Módulo de asistencia en desarrollo...</p>
+
+                        <style>
+                            /* ── Calendarios de asistencia ── */
+                            .asist-anio-sel {
+                                font-size: 0.72rem;
+                                padding: 2px 8px;
+                                border-radius: 6px;
+                                border: 1px solid #ced4da;
+                            }
+
+                            .cal-asist-wrap {
+                                display: grid;
+                                grid-template-columns: repeat(5, minmax(0, 1fr));
+                                gap: 6px;
+                                margin-top: 6px;
+                            }
+
+                            .cal-asist-card {
+                                border: 1px solid #dee2e6;
+                                border-radius: 8px;
+                                padding: 6px 4px 4px;
+                                background: #fff;
+                                min-width: 0;
+                            }
+
+                            .cal-asist-title {
+                                text-align: center;
+                                font-size: 0.68rem;
+                                font-weight: 600;
+                                color: #495057;
+                                margin-bottom: 4px;
+                                text-transform: uppercase;
+                                letter-spacing: 0.03em;
+                            }
+
+                            .cal-asist-grid {
+                                display: grid;
+                                grid-template-columns: repeat(7, 1fr);
+                                gap: 1px;
+                            }
+
+                            .cal-asist-grid .cal-dh {
+                                text-align: center;
+                                font-size: 0.52rem;
+                                font-weight: 600;
+                                color: #adb5bd;
+                                padding-bottom: 2px;
+                            }
+
+                            .cal-asist-grid .cal-dc {
+                                text-align: center;
+                                font-size: 0.58rem;
+                                font-weight: 500;
+                                width: 100%;
+                                max-width: 22px;
+                                aspect-ratio: 1;
+                                line-height: 22px;
+                                border-radius: 50%;
+                                margin: 0 auto;
+                            }
+
+                            .cal-dc.dc-presente {
+                                background: #198754;
+                                color: #fff;
+                            }
+
+                            .cal-dc.dc-ausente {
+                                background: #dc3545;
+                                color: #fff;
+                            }
+
+                            .cal-dc.dc-justif {
+                                background: #ffc107;
+                                color: #000;
+                            }
+
+                            .cal-dc.dc-tardanza {
+                                background: #0dcaf0;
+                                color: #000;
+                            }
+
+                            .cal-dc.dc-feriado {
+                                background: #e9ecef;
+                                color: #adb5bd;
+                            }
+
+                            .cal-dc.dc-finde {
+                                color: #dee2e6;
+                            }
+
+                            .cal-dc.dc-vacio {
+                                visibility: hidden;
+                            }
+
+                            .cal-asist-resumen {
+                                display: flex;
+                                justify-content: center;
+                                gap: 4px;
+                                margin-top: 4px;
+                                font-size: 0.58rem;
+                            }
+
+                            .cal-res-badge {
+                                padding: 1px 5px;
+                                border-radius: 10px;
+                                font-weight: 600;
+                            }
+
+                            .cr-p {
+                                background: #d1e7dd;
+                                color: #0a3622;
+                            }
+
+                            .cr-a {
+                                background: #f8d7da;
+                                color: #58151c;
+                            }
+
+                            .cr-j {
+                                background: #fff3cd;
+                                color: #664d03;
+                            }
+
+                            .cr-t {
+                                background: #cff4fc;
+                                color: #055160;
+                            }
+
+                            #tab-asistencia .spinner-asist {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 20px;
+                                color: #6c757d;
+                                font-size: 0.8rem;
+                            }
+                        </style>
+
+                        {{-- Selector de año lectivo --}}
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span style="font-size:0.72rem; color:#6c757d; width: 90px;">Año lectivo:</span>
+                            <select id="asist-anio-sel" class="asist-anio-sel" style="width: 90px;">
+                                @php $ay = date('Y'); @endphp
+                                @foreach([$ay - 1, $ay, $ay + 1] as $yr)
+                                    <option value="{{ $yr }}" {{ $yr == $ay ? 'selected' : '' }}>{{ $yr }}</option>
+                                @endforeach
+                            </select>
+                            <span style="font-size:0.65rem; color:#adb5bd; margin-left:4px;">
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#198754"></span>
+                                Presente &nbsp;
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#dc3545"></span>
+                                Ausente &nbsp;
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ffc107"></span>
+                                Justif. &nbsp;
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#0dcaf0"></span>
+                                Tard.
+                            </span>
+                        </div>
+
+                        {{-- Contenedor de los 10 calendarios --}}
+                        <div id="asist-calendarios-wrap">
+                            <div class="spinner-asist">
+                                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                Cargando asistencia...
+                            </div>
+                        </div>
+
                     </div>
 
                     {{-- Tab 5: Faltas --}}

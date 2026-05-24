@@ -78,22 +78,4 @@ class Alumno extends Model
     {
         return $this->hasMany(Falta::class, 'alumno_id', 'id');
     }
-
-    /**
-     * Asistencias del alumno a través de sus inscripciones.
-     * Uso: $alumno->asistencias
-     */
-    public function asistencias()
-    {
-        return $this->hasManyThrough(
-            \App\Models\Asistencia::class,  // Modelo final
-            \App\Models\Inscripcion::class, // Modelo intermedio
-            'alumno_cid',                   // FK en inscripciones → alumnos.cid
-            'inscripcion_id',               // FK en asistencias   → inscripciones.id
-            'cid',                          // PK local en alumnos
-            'id'                            // PK en inscripciones
-        );
-    }
-
-
 }

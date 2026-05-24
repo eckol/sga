@@ -447,12 +447,197 @@
 
                     {{-- Tab 4: Asistencia --}}
                     <div class="tab-pane fade" id="tab-asistencia" role="tabpanel">
-                        <p class="text-muted p-2">Módulo de asistencia en desarrollo...</p>
+
+                        <style>
+                            /* ── Calendarios de asistencia ── */
+                            .asist-anio-sel {
+                                font-size: 0.72rem;
+                                padding: 2px 8px;
+                                border-radius: 6px;
+                                border: 1px solid #ced4da;
+                            }
+
+                            .cal-asist-wrap {
+                                display: grid;
+                                grid-template-columns: repeat(5, 1fr);
+                                gap: 8px;
+                                margin-top: 6px;
+                            }
+
+                            .cal-asist-card {
+                                border: 1px solid #dee2e6;
+                                border-radius: 8px;
+                                padding: 6px 5px 4px;
+                                background: #fff;
+                            }
+
+                            .cal-asist-title {
+                                text-align: center;
+                                font-size: 0.68rem;
+                                font-weight: 600;
+                                color: #495057;
+                                margin-bottom: 4px;
+                                text-transform: uppercase;
+                                letter-spacing: 0.03em;
+                            }
+
+                            .cal-asist-grid {
+                                display: grid;
+                                grid-template-columns: repeat(7, 1fr);
+                                gap: 1px;
+                            }
+
+                            .cal-asist-grid .cal-dh {
+                                text-align: center;
+                                font-size: 0.52rem;
+                                font-weight: 600;
+                                color: #adb5bd;
+                                padding-bottom: 2px;
+                            }
+
+                            .cal-asist-grid .cal-dc {
+                                text-align: center;
+                                font-size: 0.58rem;
+                                font-weight: 500;
+                                width: 20px;
+                                height: 20px;
+                                line-height: 20px;
+                                border-radius: 50%;
+                                margin: 0 auto;
+                            }
+
+                            .cal-dc.dc-presente {
+                                background: #198754;
+                                color: #fff;
+                            }
+
+                            .cal-dc.dc-ausente {
+                                background: #dc3545;
+                                color: #fff;
+                            }
+
+                            .cal-dc.dc-justif {
+                                background: #ffc107;
+                                color: #000;
+                            }
+
+                            .cal-dc.dc-tardanza {
+                                background: #0dcaf0;
+                                color: #000;
+                            }
+
+                            .cal-dc.dc-feriado {
+                                background: #e9ecef;
+                                color: #adb5bd;
+                            }
+
+                            .cal-dc.dc-finde {
+                                color: #dee2e6;
+                            }
+
+                            .cal-dc.dc-vacio {
+                                visibility: hidden;
+                            }
+
+                            .cal-asist-resumen {
+                                display: flex;
+                                justify-content: center;
+                                gap: 4px;
+                                margin-top: 4px;
+                                font-size: 0.58rem;
+                            }
+
+                            .cal-res-badge {
+                                padding: 1px 5px;
+                                border-radius: 10px;
+                                font-weight: 600;
+                            }
+
+                            .cr-p {
+                                background: #d1e7dd;
+                                color: #0a3622;
+                            }
+
+                            .cr-a {
+                                background: #f8d7da;
+                                color: #58151c;
+                            }
+
+                            .cr-j {
+                                background: #fff3cd;
+                                color: #664d03;
+                            }
+
+                            .cr-t {
+                                background: #cff4fc;
+                                color: #055160;
+                            }
+
+                            #tab-asistencia .spinner-asist {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 20px;
+                                color: #6c757d;
+                                font-size: 0.8rem;
+                            }
+                        </style>
+
+                        {{-- Selector de año lectivo --}}
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <span style="font-size:0.72rem; color:#6c757d;">Año lectivo:</span>
+                            <select id="asist-anio-sel" class="asist-anio-sel">
+                                @php $ay = date('Y'); @endphp
+                                @foreach([$ay - 1, $ay, $ay + 1] as $yr)
+                                    <option value="{{ $yr }}" {{ $yr == $ay ? 'selected' : '' }}>{{ $yr }}</option>
+                                @endforeach
+                            </select>
+                            <span style="font-size:0.65rem; color:#adb5bd; margin-left:4px;">
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#198754"></span>
+                                Presente &nbsp;
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#dc3545"></span>
+                                Ausente &nbsp;
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ffc107"></span>
+                                Justif. &nbsp;
+                                <span
+                                    style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#0dcaf0"></span>
+                                Tard.
+                            </span>
+                        </div>
+
+                        {{-- Contenedor de los 10 calendarios --}}
+                        <div id="asist-calendarios-wrap">
+                            <div class="spinner-asist">
+                                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                Cargando asistencia...
+                            </div>
+                        </div>
+
                     </div>
 
                     {{-- Tab 5: Faltas --}}
                     <div class="tab-pane fade" id="tab-faltas" role="tabpanel">
-                        <p class="text-muted p-2">Módulo de faltas e indicadores en desarrollo...</p>
+                        <div class="table-responsive mt-1">
+                            <table id="tabla-faltas-alumno" class="table table-sm table-bordered table-hover"
+                                style="font-size: 0.75rem; width:100%;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 10px;">ID</th>
+                                        <th style="width: 10px;">Fecha</th>
+                                        <th>Indicador</th>
+                                        <th style="width: 10px;">Grado/Curso</th>
+                                        <th style="width: 30%;">Asignatura</th>
+                                        <th class="text-center" style="width:50px;">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- Se cargará vía AJAX --}}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     {{-- Tab 6: Entrevistas --}}
@@ -463,7 +648,8 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>Actualizar
+                    Cambios</button>
             </div>
         </form>
     </div>
@@ -633,6 +819,83 @@
             });
     }
 </script>
+
+{{-- ════════════════════════════════════════════════ --}}
+{{-- Modal Editar Falta (abierto desde el tab Faltas del modal Alumno) --}}
+{{-- ════════════════════════════════════════════════ --}}
+<div class="modal fade" id="modalEditarFalta" tabindex="-1" style="z-index: 1080;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header p-2 bg-warning">
+                <h6 class="modal-title"><i class="fas fa-edit me-1"></i> Editar Falta</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="formEditarFalta" action="">
+                @csrf
+                @method('PUT')
+                <div class="modal-body" style="font-size: 0.8rem;">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label form-label-sm fw-bold">Fecha <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" name="fecha" id="falta_editar_fecha" class="form-control form-control-sm"
+                                required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label form-label-sm fw-bold">Grado/Curso <span
+                                    class="text-danger">*</span></label>
+                            <select name="grado_curso_id" id="falta_editar_grado" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($grados as $g)
+                                    <option value="{{ $g->id }}">{{ $g->gradocurso }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Alumno <span
+                                    class="text-danger">*</span></label>
+                            <select name="alumno_id" id="falta_editar_alumno" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label form-label-sm fw-bold">Asignatura <span
+                                    class="text-danger">*</span></label>
+                            <select name="asignatura_id" id="falta_editar_asignatura" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="form-label form-label-sm fw-bold">Docente</label>
+                            <input type="text" id="falta_editar_docente" class="form-control form-control-sm" readonly
+                                placeholder="(se completa automáticamente)">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Tipo de Falta <span
+                                    class="text-danger">*</span></label>
+                            <select name="indicador_falta_id" id="falta_editar_indicador"
+                                class="form-select form-select-sm" required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($indicadores as $ind)
+                                    <option value="{{ $ind->id }}">{{ $ind->indicador_falta }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="fas fa-save me-1"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {{-- Modal para Editar Datos del Responsable --}}
 <div class="modal fade" id="modalResponsableEditar" tabindex="-1" style="z-index: 1070;">
