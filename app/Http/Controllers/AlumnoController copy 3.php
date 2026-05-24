@@ -38,7 +38,6 @@ class AlumnoController extends Controller
         $grados = \App\Models\GradoCurso::orderBy('id')->get();
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
-        $indicadores = \App\Models\IndicadoresFaltas::orderBy('indicador_falta')->get();
 
         return view('rrhh.alumnos.index', compact(
             'alumnos',
@@ -48,8 +47,7 @@ class AlumnoController extends Controller
             'vivecon',
             'parentescos',
             'grados',
-            'anios',
-            'indicadores'
+            'anios'
         ));
     }
 
@@ -96,7 +94,16 @@ class AlumnoController extends Controller
     // ----------------------------------------------------------------
     public function detalles(int $id): JsonResponse
     {
-        $alumno = Alumno::with(['madre', 'padre', 'encargado', 'inscripciones'])->findOrFail($id);
+        $alumno = Alumno::with([
+            'madre',
+            'padre',
+            'encargado',
+            'inscripciones',
+            'faltas',
+            'faltas.indicadorFalta',
+            'faltas.gradoCurso',
+            'faltas.asignatura',
+        ])->findOrFail($id);
 
         $madre = Madre::where('cid', $alumno->cid_madre)->first();
         $padre = Padre::where('cid', $alumno->cid_padre)->first();

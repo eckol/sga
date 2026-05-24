@@ -117,7 +117,7 @@
                         <td>{{ $al->id }}</td>
                         <td>{{ $al->apellidos }}</td>
                         <td>{{ $al->nombres }}</td>
-                        <td>{{ $al->cid }}</td>
+                        <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
                         <td>{{ $al->nacionalidad->nacionalidad ?? 'N/A' }}</td>
                         <td>{{ $al->telefono ?? '-' }}</td>
                         <td class="text-center align-middle">
@@ -213,13 +213,12 @@
                     "order": [[1, "desc"]],
                     "pageLength": 5,
                     "lengthMenu": [5, 10, 25],
-                    "autoWidth": false,
                     "columns": [
-                        { "title": "ID", "width": "10px" },
-                        { "title": "Fecha", "width": "10px" },
-                        { "title": "Indicador", "width": "30%" },
-                        { "title": "Grado/Curso", "width": "10px" },
-                        { "title": "Asignatura", "width": "30%x" },
+                        { "title": "ID" },
+                        { "title": "Fecha" },
+                        { "title": "Indicador" },
+                        { "title": "Grado/Curso" },
+                        { "title": "Asignatura" },
                         { "title": "Ver", "orderable": false, "className": "text-center" }
                     ],
                     "language": {
@@ -236,9 +235,8 @@
                         "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
                 });
 
-                // Listener para abrir modal de edición de ALUMNO
-                // Se excluye .btn-editar-falta para evitar colisión de eventos
-                $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
+                // Listener para abrir modal de edición
+                $(document).on('click', '.btn-editar', function () {
                     var d = $(this).data('json');
                     $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
 
@@ -307,16 +305,11 @@
                             dtFaltas.clear();
                             if (res.faltas && res.faltas.length > 0) {
                                 res.faltas.forEach(f => {
-                                    var boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
-                                                    style="font-size:0.65rem;"
-                                                    data-id="${f.id}"
-                                                    data-fecha="${f.fecha_raw ?? ''}"
-                                                    data-grado="${f.grado_curso_id}"
-                                                    data-alumno="${f.alumno_id}"
-                                                    data-asignatura="${f.asignatura_id}"
-                                                    data-indicador="${f.indicador_falta_id}"
-                                                    title="Editar falta">
-                                                    <i class="fas fa-edit"></i>
+                                    var boton = `<button class="btn btn-sm btn-outline-info py-0 px-1 btn-ver-falta"
+                                                    style="font-size:0.7rem;"
+                                                    data-falta-id="${f.id}"
+                                                    title="Ver detalle">
+                                                    <i class="fas fa-eye"></i>
                                                  </button>`;
                                     dtFaltas.row.add([
                                         f.id,
@@ -338,74 +331,6 @@
 
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
                     myModal.show();
-                });
-
-                // ── Funciones auxiliares para el modal Editar Falta ──
-                function faltaCargarAlumnos(gradoId, selectedId) {
-                    $('#falta_editar_alumno').prop('disabled', true).html('<option>Cargando...</option>');
-                    $.get("{{ url('academica/faltas/alumnos-por-grado') }}/" + gradoId, function (data) {
-                        let opts = '<option value="">— Seleccionar alumno —</option>';
-                        data.forEach(a => {
-                            const sel = (a.id == selectedId) ? 'selected' : '';
-                            opts += `<option value="${a.id}" ${sel}>${a.apellidos}, ${a.nombres}</option>`;
-                        });
-                        $('#falta_editar_alumno').prop('disabled', false).html(opts);
-                    });
-                }
-
-                function faltaCargarAsignaturas(gradoId, selectedId) {
-                    $('#falta_editar_asignatura').prop('disabled', true).html('<option>Cargando...</option>');
-                    $('#falta_editar_docente').val('');
-                    $.get("{{ url('academica/faltas/asignaturas-por-grado') }}/" + gradoId, function (data) {
-                        let opts = '<option value="">— Seleccionar asignatura —</option>';
-                        data.forEach(a => {
-                            const sel = (a.asignatura_id == selectedId) ? 'selected' : '';
-                            opts += `<option value="${a.asignatura_id}" data-docente="${a.docente}" ${sel}>${a.asignatura}</option>`;
-                        });
-                        $('#falta_editar_asignatura').prop('disabled', false).html(opts);
-                        if (selectedId) {
-                            $('#falta_editar_docente').val($('#falta_editar_asignatura option:selected').data('docente') || '');
-                        }
-                    });
-                }
-
-                // Cambio de grado dentro del modal Editar Falta
-                $(document).on('change', '#falta_editar_grado', function () {
-                    faltaCargarAlumnos($(this).val(), null);
-                    faltaCargarAsignaturas($(this).val(), null);
-                });
-
-                // Cambio de asignatura: actualizar docente
-                $(document).on('change', '#falta_editar_asignatura', function () {
-                    $('#falta_editar_docente').val($(this).find('option:selected').data('docente') || '');
-                });
-
-                // ── Abrir modal Editar Falta ──
-                $(document).on('click', '.btn-editar-falta', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-
-                    const faltaId   = $(this).data('id');
-                    const gradoId   = $(this).data('grado');
-                    const alumnoId  = $(this).data('alumno');
-                    const asigId    = $(this).data('asignatura');
-                    const indId     = $(this).data('indicador');
-                    const fecha     = $(this).data('fecha');
-
-                    $('#formEditarFalta').attr('action', "{{ url('academica/faltas') }}/" + faltaId);
-                    $('#falta_editar_fecha').val(fecha);
-                    $('#falta_editar_indicador').val(indId);
-                    $('#falta_editar_grado').val(gradoId);
-
-                    faltaCargarAlumnos(gradoId, alumnoId);
-                    faltaCargarAsignaturas(gradoId, asigId);
-
-                    // Cerrar el modal padre y abrir el de falta
-                    bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
-                    setTimeout(function () {
-                        new bootstrap.Modal(document.getElementById('modalEditarFalta')).show();
-                    }, 300);
                 });
 
                 // Listener para abrir el modal de inscripción

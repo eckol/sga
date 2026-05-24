@@ -72,4 +72,10 @@ class Alumno extends Model
     {
         return $this->belongsTo(Encargado::class, 'cid_encargado', 'cid');
     }
+
+    // Relación con las faltas del alumno
+    public function faltas()
+    {
+        return $this->hasMany(Falta::class, 'alumno_id', 'id');
+    }
 }

@@ -142,23 +142,26 @@
                         <td>{{ $ins->firmante_rol }}</td>
                         <td>{{ $ins->firmante_nombre }}</td>
                         <td class="text-center fw-bold 
-                                    @if($ins->estado == 'Matriculado') bg-matriculado 
-                                    @elseif($ins->estado == 'Egresado') bg-egresado 
-                                    @elseif($ins->estado == 'Trasladado') bg-trasladado 
-                                    @elseif($ins->estado == 'Abandono') bg-abandono 
-                                    @endif" style="font-size: 0.75rem;">
+                                                @if($ins->estado == 'Matriculado') bg-matriculado 
+                                                @elseif($ins->estado == 'Egresado') bg-egresado 
+                                                @elseif($ins->estado == 'Trasladado') bg-trasladado 
+                                                @elseif($ins->estado == 'Abandono') bg-abandono 
+                                                @endif" style="font-size: 0.75rem;">
                             {{ $ins->estado }}
                         </td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar" title="Editar alumno"
                                 style="font-size: 0.65rem;" data-id="{{ $ins->id }}" data-json='{{ json_encode($ins) }}'>
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('inscripciones.destroy', $ins->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar Inscripción permanentemente?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar Inscripción permanentemente?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

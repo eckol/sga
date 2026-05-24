@@ -67,18 +67,19 @@
                         <td>Gs. {{ number_format($arancel->monto_matricula, 0, ',', '.') }}</td>
                         <td>Gs. {{ number_format($arancel->monto_anualidad, 0, ',', '.') }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $arancel->id }}"
                                 data-anio_lect="{{ $arancel->anio_lect }}" data-ciclo_id="{{ $arancel->ciclo_id }}"
                                 data-monto_matricula="{{ $arancel->monto_matricula }}"
                                 data-monto_anualidad="{{ $arancel->monto_anualidad }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('aranceles.destroy', $arancel->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Eliminar Registro?')">Borrar</button>
+                                    onclick="return confirm('¿Eliminar Registro?')"><i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -163,7 +164,8 @@
                 </div>
                 <div class="modal-footer p-1">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+                    <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>Actualizar
+                        Cambios</button>
                 </div>
             </form>
         </div>

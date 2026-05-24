@@ -37,7 +37,7 @@
                                 <label class="form-label mb-0 fw-bold">Sexo</label>
                                 <select name="sexo_id" class="form-select form-select-sm" required>
                                     @foreach($sexos as $s)
-                                    <option value="{{ $s->id }}">{{ $s->sexo }}</option>
+                                        <option value="{{ $s->id }}">{{ $s->sexo }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -45,7 +45,7 @@
                                 <label class="form-label mb-0 fw-bold">Nacionalidad</label>
                                 <select name="nacionalidad_id" class="form-select form-select-sm" required>
                                     @foreach($nacionalidades as $n)
-                                    <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
+                                        <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +62,7 @@
                                 <select name="ciudad_id" class="form-select form-select-sm" required>
                                     <option value="">Seleccionar...</option>
                                     @foreach($ciudades as $c)
-                                    <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
+                                        <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -111,7 +111,7 @@
                         <label class="form-label mb-0 fw-bold">Vive Con</label>
                         <select name="vivecon_id" class="form-select form-select-sm" required>
                             @foreach($vivecon as $vc)
-                            <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
+                                <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -160,7 +160,7 @@
                         <select name="parentesco_id" class="form-select form-select-sm">
                             <option value="">Seleccionar...</option>
                             @foreach($parentescos as $p)
-                            <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
+                                <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -219,7 +219,7 @@
                                 class="col-md-3 text-center d-flex flex-column align-items-center justify-content-center">
                                 <img src="{{ asset('img/alumnos/alumno.jpg') }}" alt="Foto" id="preview_foto_editar"
                                     class="rounded-circle shadow mb-2"
-                                    style="width: 125px; height: 125px; object-fit: cover;">
+                                    style="width: 100px; height: 100px; object-fit: cover;">
                                 <input type="file" name="foto" class="form-control form-control-xs mt-1"
                                     accept="image/*" onchange="previewFoto(this, 'preview_foto_editar')"
                                     style="font-size: 0.6rem;">
@@ -251,7 +251,7 @@
                                         <select name="sexo_id" id="edit_sexo_id" class="form-select form-select-sm"
                                             required>
                                             @foreach($sexos as $s)
-                                            <option value="{{ $s->id }}">{{ $s->sexo }}</option>
+                                                <option value="{{ $s->id }}">{{ $s->sexo }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -260,7 +260,7 @@
                                         <select name="nacionalidad_id" id="edit_nacionalidad_id"
                                             class="form-select form-select-sm" required>
                                             @foreach($nacionalidades as $n)
-                                            <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
+                                                <option value="{{ $n->id }}">{{ $n->nacionalidad }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -280,7 +280,7 @@
                                             required>
                                             <option value="">Seleccionar...</option>
                                             @foreach($ciudades as $c)
-                                            <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
+                                                <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -330,7 +330,7 @@
                                 <select name="vivecon_id" id="edit_vivecon_id" class="form-select form-select-sm"
                                     required>
                                     @foreach($vivecon as $vc)
-                                    <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
+                                        <option value="{{ $vc->id }}">{{ $vc->vive_con ?? $vc->vivecon }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -409,7 +409,7 @@
                                             class="form-select form-select-sm">
                                             <option value="">Seleccionar...</option>
                                             @foreach($parentescos as $p)
-                                            <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
+                                                <option value="{{ $p->id }}">{{ $p->parentesco ?? $p->nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -486,7 +486,7 @@
                         <label class="form-label">Año Lectivo</label>
                         <select name="anio_lectivo" class="form-select form-select-sm">
                             @foreach($anios as $a)
-                            <option value="{{ $a }}" {{ $a> date('Y') ? 'selected' : '' }}>{{ $a }}</option>
+                                <option value="{{ $a }}" {{ $a > date('Y') ? 'selected' : '' }}>{{ $a }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -500,7 +500,7 @@
                         <select name="grado_curso_id" id="select_grado_nuevo" class="form-select form-select-sm"
                             required>
                             @foreach($grados as $g)
-                            <option value="{{ $g->id }}">{{ $g->gradocurso }} ({{ $g->turno }})</option>
+                                <option value="{{ $g->id }}">{{ $g->gradocurso }} ({{ $g->turno }})</option>
                             @endforeach
                         </select>
                     </div>
@@ -680,7 +680,7 @@
                         <label class="form-label mb-0 fw-bold">Ciudad</label>
                         <select name="ciudad_id" id="res_edit_ciudad_id" class="form-select form-select-sm" required>
                             @foreach($ciudades as $c)
-                            <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
+                                <option value="{{ $c->id }}">{{ $c->ciudad }}</option>
                             @endforeach
                         </select>
                     </div>

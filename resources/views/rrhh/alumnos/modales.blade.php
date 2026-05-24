@@ -168,7 +168,7 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save me-1"></i> Guardar</button>
+                <button type="submit" class="btn btn-success btn-sm">Guardar Alumno</button>
             </div>
         </form>
     </div>
@@ -452,20 +452,20 @@
 
                     {{-- Tab 5: Faltas --}}
                     <div class="tab-pane fade" id="tab-faltas" role="tabpanel">
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-1">
                             <table id="tabla-faltas-alumno" class="table table-sm table-bordered table-hover"
-                                style="font-size: 0.75rem;">
+                                style="font-size: 0.75rem; width:100%;">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Fecha</th>
-                                        <th>Falta Cometida</th>
-                                        <th>Grado/Curso</th>
-                                        <th>Asignatura</th>
-                                        <th class="text-center" width="50">Ver</th>
+                                        <th style="width: 10px;">ID</th>
+                                        <th style="width: 10px;">Fecha</th>
+                                        <th>Indicador</th>
+                                        <th style="width: 10px;">Grado/Curso</th>
+                                        <th style="width: 30%;">Asignatura</th>
+                                        <th class="text-center" style="width:50px;">Editar</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-faltas-historial">
+                                <tbody>
                                     {{-- Se cargará vía AJAX --}}
                                 </tbody>
                             </table>
@@ -480,8 +480,8 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>
-                    Actualizar</button>
+                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>Actualizar
+                    Cambios</button>
             </div>
         </form>
     </div>
@@ -563,8 +563,7 @@
                 </div>
             </div>
             <div class="modal-footer p-1">
-                <button type="submit" class="btn btn-success btn-sm w-100"><i class="fas fa-user-check me-1"></i>
-                    Finalizar Inscripción e Imprimir</button>
+                <button type="submit" class="btn btn-success btn-sm w-100">Finalizar Inscripción e Imprimir</button>
             </div>
         </form>
     </div>
@@ -653,6 +652,83 @@
     }
 </script>
 
+{{-- ════════════════════════════════════════════════ --}}
+{{-- Modal Editar Falta (abierto desde el tab Faltas del modal Alumno) --}}
+{{-- ════════════════════════════════════════════════ --}}
+<div class="modal fade" id="modalEditarFalta" tabindex="-1" style="z-index: 1080;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header p-2 bg-warning">
+                <h6 class="modal-title"><i class="fas fa-edit me-1"></i> Editar Falta</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="formEditarFalta" action="">
+                @csrf
+                @method('PUT')
+                <div class="modal-body" style="font-size: 0.8rem;">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label form-label-sm fw-bold">Fecha <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" name="fecha" id="falta_editar_fecha" class="form-control form-control-sm"
+                                required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label form-label-sm fw-bold">Grado/Curso <span
+                                    class="text-danger">*</span></label>
+                            <select name="grado_curso_id" id="falta_editar_grado" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($grados as $g)
+                                    <option value="{{ $g->id }}">{{ $g->gradocurso }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Alumno <span
+                                    class="text-danger">*</span></label>
+                            <select name="alumno_id" id="falta_editar_alumno" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label form-label-sm fw-bold">Asignatura <span
+                                    class="text-danger">*</span></label>
+                            <select name="asignatura_id" id="falta_editar_asignatura" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="form-label form-label-sm fw-bold">Docente</label>
+                            <input type="text" id="falta_editar_docente" class="form-control form-control-sm" readonly
+                                placeholder="(se completa automáticamente)">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Tipo de Falta <span
+                                    class="text-danger">*</span></label>
+                            <select name="indicador_falta_id" id="falta_editar_indicador"
+                                class="form-select form-select-sm" required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($indicadores as $ind)
+                                    <option value="{{ $ind->id }}">{{ $ind->indicador_falta }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="fas fa-save me-1"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {{-- Modal para Editar Datos del Responsable --}}
 <div class="modal fade" id="modalResponsableEditar" tabindex="-1" style="z-index: 1070;">
     <div class="modal-dialog modal-lg shadow-lg">
@@ -726,8 +802,7 @@
             </div>
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>
-                    Actualizar</button>
+                <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
             </div>
         </form>
     </div>

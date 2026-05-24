@@ -40,7 +40,6 @@ class AlumnoGradoController extends Controller
         $parentescos = \App\Models\Parentesco::all();
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
-        $indicadores = \App\Models\IndicadoresFaltas::orderBy('indicador_falta')->get();
 
         return view('academica.alumnos_grado', compact(
             'grados',
@@ -52,8 +51,7 @@ class AlumnoGradoController extends Controller
             'sexos',
             'vivecon',
             'parentescos',
-            'anios',
-            'indicadores'
+            'anios'
         ));
     }
 
@@ -66,11 +64,7 @@ class AlumnoGradoController extends Controller
             'inscripciones' => function ($q) {
                 $q->orderBy('fecha', 'desc');
             },
-            'inscripciones.grado',
-            'faltas',
-            'faltas.indicadorFalta',
-            'faltas.gradoCurso',
-            'faltas.asignatura',
+            'inscripciones.grado'
         ])
             ->findOrFail($id);
 
@@ -88,25 +82,7 @@ class AlumnoGradoController extends Controller
                     'firmante_rol' => $ins->firmante_rol,
                     'estado' => $ins->estado
                 ];
-            }),
-            'faltas' => $alumno->faltas->map(function ($f) {
-                return [
-                    'id' => $f->id,
-                    'fecha' => $f->fecha
-                        ? \Carbon\Carbon::parse($f->fecha)->format('d/m/Y')
-                        : '—',
-                    'fecha_raw' => $f->fecha
-                        ? \Carbon\Carbon::parse($f->fecha)->format('Y-m-d')
-                        : '',
-                    'falta' => $f->indicadorFalta->indicador_falta ?? '—',
-                    'grado_curso' => $f->gradoCurso->gradocurso ?? '—',
-                    'asignatura' => $f->asignatura->asignatura ?? '—',
-                    'indicador_falta_id' => $f->indicador_falta_id,
-                    'grado_curso_id' => $f->grado_curso_id,
-                    'asignatura_id' => $f->asignatura_id,
-                    'alumno_id' => $f->alumno_id,
-                ];
-            }),
+            })
         ]);
     }
 

@@ -141,7 +141,7 @@
                         <tr>
                             <td class="text-center"></td>
                             <td>{{ $al->apellidos }}, {{ $al->nombres }}</td>
-                            <td>{{ number_format($al->cid, 0, ',', '.') }}</td>
+                            <td>{{ $al->cid }}</td>
                             <td>{{ $al->sexo->sexo ?? 'N/A' }}</td>
                             <td>{{ $al->telefono ?? '-' }}</td>
                             <td class="text-center align-middle">
@@ -151,9 +151,9 @@
                                 </label>
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-success btn-xs py-0 px-1 btn-editar"
+                                <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                     style="font-size: 0.65rem;" data-id="{{ $al->id }}" data-json='{{ json_encode($al) }}'>
-                                    Editar
+                                    <i class="fas fa-edit"></i>
                                 </button>
                             </td>
                         </tr>
@@ -274,8 +274,36 @@
                         });
                     }).draw();
 
-                    // Listener para abrir modal de edición
-                    $(document).on('click', '.btn-editar', function () {
+                    // ── DataTable de faltas (dentro del modal, inicializada una sola vez) ──
+                    var dtFaltas = $('#tabla-faltas-alumno').DataTable({
+                        "order": [[1, "desc"]],
+                        "pageLength": 5,
+                        "lengthMenu": [5, 10, 25],
+                        "columns": [
+                            { "title": "ID", "width": "40px" },
+                            { "title": "Fecha", "width": "85px" },
+                            { "title": "Indicador" },
+                            { "title": "Grado/Curso", "width": "15%" },
+                            { "title": "Asignatura", "width": "20%" },
+                            { "title": "Editar", "orderable": false, "className": "text-center", "width": "50px" }
+                        ],
+                        "autoWidth": false,
+                        "language": {
+                            "search": "Buscar:",
+                            "lengthMenu": "Mostrar _MENU_",
+                            "paginate": { "next": "›", "previous": "‹" },
+                            "info": "_START_–_END_ de _TOTAL_",
+                            "infoEmpty": "0 registros",
+                            "zeroRecords": "Sin faltas",
+                            "emptyTable": "Sin faltas registradas"
+                        },
+                        "dom": "<'row mb-1'<'col-sm-6'l><'col-sm-6'f>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
+                    });
+
+                    // ── Listener para abrir modal de edición de ALUMNO ──
+                    $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
                         var d = $(this).data('json');
                         $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
 
@@ -298,7 +326,7 @@
                             }
                         });
 
-                        // Update la foto
+                        // Foto
                         let fotoPreview = document.getElementById('preview_foto_editar');
                         if (d['foto']) {
                             fotoPreview.src = "{{ asset('img/alumnos/') }}/" + d['foto'];
@@ -306,9 +334,10 @@
                             fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
                         }
 
-                        // Limpiar campos de responsables y tabla de historial
+                        // Limpiar mientras carga
                         $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
                         $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
+                        dtFaltas.clear().draw();
 
                         // Cargar detalles vía AJAX
                         $.get("{{ url('academica/alumnos') }}/" + d.id + "/detalles")
@@ -323,27 +352,122 @@
                                 if (res.inscripciones && res.inscripciones.length > 0) {
                                     res.inscripciones.forEach(ins => {
                                         html += `<tr>
-                                                <td>${ins.id}</td>
-                                                <td>${ins.fecha}</td>
-                                                <td>${ins.anio_lectivo}</td>
-                                                <td>${ins.grado_curso}</td>
-                                                <td>${ins.firmante_nombre || ''}</td>
-                                                <td>${ins.firmante_rol || ''}</td>
-                                                <td>${ins.estado}</td>
-                                            </tr>`;
+                                                                        <td>${ins.id}</td>
+                                                                        <td>${ins.fecha}</td>
+                                                                        <td>${ins.anio_lectivo}</td>
+                                                                        <td>${ins.grado_curso}</td>
+                                                                        <td>${ins.firmante_nombre || ''}</td>
+                                                                        <td>${ins.firmante_rol || ''}</td>
+                                                                        <td>${ins.estado}</td>
+                                                                    </tr>`;
                                     });
                                 } else {
                                     html = '<tr><td colspan="7" class="text-center text-muted">Sin historial</td></tr>';
                                 }
                                 $('#table-inscripciones-historial').html(html);
+
+                                // Repoblar DataTable de Faltas
+                                dtFaltas.clear();
+                                if (res.faltas && res.faltas.length > 0) {
+                                    res.faltas.forEach(f => {
+                                        var boton = `<button type="button"
+                                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                                        style="font-size:0.65rem;"
+                                                                        data-id="${f.id}"
+                                                                        data-fecha="${f.fecha_raw ?? ''}"
+                                                                        data-grado="${f.grado_curso_id}"
+                                                                        data-alumno="${f.alumno_id}"
+                                                                        data-asignatura="${f.asignatura_id}"
+                                                                        data-indicador="${f.indicador_falta_id}"
+                                                                        title="Editar falta">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>`;
+                                        dtFaltas.row.add([
+                                            f.id,
+                                            f.fecha,
+                                            f.falta,
+                                            f.grado_curso,
+                                            f.asignatura || '-',
+                                            boton
+                                        ]);
+                                    });
+                                }
+                                dtFaltas.draw();
                             })
                             .fail(function () {
                                 $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Error al cargar');
-                                $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar historial</td></tr>');
+                                $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar</td></tr>');
+                                dtFaltas.clear().draw();
                             });
 
-                        var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
-                        myModal.show();
+                        new bootstrap.Modal(document.getElementById('modalEditar')).show();
+                    });
+
+                    // ── Funciones auxiliares para modal Editar Falta ──
+                    function faltaCargarAlumnos(gradoId, selectedId) {
+                        $('#falta_editar_alumno').prop('disabled', true).html('<option>Cargando...</option>');
+                        $.get("{{ url('academica/faltas/alumnos-por-grado') }}/" + gradoId, function (data) {
+                            let opts = '<option value="">— Seleccionar alumno —</option>';
+                            data.forEach(a => {
+                                const sel = (a.id == selectedId) ? 'selected' : '';
+                                opts += `<option value="${a.id}" ${sel}>${a.apellidos}, ${a.nombres}</option>`;
+                            });
+                            $('#falta_editar_alumno').prop('disabled', false).html(opts);
+                        });
+                    }
+
+                    function faltaCargarAsignaturas(gradoId, selectedId) {
+                        $('#falta_editar_asignatura').prop('disabled', true).html('<option>Cargando...</option>');
+                        $('#falta_editar_docente').val('');
+                        $.get("{{ url('academica/faltas/asignaturas-por-grado') }}/" + gradoId, function (data) {
+                            let opts = '<option value="">— Seleccionar asignatura —</option>';
+                            data.forEach(a => {
+                                const sel = (a.asignatura_id == selectedId) ? 'selected' : '';
+                                opts += `<option value="${a.asignatura_id}" data-docente="${a.docente}" ${sel}>${a.asignatura}</option>`;
+                            });
+                            $('#falta_editar_asignatura').prop('disabled', false).html(opts);
+                            if (selectedId) {
+                                $('#falta_editar_docente').val($('#falta_editar_asignatura option:selected').data('docente') || '');
+                            }
+                        });
+                    }
+
+                    // Cambio de grado dentro del modal Editar Falta
+                    $(document).on('change', '#falta_editar_grado', function () {
+                        faltaCargarAlumnos($(this).val(), null);
+                        faltaCargarAsignaturas($(this).val(), null);
+                    });
+
+                    // Cambio de asignatura: actualizar docente
+                    $(document).on('change', '#falta_editar_asignatura', function () {
+                        $('#falta_editar_docente').val($(this).find('option:selected').data('docente') || '');
+                    });
+
+                    // ── Abrir modal Editar Falta ──
+                    $(document).on('click', '.btn-editar-falta', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+
+                        const faltaId = $(this).data('id');
+                        const gradoId = $(this).data('grado');
+                        const alumnoId = $(this).data('alumno');
+                        const asigId = $(this).data('asignatura');
+                        const indId = $(this).data('indicador');
+                        const fecha = $(this).data('fecha');
+
+                        $('#formEditarFalta').attr('action', "{{ url('academica/faltas') }}/" + faltaId);
+                        $('#falta_editar_fecha').val(fecha);
+                        $('#falta_editar_indicador').val(indId);
+                        $('#falta_editar_grado').val(gradoId);
+
+                        faltaCargarAlumnos(gradoId, alumnoId);
+                        faltaCargarAsignaturas(gradoId, asigId);
+
+                        bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
+                        setTimeout(function () {
+                            new bootstrap.Modal(document.getElementById('modalEditarFalta')).show();
+                        }, 300);
                     });
 
                     // Listener para los toggles (AJAX Update)

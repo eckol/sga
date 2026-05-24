@@ -38,7 +38,6 @@ class AlumnoController extends Controller
         $grados = \App\Models\GradoCurso::orderBy('id')->get();
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
-        $indicadores = \App\Models\IndicadoresFaltas::orderBy('indicador_falta')->get();
 
         return view('rrhh.alumnos.index', compact(
             'alumnos',
@@ -48,8 +47,7 @@ class AlumnoController extends Controller
             'vivecon',
             'parentescos',
             'grados',
-            'anios',
-            'indicadores'
+            'anios'
         ));
     }
 

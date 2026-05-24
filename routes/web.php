@@ -26,6 +26,7 @@ use App\Http\Controllers\IndicadoresFaltasController;
 use App\Http\Controllers\AsignaturaColaboradorController;
 use App\Http\Controllers\FaltaController;
 
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
