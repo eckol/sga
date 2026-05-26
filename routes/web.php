@@ -27,6 +27,8 @@ use App\Http\Controllers\AsignaturaColaboradorController;
 use App\Http\Controllers\FaltaController;
 use App\Http\Controllers\Academica\AsistenciaController;
 use App\Http\Controllers\PortalResponsableController;
+use App\Http\Controllers\Academica\EntrevistaController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -118,6 +120,21 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/asistencias/guardar-grilla', [AsistenciaController::class, 'guardarGrilla'])->name('asistencias.guardarGrilla');
         Route::get('/asistencias/{alumno}/por-alumno', [AsistenciaController::class, 'porAlumno'])->name('asistencias.porAlumno');
         Route::delete('/asistencias/{id}', [AsistenciaController::class, 'destroy'])->name('asistencias.destroy');
+        // 1. Rutas del Módulo Principal de Entrevistas
+        Route::get('entrevistas', [EntrevistaController::class, 'index'])->name('entrevistas.index');
+
+        // 2. CRUD para Entrevistas con Alumnos Directos
+        Route::post('entrevistas/alumno', [EntrevistaController::class, 'storeAlumno'])->name('entrevistas.alumno.store');
+        Route::put('entrevistas/alumno/{id}', [EntrevistaController::class, 'updateAlumno'])->name('entrevistas.alumno.update');
+        Route::delete('entrevistas/alumno/{id}', [EntrevistaController::class, 'destroyAlumno'])->name('entrevistas.alumno.destroy');
+
+        // 3. CRUD para Actas de Entrevistas con Padres / Encargados
+        Route::post('entrevistas/responsable', [EntrevistaController::class, 'storeResponsable'])->name('entrevistas.responsable.store');
+        Route::put('entrevistas/responsable/{id}', [EntrevistaController::class, 'updateResponsable'])->name('entrevistas.responsable.update');
+        Route::delete('entrevistas/responsable/{id}', [EntrevistaController::class, 'destroyResponsable'])->name('entrevistas.responsable.destroy');
+
+        // 4. API/AJAX interna para alimentar el Tab del modal del expediente del Alumno
+        Route::get('entrevistas/alumno/{alumnoId}/json', [EntrevistaController::class, 'getEntrevistasPorAlumno'])->name('entrevistas.alumno.json');
     });
 });
 

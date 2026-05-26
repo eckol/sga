@@ -208,7 +208,7 @@
                     Gabinete <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuGabinete">
-                    <a href="#" class="nav-link">Entrevistas</a>
+                    <a href="{{ route('entrevistas.index') }}" class="nav-link">Entrevistas</a>
                     <a href="#" class="nav-link">Observaciones</a>
                 </div>
 

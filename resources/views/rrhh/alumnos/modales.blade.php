@@ -644,7 +644,31 @@
 
                     {{-- Tab 6: Entrevistas --}}
                     <div class="tab-pane fade" id="tab-entrevistas" role="tabpanel">
-                        <p class="text-muted p-2">Módulo de entrevistas en desarrollo...</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2 mb-1">
+                            <h6 class="fw-bold text-secondary mb-0" style="font-size: 0.75rem;">Historial de Entrevistas
+                            </h6>
+                            <a href="{{ route('entrevistas.index') }}" class="btn btn-primary btn-xs py-1 px-2"
+                                style="font-size: 0.65rem;">
+                                Ir al Módulo <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="tabla-entrevistas-alumno"
+                                class="table table-sm table-bordered table-hover table-xs" style="width:100%;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Tipo</th>
+                                        <th>Atendido por</th>
+                                        <th>Motivo</th>
+                                        <th>Observación</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body-entrevistas-alumno">
+                                    {{-- Se cargará vía AJAX --}}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -819,6 +843,31 @@
                 console.error(error);
                 Swal.fire('Error', 'Hubo un problema al buscar los datos.', 'error');
             });
+    }
+
+    function cargarEntrevistasTab(alumnoId) {
+        const body = $('#body-entrevistas-alumno');
+        body.html('<tr><td colspan="5" class="text-center">Cargando entrevistas...</td></tr>');
+
+        $.get(`/academica/entrevistas/alumno/${alumnoId}/json`, function (data) {
+            let html = '';
+            if (data.length > 0) {
+                data.forEach(e => {
+                    let badgeClass = e.tipo === 'Alumno' ? 'bg-info' : 'bg-success';
+                    html += `
+                    <tr>
+                        <td>${e.fecha}</td>
+                        <td><span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span></td>
+                        <td>${e.entrevistador}</td>
+                        <td class="fw-bold">${e.motivo}</td>
+                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${e.obs}">${e.obs || '-'}</td>
+                    </tr>`;
+                });
+            } else {
+                html = '<tr><td colspan="5" class="text-center text-muted">No hay entrevistas registradas.</td></tr>';
+            }
+            body.html(html);
+        });
     }
 </script>
 
