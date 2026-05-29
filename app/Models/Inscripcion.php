@@ -23,7 +23,8 @@ class Inscripcion extends Model
         'aut_foto',
         'estado',
         'fecha_baja',
-        'observaciones'
+        'observaciones',
+        'al_dia'
     ];
 
     public function alumno()

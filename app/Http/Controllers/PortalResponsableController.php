@@ -8,15 +8,10 @@ use Illuminate\Http\JsonResponse;
 
 class PortalResponsableController extends Controller
 {
-    /**
-     * Vista principal del Portal de Responsables
-     */
     public function index()
     {
-        // Correo del responsable autenticado
         $emailUsuario = auth()->user()->email;
 
-        // Buscamos los alumnos asociados al email por cualquiera de los 3 roles
         $alumnos = Alumno::whereHas('madre', function ($q) use ($emailUsuario) {
             $q->where('email', $emailUsuario);
         })
@@ -42,6 +37,12 @@ class PortalResponsableController extends Controller
             ])
             ->get();
 
-        return view('portal_responsables.index', compact('alumnos'));
+        $tieneDeuda = $alumnos->contains(function ($alumno) {
+            return $alumno->inscripciones
+                ->where('al_dia', 0)  // <- usar 0 en lugar de false
+                ->isNotEmpty();
+        });
+
+        return view('portal_responsables.index', compact('alumnos', 'tieneDeuda'));
     }
 }

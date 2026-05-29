@@ -80,7 +80,12 @@
 
         input:checked+.slider {
             background-color: #198754;
-            /* Bootstrap Success color */
+            /* verde = al día */
+        }
+
+        input:not(:checked)+.slider {
+            background-color: #dc3545;
+            /* rojo = no al día */
         }
 
         input:checked+.slider:before {
@@ -132,7 +137,7 @@
                         <th>Cédula Id.</th>
                         <th>Sexo</th>
                         <th>Teléfono</th>
-                        <th class="text-center">Activo</th>
+                        <th class="text-center">Al día</th>
                         <th width="80" class="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -146,7 +151,7 @@
                             <td>{{ $al->telefono ?? '-' }}</td>
                             <td class="text-center align-middle">
                                 <label class="toggle mb-0" style="margin-top:0;">
-                                    <input type="checkbox" class="toggle-estado" data-id="{{ $al->id }}" data-campo="activo" {{ $al->activo == 'Sí' ? 'checked' : '' }}>
+                                    <input type="checkbox" class="toggle-estado" data-id="{{ $al->id }}" data-campo="al_dia" {{ $al->inscripciones->first()?->al_dia ? 'checked' : '' }}>
                                     <span class="slider"></span>
                                 </label>
                             </td>
@@ -302,8 +307,35 @@
                             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
                     });
 
+                    // ── DataTable de entrevistas ──
+                    var dtEntrevistas = $('#tabla-entrevistas-alumno').DataTable({
+                        "order": [[0, "desc"]],
+                        "pageLength": 5,
+                        "lengthMenu": [5, 10, 25],
+                        "autoWidth": false,
+                        "columns": [
+                            { "title": "Fecha", "width": "80px" },
+                            { "title": "Tipo", "width": "70px" },
+                            { "title": "Atendido por", "width": "30%" },
+                            { "title": "Motivo", "width": "40%" },
+                            { "title": "Editar", "orderable": false, "className": "text-center", "width": "50px" }
+                        ],
+                        "language": {
+                            "search": "Buscar:",
+                            "lengthMenu": "Mostrar _MENU_",
+                            "paginate": { "next": "›", "previous": "‹" },
+                            "info": "_START_–_END_ de _TOTAL_",
+                            "infoEmpty": "0 registros",
+                            "zeroRecords": "Sin entrevistas",
+                            "emptyTable": "Sin entrevistas registradas"
+                        },
+                        "dom": "<'row mb-1'<'col-sm-6'l><'col-sm-6'f>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
+                    });
+
                     // ── Listener para abrir modal de edición de ALUMNO ──
-                    $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
+                    $(document).on('click', '.btn-editar:not(.btn-editar-falta):not(.btn-editar-entrevista)', function () {
                         var d = $(this).data('json');
                         $('#formEditar').attr('action', "{{ url('rrhh/alumnos') }}/" + d.id);
 
@@ -338,6 +370,7 @@
                         $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
                         $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
                         dtFaltas.clear().draw();
+                        dtEntrevistas.clear().draw();
 
                         // Cargar detalles vía AJAX
                         $.get("{{ url('academica/alumnos') }}/" + d.id + "/detalles")
@@ -352,14 +385,14 @@
                                 if (res.inscripciones && res.inscripciones.length > 0) {
                                     res.inscripciones.forEach(ins => {
                                         html += `<tr>
-                                                                        <td>${ins.id}</td>
-                                                                        <td>${ins.fecha}</td>
-                                                                        <td>${ins.anio_lectivo}</td>
-                                                                        <td>${ins.grado_curso}</td>
-                                                                        <td>${ins.firmante_nombre || ''}</td>
-                                                                        <td>${ins.firmante_rol || ''}</td>
-                                                                        <td>${ins.estado}</td>
-                                                                    </tr>`;
+                                                                                        <td>${ins.id}</td>
+                                                                                        <td>${ins.fecha}</td>
+                                                                                        <td>${ins.anio_lectivo}</td>
+                                                                                        <td>${ins.grado_curso}</td>
+                                                                                        <td>${ins.firmante_nombre || ''}</td>
+                                                                                        <td>${ins.firmante_rol || ''}</td>
+                                                                                        <td>${ins.estado}</td>
+                                                                                    </tr>`;
                                     });
                                 } else {
                                     html = '<tr><td colspan="7" class="text-center text-muted">Sin historial</td></tr>';
@@ -371,17 +404,17 @@
                                 if (res.faltas && res.faltas.length > 0) {
                                     res.faltas.forEach(f => {
                                         var boton = `<button type="button"
-                                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
-                                                                        style="font-size:0.65rem;"
-                                                                        data-id="${f.id}"
-                                                                        data-fecha="${f.fecha_raw ?? ''}"
-                                                                        data-grado="${f.grado_curso_id}"
-                                                                        data-alumno="${f.alumno_id}"
-                                                                        data-asignatura="${f.asignatura_id}"
-                                                                        data-indicador="${f.indicador_falta_id}"
-                                                                        title="Editar falta">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </button>`;
+                                                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                                                        style="font-size:0.65rem;"
+                                                                                        data-id="${f.id}"
+                                                                                        data-fecha="${f.fecha_raw ?? ''}"
+                                                                                        data-grado="${f.grado_curso_id}"
+                                                                                        data-alumno="${f.alumno_id}"
+                                                                                        data-asignatura="${f.asignatura_id}"
+                                                                                        data-indicador="${f.indicador_falta_id}"
+                                                                                        title="Editar falta">
+                                                                                        <i class="fas fa-edit"></i>
+                                                                                    </button>`;
                                         dtFaltas.row.add([
                                             f.id,
                                             f.fecha,
@@ -393,11 +426,43 @@
                                     });
                                 }
                                 dtFaltas.draw();
+
+                                // Repoblar DataTable de Entrevistas
+                                dtEntrevistas.clear();
+                                if (res.entrevistas && res.entrevistas.length > 0) {
+                                    res.entrevistas.forEach(e => {
+                                        let badgeClass = e.tipo === 'Alumno' ? 'bg-info' : 'bg-success';
+                                        let badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span>`;
+
+                                        let boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-entrevista"
+                                                                    style="font-size:0.65rem;"
+                                                                    data-id="${e.id}"
+                                                                    data-tipo="${e.tipo}"
+                                                                    data-fecha="${e.fecha_raw}"
+                                                                    data-colaborador="${e.colaborador_id}"
+                                                                    data-motivo="${e.motivo}"
+                                                                    data-obs="${e.obs || ''}"
+                                                                    data-testigos='${JSON.stringify(e.testigos || [])}'
+                                                                    title="Editar entrevista">
+                                                                    <i class="fas fa-edit"></i>
+                                                                 </button>`;
+
+                                        dtEntrevistas.row.add([
+                                            e.fecha,
+                                            badgeHtml,
+                                            e.entrevistador,
+                                            e.motivo,
+                                            boton
+                                        ]);
+                                    });
+                                }
+                                dtEntrevistas.draw();
                             })
                             .fail(function () {
                                 $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Error al cargar');
                                 $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar</td></tr>');
                                 dtFaltas.clear().draw();
+                                dtEntrevistas.clear().draw();
                             });
 
                         new bootstrap.Modal(document.getElementById('modalEditar')).show();
@@ -468,6 +533,42 @@
                         setTimeout(function () {
                             new bootstrap.Modal(document.getElementById('modalEditarFalta')).show();
                         }, 300);
+                    });
+
+                    // ── Abrir modal Editar Entrevista ──
+                    $(document).on('click', '.btn-editar-entrevista', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        const d = $(this).data();
+                        const tipo = d.tipo; // 'Alumno' o 'Responsable'
+
+                        if (tipo === 'Alumno') {
+                            $('#formEditarEntrevistaAlumno').attr('action', "{{ url('academica/entrevistas/alumno') }}/" + d.id);
+                            $('#edit_ent_al_fecha').val(d.fecha);
+                            $('#edit_ent_al_colaborador').val(d.colaborador);
+                            $('#edit_ent_al_motivo').val(d.motivo);
+                            $('#edit_ent_al_obs').val(d.obs);
+
+                            bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
+                            setTimeout(function () {
+                                new bootstrap.Modal(document.getElementById('modalEditarEntrevistaAlumno')).show();
+                            }, 300);
+                        } else {
+                            $('#formEditarEntrevistaResponsable').attr('action', "{{ url('academica/entrevistas/responsable') }}/" + d.id);
+                            $('#edit_ent_res_fecha').val(d.fecha);
+                            $('#edit_ent_res_colaborador').val(d.colaborador);
+                            $('#edit_ent_res_motivo').val(d.motivo);
+                            $('#edit_ent_res_obs').val(d.obs);
+
+                            // Select2 para testigos
+                            $('#edit_ent_res_testigos').val(d.testigos).trigger('change');
+
+                            bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
+                            setTimeout(function () {
+                                new bootstrap.Modal(document.getElementById('modalEditarEntrevistaResponsable')).show();
+                            }, 300);
+                        }
                     });
 
                     // Listener para los toggles (AJAX Update)

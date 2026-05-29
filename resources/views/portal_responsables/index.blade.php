@@ -109,6 +109,9 @@
         </div>
     </div>
 
+    {{-- ══════════════════════════════════════════════════════════
+    MODAL PRINCIPAL: Ficha del Alumno (multi-tab)
+    ══════════════════════════════════════════════════════════ --}}
     <div class="modal fade" id="modalAlumnoAsist" tabindex="-1" style="z-index: 1060;">
         <div class="modal-dialog modal-xl" style="max-width: 95vw;">
             <div class="modal-content">
@@ -162,6 +165,13 @@
                             <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-faltas"
                                 type="button">
                                 <i class="fas fa-triangle-exclamation me-1"></i>Faltas
+                            </button>
+                        </li>
+                        {{-- ── NUEVO TAB: Entrevistas ── --}}
+                        <li class="nav-item">
+                            <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-entrevistas"
+                                type="button" id="tab-btn-entrevistas">
+                                <i class="fas fa-comments me-1"></i>Entrevistas
                             </button>
                         </li>
                     </ul>
@@ -440,6 +450,28 @@
                             </div>
                         </div>
 
+                        {{-- ══════════════════════════════════════════════════════
+                        Tab 7: Entrevistas ← NUEVO
+                        ══════════════════════════════════════════════════════ --}}
+                        <div class="tab-pane fade" id="masist-tab-entrevistas">
+                            <div class="table-responsive mt-1">
+                                <table id="tabla-entrevistas-portal" class="table table-sm table-bordered table-hover"
+                                    style="font-size:0.75rem;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width:85px;">Fecha</th>
+                                            <th style="width:90px;" class="text-center">Tipo</th>
+                                            <th>Entrevistador</th>
+                                            <th>Motivo</th>
+                                            <th style="width:55px;" class="text-center">Detalle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {{-- ══ Fin Tab Entrevistas ══ --}}
+
                     </div>
                 </div>
 
@@ -450,6 +482,89 @@
             </div>
         </div>
     </div>
+
+    {{-- ══════════════════════════════════════════════════════════
+    MODAL SECUNDARIO: Detalle de Entrevista (solo lectura)
+    ══════════════════════════════════════════════════════════ --}}
+    <div class="modal fade" id="modalDetalleEntrevista" tabindex="-1" style="z-index: 1070;">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header p-2" id="detalle-ent-header">
+                    <h6 class="modal-title fw-bold" id="detalle-ent-titulo" style="font-size:0.85rem;">
+                        <i class="fas fa-comments me-1"></i> Detalle de Entrevista
+                    </h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3" style="font-size:0.78rem;">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label mb-0 fw-bold">Fecha</label>
+                            <input type="text" id="det-ent-fecha" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label mb-0 fw-bold">Tipo</label>
+                            <input type="text" id="det-ent-tipo" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label mb-0 fw-bold">Entrevistador</label>
+                            <input type="text" id="det-ent-entrevistador" class="form-control form-control-sm bg-light"
+                                readonly>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mb-0 fw-bold">Motivo Principal</label>
+                            <input type="text" id="det-ent-motivo" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mb-0 fw-bold">Observaciones / Acuerdos</label>
+                            <textarea id="det-ent-obs" class="form-control form-control-sm bg-light" rows="4"
+                                readonly></textarea>
+                        </div>
+                        {{-- Sección Testigos: sólo visible para tipo Responsable --}}
+                        <div class="col-12" id="det-ent-testigos-wrap" style="display:none;">
+                            <label class="form-label mb-0 fw-bold">Testigos presentes</label>
+                            <div id="det-ent-testigos" class="d-flex flex-wrap gap-1 mt-1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ══ MODAL DEUDA ══ --}}
+    @if(isset($tieneDeuda) && $tieneDeuda)
+        <div id="modalDeuda" style="
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.75);
+            display: flex; align-items: center; justify-content: center;">
+            <div style="
+                background: #fff; border-radius: 12px;
+                padding: 2rem; max-width: 480px; width: 90%;
+                text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+
+                <i class="fas fa-exclamation-circle text-danger" style="font-size: 3rem;"></i>
+                <h5 class="mt-3 fw-bold text-danger">Acceso Restringido</h5>
+                <p class="text-muted mt-2" style="font-size: 0.9rem;">
+                    Su cuenta presenta <strong>cuotas pendientes de pago</strong>.<br>
+                    Para acceder al Portal de Familias, por favor regularice
+                    su situación en la Administración del Colegio Santa Teresita.
+                </p>
+                <hr>
+                <small class="text-muted d-block mb-3">
+                    Ante consultas, comuníquese con la administración del colegio.
+                </small>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                    </button>
+                </form>
+            </div>
+        </div>
+    @endif
+
 @endsection
 
 @section('scripts')
@@ -470,11 +585,124 @@
 
             const CSRF = "{{ csrf_token() }}";
             const URL_POR_ALUMNO = "{{ url('academica/asistencias') }}";
+            const URL_ENTREVISTAS = "{{ url('academica/entrevistas/alumno') }}";
 
             let _modalMes = new Date().getMonth() + 1;
             let _modalAnio = new Date().getFullYear();
 
-            // Setea los select del modal cuando cambia el combo dinámicamente
+            // ── DataTable de entrevistas (dentro del modal, inicializada una sola vez) ──
+            var dtEntrevistasPortal = $('#tabla-entrevistas-portal').DataTable({
+                "paging": true,
+                "pageLength": 10,
+                "order": [[0, "desc"]],
+                "columnDefs": [{ "orderable": false, "targets": 4 }],
+                "language": {
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_",
+                    "paginate": { "next": "›", "previous": "‹" },
+                    "info": "_START_–_END_ de _TOTAL_",
+                    "infoEmpty": "0 registros",
+                    "zeroRecords": "Sin entrevistas",
+                    "emptyTable": "Sin entrevistas registradas"
+                },
+                "dom": "<'row mb-1'<'col-sm-6'l><'col-sm-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
+            });
+
+            // ── Cargar entrevistas cuando se activa ese tab ──
+            $('#tab-btn-entrevistas').on('shown.bs.tab', function () {
+                const alumnoId = parseInt($('#masist_alumno_id').val());
+                if (!alumnoId || !idsPermitidos.includes(alumnoId)) return;
+                cargarEntrevistasPortal(alumnoId);
+            });
+
+            function cargarEntrevistasPortal(alumnoId) {
+                dtEntrevistasPortal.clear().draw();
+
+                $.get(`${URL_ENTREVISTAS}/${alumnoId}/json`)
+                    .done(function (data) {
+                        dtEntrevistasPortal.clear();
+
+                        if (data && data.length > 0) {
+                            data.forEach(function (e) {
+                                const esAlumno = e.tipo === 'Alumno';
+                                const badgeClass = esAlumno ? 'bg-info text-dark' : 'bg-success text-white';
+                                const icono = esAlumno
+                                    ? '<i class="fas fa-user-graduate me-1"></i>'
+                                    : '<i class="fas fa-users me-1"></i>';
+
+                                const badgeHtml = `<span class="badge ${badgeClass} px-2 py-1" style="font-size:0.65rem;">${icono}${e.tipo}</span>`;
+
+                                // Botón Ver detalle
+                                const btnVer = `<button type="button"
+                                                        class="btn btn-sm btn-outline-primary py-0 px-1 btn-ver-detalle-ent"
+                                                        style="font-size:0.65rem;"
+                                                        data-fecha="${e.fecha}"
+                                                        data-tipo="${e.tipo}"
+                                                        data-entrevistador="${e.entrevistador}"
+                                                        data-motivo="${e.motivo}"
+                                                        data-obs="${(e.obs || '').replace(/"/g, '&quot;')}"
+                                                        data-testigos='${JSON.stringify(e.testigos_nombres || [])}'
+                                                        title="Ver detalle">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>`;
+
+                                dtEntrevistasPortal.row.add([
+                                    e.fecha,
+                                    badgeHtml,
+                                    e.entrevistador,
+                                    e.motivo,
+                                    btnVer
+                                ]);
+                            });
+                        }
+
+                        dtEntrevistasPortal.draw();
+                    })
+                    .fail(function () {
+                        dtEntrevistasPortal.clear().draw();
+                    });
+            }
+
+            // ── Abrir modal de detalle al hacer clic en el ojo ──
+            $(document).on('click', '.btn-ver-detalle-ent', function () {
+                const tipo = $(this).data('tipo');
+                const esResponsable = tipo === 'Responsable';
+                const testigos = $(this).data('testigos') || [];
+
+                // Colores del header según tipo
+                const headerClass = esResponsable ? 'bg-success text-white' : 'bg-info text-dark';
+                $('#detalle-ent-header').removeClass('bg-success bg-info text-white text-dark').addClass(headerClass);
+                $('#detalle-ent-titulo').html(
+                    `<i class="fas fa-comments me-1"></i> ${esResponsable ? 'Acta con Responsables' : 'Entrevista con Alumno'}`
+                );
+
+                // Rellenar campos
+                $('#det-ent-fecha').val($(this).data('fecha'));
+                $('#det-ent-tipo').val(tipo);
+                $('#det-ent-entrevistador').val($(this).data('entrevistador'));
+                $('#det-ent-motivo').val($(this).data('motivo'));
+                $('#det-ent-obs').val($(this).data('obs') || '—');
+
+                // Testigos (solo para Responsables)
+                if (esResponsable && testigos.length > 0) {
+                    let html = '';
+                    testigos.forEach(function (t) {
+                        html += `<span class="badge bg-secondary py-1 px-2" style="font-size:0.65rem;font-weight:normal;">${t}</span>`;
+                    });
+                    $('#det-ent-testigos').html(html);
+                    $('#det-ent-testigos-wrap').show();
+                } else {
+                    $('#det-ent-testigos').html('');
+                    $('#det-ent-testigos-wrap').hide();
+                }
+
+                // Abrir el modal secundario sin cerrar el principal
+                new bootstrap.Modal(document.getElementById('modalDetalleEntrevista')).show();
+            });
+
+            // ── Setea los select del modal cuando cambia el combo dinámicamente ──
             $('#masist_mes').on('change', function () {
                 const aId = parseInt($('#masist_alumno_id').val());
                 if (idsPermitidos.includes(aId)) {
@@ -491,12 +719,12 @@
                 }
             });
 
-            // Al hacer clic en la lupa
+            // ── Al hacer clic en la lupa ──
             $('.btn-ver-asistencia').on('click', function () {
                 const alumnoId = parseInt($(this).data('id'));
                 const alumnoNombre = $(this).data('nombre');
 
-                // VALIDACIÓN DE SEGURIDAD INTERNA:
+                // VALIDACIÓN DE SEGURIDAD INTERNA
                 if (!idsPermitidos.includes(alumnoId)) {
                     Swal.fire({
                         icon: 'error',
@@ -518,11 +746,14 @@
                 const firstTab = new bootstrap.Tab(document.querySelector('#modalAlumnoAsistTabs button[data-bs-target="#masist-tab-datos"]'));
                 firstTab.show();
 
+                // Limpiar tabla de entrevistas al abrir una nueva ficha
+                dtEntrevistasPortal.clear().draw();
+
                 $('#modalAlumnoAsist').modal('show');
                 cargarCalendarioModal(alumnoId, _modalMes, _modalAnio);
             });
 
-            // Lógica AJAX para alimentar el modal
+            // ── Lógica AJAX para alimentar el modal ──
             function cargarCalendarioModal(alumnoId, mes, anio) {
                 if (!alumnoId || !idsPermitidos.includes(parseInt(alumnoId))) return;
 
@@ -589,11 +820,11 @@
                                 let htmlFaltas = '';
                                 a.faltas.forEach(f => {
                                     htmlFaltas += `<tr>
-                                        <td>${f.fecha ? f.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
-                                        <td>${f.indicador_falta?.indicador_falta || '—'}</td>
-                                        <td>${f.asignatura?.asignatura || '—'}</td>
-                                        <td>${f.docente || '—'}</td>
-                                    </tr>`;
+                                                                <td>${f.fecha ? f.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                                                <td>${f.indicador_falta?.indicador_falta || '—'}</td>
+                                                                <td>${f.asignatura?.asignatura || '—'}</td>
+                                                                <td>${f.docente || '—'}</td>
+                                                            </tr>`;
                                 });
                                 $('#masist-faltas-body').html(htmlFaltas);
                             } else {
@@ -606,13 +837,13 @@
                             let htmlIns = '';
                             res.inscripciones.forEach(i => {
                                 htmlIns += `<tr>
-                                    <td>${i.anio_lectivo}</td>
-                                    <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
-                                    <td>${i.grado?.gradocurso || '—'}</td>
-                                    <td>${i.firmante_nombre || '—'}</td>
-                                    <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
-                                        style="font-size:0.65rem;">${i.estado || '—'}</span></td>
-                                </tr>`;
+                                                            <td>${i.anio_lectivo}</td>
+                                                            <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                                            <td>${i.grado?.gradocurso || '—'}</td>
+                                                            <td>${i.firmante_nombre || '—'}</td>
+                                                            <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
+                                                                style="font-size:0.65rem;">${i.estado || '—'}</span></td>
+                                                        </tr>`;
                             });
                             $('#masist-inscripciones-body').html(htmlIns);
                         } else {
@@ -661,9 +892,7 @@
                                     htmlWrap += `<div style="text-align:center;color:#adb5bd;font-weight:600;padding-bottom:2px;">${d}</div>`;
                                 });
 
-                                for (let i = 0; i < primerDia; i++) {
-                                    htmlWrap += `<div></div>`;
-                                }
+                                for (let i = 0; i < primerDia; i++) { htmlWrap += `<div></div>`; }
 
                                 for (let d = 1; d <= diasEnMes; d++) {
                                     const diaSem = new Date(anio, m - 1, d).getDay();
@@ -706,17 +935,17 @@
                             });
                         }
                         let htmlRes = `<table class="table table-sm table-striped table-hover m-0" style="font-size:0.72rem;">
-                                        <thead class="table-light">
-                                            <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
-                                        </thead><tbody>`;
+                                                                <thead class="table-light">
+                                                                    <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
+                                                                </thead><tbody>`;
                         for (let m = 1; m <= 12; m++) {
                             htmlRes += `<tr>
-                                <td>${nombreMes(m)}</td>
-                                <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
-                                <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
-                                <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
-                                <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
-                            </tr>`;
+                                                        <td>${nombreMes(m)}</td>
+                                                        <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
+                                                        <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
+                                                        <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
+                                                        <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
+                                                    </tr>`;
                         }
                         htmlRes += '</tbody></table>';
                         $('#masist-resumen').html(htmlRes);
@@ -732,7 +961,7 @@
                 return n[parseInt(m)] || '';
             }
 
-            // Flechas de navegación del modal
+            // ── Flechas de navegación del modal ──
             $('#masist-btn-prev').on('click', function () {
                 const aId = parseInt($('#masist_alumno_id').val());
                 if (idsPermitidos.includes(aId)) {

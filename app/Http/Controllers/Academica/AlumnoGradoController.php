@@ -20,7 +20,13 @@ class AlumnoGradoController extends Controller
             $anio_actual = date('Y');
 
             // Get inscripciones for the selected grado, current year, and estado = Matriculado
-            $inscripciones = \App\Models\Inscripcion::with(['alumno', 'alumno.nacionalidad'])
+            $inscripciones = \App\Models\Inscripcion::with([
+                'alumno',
+                'alumno.nacionalidad',
+                'alumno.inscripciones' => function ($q) {
+                    $q->where('anio_lectivo', date('Y'));
+                }
+            ])
                 ->where('grado_curso_id', $selectedGradoId)
                 ->where('anio_lectivo', $anio_actual)
                 ->where('estado', 'Matriculado')
@@ -41,6 +47,7 @@ class AlumnoGradoController extends Controller
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
         $indicadores = \App\Models\IndicadoresFaltas::orderBy('indicador_falta')->get();
+        $colaboradores = \App\Models\Colaborador::orderBy('apellidos')->get();
 
         return view('academica.alumnos_grado', compact(
             'grados',
@@ -53,7 +60,8 @@ class AlumnoGradoController extends Controller
             'vivecon',
             'parentescos',
             'anios',
-            'indicadores'
+            'indicadores',
+            'colaboradores'
         ));
     }
 
@@ -71,8 +79,42 @@ class AlumnoGradoController extends Controller
             'faltas.indicadorFalta',
             'faltas.gradoCurso',
             'faltas.asignatura',
+            'entrevistasAlumnos',
+            'entrevistasResponsables'
         ])
             ->findOrFail($id);
+
+        // Entrevistas combinadas (Alumnos + Responsables)
+        $entrevistas = collect();
+
+        foreach ($alumno->entrevistasAlumnos as $ea) {
+            $entrevistas->push([
+                'id' => $ea->id,
+                'tipo' => 'Alumno',
+                'fecha' => $ea->fecha->format('d/m/Y'),
+                'fecha_raw' => $ea->fecha->format('Y-m-d'),
+                'entrevistador' => $ea->entrevistador ? $ea->entrevistador->apellidos . ', ' . $ea->entrevistador->nombres : '—',
+                'colaborador_id' => $ea->colaborador_id,
+                'motivo' => $ea->motivo,
+                'obs' => $ea->observaciones,
+            ]);
+        }
+
+        foreach ($alumno->entrevistasResponsables as $er) {
+            $entrevistas->push([
+                'id' => $er->id,
+                'tipo' => 'Responsable',
+                'fecha' => $er->fecha->format('d/m/Y'),
+                'fecha_raw' => $er->fecha->format('Y-m-d'),
+                'entrevistador' => $er->entrevistador ? $er->entrevistador->apellidos . ', ' . $er->entrevistador->nombres : '—',
+                'colaborador_id' => $er->colaborador_id,
+                'motivo' => $er->motivo,
+                'obs' => $er->observaciones,
+                'testigos' => $er->testigos->pluck('id'),
+            ]);
+        }
+
+        $entrevistas = $entrevistas->sortByDesc(fn($e) => $e['fecha_raw'])->values();
 
         return response()->json([
             'madre' => $alumno->madre,
@@ -107,16 +149,26 @@ class AlumnoGradoController extends Controller
                     'alumno_id' => $f->alumno_id,
                 ];
             }),
+            'entrevistas' => $entrevistas,
         ]);
     }
 
     public function toggleEstado(Request $request, $id)
     {
-        $alumno = \App\Models\Alumno::findOrFail($id);
-        if ($request->has('activo')) {
-            $alumno->activo = $request->input('activo') == 'true' ? 'Sí' : 'No';
+        if ($request->has('al_dia')) {
+            $valor = filter_var($request->input('al_dia'), FILTER_VALIDATE_BOOLEAN);
+            $alumno = \App\Models\Alumno::findOrFail($id);
+            \App\Models\Inscripcion::where('alumno_cid', $alumno->cid)
+                ->where('anio_lectivo', date('Y'))
+                ->update(['al_dia' => $valor]);
         }
-        $alumno->save();
+
+        if ($request->has('activo')) {
+            $alumno = \App\Models\Alumno::findOrFail($id);
+            $alumno->activo = filter_var($request->input('activo'), FILTER_VALIDATE_BOOLEAN) ? 'Sí' : 'No';
+            $alumno->save();
+        }
+
         return response()->json(['success' => true]);
     }
 }

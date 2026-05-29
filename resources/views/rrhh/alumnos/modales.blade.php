@@ -652,19 +652,19 @@
                                 Ir al Módulo <i class="fas fa-external-link-alt ms-1"></i>
                             </a>
                         </div>
-                        <div class="table-responsive">
-                            <table id="tabla-entrevistas-alumno"
-                                class="table table-sm table-bordered table-hover table-xs" style="width:100%;">
+                        <div class="table-responsive mt-1">
+                            <table id="tabla-entrevistas-alumno" class="table table-sm table-bordered table-hover"
+                                style="font-size: 0.75rem; width:100%;">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Fecha</th>
-                                        <th>Tipo</th>
-                                        <th>Atendido por</th>
+                                        <th style="width: 10px;">Fecha</th>
+                                        <th style="width: 10px;">Tipo</th>
+                                        <th style="width: 25%;">Atendido por</th>
                                         <th>Motivo</th>
-                                        <th>Observación</th>
+                                        <th class="text-center" style="width:50px;">Editar</th>
                                     </tr>
                                 </thead>
-                                <tbody id="body-entrevistas-alumno">
+                                <tbody>
                                     {{-- Se cargará vía AJAX --}}
                                 </tbody>
                             </table>
@@ -845,31 +845,110 @@
             });
     }
 
-    function cargarEntrevistasTab(alumnoId) {
-        const body = $('#body-entrevistas-alumno');
-        body.html('<tr><td colspan="5" class="text-center">Cargando entrevistas...</td></tr>');
-
-        $.get(`/academica/entrevistas/alumno/${alumnoId}/json`, function (data) {
-            let html = '';
-            if (data.length > 0) {
-                data.forEach(e => {
-                    let badgeClass = e.tipo === 'Alumno' ? 'bg-info' : 'bg-success';
-                    html += `
-                    <tr>
-                        <td>${e.fecha}</td>
-                        <td><span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span></td>
-                        <td>${e.entrevistador}</td>
-                        <td class="fw-bold">${e.motivo}</td>
-                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${e.obs}">${e.obs || '-'}</td>
-                    </tr>`;
-                });
-            } else {
-                html = '<tr><td colspan="5" class="text-center text-muted">No hay entrevistas registradas.</td></tr>';
-            }
-            body.html(html);
-        });
-    }
+    // Función cargarEntrevistasTab removida (ahora se maneja vía DataTables API en index.blade.php)
 </script>
+
+{{-- ════════════════════════════════════════════════ --}}
+{{-- Modales de Edición de Entrevistas (abiertos desde el tab Entrevistas del modal Alumno) --}}
+{{-- ════════════════════════════════════════════════ --}}
+<div class="modal fade" id="modalEditarEntrevistaAlumno" tabindex="-1" style="z-index: 1085;">
+    <div class="modal-dialog">
+        <form id="formEditarEntrevistaAlumno" method="POST" class="modal-content">
+            @csrf @method('PUT')
+            <div class="modal-header p-2 bg-warning text-dark">
+                <h6 class="modal-title fw-bold" style="font-size: 0.85rem;"><i class="fas fa-edit me-1"></i>
+                    Modificar Entrevista Alumno</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-2">
+                <div class="row g-2" style="font-size: 0.75rem;">
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Fecha</label>
+                        <input type="date" name="fecha" id="edit_ent_al_fecha" class="form-control form-control-sm"
+                            required>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label mb-0 fw-bold">Entrevistador</label>
+                        <select name="colaborador_id" id="edit_ent_al_colaborador" class="form-select form-select-sm"
+                            required>
+                            @foreach($colaboradores as $c)
+                                <option value="{{ $c->id }}">{{ $c->apellidos }}, {{ $c->nombres }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label mb-0 fw-bold">Motivo Principal</label>
+                        <input type="text" name="motivo" id="edit_ent_al_motivo" class="form-control form-control-sm"
+                            required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label mb-0 fw-bold">Observaciones / Acuerdos</label>
+                        <textarea name="observaciones" id="edit_ent_al_obs" class="form-control form-control-sm"
+                            rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer p-1">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-warning btn-sm fw-bold text-dark">Actualizar Registro</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditarEntrevistaResponsable" tabindex="-1" style="z-index: 1085;">
+    <div class="modal-dialog">
+        <form id="formEditarEntrevistaResponsable" method="POST" class="modal-content">
+            @csrf @method('PUT')
+            <div class="modal-header p-2 bg-warning text-dark">
+                <h6 class="modal-title fw-bold" style="font-size: 0.85rem;"><i class="fas fa-edit me-1"></i>
+                    Modificar Acta de Responsables</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-2">
+                <div class="row g-2" style="font-size: 0.75rem;">
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Fecha</label>
+                        <input type="date" name="fecha" id="edit_ent_res_fecha" class="form-control form-control-sm"
+                            required>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label mb-0 fw-bold">Atendido por</label>
+                        <select name="colaborador_id" id="edit_ent_res_colaborador" class="form-select form-select-sm"
+                            required>
+                            @foreach($colaboradores as $c)
+                                <option value="{{ $c->id }}">{{ $c->apellidos }}, {{ $c->nombres }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label mb-0 fw-bold">Testigos en Acta</label>
+                        <select name="testigos[]" id="edit_ent_res_testigos"
+                            class="form-select form-select-sm select2-modal" multiple style="width: 100%;">
+                            @foreach($colaboradores as $c)
+                                <option value="{{ $c->id }}">{{ $c->apellidos }}, {{ $c->nombres }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label mb-0 fw-bold">Motivo del Encuentro</label>
+                        <input type="text" name="motivo" id="edit_ent_res_motivo" class="form-control form-control-sm"
+                            required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label mb-0 fw-bold">Resoluciones / Acuerdos</label>
+                        <textarea name="observaciones" id="edit_ent_res_obs" class="form-control form-control-sm"
+                            rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer p-1">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-warning btn-sm fw-bold text-dark">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {{-- ════════════════════════════════════════════════ --}}
 {{-- Modal Editar Falta (abierto desde el tab Faltas del modal Alumno) --}}

@@ -32,7 +32,7 @@ class EntrevistaController extends Controller
         $entrevistasAlumnos = EntrevistaAlumno::with(['alumno', 'entrevistador'])->latest()->get();
         $entrevistasResponsables = EntrevistaResponsable::with(['alumno', 'entrevistador', 'testigos'])->latest()->get();
 
-        // Data para los formularios de creación
+        // Data para los formularios de creacion
         $alumnos = $this->getAlumnosMatriculados();
         $colaboradores = Colaborador::orderBy('apellidos')->get();
 
@@ -67,11 +67,10 @@ class EntrevistaController extends Controller
             'colaborador_id' => 'required|exists:colaboradores,id',
             'motivo' => 'required|string|max:255',
             'observaciones' => 'nullable|string',
-            'testigos' => 'nullable|array', // Array de IDs de colaboradores
+            'testigos' => 'nullable|array',
             'testigos.*' => 'exists:colaboradores,id',
         ]);
 
-        // Recuperamos el alumno para autofiltrar e hidratar sus responsables en la BD
         $alumno = Alumno::findOrFail($data['alumno_id']);
 
         $entrevista = EntrevistaResponsable::create([
@@ -86,11 +85,119 @@ class EntrevistaController extends Controller
             'parentesco_id' => $alumno->parentesco_id,
         ]);
 
-        // Sincronizamos los testigos en la tabla intermedia (Many-to-Many de Laravel)
         if (!empty($request->input('testigos'))) {
             $entrevista->testigos()->sync($request->input('testigos'));
         }
 
-        return redirect()->back()->with('success', 'Entrevista de Responsables registrada con éxito.');
+        return redirect()->back()->with('success', 'Entrevista de Responsables registrada con exito.');
+    }
+
+    // ── UPDATE ─────────────────────────────────────────────────────────────
+
+    public function updateAlumno(Request $request, int $id): RedirectResponse
+    {
+        $entrevista = EntrevistaAlumno::findOrFail($id);
+
+        $data = $request->validate([
+            'fecha' => 'required|date',
+            'colaborador_id' => 'required|exists:colaboradores,id',
+            'motivo' => 'required|string|max:255',
+            'observaciones' => 'nullable|string',
+        ]);
+
+        $entrevista->update($data);
+
+        return redirect()->back()->with('success', 'Entrevista de Alumno actualizada correctamente.');
+    }
+
+    public function updateResponsable(Request $request, int $id): RedirectResponse
+    {
+        $entrevista = EntrevistaResponsable::findOrFail($id);
+
+        $data = $request->validate([
+            'fecha' => 'required|date',
+            'colaborador_id' => 'required|exists:colaboradores,id',
+            'motivo' => 'required|string|max:255',
+            'observaciones' => 'nullable|string',
+            'testigos' => 'nullable|array',
+            'testigos.*' => 'exists:colaboradores,id',
+        ]);
+
+        $entrevista->update([
+            'fecha' => $data['fecha'],
+            'colaborador_id' => $data['colaborador_id'],
+            'motivo' => $data['motivo'],
+            'observaciones' => $data['observaciones'] ?? null,
+        ]);
+
+        $entrevista->testigos()->sync($request->input('testigos', []));
+
+        return redirect()->back()->with('success', 'Acta de Responsables actualizada correctamente.');
+    }
+
+    // ── DESTROY ────────────────────────────────────────────────────────────
+
+    public function destroyAlumno(int $id): RedirectResponse
+    {
+        EntrevistaAlumno::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Entrevista eliminada correctamente.');
+    }
+
+    public function destroyResponsable(int $id): RedirectResponse
+    {
+        $entrevista = EntrevistaResponsable::findOrFail($id);
+        $entrevista->testigos()->detach();
+        $entrevista->delete();
+        return redirect()->back()->with('success', 'Acta de Responsables eliminada correctamente.');
+    }
+
+    // ── AJAX ───────────────────────────────────────────────────────────────
+
+    public function getEntrevistasPorAlumno(int $alumnoId)
+    {
+        $alumno = Alumno::with([
+            'entrevistasAlumnos.entrevistador',
+            'entrevistasResponsables.entrevistador',
+            'entrevistasResponsables.testigos'
+        ])->findOrFail($alumnoId);
+
+        $entrevistas = collect();
+
+        foreach ($alumno->entrevistasAlumnos as $ea) {
+            $entrevistas->push([
+                'id' => $ea->id,
+                'tipo' => 'Alumno',
+                'fecha' => $ea->fecha->format('d/m/Y'),
+                'fecha_raw' => $ea->fecha->format('Y-m-d'),
+                'entrevistador' => $ea->entrevistador
+                    ? $ea->entrevistador->apellidos . ', ' . $ea->entrevistador->nombres
+                    : '-',
+                'colaborador_id' => $ea->colaborador_id,
+                'motivo' => $ea->motivo,
+                'obs' => $ea->observaciones,
+                'testigos' => [],           // sin testigos en entrevista de alumno
+                'testigos_nombres' => [],
+            ]);
+        }
+
+        foreach ($alumno->entrevistasResponsables as $er) {
+            $entrevistas->push([
+                'id' => $er->id,
+                'tipo' => 'Responsable',
+                'fecha' => $er->fecha->format('d/m/Y'),
+                'fecha_raw' => $er->fecha->format('Y-m-d'),
+                'entrevistador' => $er->entrevistador
+                    ? $er->entrevistador->apellidos . ', ' . $er->entrevistador->nombres
+                    : '-',
+                'colaborador_id' => $er->colaborador_id,
+                'motivo' => $er->motivo,
+                'obs' => $er->observaciones,
+                'testigos' => $er->testigos->pluck('id'),
+                // ← NUEVO: nombres completos para mostrar en el Portal
+                'testigos_nombres' => $er->testigos->map(fn($t) => $t->apellidos . ', ' . $t->nombres)->values(),
+            ]);
+        }
+
+        return response()->json($entrevistas->sortByDesc('fecha_raw')->values());
     }
 }

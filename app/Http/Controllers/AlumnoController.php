@@ -36,6 +36,7 @@ class AlumnoController extends Controller
         $vivecon = ViveCon::all();
         $parentescos = Parentesco::all();
         $grados = \App\Models\GradoCurso::orderBy('id')->get();
+        $colaboradores = \App\Models\Colaborador::orderBy('apellidos')->get();
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
         $indicadores = \App\Models\IndicadoresFaltas::orderBy('indicador_falta')->get();
@@ -48,6 +49,7 @@ class AlumnoController extends Controller
             'vivecon',
             'parentescos',
             'grados',
+            'colaboradores',
             'anios',
             'indicadores'
         ));
@@ -92,11 +94,11 @@ class AlumnoController extends Controller
 
     // ----------------------------------------------------------------
     // GET  academica/alumnos/{id}/detalles
-    // AJAX: responsables + historial de inscripciones + faltas
+    // AJAX: responsables + historial de inscripciones + faltas + entrevistas
     // ----------------------------------------------------------------
     public function detalles(int $id): JsonResponse
     {
-        $alumno = Alumno::with(['madre', 'padre', 'encargado', 'inscripciones'])->findOrFail($id);
+        $alumno = Alumno::with(['madre', 'padre', 'encargado', 'inscripciones', 'entrevistasAlumnos', 'entrevistasResponsables'])->findOrFail($id);
 
         $madre = Madre::where('cid', $alumno->cid_madre)->first();
         $padre = Padre::where('cid', $alumno->cid_padre)->first();
@@ -126,12 +128,45 @@ class AlumnoController extends Controller
             'alumno_id' => $f->alumno_id,
         ]);
 
+        // Entrevistas combinadas (Alumnos + Responsables)
+        $entrevistas = collect();
+
+        foreach ($alumno->entrevistasAlumnos as $ea) {
+            $entrevistas->push([
+                'id' => $ea->id,
+                'tipo' => 'Alumno',
+                'fecha' => $ea->fecha->format('d/m/Y'),
+                'fecha_raw' => $ea->fecha->format('Y-m-d'),
+                'entrevistador' => $ea->entrevistador ? $ea->entrevistador->apellidos . ', ' . $ea->entrevistador->nombres : '—',
+                'colaborador_id' => $ea->colaborador_id,
+                'motivo' => $ea->motivo,
+                'obs' => $ea->observaciones,
+            ]);
+        }
+
+        foreach ($alumno->entrevistasResponsables as $er) {
+            $entrevistas->push([
+                'id' => $er->id,
+                'tipo' => 'Responsable',
+                'fecha' => $er->fecha->format('d/m/Y'),
+                'fecha_raw' => $er->fecha->format('Y-m-d'),
+                'entrevistador' => $er->entrevistador ? $er->entrevistador->apellidos . ', ' . $er->entrevistador->nombres : '—',
+                'colaborador_id' => $er->colaborador_id,
+                'motivo' => $er->motivo,
+                'obs' => $er->observaciones,
+                'testigos' => $er->testigos->pluck('id'),
+            ]);
+        }
+
+        $entrevistas = $entrevistas->sortByDesc(fn($e) => $e['fecha_raw'])->values();
+
         return response()->json([
             'madre' => $madre,
             'padre' => $padre,
             'encargado' => $encargado,
             'inscripciones' => $inscripciones,
             'faltas' => $faltas,
+            'entrevistas' => $entrevistas,
         ]);
     }
 
@@ -157,4 +192,24 @@ class AlumnoController extends Controller
             'indicador' => $falta->indicadorFalta->indicador_falta ?? '—',
         ]);
     }
+
+    public function toggleEstado(Request $request, $id)
+    {
+        if ($request->has('al_dia')) {
+            $valor = filter_var($request->input('al_dia'), FILTER_VALIDATE_BOOLEAN);
+            $alumno = \App\Models\Alumno::findOrFail($id);
+            \App\Models\Inscripcion::where('alumno_cid', $alumno->cid)
+                ->where('anio_lectivo', date('Y'))
+                ->update(['al_dia' => $valor]);
+        }
+
+        if ($request->has('activo')) {
+            $alumno = \App\Models\Alumno::findOrFail($id);
+            $alumno->activo = filter_var($request->input('activo'), FILTER_VALIDATE_BOOLEAN) ? 'Sí' : 'No';
+            $alumno->save();
+        }
+
+        return response()->json(['success' => true]);
+    }
+
 }

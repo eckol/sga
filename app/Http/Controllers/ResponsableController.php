@@ -34,11 +34,30 @@ class ResponsableController extends Controller
         $ciudades = \App\Models\Ciudad::orderBy('ciudad')->get();
         $rolResponsable = Rol::where('rol', 'responsable')->first();
 
+        // Cargar entrevistas de responsables para la pestaña Entrevistas
+        // Filtramos según el tipo: padres → padre_cid, madres → madre_cid, encargados → encargado_cid
+        $columnaCid = match ($tipo) {
+            'padres' => 'padre_cid',
+            'madres' => 'madre_cid',
+            'encargados' => 'encargado_cid',
+            default => null,
+        };
+
+        $entrevistas = collect();
+        if ($columnaCid) {
+            $cids = $registros->pluck('cid')->filter()->values();
+            $entrevistas = \App\Models\EntrevistaResponsable::with(['alumno', 'entrevistador', 'testigos'])
+                ->whereIn($columnaCid, $cids)
+                ->orderByDesc('fecha')
+                ->get();
+        }
+
         return view("rrhh.responsables.index", [
             'registros' => $registros,
             'tipo' => $tipo,
             'ciudades' => $ciudades,
-            'rol_id' => $rolResponsable->id ?? 6
+            'rol_id' => $rolResponsable->id ?? 6,
+            'entrevistas' => $entrevistas,
         ]);
     }
 

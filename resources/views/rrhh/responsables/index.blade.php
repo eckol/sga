@@ -36,56 +36,188 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de {{ ucfirst($tipo) }}</h2>
     </x-slot>
 
+    {{-- ── Pestañas ─────────────────────────────────────────────────────── --}}
     <div class="card card-body p-2 shadow-sm">
-        <div class="d-flex justify-content-between mb-2">
-            <h6 class="fw-bold text-secondary"></h6>
-            <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nuevo Registro</button>
+        <div class="card-header bg-white py-1 border-bottom px-0">
+            <ul class="nav nav-tabs card-header-tabs border-bottom-0" id="responsablesTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active py-1 px-2 fw-bold text-secondary" id="tab-lista-btn"
+                        data-bs-toggle="tab" data-bs-target="#tab-lista" type="button" role="tab"
+                        style="font-size: 0.75rem;">
+                        <i class="fas fa-list text-primary me-1"></i> Listado de {{ ucfirst($tipo) }}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link py-1 px-2 fw-bold text-secondary" id="tab-entrevistas-btn"
+                        data-bs-toggle="tab" data-bs-target="#tab-entrevistas" type="button" role="tab"
+                        style="font-size: 0.75rem;">
+                        <i class="fas fa-comments text-success me-1"></i> Entrevistas
+                        <span class="badge bg-success ms-1" style="font-size:0.6rem;">{{ $entrevistas->count() }}</span>
+                    </button>
+                </li>
+            </ul>
         </div>
 
-        <table id="tabla-responsables" class="table table-sm table-hover table-bordered table-xs">
-            <thead class="table-light">
-                <tr>
-                    <th width="50">ID</th>
-                    <th>Nombre Completo</th>
-                    <th>C.I.D.</th>
-                    <th>Teléfono 1</th>
-                    <th>Teléfono 2</th>
-                    <th>Email</th>
-                    <th width="100" class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($registros as $reg)
-                    <tr>
-                        <td>{{ $reg->id }}</td>
-                        <td>{{ $reg->nombre }}</td>
-                        <td>{{ number_format($reg->cid, 0, ',', '.') }}</td>
-                        <td>{{ $reg->telefono1 }}</td>
-                        <td>{{ $reg->telefono2 ?? '-' }}</td>
-                        <td>{{ $reg->email ?? 'N/A' }}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
-                                style="font-size: 0.65rem;" data-id="{{ $reg->id }}" data-nombre="{{ $reg->nombre }}"
-                                data-cid="{{ $reg->cid }}" data-profesion="{{ $reg->profesion }}"
-                                data-direccion="{{ $reg->direccion }}" data-barrio="{{ $reg->barrio }}"
-                                data-ciudad="{{ $reg->ciudad_id }}" data-tel1="{{ $reg->telefono1 }}"
-                                data-tel2="{{ $reg->telefono2 }}" data-email="{{ $reg->email }}"
-                                data-trabajo="{{ $reg->lugartrabajo }}" data-ruc="{{ $reg->ruc }}" data-dv="{{ $reg->dv }}">
-                                Editar
-                            </button>
+        <div class="card-body p-2">
+            <div class="tab-content" id="responsablesTabContent">
 
-                            <form action="{{ route('responsables.destroy', [$tipo, $reg->id]) }}" method="POST"
-                                class="d-inline">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Eliminar registro?')">Borrar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                {{-- ══════════════════════ TAB 1: LISTADO ══════════════════════ --}}
+                <div class="tab-pane fade show active" id="tab-lista" role="tabpanel">
+                    <div class="d-flex justify-content-between mb-2 mt-1">
+                        <h6 class="fw-bold text-secondary mb-0" style="font-size:0.8rem;"></h6>
+                        <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
+                            data-bs-target="#modalCrear">
+                            <i class="fas fa-plus me-1"></i> Nuevo Registro
+                        </button>
+                    </div>
+
+                    <table id="tabla-responsables" class="table table-sm table-hover table-bordered table-xs">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="50">ID</th>
+                                <th>Nombre Completo</th>
+                                <th>C.I.D.</th>
+                                <th>Teléfono 1</th>
+                                <th>Teléfono 2</th>
+                                <th>Email</th>
+                                <th width="100" class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($registros as $reg)
+                                <tr>
+                                    <td>{{ $reg->id }}</td>
+                                    <td>{{ $reg->nombre }}</td>
+                                    <td>{{ number_format($reg->cid, 0, ',', '.') }}</td>
+                                    <td>{{ $reg->telefono1 }}</td>
+                                    <td>{{ $reg->telefono2 ?? '-' }}</td>
+                                    <td>{{ $reg->email ?? 'N/A' }}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                                            style="font-size: 0.65rem;" data-id="{{ $reg->id }}"
+                                            data-nombre="{{ $reg->nombre }}" data-cid="{{ $reg->cid }}"
+                                            data-profesion="{{ $reg->profesion }}" data-direccion="{{ $reg->direccion }}"
+                                            data-barrio="{{ $reg->barrio }}" data-ciudad="{{ $reg->ciudad_id }}"
+                                            data-tel1="{{ $reg->telefono1 }}" data-tel2="{{ $reg->telefono2 }}"
+                                            data-email="{{ $reg->email }}" data-trabajo="{{ $reg->lugartrabajo }}"
+                                            data-ruc="{{ $reg->ruc }}" data-dv="{{ $reg->dv }}">
+                                            Editar
+                                        </button>
+
+                                        <form action="{{ route('responsables.destroy', [$tipo, $reg->id]) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-xs py-0 px-1"
+                                                style="font-size: 0.65rem;"
+                                                onclick="return confirm('¿Eliminar registro?')">Borrar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- ══════════════════════ TAB 2: ENTREVISTAS ══════════════════════ --}}
+                <div class="tab-pane fade" id="tab-entrevistas" role="tabpanel">
+                    <div class="mt-1 mb-2">
+                        <p class="mb-0 text-muted" style="font-size:0.75rem;">
+                            <i class="fas fa-info-circle me-1 text-primary"></i>
+                            Actas de entrevistas en las que participaron los/as <strong>{{ $tipo }}</strong> vinculados
+                            al sistema.
+                        </p>
+                    </div>
+
+                    <table id="tabla-entrevistas-resp" class="table table-sm table-hover table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="40" class="text-center">N°</th>
+                                <th style="width:80px;" class="text-center">Fecha</th>
+                                <th>Alumno Vinculado</th>
+                                <th>Atendido por</th>
+                                <th>Motivo</th>
+                                <th width="60" class="text-center">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($entrevistas as $ent)
+                                <tr>
+                                    <td class="text-center"></td>
+                                    <td class="text-center" data-order="{{ $ent->fecha->format('Ymd') }}">
+                                        {{ $ent->fecha->format('d/m/Y') }}
+                                    </td>
+                                    <td>{{ $ent->alumno ? $ent->alumno->apellidos . ', ' . $ent->alumno->nombres : '—' }}
+                                    </td>
+                                    <td>{{ $ent->entrevistador ? $ent->entrevistador->apellidos . ', ' . $ent->entrevistador->nombres : '—' }}
+                                    </td>
+                                    <td>{{ $ent->motivo }}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-info btn-xs py-0 px-1 btn-ver-entrevista"
+                                            style="font-size:0.65rem;" data-id="{{ $ent->id }}"
+                                            data-fecha="{{ $ent->fecha->format('d/m/Y') }}"
+                                            data-alumno="{{ $ent->alumno ? $ent->alumno->apellidos . ', ' . $ent->alumno->nombres : '—' }}"
+                                            data-entrevistador="{{ $ent->entrevistador ? $ent->entrevistador->apellidos . ', ' . $ent->entrevistador->nombres : '—' }}"
+                                            data-motivo="{{ $ent->motivo }}" data-obs="{{ $ent->observaciones }}"
+                                            data-testigos="{{ $ent->testigos->map(fn($t) => $t->apellidos . ', ' . $t->nombres)->implode(' | ') }}"
+                                            title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{-- ══════════════════════ MODAL VER ENTREVISTA ══════════════════════ --}}
+    <div class="modal fade" id="modalVerEntrevista" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header p-2" style="background-color:#1e3a5f; color:#fff;">
+                    <h6 class="modal-title fw-bold" style="font-size:0.85rem;">
+                        <i class="fas fa-comments me-1"></i> Detalle de Entrevista / Acta
+                    </h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3" style="font-size:0.8rem;">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label mb-0 fw-bold text-muted">Fecha</label>
+                            <input type="text" id="ver_fecha" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label mb-0 fw-bold text-muted">Alumno Vinculado</label>
+                            <input type="text" id="ver_alumno" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mb-0 fw-bold text-muted">Atendido por</label>
+                            <input type="text" id="ver_entrevistador" class="form-control form-control-sm bg-light"
+                                readonly>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mb-0 fw-bold text-muted">Motivo Principal</label>
+                            <input type="text" id="ver_motivo" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mb-0 fw-bold text-muted">Testigos / Miembros presentes</label>
+                            <input type="text" id="ver_testigos" class="form-control form-control-sm bg-light" readonly>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mb-0 fw-bold text-muted">Resoluciones / Acuerdos</label>
+                            <textarea id="ver_obs" class="form-control form-control-sm bg-light" rows="4"
+                                readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- ======================== MODAL CREAR ======================== --}}
@@ -245,38 +377,56 @@
 
     {{-- ======================== JAVASCRIPT ======================== --}}
     <script>
-        // Igual que en usuarios: esperamos a que jQuery y Bootstrap estén listos
         window.onload = function () {
             if (window.jQuery) {
 
-                // Inicializar DataTable
+                const langDt = {
+                    search: "Buscar:",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    paginate: { next: "›", previous: "‹" },
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    infoEmpty: "0 registros",
+                    infoFiltered: "(filtrado de _MAX_)",
+                    zeroRecords: "No se encontraron registros",
+                    emptyTable: "No hay datos disponibles"
+                };
+
+                // ── DataTable Responsables ──
                 $('#tabla-responsables').DataTable({
-                    "order": [[0, "asc"]],
-                    "pageLength": 10,
-                    "language": {
-                        "search": "Buscar:",
-                        "lengthMenu": "Mostrar _MENU_ registros",
-                        "paginate": { "next": "Siguiente", "previous": "Anterior" },
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
-                        "infoFiltered": "(filtrado de _MAX_ registros)",
-                        "zeroRecords": "No se encontraron registros",
-                        "emptyTable": "No hay datos disponibles en la tabla"
-                    },
-                    "dom": "<'row mb-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                    order: [[0, "asc"]],
+                    pageLength: 15,
+                    language: langDt,
+                    dom: "<'row mb-2'<'col-sm-6'l><'col-sm-6'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
-                        "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+                        "<'row mt-2'<'col-sm-5'i><'col-sm-7'p>>"
                 });
 
-                // Escuchador para el botón Editar
+                // ── DataTable Entrevistas ──
+                var tEnt = $('#tabla-entrevistas-resp').DataTable({
+                    order: [[1, "desc"]],
+                    pageLength: 15,
+                    columnDefs: [
+                        { searchable: false, orderable: false, targets: 0 }
+                    ],
+                    language: langDt,
+                    dom: "<'row mb-2'<'col-sm-6'l><'col-sm-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row mt-2'<'col-sm-5'i><'col-sm-7'p>>"
+                });
+
+                // Numeración automática entrevistas
+                tEnt.on('order.dt search.dt', function () {
+                    let i = 1;
+                    tEnt.cells(null, 0, { search: 'applied', order: 'applied' }).every(function () {
+                        this.data(i++);
+                    });
+                }).draw();
+
+                // ── Editar Responsable ──
                 $(document).on('click', '.btn-editar', function (e) {
                     e.preventDefault();
                     var d = $(this).data();
-
-                    // Armar la URL de acción con el tipo Blade y el ID del registro
                     $('#formEditar').attr('action', '/rrhh/responsables/{{ $tipo }}/' + d.id);
-
-                    // Rellenar los campos del modal
                     $('#edit_nombre').val(d.nombre);
                     $('#edit_cid').val(d.cid);
                     $('#edit_profesion').val(d.profesion);
@@ -289,10 +439,19 @@
                     $('#edit_lugartrabajo').val(d.trabajo);
                     $('#edit_ruc').val(d.ruc);
                     $('#edit_dv').val(d.dv);
+                    new bootstrap.Modal(document.getElementById('modalEditar')).show();
+                });
 
-                    // Abrir el modal
-                    var myModal = new bootstrap.Modal(document.getElementById('modalEditar'));
-                    myModal.show();
+                // ── Ver Detalle Entrevista ──
+                $(document).on('click', '.btn-ver-entrevista', function () {
+                    var d = $(this).data();
+                    $('#ver_fecha').val(d.fecha);
+                    $('#ver_alumno').val(d.alumno);
+                    $('#ver_entrevistador').val(d.entrevistador);
+                    $('#ver_motivo').val(d.motivo);
+                    $('#ver_testigos').val(d.testigos || '—');
+                    $('#ver_obs').val(d.obs || '—');
+                    new bootstrap.Modal(document.getElementById('modalVerEntrevista')).show();
                 });
 
             } else {
