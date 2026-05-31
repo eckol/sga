@@ -136,17 +136,17 @@
                         <td>{{ $ins->id }}</td>
                         <td data-sort="{{ $ins->fecha }}">{{ \Carbon\Carbon::parse($ins->fecha)->format('d/m/Y') }}</td>
                         <td class="text-center">{{ $ins->anio_lectivo }}</td>
-                        <td>{{ number_format((int) $ins->alumno_cid, 0, ',', '.') }}</td>
+                        <td>{{ $ins->alumno_cid }}</td>
                         <td>{{ $ins->alumno->apellidos ?? '' }}, {{ $ins->alumno->nombres ?? '' }}</td>
                         <td>{{ $ins->grado->gradocurso ?? '' }}</td>
                         <td>{{ $ins->firmante_rol }}</td>
                         <td>{{ $ins->firmante_nombre }}</td>
                         <td class="text-center fw-bold 
-                                                @if($ins->estado == 'Matriculado') bg-matriculado 
-                                                @elseif($ins->estado == 'Egresado') bg-egresado 
-                                                @elseif($ins->estado == 'Trasladado') bg-trasladado 
-                                                @elseif($ins->estado == 'Abandono') bg-abandono 
-                                                @endif" style="font-size: 0.75rem;">
+                                @if($ins->estado == 'Matriculado') bg-matriculado 
+                                @elseif($ins->estado == 'Egresado') bg-egresado 
+                                @elseif($ins->estado == 'Trasladado') bg-trasladado 
+                                @elseif($ins->estado == 'Abandono') bg-abandono 
+                                @endif" style="font-size: 0.75rem;">
                             {{ $ins->estado }}
                         </td>
                         <td class="text-center">

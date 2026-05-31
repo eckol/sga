@@ -62,4 +62,15 @@ class Colaborador extends Model
     {
         return $this->belongsTo(TipoColaborador::class, 'tipo_colaborador_id');
     }
+
+    public function periodosLaborales()
+    {
+        return $this->hasMany(PeriodoLaboral::class, 'colaborador_id');
+    }
+
+    public function getEsActivoAttribute()
+    {
+        $ultimoPeriodo = $this->periodosLaborales->last();
+        return $ultimoPeriodo && is_null($ultimoPeriodo->fecha_egreso);
+    }
 }

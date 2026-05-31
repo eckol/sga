@@ -107,6 +107,29 @@
             min-width: 220px;
             font-size: 0.78rem;
         }
+
+        /* ── Colores de Asignaturas (Pasteles) ── */
+        .asig-bg-0 { background-color: #f8fbff !important; } /* Sin asignar */
+        .asig-bg-1 { background-color: #ffdce5 !important; } /* Rosa */
+        .asig-bg-2 { background-color: #dcefff !important; } /* Azul */
+        .asig-bg-3 { background-color: #dcffe5 !important; } /* Verde */
+        .asig-bg-4 { background-color: #fffac1 !important; } /* Amarillo */
+        .asig-bg-5 { background-color: #ebdfff !important; } /* Violeta */
+        .asig-bg-6 { background-color: #ffeadc !important; } /* Naranja */
+        .asig-bg-7 { background-color: #dcfff7 !important; } /* Turquesa */
+        .asig-bg-8 { background-color: #ffdcf7 !important; } /* Fucsia */
+        .asig-bg-9 { background-color: #dcedff !important; } /* Celeste */
+        .asig-bg-10 { background-color: #fff3dc !important; } /* Crema */
+        .asig-bg-11 { background-color: #f1ffe5 !important; } /* Lima */
+        .asig-bg-12 { background-color: #e5ebff !important; } /* Lavanda */
+        .asig-bg-13 { background-color: #ffdfdc !important; } /* Coral */
+        .asig-bg-14 { background-color: #dcfffb !important; } /* Aguamarina */
+        .asig-bg-15 { background-color: #f3dcff !important; } /* Malva */
+        .asig-bg-16 { background-color: #f7ffe5 !important; } /* Verde limón */
+        .asig-bg-17 { background-color: #ffdce9 !important; } /* Rosado fuerte */
+        .asig-bg-18 { background-color: #dcefff !important; } /* Azul cielo */
+        .asig-bg-19 { background-color: #f8fbff !important; } /* Gris muy claro */
+        .asig-bg-20 { background-color: #f0f0f0 !important; } /* Gris */
     </style>
 
     <x-slot name="header">
@@ -149,7 +172,7 @@
                                     <td>
                                         @if($horario)
                                             <select
-                                                class="select-asignatura"
+                                                class="select-asignatura asig-bg-{{ $horario->asignatura_id ? ($horario->asignatura_id % 20) + 1 : 0 }}"
                                                 data-id="{{ $horario->id }}"
                                                 data-url="{{ route('academica.horarios.update', $horario->id) }}">
                                                 <option value="">— Sin asignar —</option>
@@ -209,7 +232,7 @@
                                     <td>
                                         @if($horario)
                                             <select
-                                                class="select-asignatura"
+                                                class="select-asignatura asig-bg-{{ $horario->asignatura_id ? ($horario->asignatura_id % 20) + 1 : 0 }}"
                                                 data-id="{{ $horario->id }}"
                                                 data-url="{{ route('academica.horarios.update', $horario->id) }}">
                                                 <option value="">— Sin asignar —</option>
@@ -262,7 +285,14 @@
                     const asignaturaId = this.value;
                     const el           = this;
 
-                    el.classList.remove('guardado', 'error');
+                    // Actualizar color visual instantáneamente
+                    el.className = 'select-asignatura'; 
+                    if (asignaturaId) {
+                        el.classList.add('asig-bg-' + ((asignaturaId % 20) + 1));
+                    } else {
+                        el.classList.add('asig-bg-0');
+                    }
+
                     el.disabled = true;
 
                     fetch(url, {

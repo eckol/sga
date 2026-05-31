@@ -34,8 +34,18 @@
             width: 200px;
             background: #2c3e50;
             color: white;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
+            z-index: 1050;
+        }
+
+        /* Sidebar colapsada (Desktop y Mobile) */
+        .sidebar.collapsed {
+            margin-left: -200px;
+        }
+
+        .flex-fill {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* 2. Logo centrado y texto SGA-CST más grande */
@@ -149,12 +159,28 @@
         @media (max-width: 768px) {
             .sidebar {
                 margin-left: -200px;
-                position: absolute;
-                z-index: 1000;
+                position: fixed;
+                /* Cambiado a fixed para mobile */
             }
 
             .sidebar.active {
                 margin-left: 0;
+            }
+
+            /* Overlay cuando está abierto en mobile */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1040;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
             }
         }
     </style>
@@ -257,8 +283,8 @@
 
         <div class="flex-fill">
             <nav class="navbar navbar-expand navbar-custom">
-                <button type="button" id="sidebarCollapse" class="btn btn-sm btn-outline-secondary d-md-none">
-                    Menú
+                <button type="button" id="sidebarCollapse" class="btn btn-sm btn-outline-secondary me-3">
+                    <i class="fas fa-bars"></i>
                 </button>
 
                 <div class="ms-auto user-profile-section">
@@ -305,10 +331,42 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     @stack('scripts')
     <script>
-        // Menú móvil
-        document.getElementById('sidebarCollapse')?.addEventListener('click', function () {
-            document.getElementById('sidebar').classList.toggle('active');
+        // Toggle Sidebar
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+
+        function toggleSidebar() {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                // Guardar preferencia en desktop
+                localStorage.setItem('sga_sidebar_collapsed', sidebar.classList.contains('collapsed'));
+            }
+        }
+
+        document.getElementById('sidebarCollapse')?.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Auto-colapsar al seleccionar menú (especialmente importante en mobile)
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function () {
+                if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            });
         });
+
+        // Restaurar estado de sidebar en Desktop al cargar
+        if (window.innerWidth > 768) {
+            if (localStorage.getItem('sga_sidebar_collapsed') === 'true') {
+                sidebar.classList.add('collapsed');
+            }
+        }
 
         // ── Acordeón del sidebar ──────────────────────────────────────────
         var STORAGE_KEY = 'sga_sidebar_open';

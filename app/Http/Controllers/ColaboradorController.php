@@ -15,7 +15,7 @@ class ColaboradorController extends Controller
 {
     public function index()
     {
-        $colaboradores = Colaborador::with(['nacionalidad', 'sexo', 'estadoCivil', 'ciudad', 'tipoColaborador'])->get();
+        $colaboradores = Colaborador::with(['nacionalidad', 'sexo', 'estadoCivil', 'ciudad', 'tipoColaborador', 'periodosLaborales'])->get();
         $nacionalidades = Nacionalidad::all();
         $sexos = Sexo::all();
         $estadosciviles = EstadoCivil::all();
