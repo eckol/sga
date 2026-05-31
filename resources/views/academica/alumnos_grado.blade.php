@@ -385,14 +385,14 @@
                                 if (res.inscripciones && res.inscripciones.length > 0) {
                                     res.inscripciones.forEach(ins => {
                                         html += `<tr>
-                                                    <td>${ins.id}</td>
-                                                    <td>${ins.fecha}</td>
-                                                    <td>${ins.anio_lectivo}</td>
-                                                    <td>${ins.grado_curso}</td>
-                                                    <td>${ins.firmante_nombre || ''}</td>
-                                                    <td>${ins.firmante_rol || ''}</td>
-                                                    <td>${ins.estado}</td>
-                                                </tr>`;
+                                                        <td>${ins.id}</td>
+                                                        <td>${ins.fecha}</td>
+                                                        <td>${ins.anio_lectivo}</td>
+                                                        <td>${ins.grado_curso}</td>
+                                                        <td>${ins.firmante_nombre || ''}</td>
+                                                        <td>${ins.firmante_rol || ''}</td>
+                                                        <td>${ins.estado}</td>
+                                                    </tr>`;
                                     });
                                 } else {
                                     html = '<tr><td colspan="7" class="text-center text-muted">Sin historial</td></tr>';
@@ -404,17 +404,17 @@
                                 if (res.faltas && res.faltas.length > 0) {
                                     res.faltas.forEach(f => {
                                         var boton = `<button type="button"
-                                                class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
-                                                style="font-size:0.65rem;"
-                                                data-id="${f.id}"
-                                                data-fecha="${f.fecha_raw ?? ''}"
-                                                data-grado="${f.grado_curso_id}"
-                                                data-alumno="${f.alumno_id}"
-                                                data-asignatura="${f.asignatura_id}"
-                                                data-indicador="${f.indicador_falta_id}"
-                                                title="Editar falta">
-                                                <i class="fas fa-edit"></i>
-                                                </button>`;
+                                                    class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                    style="font-size:0.65rem;"
+                                                    data-id="${f.id}"
+                                                    data-fecha="${f.fecha_raw ?? ''}"
+                                                    data-grado="${f.grado_curso_id}"
+                                                    data-alumno="${f.alumno_id}"
+                                                    data-asignatura="${f.asignatura_id}"
+                                                    data-indicador="${f.indicador_falta_id}"
+                                                    title="Editar falta">
+                                                    <i class="fas fa-edit"></i>
+                                                    </button>`;
                                         dtFaltas.row.add([
                                             f.id,
                                             f.fecha,
@@ -435,17 +435,17 @@
                                         let badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span>`;
 
                                         let boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-entrevista"
-                                                            style="font-size:0.65rem;"
-                                                            data-id="${e.id}"
-                                                            data-tipo="${e.tipo}"
-                                                            data-fecha="${e.fecha_raw}"
-                                                            data-colaborador="${e.colaborador_id}"
-                                                            data-motivo="${e.motivo}"
-                                                            data-obs="${e.obs || ''}"
-                                                            data-testigos='${JSON.stringify(e.testigos || [])}'
-                                                            title="Editar entrevista">
-                                                            <i class="fas fa-edit"></i>
-                                                            </button>`;
+                                                                style="font-size:0.65rem;"
+                                                                data-id="${e.id}"
+                                                                data-tipo="${e.tipo}"
+                                                                data-fecha="${e.fecha_raw}"
+                                                                data-colaborador="${e.colaborador_id}"
+                                                                data-motivo="${e.motivo}"
+                                                                data-obs="${e.obs || ''}"
+                                                                data-testigos='${JSON.stringify(e.testigos || [])}'
+                                                                title="Editar entrevista">
+                                                                <i class="fas fa-edit"></i>
+                                                                </button>`;
                                         dtEntrevistas.row.add([
                                             e.fecha,
                                             badgeHtml,

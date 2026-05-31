@@ -178,7 +178,7 @@
 
                 // Inicializar DataTable — apunta a #tabla-aranceles
                 var table = $('#tabla-aranceles').DataTable({
-                    "order": [[0, "asc"]],
+                    "order": [[1, "desc"]],
                     "pageLength": 10,
                     "language": {
                         "search": "Buscar:",

@@ -34,12 +34,8 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    if (auth()->user()->role_id === 6) {
-        return redirect()->route('portal_responsables.index');
-    }
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -53,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('vivecon', ViveConController::class)->except(['create', 'show', 'edit']);
     Route::resource('roles', RolController::class)->except(['create', 'show', 'edit']);
     Route::resource('usuarios', UserController::class)->except(['create', 'show', 'edit']);
+    Route::get('aranceles/buscar', [ArancelController::class, 'getArancelByGrado'])->name('aranceles.buscar');
     Route::resource('aranceles', ArancelController::class)->except(['create', 'show', 'edit']);
     Route::resource('gradoscursos', GradoCursoController::class)->except(['create', 'show', 'edit']);
     Route::resource('inscripciones', InscripcionController::class)->except(['create', 'show', 'edit']);

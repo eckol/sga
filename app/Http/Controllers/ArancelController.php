@@ -11,7 +11,7 @@ class ArancelController extends Controller
     public function index()
     {
         // Traemos los aranceles con su ciclo, ordenados por año y ciclo
-        $aranceles = Arancel::with('ciclo')->orderBy('anio_lect', 'desc')->orderBy('ciclo_id')->get();
+        $aranceles = Arancel::with('ciclo')->orderBy('id', 'desc')->get();
         $ciclos = Ciclo::all();
 
         return view('configuracion.aranceles.index', compact('aranceles', 'ciclos'));
@@ -47,5 +47,30 @@ class ArancelController extends Controller
     {
         $arancele->delete();
         return redirect()->back()->with('success', 'Arancel eliminado.');
+    }
+
+    public function getArancelByGrado(Request $request)
+    {
+        $grado = \App\Models\GradoCurso::find($request->grado_id);
+        if (!$grado) {
+            return response()->json(['success' => false, 'message' => 'Grado no encontrado']);
+        }
+
+        $arancel = Arancel::where('anio_lect', $request->anio)
+            ->where('ciclo_id', $grado->ciclo_id)
+            ->first();
+
+        if ($arancel) {
+            return response()->json([
+                'success' => true,
+                'monto_matricula' => $arancel->monto_matricula,
+                'monto_anualidad' => $arancel->monto_anualidad
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'No se encontró arancel para el año y ciclo seleccionado.'
+        ]);
     }
 }

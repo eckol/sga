@@ -27,18 +27,24 @@ class InscripcionController extends Controller
         $alumno = Alumno::where('cid', $request->alumno_cid)->first();
         $grado = GradoCurso::find($request->grado_curso_id);
 
-        // Buscamos el arancel exacto para ese año y el ciclo del grado
         $arancel = Arancel::where('anio_lect', $request->anio_lectivo)
             ->where('ciclo_id', $grado->ciclo_id)
             ->first();
 
-        if (!$arancel) {
-            return back()->with('error', 'No se encontraron aranceles definidos para el ciclo y año seleccionados.');
+        $data = $request->all();
+
+        // Si no hay arancel y no se enviaron montos manuales, error.
+        if (!$arancel && (empty($data['monto_matricula']) || empty($data['monto_anualidad']))) {
+            return back()->with('error', 'No se encontraron aranceles definidos para el ciclo y año seleccionados y no se ingresaron montos manuales.');
         }
 
-        $data = $request->all();
-        $data['monto_matricula'] = $arancel->monto_matricula;
-        $data['monto_anualidad'] = $arancel->monto_anualidad;
+        // Prioridad: 1. Request (si > 0), 2. Arancel
+        if (empty($data['monto_matricula']) || $data['monto_matricula'] == 0) {
+            $data['monto_matricula'] = $arancel ? $arancel->monto_matricula : 0;
+        }
+        if (empty($data['monto_anualidad']) || $data['monto_anualidad'] == 0) {
+            $data['monto_anualidad'] = $arancel ? $arancel->monto_anualidad : 0;
+        }
 
         $firmante_nombre = 'No especificado';
         if ($request->firmante_rol == 'Madre' && $alumno->cid_madre) {

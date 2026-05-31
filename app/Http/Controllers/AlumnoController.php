@@ -107,11 +107,22 @@ class AlumnoController extends Controller
         $inscripciones = $alumno->inscripciones->map(fn($ins) => [
             'id' => $ins->id,
             'fecha' => $ins->fecha ? \Carbon\Carbon::parse($ins->fecha)->format('d/m/Y') : '—',
+            'fecha_raw' => $ins->fecha ? \Carbon\Carbon::parse($ins->fecha)->format('Y-m-d') : '',
             'anio_lectivo' => $ins->anio_lectivo,
+            'alumno_cid' => $ins->alumno_cid,
+            'grado_curso_id' => $ins->grado_curso_id,
             'grado_curso' => $ins->grado->gradocurso ?? '—',
-            'firmante_nombre' => $ins->firmante_nombre,
+            'procede' => $ins->procede,
+            'fpago' => $ins->fpago,
             'firmante_rol' => $ins->firmante_rol,
+            'firmante_nombre' => $ins->firmante_nombre,
+            'monto_matricula' => $ins->monto_matricula,
+            'monto_anualidad' => $ins->monto_anualidad,
+            'aut_mochila' => $ins->aut_mochila,
+            'aut_foto' => $ins->aut_foto,
             'estado' => $ins->estado,
+            'fecha_baja' => $ins->fecha_baja ? \Carbon\Carbon::parse($ins->fecha_baja)->format('Y-m-d') : '',
+            'observaciones' => $ins->observaciones,
         ]);
 
         // Mapeo enriquecido con IDs nativos para el funcionamiento del modal de faltas

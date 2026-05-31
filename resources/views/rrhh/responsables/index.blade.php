@@ -394,7 +394,7 @@
                 // ── DataTable Responsables ──
                 $('#tabla-responsables').DataTable({
                     order: [[0, "asc"]],
-                    pageLength: 15,
+                    pageLength: 10,
                     language: langDt,
                     dom: "<'row mb-2'<'col-sm-6'l><'col-sm-6'f>>" +
                         "<'row'<'col-sm-12'tr>>" +
@@ -404,7 +404,7 @@
                 // ── DataTable Entrevistas ──
                 var tEnt = $('#tabla-entrevistas-resp').DataTable({
                     order: [[1, "desc"]],
-                    pageLength: 15,
+                    pageLength: 10,
                     columnDefs: [
                         { searchable: false, orderable: false, targets: 0 }
                     ],

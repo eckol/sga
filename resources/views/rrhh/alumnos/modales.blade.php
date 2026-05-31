@@ -436,6 +436,7 @@
                                         <th>Firmante</th>
                                         <th>Rol</th>
                                         <th>Estado</th>
+                                        <th class="text-center" width="50">Acc.</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-inscripciones-historial">
@@ -696,7 +697,7 @@
                 <div class="row g-2">
                     <div class="col-md-4">
                         <label class="form-label">Año Lectivo</label>
-                        <select name="anio_lectivo" class="form-select form-select-sm">
+                        <select name="anio_lectivo" id="ins_anio_lectivo" class="form-select form-select-sm">
                             @foreach($anios as $a)
                                 <option value="{{ $a }}" {{ $a > date('Y') ? 'selected' : '' }}>{{ $a }}</option>
                             @endforeach
@@ -717,12 +718,34 @@
                         </select>
                     </div>
                     <div class="col-md-12">
-                        <label class="form-label">Quién firma el contrato</label>
+                        <label class="form-label mb-0 fw-bold">Quién firma el contrato</label>
                         <select name="firmante_rol" id="select_firmante" class="form-select form-select-sm" required>
                             <option value="Padre">Padre</option>
                             <option value="Madre">Madre</option>
                             <option value="Encargado">Encargado</option>
                         </select>
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <label class="form-label mb-0 fw-bold">Procede de</label>
+                        <input type="text" name="procede" class="form-control form-control-sm" value="C.S.T."
+                            placeholder="Institución de origen">
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <label class="form-label mb-0 fw-bold">Forma de Pago</label>
+                        <select name="fpago" class="form-select form-select-sm" required>
+                            <option value="Mensual" selected>Mensual</option>
+                            <option value="Contado">Contado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <label class="form-label mb-0 fw-bold">Monto Matrícula (Gs)</label>
+                        <input type="number" name="monto_matricula" id="ins_monto_matricula"
+                            class="form-control form-control-sm bg-light" value="0" readonly>
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <label class="form-label mb-0 fw-bold">Monto Anualidad (Gs)</label>
+                        <input type="number" name="monto_anualidad" id="ins_monto_anualidad"
+                            class="form-control form-control-sm bg-light" value="0" readonly>
                     </div>
                     <div class="col-md-6 mt-3">
                         <div class="form-check">
@@ -1101,6 +1124,128 @@
             <div class="modal-footer p-1">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-success btn-sm">Actualizar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{-- Modal Editar Inscripción (reutilizado desde inscripciones) --}}
+<div class="modal fade" id="modalEditarInsAlumno" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form id="formEditarInsAlumno" method="POST" class="modal-content">
+            @csrf @method('PUT')
+            <div class="modal-header p-2 bg-warning">
+                <h6 class="modal-title fw-bold">Modificar Inscripción</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-2">
+                <div class="row g-2">
+                    <div class="col-md-5">
+                        <label class="form-label mb-0 fw-bold">Alumno</label>
+                        <input type="text" id="ins_edit_alumno_nombre" class="form-control form-control-sm bg-light"
+                            readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">C.I. Alumno</label>
+                        <input type="number" name="alumno_cid" id="ins_edit_alumno_cid"
+                            class="form-control form-control-sm bg-light" readonly>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label mb-0 fw-bold">Fecha</label>
+                        <input type="date" name="fecha" id="ins_edit_fecha" class="form-control form-control-sm"
+                            required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label mb-0 fw-bold">Año Lectivo</label>
+                        <input type="number" name="anio_lectivo" id="ins_edit_anio_lectivo"
+                            class="form-control form-control-sm" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Grado/Curso</label>
+                        <select name="grado_curso_id" id="ins_edit_grado_curso_id" class="form-select form-select-sm"
+                            required>
+                            @foreach($grados as $g)
+                                <option value="{{ $g->id }}">{{ $g->gradocurso }} ({{ $g->turno }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Procede</label>
+                        <input type="text" name="procede" id="ins_edit_procede" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Forma de Pago</label>
+                        <select name="fpago" id="ins_edit_fpago" class="form-select form-select-sm" required>
+                            <option value="Contado">Contado</option>
+                            <option value="Mensual">Mensual</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Firmante Rol</label>
+                        <select name="firmante_rol" id="ins_edit_firmante_rol" class="form-select form-select-sm"
+                            required>
+                            <option value="Padre">Padre</option>
+                            <option value="Madre">Madre</option>
+                            <option value="Encargado">Encargado</option>
+                            <option value="No especificado">No especificado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Firmante Nombre</label>
+                        <input type="text" name="firmante_nombre" id="ins_edit_firmante_nombre"
+                            class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Monto Matrícula (Gs)</label>
+                        <input type="number" name="monto_matricula" id="ins_edit_monto_matricula"
+                            class="form-control form-control-sm" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Monto Anualidad (Gs)</label>
+                        <input type="number" name="monto_anualidad" id="ins_edit_monto_anualidad"
+                            class="form-control form-control-sm" required>
+                    </div>
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Aut.
+                            Mochila</label>
+                        <label class="toggle">
+                            <input type="hidden" name="aut_mochila" value="No">
+                            <input type="checkbox" name="aut_mochila" id="ins_edit_aut_mochila" value="Sí">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Aut. Foto</label>
+                        <label class="toggle">
+                            <input type="hidden" name="aut_foto" value="No">
+                            <input type="checkbox" name="aut_foto" id="ins_edit_aut_foto" value="Sí">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">Estado</label>
+                        <select name="estado" id="ins_edit_estado" class="form-select form-select-sm" required>
+                            <option value="Matriculado">MATRICULADO</option>
+                            <option value="Egresado">EGRESADO</option>
+                            <option value="Trasladado">TRASLADADO</option>
+                            <option value="Abandono">ABANDONO</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label mb-0 fw-bold">Fecha Baja</label>
+                        <input type="date" name="fecha_baja" id="ins_edit_fecha_baja"
+                            class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label mb-0 fw-bold">Observaciones</label>
+                        <input type="text" name="observaciones" id="ins_edit_observaciones"
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer p-1">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-save me-1"></i>Actualizar
+                    Cambios</button>
             </div>
         </form>
     </div>

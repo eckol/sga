@@ -123,12 +123,23 @@ class AlumnoGradoController extends Controller
             'inscripciones' => $alumno->inscripciones->map(function ($ins) {
                 return [
                     'id' => $ins->id,
-                    'fecha' => \Carbon\Carbon::parse($ins->fecha)->format('d/m/Y'),
+                    'fecha' => $ins->fecha ? \Carbon\Carbon::parse($ins->fecha)->format('d/m/Y') : '—',
+                    'fecha_raw' => $ins->fecha ? \Carbon\Carbon::parse($ins->fecha)->format('Y-m-d') : '',
                     'anio_lectivo' => $ins->anio_lectivo,
-                    'grado_curso' => $ins->grado->gradocurso ?? 'N/A',
-                    'firmante_nombre' => $ins->firmante_nombre,
+                    'alumno_cid' => $ins->alumno_cid,
+                    'grado_curso_id' => $ins->grado_curso_id,
+                    'grado_curso' => $ins->grado->gradocurso ?? '—',
+                    'procede' => $ins->procede,
+                    'fpago' => $ins->fpago,
                     'firmante_rol' => $ins->firmante_rol,
-                    'estado' => $ins->estado
+                    'firmante_nombre' => $ins->firmante_nombre,
+                    'monto_matricula' => $ins->monto_matricula,
+                    'monto_anualidad' => $ins->monto_anualidad,
+                    'aut_mochila' => $ins->aut_mochila,
+                    'aut_foto' => $ins->aut_foto,
+                    'estado' => $ins->estado,
+                    'fecha_baja' => $ins->fecha_baja ? \Carbon\Carbon::parse($ins->fecha_baja)->format('Y-m-d') : '',
+                    'observaciones' => $ins->observaciones,
                 ];
             }),
             'faltas' => $alumno->faltas->map(function ($f) {

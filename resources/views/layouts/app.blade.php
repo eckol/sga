@@ -352,9 +352,11 @@
         document.getElementById('sidebarCollapse')?.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
 
-        // Auto-colapsar al seleccionar menú (especialmente importante en mobile)
+        // Auto-colapsar sidebar en mobile y marcar que el menú debe cerrarse tras navegar
         document.querySelectorAll('.sidebar .nav-link').forEach(link => {
             link.addEventListener('click', function () {
+                // Marcar que el menú debe quedar contraído en la próxima carga
+                localStorage.setItem('sga_menu_nav_collapsed', '1');
                 if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
                     toggleSidebar();
                 }
@@ -402,7 +404,7 @@
             var currentUrl = window.location.href;
             var activePanel = null;
 
-            // 1. Buscar enlace activo dentro de los paneles colapsables
+            // 1. Buscar enlace activo dentro de los paneles colapsables (solo para marcar active)
             document.querySelectorAll('.menu-links a.nav-link').forEach(function (link) {
                 var href = link.getAttribute('href');
                 if (href && href !== '#' && currentUrl.indexOf(href) !== -1) {
@@ -412,12 +414,18 @@
                 }
             });
 
-            // 2. Ruta activa tiene prioridad sobre localStorage
+            // 2. Si se llegó aquí tras hacer clic en un enlace → dejar todo contraído
+            if (localStorage.getItem('sga_menu_nav_collapsed') === '1') {
+                localStorage.removeItem('sga_menu_nav_collapsed');
+                return; // no abrir ningún panel
+            }
+
+            // 3. Ruta activa tiene prioridad sobre localStorage
             if (activePanel) {
                 openPanel(activePanel);
                 localStorage.setItem(STORAGE_KEY, activePanel);
             } else {
-                // 3. Sin ruta activa: restaurar último panel guardado
+                // 4. Sin ruta activa: restaurar último panel guardado
                 var saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) openPanel(saved);
             }

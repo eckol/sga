@@ -316,6 +316,13 @@
                             let html = '';
                             if (res.inscripciones && res.inscripciones.length > 0) {
                                 res.inscripciones.forEach(ins => {
+                                    let btnEditIns = `<button type="button"
+                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-inscripcion"
+                                        style="font-size:0.65rem;"
+                                        data-ins='${JSON.stringify(ins)}'
+                                        title="Editar inscripci\u00f3n">
+                                        <i class="fas fa-edit"></i>
+                                    </button>`;
                                     html += `<tr>
                                         <td>${ins.id}</td>
                                         <td>${ins.fecha}</td>
@@ -324,6 +331,7 @@
                                         <td>${ins.firmante_nombre || ''}</td>
                                         <td>${ins.firmante_rol || ''}</td>
                                         <td>${ins.estado}</td>
+                                        <td class="text-center">${btnEditIns}</td>
                                     </tr>`;
                                 });
                             } else {
@@ -504,6 +512,32 @@
                     }
                 });
 
+                // Función para cargar los montos desde aranceles
+                function cargarMontosInscripcion() {
+                    const grado_id = $('#select_grado_nuevo').val();
+                    const anio     = $('#ins_anio_lectivo').val();
+                    if (!grado_id || !anio) return;
+
+                    $('#ins_monto_matricula').val('Cargando...').addClass('text-muted');
+                    $('#ins_monto_anualidad').val('Cargando...').addClass('text-muted');
+
+                    $.get('{{ route("aranceles.buscar") }}', { grado_id, anio })
+                        .done(function(res) {
+                            if (res.success) {
+                                $('#ins_monto_matricula').val(res.monto_matricula).removeClass('text-muted');
+                                $('#ins_monto_anualidad').val(res.monto_anualidad).removeClass('text-muted');
+                            } else {
+                                $('#ins_monto_matricula').val(0).removeClass('text-muted');
+                                $('#ins_monto_anualidad').val(0).removeClass('text-muted');
+                                console.warn('Arancel no encontrado:', res.message);
+                            }
+                        })
+                        .fail(function() {
+                            $('#ins_monto_matricula').val(0).removeClass('text-muted');
+                            $('#ins_monto_anualidad').val(0).removeClass('text-muted');
+                        });
+                }
+
                 // Listener para abrir el modal de inscripción
                 $(document).on('click', '.btn-inscribir', function () {
                     const d = $(this).data();
@@ -533,9 +567,18 @@
                         });
                     }
 
+                    // Cargar montos automáticamente al abrir
+                    cargarMontosInscripcion();
+
                     var myModal = new bootstrap.Modal(document.getElementById('modalInscribir'));
                     myModal.show();
                 });
+
+                // Recargar montos si el usuario cambia grado o año en el modal
+                $(document).on('change', '#select_grado_nuevo, #ins_anio_lectivo', function() {
+                    cargarMontosInscripcion();
+                });
+
 
                 // ── Tab Asistencia: 10 calendarios (Feb–Nov) ────────────────
                 // Se dispara al mostrar el tab de asistencia dentro del modalEditar
@@ -675,6 +718,37 @@
                     $('#asist-calendarios-wrap').html(html);
                 }
                 // ── Fin Tab Asistencia ────────────────────────────────────────
+
+                // ── Editar inscripción desde el historial del alumno ──────────
+                $(document).on('click', '.btn-editar-inscripcion', function () {
+                    var ins = $(this).data('ins');
+
+                    $('#formEditarInsAlumno').attr('action', "{{ url('inscripciones') }}/" + ins.id);
+
+                    // Campos de sólo lectura
+                    $('#ins_edit_alumno_cid').val(ins.alumno_cid);
+                    var nombreAlumno = $('#edit_apellidos').val() + ', ' + $('#edit_nombres').val();
+                    $('#ins_edit_alumno_nombre').val(nombreAlumno);
+
+                    // Campos editables
+                    $('#ins_edit_fecha').val(ins.fecha_raw || '');
+                    $('#ins_edit_anio_lectivo').val(ins.anio_lectivo);
+                    $('#ins_edit_grado_curso_id').val(ins.grado_curso_id);
+                    $('#ins_edit_procede').val(ins.procede || '');
+                    $('#ins_edit_fpago').val(ins.fpago || 'Mensual');
+                    $('#ins_edit_firmante_rol').val(ins.firmante_rol || '');
+                    $('#ins_edit_firmante_nombre').val(ins.firmante_nombre || '');
+                    $('#ins_edit_monto_matricula').val(ins.monto_matricula || 0);
+                    $('#ins_edit_monto_anualidad').val(ins.monto_anualidad || 0);
+                    $('#ins_edit_aut_mochila').prop('checked', ins.aut_mochila === 'Sí' || ins.aut_mochila === 1);
+                    $('#ins_edit_aut_foto').prop('checked', ins.aut_foto === 'Sí' || ins.aut_foto === 1);
+                    $('#ins_edit_estado').val(ins.estado || 'Matriculado');
+                    $('#ins_edit_fecha_baja').val(ins.fecha_baja ? ins.fecha_baja.substring(0,10) : '');
+                    $('#ins_edit_observaciones').val(ins.observaciones || '');
+
+                    new bootstrap.Modal(document.getElementById('modalEditarInsAlumno')).show();
+                });
+
 
             } else {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
