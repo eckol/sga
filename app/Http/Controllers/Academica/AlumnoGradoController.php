@@ -137,6 +137,7 @@ class AlumnoGradoController extends Controller
                     'monto_anualidad' => $ins->monto_anualidad,
                     'aut_mochila' => $ins->aut_mochila,
                     'aut_foto' => $ins->aut_foto,
+                    'alumno_nuevo' => $ins->alumno_nuevo ? 1 : 0,
                     'estado' => $ins->estado,
                     'fecha_baja' => $ins->fecha_baja ? \Carbon\Carbon::parse($ins->fecha_baja)->format('Y-m-d') : '',
                     'observaciones' => $ins->observaciones,

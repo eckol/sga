@@ -358,10 +358,22 @@
                                         <input type="number" name="cid_madre" id="edit_cid_madre"
                                             class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         <label class="form-label mb-0 fw-bold">Nombre Madre</label>
                                         <input type="text" id="info_madre_nombre"
                                             class="form-control form-control-sm bg-light" readonly>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label mb-0 fw-bold">Teléfono Madre</label>
+                                        <input type="text" id="info_madre_telefono"
+                                            class="form-control form-control-sm bg-light" readonly>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-end">
+                                        <button type="button" class="btn btn-success btn-sm w-60 btn-whatsapp"
+                                            data-tel-source="info_madre_telefono" title="Abrir WhatsApp"
+                                            style="height: calc(1.5em + 0.5rem + 2px); background-color:#25D366; border-color:#25D366;">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-end">
                                         <button type="button" class="btn btn-primary btn-sm w-100"
@@ -378,10 +390,22 @@
                                         <input type="number" name="cid_padre" id="edit_cid_padre"
                                             class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         <label class="form-label mb-0 fw-bold">Nombre Padre</label>
                                         <input type="text" id="info_padre_nombre"
                                             class="form-control form-control-sm bg-light" readonly>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label mb-0 fw-bold">Teléfono Padre</label>
+                                        <input type="text" id="info_padre_telefono"
+                                            class="form-control form-control-sm bg-light" readonly>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-end">
+                                        <button type="button" class="btn btn-sm w-60 btn-whatsapp"
+                                            data-tel-source="info_padre_telefono" title="Abrir WhatsApp"
+                                            style="height: calc(1.5em + 0.5rem + 2px); background-color:#25D366; border-color:#25D366; color:white;">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-end">
                                         <button type="button" class="btn btn-success btn-sm w-100"
@@ -398,10 +422,22 @@
                                         <input type="number" name="cid_encargado" id="edit_cid_encargado"
                                             class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label class="form-label mb-0 fw-bold">Nombre Encargado</label>
                                         <input type="text" id="info_encargado_nombre"
                                             class="form-control form-control-sm bg-light" readonly>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label mb-0 fw-bold">Teléfono Encargado</label>
+                                        <input type="text" id="info_encargado_telefono"
+                                            class="form-control form-control-sm bg-light" readonly>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-end">
+                                        <button type="button" class="btn btn-sm w-60 btn-whatsapp"
+                                            data-tel-source="info_encargado_telefono" title="Abrir WhatsApp"
+                                            style="height: calc(1.5em + 0.5rem + 2px); background-color:#25D366; border-color:#25D366; color:white;">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label mb-0 fw-bold text-dark">Parentesco</label>
@@ -747,17 +783,31 @@
                         <input type="number" name="monto_anualidad" id="ins_monto_anualidad"
                             class="form-control form-control-sm bg-light" value="0" readonly>
                     </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="aut_mochila" value="Sí" id="mochila">
-                            <label class="form-check-label" for="mochila">Autoriza revisión mochila</label>
-                        </div>
+                    <div class="col-md-4 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Aut.
+                            Mochila</label>
+                        <label class="toggle">
+                            <input type="hidden" name="aut_mochila" value="No">
+                            <input type="checkbox" name="aut_mochila" id="ins_aut_mochila" value="Sí">
+                            <span class="slider"></span>
+                        </label>
                     </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="aut_foto" value="Sí" id="foto">
-                            <label class="form-check-label" for="foto">Autoriza uso de imagen</label>
-                        </div>
+                    <div class="col-md-4 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Aut. Foto</label>
+                        <label class="toggle">
+                            <input type="hidden" name="aut_foto" value="No">
+                            <input type="checkbox" name="aut_foto" id="ins_aut_foto" value="Sí">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-4 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Alumno
+                            Nuevo</label>
+                        <label class="toggle">
+                            <input type="hidden" name="alumno_nuevo" value="0">
+                            <input type="checkbox" name="alumno_nuevo" id="ins_alumno_nuevo" value="1">
+                            <span class="slider"></span>
+                        </label>
                     </div>
                     <div class="col-md-6 mt-2">
                         <label class="form-label mb-0 fw-bold">Estado</label>
@@ -1194,12 +1244,12 @@
                         <input type="text" name="firmante_nombre" id="ins_edit_firmante_nombre"
                             class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Monto Matrícula (Gs)</label>
                         <input type="number" name="monto_matricula" id="ins_edit_monto_matricula"
                             class="form-control form-control-sm" required>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Monto Anualidad (Gs)</label>
                         <input type="number" name="monto_anualidad" id="ins_edit_monto_anualidad"
                             class="form-control form-control-sm" required>
@@ -1218,6 +1268,15 @@
                         <label class="toggle">
                             <input type="hidden" name="aut_foto" value="No">
                             <input type="checkbox" name="aut_foto" id="ins_edit_aut_foto" value="Sí">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Alumno
+                            Nuevo</label>
+                        <label class="toggle">
+                            <input type="hidden" name="alumno_nuevo" value="0">
+                            <input type="checkbox" name="alumno_nuevo" id="ins_edit_alumno_nuevo" value="1">
                             <span class="slider"></span>
                         </label>
                     </div>

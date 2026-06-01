@@ -309,8 +309,11 @@
                         .done(function (res) {
                             // Responsables
                             $('#info_madre_nombre').val(res.madre ? res.madre.nombre : 'No registrado');
+                            $('#info_madre_telefono').val(res.madre ? (res.madre.telefono1 || '') : '');
                             $('#info_padre_nombre').val(res.padre ? res.padre.nombre : 'No registrado');
+                            $('#info_padre_telefono').val(res.padre ? (res.padre.telefono1 || '') : '');
                             $('#info_encargado_nombre').val(res.encargado ? res.encargado.nombre : 'No registrado');
+                            $('#info_encargado_telefono').val(res.encargado ? (res.encargado.telefono1 || '') : '');
 
                             // Historial de Inscripciones
                             let html = '';
@@ -742,6 +745,7 @@
                     $('#ins_edit_monto_anualidad').val(ins.monto_anualidad || 0);
                     $('#ins_edit_aut_mochila').prop('checked', ins.aut_mochila === 'Sí' || ins.aut_mochila === 1);
                     $('#ins_edit_aut_foto').prop('checked', ins.aut_foto === 'Sí' || ins.aut_foto === 1);
+                    $('#ins_edit_alumno_nuevo').prop('checked', ins.alumno_nuevo === 1 || ins.alumno_nuevo === true);
                     $('#ins_edit_estado').val(ins.estado || 'Matriculado');
                     $('#ins_edit_fecha_baja').val(ins.fecha_baja ? ins.fecha_baja.substring(0,10) : '');
                     $('#ins_edit_observaciones').val(ins.observaciones || '');
@@ -749,6 +753,39 @@
                     new bootstrap.Modal(document.getElementById('modalEditarInsAlumno')).show();
                 });
 
+                // ── Botones WhatsApp de Responsables ─────────────────────────
+                $(document).on('click', '.btn-whatsapp', function () {
+                    var sourceId = $(this).data('tel-source');
+                    var tel = $('#' + sourceId).val().trim();
+
+                    if (!tel) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Sin número de teléfono',
+                            text: 'Debe registrar un número telefónico válido para usar esta función.',
+                            confirmButtonText: 'Entendido',
+                            confirmButtonColor: '#25D366'
+                        });
+                        return;
+                    }
+
+                    // Limpiar: quitar espacios, guiones, paréntesis
+                    var telLimpio = tel.replace(/[\s\-\(\)]/g, '');
+
+                    // Normalizar al formato internacional +595
+                    if (telLimpio.startsWith('00595')) {
+                        telLimpio = '+' + telLimpio.slice(2);
+                    } else if (telLimpio.startsWith('595')) {
+                        telLimpio = '+' + telLimpio;
+                    } else if (telLimpio.startsWith('0')) {
+                        telLimpio = '+595' + telLimpio.slice(1);
+                    } else if (!telLimpio.startsWith('+')) {
+                        telLimpio = '+595' + telLimpio;
+                    }
+
+                    window.open('https://wa.me/' + telLimpio, '_blank');
+                });
+                // ── Fin WhatsApp ──────────────────────────────────────────────
 
             } else {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");

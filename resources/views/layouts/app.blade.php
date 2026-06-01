@@ -13,45 +13,60 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <style>
-        /* Estilos Generales Compactos XS */
         body {
             font-size: 0.8rem;
             background-color: #f4f6f9;
             font-family: 'Figtree', sans-serif;
         }
 
-        /* 1. Barra lateral más angosta (200px) */
+        /* ── Sidebar ─────────────────────────────── */
         .sidebar {
             min-height: 100vh;
             height: 100vh;
             position: sticky;
             top: 0;
-            width: 200px;
-            background: #2c3e50;
+            width: 210px;
+            min-width: 210px;
+            background: linear-gradient(180deg, #1a2535 0%, #2c3e50 100%);
             color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.3s ease, min-width 0.3s ease, margin-left 0.3s ease;
             overflow-y: auto;
+            overflow-x: hidden;
             z-index: 1050;
+            scrollbar-width: thin;
+            scrollbar-color: #3e5060 transparent;
         }
 
-        /* Sidebar colapsada (Desktop y Mobile) */
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #3e5060;
+            border-radius: 2px;
+        }
+
         .sidebar.collapsed {
-            margin-left: -200px;
+            width: 0;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .flex-fill {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
+            min-width: 0;
         }
 
-        /* 2. Logo centrado y texto SGA-CST más grande */
+        /* ── Logo / header ───────────────────────── */
         .sidebar-header {
-            padding: 15px;
-            border-bottom: 1px solid #3e4f5f;
+            padding: 16px 12px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -59,85 +74,138 @@
         }
 
         .logo-img {
-            width: 55px;
+            width: 50px;
             height: auto;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .brand-text {
-            font-size: 0.9rem;
-            /* Tamaño similar al título del dashboard */
-            font-weight: bold;
+            font-size: 0.85rem;
+            font-weight: 700;
             color: #ecf0f1;
+            letter-spacing: 1px;
         }
 
-        /* 3. Títulos de menú colapsables */
-        .menu-header {
-            padding: 8px 15px 5px;
-            font-weight: bold;
-            font-size: 0.75rem;
-            color: #a0d8ef !important;
-            letter-spacing: 0.5px;
+        /* ── Sección / título de grupo ───────────── */
+        .menu-section-label {
+            padding: 14px 14px 4px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* ── Botón de grupo colapsable ───────────── */
+        .menu-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            user-select: none;
+            width: 100%;
+            padding: 7px 14px;
             background: none;
             border: none;
-            width: 100%;
+            color: #a0c4de;
+            font-size: 0.73rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            cursor: pointer;
             text-align: left;
+            border-radius: 0;
+            transition: background 0.15s, color 0.15s;
+            user-select: none;
+            /* Evita que el click se "trague" el nav-link de abajo */
+            position: relative;
+            z-index: 1;
         }
 
-        .menu-header .menu-arrow {
-            font-size: 0.6rem;
-            transition: transform 0.25s ease;
-            display: inline-block;
+        .menu-header:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #d0e8f5;
+        }
+
+        .menu-header.open {
+            color: #7ec8f0;
+            background: rgba(126, 200, 240, 0.07);
+        }
+
+        .menu-arrow {
+            font-size: 0.55rem;
+            transition: transform 0.22s ease;
+            opacity: 0.6;
+            flex-shrink: 0;
         }
 
         .menu-header.open .menu-arrow {
             transform: rotate(180deg);
+            opacity: 1;
         }
 
-        /* Panel de enlaces: oculto por defecto con max-height */
+        /* ── Panel colapsable ────────────────────── */
         .menu-links {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.28s ease;
         }
 
         .menu-links.open {
-            max-height: 400px;
+            max-height: 600px;
         }
 
+        /* ── Nav links ───────────────────────────── */
         .sidebar .nav-link {
-            color: #bdc3c7;
-            padding: 5px 15px;
-            font-size: 0.75rem;
+            display: block;
+            color: #b0bec5;
+            padding: 5px 14px 5px 24px;
+            font-size: 0.73rem;
+            line-height: 1.5;
+            border-left: 2px solid transparent;
+            transition: color 0.15s, background 0.15s, border-color 0.15s;
+            white-space: nowrap;
+            text-decoration: none;
+            /* Asegura que el área de click sea solo del link */
+            position: relative;
+            z-index: 2;
         }
 
-        .sidebar .nav-link:hover,
+        .sidebar .nav-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.07);
+            border-left-color: rgba(126, 200, 240, 0.4);
+        }
+
         .sidebar .nav-link.active {
-            color: white;
-            background: #34495e;
+            color: #ffffff;
+            background: rgba(126, 200, 240, 0.13);
+            border-left-color: #7ec8f0;
+            font-weight: 600;
         }
 
-        /* 4. Topbar con alineación vertical centralizada */
+        /* Dashboard link directo */
+        .sidebar .nav-link-direct {
+            padding-left: 14px;
+            border-left-color: transparent;
+        }
+
+        /* ── Topbar ──────────────────────────────── */
         .navbar-custom {
-            background: white;
-            border-bottom: 1px solid #dee2e6;
+            background: #ffffff;
+            border-bottom: 1px solid #e8ecf0;
             height: 50px;
-            /* Altura fija para control de alineación */
             display: flex;
             align-items: center;
-            padding: 0 15px;
+            padding: 0 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .user-profile-section {
             display: flex;
             align-items: center;
-            /* Centro vertical */
             gap: 10px;
         }
 
@@ -150,32 +218,30 @@
             font-size: 0.75rem !important;
         }
 
-        /* Ajuste de la flecha del dropdown al costado */
         .dropdown-toggle::after {
             vertical-align: middle;
             margin-left: 8px;
         }
 
+        /* ── Mobile ──────────────────────────────── */
         @media (max-width: 768px) {
             .sidebar {
-                margin-left: -200px;
                 position: fixed;
-                /* Cambiado a fixed para mobile */
+                height: 100vh;
+                margin-left: -210px;
+                width: 210px !important;
+                min-width: 210px !important;
             }
 
-            .sidebar.active {
+            .sidebar.mobile-open {
                 margin-left: 0;
             }
 
-            /* Overlay cuando está abierto en mobile */
             .sidebar-overlay {
                 display: none;
                 position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
+                inset: 0;
+                background: rgba(0, 0, 0, 0.45);
                 z-index: 1040;
             }
 
@@ -189,19 +255,26 @@
 </head>
 
 <body class="antialiased">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="d-flex">
         <nav id="sidebar" class="sidebar flex-column">
             <div class="sidebar-header">
                 <img src="{{ asset('img/logo_cst.png') }}" alt="CST" class="logo-img">
-                <div class="brand-text">SGA - CST</div>
+                <div class="brand-text">SGA · CST</div>
             </div>
 
-            <div class="mt-3" id="sidebarAccordion">
-                <div class="menu-header" style="cursor:default;">Principal</div>
-                <a href="{{ route('dashboard') }}" class="nav-link active">Dashboard</a>
+            <div class="mt-2" id="sidebarNav">
 
-                <button class="menu-header" onclick="toggleMenu(this, 'menuAlumnado')">
-                    Alumnado <span class="menu-arrow">&#9660;</span>
+                <div class="menu-section-label">Principal</div>
+                <a href="{{ route('dashboard') }}" class="nav-link nav-link-direct">
+                    <i class="fas fa-home me-1" style="width:13px;opacity:.7;"></i> Dashboard
+                </a>
+
+                <div class="menu-section-label">Gestión</div>
+
+                <button type="button" class="menu-header" data-target="menuAlumnado">
+                    <span><i class="fas fa-users me-1" style="width:13px;opacity:.7;"></i> Alumnado</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAlumnado">
                     <a href="{{ route('alumnos.index') }}" class="nav-link">Alumnos</a>
@@ -210,15 +283,19 @@
                     <a href="{{ route('responsables.index', ['tipo' => 'encargados']) }}"
                         class="nav-link">Encargados</a>
                 </div>
-                <button class="menu-header" onclick="toggleMenu(this, 'menuColaboradores')">
-                    Colaboradores <span class="menu-arrow">&#9660;</span>
+
+                <button type="button" class="menu-header" data-target="menuColaboradores">
+                    <span><i class="fas fa-id-badge me-1" style="width:13px;opacity:.7;"></i> Colaboradores</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuColaboradores">
                     <a href="{{ route('colaboradores.index') }}" class="nav-link">Colaboradores</a>
                     <a href="{{ route('periodos-laborales.index') }}" class="nav-link">Períodos Laborales</a>
                 </div>
-                <button class="menu-header" onclick="toggleMenu(this, 'menuAcademica')">
-                    Gestión Académica <span class="menu-arrow">&#9660;</span>
+
+                <button type="button" class="menu-header" data-target="menuAcademica">
+                    <span><i class="fas fa-book-open me-1" style="width:13px;opacity:.7;"></i> Gestión Académica</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAcademica">
                     <a href="{{ route('academica.alumnos-grado') }}" class="nav-link">Alumnos por Grado/Curso</a>
@@ -230,31 +307,38 @@
                     <a href="#" class="nav-link">Calificaciones</a>
                 </div>
 
-                <button class="menu-header" onclick="toggleMenu(this, 'menuGabinete')">
-                    Gabinete <span class="menu-arrow">&#9660;</span>
+                <button type="button" class="menu-header" data-target="menuGabinete">
+                    <span><i class="fas fa-comments me-1" style="width:13px;opacity:.7;"></i> Gabinete</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuGabinete">
                     <a href="{{ route('entrevistas.index') }}" class="nav-link">Entrevistas</a>
                     <a href="#" class="nav-link">Observaciones</a>
                 </div>
 
-                <button class="menu-header" onclick="toggleMenu(this, 'menuInscripciones')">
-                    Inscripciones <span class="menu-arrow">&#9660;</span>
+                <button type="button" class="menu-header" data-target="menuInscripciones">
+                    <span><i class="fas fa-file-alt me-1" style="width:13px;opacity:.7;"></i> Inscripciones</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuInscripciones">
                     <a href="{{ route('aranceles.index') }}" class="nav-link">Aranceles</a>
                     <a href="{{ route('inscripciones.index') }}" class="nav-link">Inscripciones</a>
                 </div>
 
-                <button class="menu-header" onclick="toggleMenu(this, 'menuPortalResponsables')">
-                    Portal Responsables <span class="menu-arrow">&#9660;</span>
+                <button type="button" class="menu-header" data-target="menuPortalResponsables">
+                    <span><i class="fas fa-door-open me-1" style="width:13px;opacity:.7;"></i> Portal
+                        Responsables</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuPortalResponsables">
                     <a href="{{ route('portal_responsables.index') }}" class="nav-link">Portal de Responsables</a>
                 </div>
 
-                <button class="menu-header" onclick="toggleMenu(this, 'menuConfiguracion')">
-                    Configuración <span class="menu-arrow">&#9660;</span>
+                <div class="menu-section-label">Sistema</div>
+
+                <button type="button" class="menu-header" data-target="menuConfiguracion">
+                    <span><i class="fas fa-cog me-1" style="width:13px;opacity:.7;"></i> Configuración</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuConfiguracion">
                     <a href="{{ route('ciclos.index') }}" class="nav-link">Ciclos Académicos</a>
@@ -271,19 +355,21 @@
                     <a href="{{ route('indicadores_faltas.index') }}" class="nav-link">Indicadores de Faltas</a>
                 </div>
 
-                <button class="menu-header" onclick="toggleMenu(this, 'menuSeguridad')">
-                    Seguridad <span class="menu-arrow">&#9660;</span>
+                <button type="button" class="menu-header" data-target="menuSeguridad">
+                    <span><i class="fas fa-lock me-1" style="width:13px;opacity:.7;"></i> Seguridad</span>
+                    <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuSeguridad">
                     <a href="{{ route('usuarios.index') }}" class="nav-link">Usuarios</a>
                     <a href="{{ route('roles.index') }}" class="nav-link">Roles</a>
                 </div>
+
             </div>
         </nav>
 
         <div class="flex-fill">
             <nav class="navbar navbar-expand navbar-custom">
-                <button type="button" id="sidebarCollapse" class="btn btn-sm btn-outline-secondary me-3">
+                <button type="button" id="sidebarToggle" class="btn btn-sm btn-outline-secondary me-3">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -317,7 +403,6 @@
                         <h5 class="fw-bold mb-0">{{ $header }}</h5>
                     </div>
                 @endisset
-
                 <div class="container-fluid">
                     {{ $slot }}
                 </div>
@@ -330,106 +415,134 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     @stack('scripts')
+
     <script>
-        // Toggle Sidebar
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.createElement('div');
-        overlay.className = 'sidebar-overlay';
-        document.body.appendChild(overlay);
+        (function () {
+            'use strict';
 
-        function toggleSidebar() {
-            const isMobile = window.innerWidth <= 768;
-            if (isMobile) {
-                sidebar.classList.toggle('active');
-                overlay.classList.toggle('active');
-            } else {
-                sidebar.classList.toggle('collapsed');
-                // Guardar preferencia en desktop
-                localStorage.setItem('sga_sidebar_collapsed', sidebar.classList.contains('collapsed'));
-            }
-        }
+            var sidebar = document.getElementById('sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            var toggle = document.getElementById('sidebarToggle');
+            var STORE_KEY = 'sga_open_panel';
+            var COLL_KEY = 'sga_collapsed';
+            var isMobile = function () { return window.innerWidth <= 768; };
 
-        document.getElementById('sidebarCollapse')?.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-
-        // Auto-colapsar sidebar en mobile y marcar que el menú debe cerrarse tras navegar
-        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
-            link.addEventListener('click', function () {
-                // Marcar que el menú debe quedar contraído en la próxima carga
-                localStorage.setItem('sga_menu_nav_collapsed', '1');
-                if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
-                    toggleSidebar();
+            /* ── Sidebar toggle ──────────────────────── */
+            function openSidebar() {
+                if (isMobile()) {
+                    sidebar.classList.add('mobile-open');
+                    overlay.classList.add('active');
+                } else {
+                    sidebar.classList.remove('collapsed');
+                    localStorage.setItem(COLL_KEY, '0');
                 }
-            });
-        });
+            }
 
-        // Restaurar estado de sidebar en Desktop al cargar
-        if (window.innerWidth > 768) {
-            if (localStorage.getItem('sga_sidebar_collapsed') === 'true') {
+            function closeSidebar() {
+                if (isMobile()) {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                } else {
+                    sidebar.classList.add('collapsed');
+                    localStorage.setItem(COLL_KEY, '1');
+                }
+            }
+
+            function toggleSidebar() {
+                if (isMobile()) {
+                    sidebar.classList.contains('mobile-open') ? closeSidebar() : openSidebar();
+                } else {
+                    sidebar.classList.contains('collapsed') ? openSidebar() : closeSidebar();
+                }
+            }
+
+            toggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', closeSidebar);
+
+            /* Restaurar estado desktop */
+            if (!isMobile() && localStorage.getItem(COLL_KEY) === '1') {
                 sidebar.classList.add('collapsed');
             }
-        }
 
-        // ── Acordeón del sidebar ──────────────────────────────────────────
-        var STORAGE_KEY = 'sga_sidebar_open';
+            /* ── Acordeón ────────────────────────────── */
+            function getPanelId(btn) { return btn.getAttribute('data-target'); }
 
-        function openPanel(panelId) {
-            var panel = document.getElementById(panelId);
-            if (!panel) return;
-            var btn = document.querySelector('[onclick="toggleMenu(this, \'' + panelId + '\')"]');
-            panel.classList.add('open');
-            if (btn) btn.classList.add('open');
-        }
-
-        function closeAll() {
-            document.querySelectorAll('.menu-links.open').forEach(function (p) { p.classList.remove('open'); });
-            document.querySelectorAll('.menu-header.open').forEach(function (b) { b.classList.remove('open'); });
-        }
-
-        function toggleMenu(btn, panelId) {
-            var panel = document.getElementById(panelId);
-            var isOpen = panel.classList.contains('open');
-            closeAll();
-            if (!isOpen) {
+            function openPanel(panelId) {
+                var panel = document.getElementById(panelId);
+                var btn = document.querySelector('[data-target="' + panelId + '"]');
+                if (!panel) return;
                 panel.classList.add('open');
-                btn.classList.add('open');
-                localStorage.setItem(STORAGE_KEY, panelId);
-            } else {
-                localStorage.removeItem(STORAGE_KEY);
+                if (btn) btn.classList.add('open');
             }
-        }
 
-        // ── Al cargar: detectar ruta activa y restaurar estado ────────────
-        document.addEventListener('DOMContentLoaded', function () {
-            var currentUrl = window.location.href;
-            var activePanel = null;
+            function closePanel(panelId) {
+                var panel = document.getElementById(panelId);
+                var btn = document.querySelector('[data-target="' + panelId + '"]');
+                if (!panel) return;
+                panel.classList.remove('open');
+                if (btn) btn.classList.remove('open');
+            }
 
-            // 1. Buscar enlace activo dentro de los paneles colapsables (solo para marcar active)
-            document.querySelectorAll('.menu-links a.nav-link').forEach(function (link) {
-                var href = link.getAttribute('href');
-                if (href && href !== '#' && currentUrl.indexOf(href) !== -1) {
-                    link.classList.add('active');
-                    var parentPanel = link.closest('.menu-links');
-                    if (parentPanel) activePanel = parentPanel.id;
+            function closeAll() {
+                document.querySelectorAll('.menu-links.open').forEach(function (p) {
+                    closePanel(p.id);
+                });
+            }
+
+            /* Delegación de eventos: un solo listener en el contenedor */
+            document.getElementById('sidebarNav').addEventListener('click', function (e) {
+                /* Si el click fue en un nav-link → no hacer nada con el acordeón */
+                if (e.target.closest('a.nav-link')) return;
+
+                var btn = e.target.closest('button.menu-header');
+                if (!btn) return;
+
+                var panelId = getPanelId(btn);
+                var panel = document.getElementById(panelId);
+                if (!panel) return;
+
+                var isOpen = panel.classList.contains('open');
+                closeAll();
+                if (!isOpen) {
+                    openPanel(panelId);
+                    localStorage.setItem(STORE_KEY, panelId);
+                } else {
+                    localStorage.removeItem(STORE_KEY);
                 }
             });
 
-            // 2. Si se llegó aquí tras hacer clic en un enlace → dejar todo contraído
-            if (localStorage.getItem('sga_menu_nav_collapsed') === '1') {
-                localStorage.removeItem('sga_menu_nav_collapsed');
-                return; // no abrir ningún panel
-            }
+            /* ── Al cargar: detectar página activa ───── */
+            document.addEventListener('DOMContentLoaded', function () {
+                var currentPath = window.location.pathname;
+                var activePanel = null;
 
-            // 3. Ruta activa tiene prioridad sobre localStorage
-            if (activePanel) {
-                openPanel(activePanel);
-                localStorage.setItem(STORAGE_KEY, activePanel);
-            } else {
-                // 4. Sin ruta activa: restaurar último panel guardado
-                var saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) openPanel(saved);
-            }
-        });
+                document.querySelectorAll('.menu-links a.nav-link').forEach(function (link) {
+                    var href = link.getAttribute('href');
+                    if (!href || href === '#') return;
+
+                    /* Comparación exacta de pathname para evitar falsos positivos */
+                    try {
+                        var linkPath = new URL(href, window.location.origin).pathname;
+                        /* Coincidencia exacta O sub-ruta directa (ej: /rrhh/alumnos/123) */
+                        if (currentPath === linkPath ||
+                            (currentPath.startsWith(linkPath + '/') && linkPath !== '/')) {
+                            link.classList.add('active');
+                            var parentPanel = link.closest('.menu-links');
+                            if (parentPanel && !activePanel) activePanel = parentPanel.id;
+                        }
+                    } catch (err) { /* URL inválida, ignorar */ }
+                });
+
+                /* Prioridad: página activa > último guardado */
+                if (activePanel) {
+                    openPanel(activePanel);
+                    localStorage.setItem(STORE_KEY, activePanel);
+                } else {
+                    var saved = localStorage.getItem(STORE_KEY);
+                    if (saved) openPanel(saved);
+                }
+            });
+        })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -443,7 +556,6 @@
             });
         </script>
     @endif
-
     @if(session('error'))
         <script>
             Swal.fire({

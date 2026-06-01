@@ -12,6 +12,7 @@ class Inscripcion extends Model
         'fecha',
         'anio_lectivo',
         'alumno_cid',
+        'alumno_nuevo',
         'grado_curso_id',
         'procede',
         'fpago',
@@ -27,10 +28,15 @@ class Inscripcion extends Model
         'al_dia'
     ];
 
+    protected $casts = [
+        'alumno_nuevo' => 'boolean',
+    ];
+
     public function alumno()
     {
         return $this->belongsTo(Alumno::class, 'alumno_cid', 'cid');
     }
+
     public function grado()
     {
         return $this->belongsTo(GradoCurso::class, 'grado_curso_id');

@@ -36,7 +36,7 @@
             border-radius: 5px !important;
         }
 
-        /* Switch Activo/Matriculado */
+        /* Toggle genérico (modal y tabla) */
         .toggle {
             position: relative;
             display: inline-block;
@@ -54,10 +54,7 @@
         .slider {
             position: absolute;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-color: #ccc;
             transition: .3s;
             border-radius: 22px;
@@ -75,35 +72,22 @@
             border-radius: 50%;
         }
 
-        input:checked+.slider {
+        input:checked + .slider {
             background-color: #198754;
-            /* Bootstrap Success color */
         }
 
-        input:checked+.slider:before {
+        input:checked + .slider:before {
             transform: translateX(16px);
         }
 
-        /* Colores para los estados */
-        .bg-matriculado {
-            background-color: #d4edda !important;
-            color: #0f5132 !important;
+        /* Toggle inline tabla — centrado y sin margen extra */
+        .toggle-tabla {
+            margin-top: 0;
+            vertical-align: middle;
         }
 
-        .bg-egresado {
-            background-color: #ecd1f1ff !important;
-            color: #8f0482ff !important;
-        }
-
-        .bg-trasladado {
-            background-color: #fff3cd !important;
-            color: #664d03 !important;
-        }
-
-        .bg-abandono {
-            background-color: #f8d7da !important;
-            color: #842029 !important;
-        }
+        /* Badges de estado — mismo tamaño que vista alumnos */
+        .badge { font-size: 0.65rem; }
     </style>
 
     <x-slot name="header">
@@ -125,7 +109,7 @@
                     <th>Alumno</th>
                     <th width="100">Grado/Curso</th>
                     <th>Rol</th>
-                    <th>Firmante</th>
+                    <th width="55" class="text-center">Nuevo</th>
                     <th>Estado</th>
                     <th width="90" class="text-center">Acciones</th>
                 </tr>
@@ -140,22 +124,33 @@
                         <td>{{ $ins->alumno->apellidos ?? '' }}, {{ $ins->alumno->nombres ?? '' }}</td>
                         <td>{{ $ins->grado->gradocurso ?? '' }}</td>
                         <td>{{ $ins->firmante_rol }}</td>
-                        <td>{{ $ins->firmante_nombre }}</td>
-                        <td class="text-center fw-bold 
-                                @if($ins->estado == 'Matriculado') bg-matriculado 
-                                @elseif($ins->estado == 'Egresado') bg-egresado 
-                                @elseif($ins->estado == 'Trasladado') bg-trasladado 
-                                @elseif($ins->estado == 'Abandono') bg-abandono 
-                                @endif" style="font-size: 0.75rem;">
-                            {{ $ins->estado }}
+                        <td class="text-center">
+                            <label class="toggle toggle-tabla" title="{{ $ins->alumno_nuevo ? 'Alumno nuevo' : 'Alumno no nuevo' }}">
+                                <input type="checkbox"
+                                    class="toggle-alumno-nuevo"
+                                    data-id="{{ $ins->id }}"
+                                    {{ $ins->alumno_nuevo ? 'checked' : '' }}>
+                                <span class="slider"></span>
+                            </label>
                         </td>
                         <td class="text-center">
-
-                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar" title="Editar alumno"
+                            @if($ins->estado == 'Matriculado')
+                                <span class="badge bg-success" style="font-size:0.65rem">{{ $ins->estado }}</span>
+                            @elseif($ins->estado == 'Egresado')
+                                <span class="badge bg-purple" style="font-size:0.65rem; background-color:#8f0482;">{{ $ins->estado }}</span>
+                            @elseif($ins->estado == 'Trasladado')
+                                <span class="badge bg-warning text-dark" style="font-size:0.65rem">{{ $ins->estado }}</span>
+                            @elseif($ins->estado == 'Abandono')
+                                <span class="badge bg-danger" style="font-size:0.65rem">{{ $ins->estado }}</span>
+                            @else
+                                <span class="badge bg-secondary" style="font-size:0.65rem">{{ $ins->estado }}</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar" title="Editar inscripción"
                                 style="font-size: 0.65rem;" data-id="{{ $ins->id }}" data-json='{{ json_encode($ins) }}'>
                                 <i class="fas fa-edit"></i>
                             </button>
-
                             <form action="{{ route('inscripciones.destroy', $ins->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
@@ -174,71 +169,94 @@
 
     <script>
         window.onload = function () {
-            if (window.jQuery) {
-
-                $('#tabla-inscripciones').DataTable({
-                    "order": [[1, "desc"]], // Ordenar por fecha descendiente
-                    "pageLength": 10,
-                    "language": {
-                        "search": "Buscar:",
-                        "lengthMenu": "Mostrar _MENU_ registros",
-                        "paginate": { "next": "Siguiente", "previous": "Anterior" },
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
-                        "infoFiltered": "(filtrado de _MAX_ registros)",
-                        "zeroRecords": "No se encontraron registros",
-                        "emptyTable": "No hay datos disponibles en la tabla"
-                    },
-                    "dom": "<'row mb-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
-                });
-
-                let currentInscripcion = null;
-
-                $(document).on('click', '.btn-editar', function () {
-                    var d = $(this).data('json');
-                    currentInscripcion = d;
-                    $('#formEditarIns').attr('action', "{{ url('inscripciones') }}/" + d.id);
-
-                    // Mapeo dinámico de campos al modal
-                    Object.keys(d).forEach(key => {
-                        let el = $(`#edit_${key}`);
-                        if (el.length > 0) {
-                            if (el.attr('type') === 'checkbox') {
-                                el.prop('checked', d[key] === 'Sí' || d[key] === 1 || d[key] === true);
-                            } else {
-                                el.val(d[key]);
-                            }
-                        }
-                    });
-
-                    // Mostrar info de lectura extra
-                    if (d.alumno) {
-                        $('#edit_alumno_nombre').val(d.alumno.apellidos + ', ' + d.alumno.nombres);
-                    }
-
-                    var myModal = new bootstrap.Modal(document.getElementById('modalEditarIns'));
-                    myModal.show();
-                });
-
-                $('#edit_firmante_rol').on('change', function () {
-                    if (!currentInscripcion || !currentInscripcion.alumno) return;
-                    const rol = $(this).val();
-                    const a = currentInscripcion.alumno;
-                    let nombre = '';
-
-                    if (rol === 'Madre' && a.madre) nombre = a.madre.nombre;
-                    else if (rol === 'Padre' && a.padre) nombre = a.padre.nombre;
-                    else if (rol === 'Encargado' && a.encargado) nombre = a.encargado.nombre;
-
-                    if (nombre) {
-                        $('#edit_firmante_nombre').val(nombre);
-                    }
-                });
-            } else {
+            if (!window.jQuery) {
                 alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
+                return;
             }
+
+            // ── DataTable ──────────────────────────────────────────────
+            $('#tabla-inscripciones').DataTable({
+                "order": [[1, "desc"]],
+                "pageLength": 10,
+                "language": {
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "paginate": { "next": "Siguiente", "previous": "Anterior" },
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros)",
+                    "zeroRecords": "No se encontraron registros",
+                    "emptyTable": "No hay datos disponibles en la tabla"
+                },
+                "dom": "<'row mb-2'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                       "<'row'<'col-sm-12'tr>>" +
+                       "<'row mt-2'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+            });
+
+            // ── Toggle Alumno Nuevo (AJAX) ─────────────────────────────
+            $(document).on('change', '.toggle-alumno-nuevo', function () {
+                const id       = $(this).data('id');
+                const valor    = $(this).is(':checked') ? 1 : 0;
+                const $toggle  = $(this);
+
+                $.ajax({
+                    url: "{{ route('inscripciones.toggleAlumnoNuevo', ['id' => '__ID__']) }}".replace('__ID__', id),
+                    method: 'PATCH',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        alumno_nuevo: valor
+                    },
+                    success: function (res) {
+                        // Actualizar el title del label para accesibilidad
+                        $toggle.closest('label').attr('title', valor ? 'Alumno nuevo' : 'Alumno no nuevo');
+                    },
+                    error: function () {
+                        // Revertir el toggle si falla
+                        $toggle.prop('checked', !valor);
+                        alert('Error al guardar. Intente nuevamente.');
+                    }
+                });
+            });
+
+            // ── Modal Editar ───────────────────────────────────────────
+            let currentInscripcion = null;
+
+            $(document).on('click', '.btn-editar', function () {
+                var d = $(this).data('json');
+                currentInscripcion = d;
+                $('#formEditarIns').attr('action', "{{ url('inscripciones') }}/" + d.id);
+
+                Object.keys(d).forEach(key => {
+                    let el = $(`#edit_${key}`);
+                    if (el.length > 0) {
+                        if (el.attr('type') === 'checkbox') {
+                            el.prop('checked', d[key] === 'Sí' || d[key] === 1 || d[key] === true);
+                        } else {
+                            el.val(d[key]);
+                        }
+                    }
+                });
+
+                if (d.alumno) {
+                    $('#edit_alumno_nombre').val(d.alumno.apellidos + ', ' + d.alumno.nombres);
+                }
+
+                var myModal = new bootstrap.Modal(document.getElementById('modalEditarIns'));
+                myModal.show();
+            });
+
+            $('#edit_firmante_rol').on('change', function () {
+                if (!currentInscripcion || !currentInscripcion.alumno) return;
+                const rol = $(this).val();
+                const a   = currentInscripcion.alumno;
+                let nombre = '';
+
+                if (rol === 'Madre' && a.madre)         nombre = a.madre.nombre;
+                else if (rol === 'Padre' && a.padre)    nombre = a.padre.nombre;
+                else if (rol === 'Encargado' && a.encargado) nombre = a.encargado.nombre;
+
+                if (nombre) $('#edit_firmante_nombre').val(nombre);
+            });
         };
     </script>
 </x-app-layout>

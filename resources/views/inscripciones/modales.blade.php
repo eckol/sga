@@ -63,17 +63,18 @@
                         <input type="text" name="firmante_nombre" id="edit_firmante_nombre"
                             class="form-control form-control-sm">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Monto Matrícula (Gs)</label>
                         <input type="number" name="monto_matricula" id="edit_monto_matricula"
                             class="form-control form-control-sm" required>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Monto Anualidad (Gs)</label>
                         <input type="number" name="monto_anualidad" id="edit_monto_anualidad"
                             class="form-control form-control-sm" required>
                     </div>
 
+                    {{-- Toggles: Aut. Mochila / Aut. Foto / Alumno Nuevo --}}
                     <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
                         <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Aut.
                             Mochila</label>
@@ -88,6 +89,15 @@
                         <label class="toggle">
                             <input type="hidden" name="aut_foto" value="No">
                             <input type="checkbox" name="aut_foto" id="edit_aut_foto" value="Sí">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 mt-1 d-flex flex-column align-items-center justify-content-center">
+                        <label class="form-label mb-1 fw-bold text-center" style="font-size:0.7rem;">Alumno
+                            Nuevo</label>
+                        <label class="toggle">
+                            <input type="hidden" name="alumno_nuevo" value="0">
+                            <input type="checkbox" name="alumno_nuevo" id="edit_alumno_nuevo" value="1">
                             <span class="slider"></span>
                         </label>
                     </div>

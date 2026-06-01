@@ -85,4 +85,12 @@ class InscripcionController extends Controller
 
         return back()->with('success', 'Inscripción eliminada correctamente.');
     }
+
+    public function toggleAlumnoNuevo(Request $request, $id)
+    {
+        $inscripcion = Inscripcion::findOrFail($id);
+        $inscripcion->alumno_nuevo = $request->input('alumno_nuevo');
+        $inscripcion->save();
+        return response()->json(['success' => true, 'alumno_nuevo' => $inscripcion->alumno_nuevo]);
+    }
 }

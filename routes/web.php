@@ -38,6 +38,7 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'ind
     ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -70,6 +71,8 @@ Route::middleware('auth')->group(function () {
     // ── Portal de Responsables (fuera de rrhh, URL limpia) ──
     Route::get('/portal-responsables', [PortalResponsableController::class, 'index'])
         ->name('portal_responsables.index');
+    Route::patch('inscripciones/{id}/alumno-nuevo', [InscripcionController::class, 'toggleAlumnoNuevo'])->name('inscripciones.toggleAlumnoNuevo');
+
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -96,8 +99,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('colaboradores/{id}', [ColaboradorController::class, 'update'])->name('colaboradores.update');
         Route::delete('colaboradores/{id}', [ColaboradorController::class, 'destroy'])->name('colaboradores.destroy');
         Route::resource('periodos-laborales', PeriodoLaboralController::class)->except(['create', 'show', 'edit']);
-    });
 
+
+    });
     Route::prefix('academica')->group(function () {
         Route::get('alumnos-grado', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'index'])->name('academica.alumnos-grado');
         Route::get('alumnos/{id}/detalles', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'getDetalles'])->name('academica.alumnos.detalles');

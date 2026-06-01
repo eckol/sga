@@ -377,25 +377,36 @@
                             .done(function (res) {
                                 // Responsables
                                 $('#info_madre_nombre').val(res.madre ? res.madre.nombre : 'No registrado');
+                                $('#info_madre_telefono').val(res.madre ? (res.madre.telefono1 || '') : '');
                                 $('#info_padre_nombre').val(res.padre ? res.padre.nombre : 'No registrado');
+                                $('#info_padre_telefono').val(res.padre ? (res.padre.telefono1 || '') : '');
                                 $('#info_encargado_nombre').val(res.encargado ? res.encargado.nombre : 'No registrado');
+                                $('#info_encargado_telefono').val(res.encargado ? (res.encargado.telefono1 || '') : '');
 
                                 // Historial de Inscripciones
                                 let html = '';
                                 if (res.inscripciones && res.inscripciones.length > 0) {
                                     res.inscripciones.forEach(ins => {
+                                        let btnEditIns = `<button type="button"
+                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-inscripcion"
+                                                        style="font-size:0.65rem;"
+                                                        data-ins='${JSON.stringify(ins)}'
+                                                        title="Editar inscripci\u00f3n">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>`;
                                         html += `<tr>
-                                                        <td>${ins.id}</td>
-                                                        <td>${ins.fecha}</td>
-                                                        <td>${ins.anio_lectivo}</td>
-                                                        <td>${ins.grado_curso}</td>
-                                                        <td>${ins.firmante_nombre || ''}</td>
-                                                        <td>${ins.firmante_rol || ''}</td>
-                                                        <td>${ins.estado}</td>
-                                                    </tr>`;
+                                                                        <td>${ins.id}</td>
+                                                                        <td>${ins.fecha}</td>
+                                                                        <td>${ins.anio_lectivo}</td>
+                                                                        <td>${ins.grado_curso}</td>
+                                                                        <td>${ins.firmante_nombre || ''}</td>
+                                                                        <td>${ins.firmante_rol || ''}</td>
+                                                                        <td>${ins.estado}</td>
+                                                                        <td class="text-center">${btnEditIns}</td>
+                                                                    </tr>`;
                                     });
                                 } else {
-                                    html = '<tr><td colspan="7" class="text-center text-muted">Sin historial</td></tr>';
+                                    html = '<tr><td colspan="8" class="text-center text-muted">Sin historial</td></tr>';
                                 }
                                 $('#table-inscripciones-historial').html(html);
 
@@ -404,17 +415,17 @@
                                 if (res.faltas && res.faltas.length > 0) {
                                     res.faltas.forEach(f => {
                                         var boton = `<button type="button"
-                                                    class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
-                                                    style="font-size:0.65rem;"
-                                                    data-id="${f.id}"
-                                                    data-fecha="${f.fecha_raw ?? ''}"
-                                                    data-grado="${f.grado_curso_id}"
-                                                    data-alumno="${f.alumno_id}"
-                                                    data-asignatura="${f.asignatura_id}"
-                                                    data-indicador="${f.indicador_falta_id}"
-                                                    title="Editar falta">
-                                                    <i class="fas fa-edit"></i>
-                                                    </button>`;
+                                                                    class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                                    style="font-size:0.65rem;"
+                                                                    data-id="${f.id}"
+                                                                    data-fecha="${f.fecha_raw ?? ''}"
+                                                                    data-grado="${f.grado_curso_id}"
+                                                                    data-alumno="${f.alumno_id}"
+                                                                    data-asignatura="${f.asignatura_id}"
+                                                                    data-indicador="${f.indicador_falta_id}"
+                                                                    title="Editar falta">
+                                                                    <i class="fas fa-edit"></i>
+                                                                    </button>`;
                                         dtFaltas.row.add([
                                             f.id,
                                             f.fecha,
@@ -435,17 +446,17 @@
                                         let badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span>`;
 
                                         let boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-entrevista"
-                                                                style="font-size:0.65rem;"
-                                                                data-id="${e.id}"
-                                                                data-tipo="${e.tipo}"
-                                                                data-fecha="${e.fecha_raw}"
-                                                                data-colaborador="${e.colaborador_id}"
-                                                                data-motivo="${e.motivo}"
-                                                                data-obs="${e.obs || ''}"
-                                                                data-testigos='${JSON.stringify(e.testigos || [])}'
-                                                                title="Editar entrevista">
-                                                                <i class="fas fa-edit"></i>
-                                                                </button>`;
+                                                                                style="font-size:0.65rem;"
+                                                                                data-id="${e.id}"
+                                                                                data-tipo="${e.tipo}"
+                                                                                data-fecha="${e.fecha_raw}"
+                                                                                data-colaborador="${e.colaborador_id}"
+                                                                                data-motivo="${e.motivo}"
+                                                                                data-obs="${e.obs || ''}"
+                                                                                data-testigos='${JSON.stringify(e.testigos || [])}'
+                                                                                title="Editar entrevista">
+                                                                                <i class="fas fa-edit"></i>
+                                                                                </button>`;
                                         dtEntrevistas.row.add([
                                             e.fecha,
                                             badgeHtml,
@@ -727,7 +738,72 @@
                         html += '</div>'; // cal-asist-wrap
                         $('#asist-calendarios-wrap').html(html);
                     }
-                    // ── Fin Tab Asistencia ────────────────────────────────────────                    
+                    // ── Fin Tab Asistencia ────────────────────────────────────────
+
+                    // ── Editar inscripción desde el historial del alumno ──────────
+                    $(document).on('click', '.btn-editar-inscripcion', function () {
+                        var ins = $(this).data('ins');
+
+                        $('#formEditarInsAlumno').attr('action', "{{ url('inscripciones') }}/" + ins.id);
+
+                        // Campos de sólo lectura
+                        $('#ins_edit_alumno_cid').val(ins.alumno_cid);
+                        var nombreAlumno = $('#edit_apellidos').val() + ', ' + $('#edit_nombres').val();
+                        $('#ins_edit_alumno_nombre').val(nombreAlumno);
+
+                        // Campos editables
+                        $('#ins_edit_fecha').val(ins.fecha_raw || '');
+                        $('#ins_edit_anio_lectivo').val(ins.anio_lectivo);
+                        $('#ins_edit_grado_curso_id').val(ins.grado_curso_id);
+                        $('#ins_edit_procede').val(ins.procede || '');
+                        $('#ins_edit_fpago').val(ins.fpago || 'Mensual');
+                        $('#ins_edit_firmante_rol').val(ins.firmante_rol || '');
+                        $('#ins_edit_firmante_nombre').val(ins.firmante_nombre || '');
+                        $('#ins_edit_monto_matricula').val(ins.monto_matricula || 0);
+                        $('#ins_edit_monto_anualidad').val(ins.monto_anualidad || 0);
+                        $('#ins_edit_aut_mochila').prop('checked', ins.aut_mochila === 'Sí' || ins.aut_mochila === 1);
+                        $('#ins_edit_aut_foto').prop('checked', ins.aut_foto === 'Sí' || ins.aut_foto === 1);
+                        $('#ins_edit_estado').val(ins.estado || 'Matriculado');
+                        $('#ins_edit_fecha_baja').val(ins.fecha_baja ? ins.fecha_baja.substring(0, 10) : '');
+                        $('#ins_edit_observaciones').val(ins.observaciones || '');
+
+                        new bootstrap.Modal(document.getElementById('modalEditarInsAlumno')).show();
+                    });
+                    // ── Fin Editar Inscripción ────────────────────────────────────
+
+                    // ── Botones WhatsApp de Responsables ─────────────────────────
+                    $(document).on('click', '.btn-whatsapp', function () {
+                        var sourceId = $(this).data('tel-source');
+                        var tel = $('#' + sourceId).val().trim();
+
+                        if (!tel) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Sin número de teléfono',
+                                text: 'Debe registrar un número telefónico válido para usar esta función.',
+                                confirmButtonText: 'Entendido',
+                                confirmButtonColor: '#25D366'
+                            });
+                            return;
+                        }
+
+                        // Limpiar: quitar espacios, guiones, paréntesis
+                        var telLimpio = tel.replace(/[\s\-\(\)]/g, '');
+
+                        // Normalizar al formato internacional +595
+                        if (telLimpio.startsWith('00595')) {
+                            telLimpio = '+' + telLimpio.slice(2);
+                        } else if (telLimpio.startsWith('595')) {
+                            telLimpio = '+' + telLimpio;
+                        } else if (telLimpio.startsWith('0')) {
+                            telLimpio = '+595' + telLimpio.slice(1);
+                        } else if (!telLimpio.startsWith('+')) {
+                            telLimpio = '+595' + telLimpio;
+                        }
+
+                        window.open('https://wa.me/' + telLimpio, '_blank');
+                    });
+                    // ── Fin WhatsApp ──────────────────────────────────────────────
 
                 } else {
                     alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
