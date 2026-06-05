@@ -202,45 +202,4 @@ class AlumnoGradoController extends Controller
 
         return response()->json(['success' => true]);
     }
-
-    /**
-     * Devuelve los registros anecdóticos de un alumno para el portal de responsables.
-     * Valida que el alumno pertenezca al responsable autenticado antes de responder.
-     */
-    public function getRegistrosAnecdoticosPortal($id)
-    {
-        $emailUsuario = auth()->user()->email;
-
-        // Verificar que el alumno le pertenece al responsable logueado
-        $alumno = \App\Models\Alumno::where('id', $id)
-            ->where(function ($q) use ($emailUsuario) {
-                $q->whereHas('madre', fn($s) => $s->where('email', $emailUsuario))
-                    ->orWhereHas('padre', fn($s) => $s->where('email', $emailUsuario))
-                    ->orWhereHas('encargado', fn($s) => $s->where('email', $emailUsuario));
-            })
-            ->with(['registrosAnecdoticos.asignatura', 'registrosAnecdoticos.gradoCurso'])
-            ->firstOrFail();
-
-        // Enriquecer con nombre del colaborador (misma lógica que RegistroAnecdoticoController)
-        $asigColabMap = \App\Models\AsignaturaColaborador::with('colaborador')->get()
-            ->keyBy(fn($r) => $r->asignatura_id . '-' . $r->grado_curso_id);
-
-        $registros = $alumno->registrosAnecdoticos
-            ->sortByDesc('fecha')
-            ->map(function ($r) use ($asigColabMap) {
-                $key = $r->asignatura_id . '-' . $r->grado_curso_id;
-                return [
-                    'id' => $r->id,
-                    'fecha' => $r->fecha ? \Carbon\Carbon::parse($r->fecha)->format('d/m/Y') : '—',
-                    'asignatura' => $r->asignatura->asignatura ?? '—',
-                    'colaborador_nombre' => isset($asigColabMap[$key])
-                        ? $asigColabMap[$key]->colaborador->apellidos . ', ' . $asigColabMap[$key]->colaborador->nombres
-                        : '—',
-                    'detalle' => $r->detalle,
-                ];
-            })
-            ->values();
-
-        return response()->json(['registros_anecdoticos' => $registros]);
-    }
 }

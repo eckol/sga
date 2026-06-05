@@ -206,6 +206,10 @@
                             type="button">Faltas</button>
                     </li>
                     <li class="nav-item">
+                        <button class="nav-link py-1" id="registros-anecdoticos-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab-registros-anecdoticos" type="button">Reg. Anecdótico</button>
+                    </li>
+                    <li class="nav-item">
                         <button class="nav-link py-1" id="entrevistas-tab" data-bs-toggle="tab"
                             data-bs-target="#tab-entrevistas" type="button">Entrevistas</button>
                     </li>
@@ -679,7 +683,28 @@
                         </div>
                     </div>
 
-                    {{-- Tab 6: Entrevistas --}}
+                    {{-- Tab 6: Registro Anecdótico --}}
+                    <div class="tab-pane fade" id="tab-registros-anecdoticos" role="tabpanel">
+                        <div class="table-responsive mt-1">
+                            <table id="tabla-registros-alumno" class="table table-sm table-bordered table-hover"
+                                style="font-size: 0.75rem; width:100%;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 10px;">ID</th>
+                                        <th style="width: 10px;">Fecha</th>
+                                        <th style="width: 30%;">Asignatura</th>
+                                        <th>Detalle</th>
+                                        <th class="text-center" style="width:50px;">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- Se cargará vía AJAX --}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{-- Tab 7: Entrevistas --}}
                     <div class="tab-pane fade" id="tab-entrevistas" role="tabpanel">
                         <div class="d-flex justify-content-between align-items-center mt-2 mb-1">
                             <h6 class="fw-bold text-secondary mb-0" style="font-size: 0.75rem;">Historial de Entrevistas
@@ -1086,6 +1111,78 @@
                                     <option value="{{ $ind->id }}">{{ $ind->indicador_falta }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer p-1">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="fas fa-save me-1"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- ════════════════════════════════════════════════ --}}
+{{-- Modal Editar Registro Anecdótico (abierto desde el tab Reg. Anecdótico del modal Alumno) --}}
+{{-- ════════════════════════════════════════════════ --}}
+<div class="modal fade" id="modalEditarRegistroAnecdotico" tabindex="-1" style="z-index: 1080;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header p-2 bg-warning">
+                <h6 class="modal-title"><i class="fas fa-edit me-1"></i> Editar Registro Anecdótico</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="formEditarRegistroAnecdotico" action="">
+                @csrf
+                @method('PUT')
+                <div class="modal-body" style="font-size: 0.8rem;">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label form-label-sm fw-bold">Fecha <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" name="fecha" id="ranec_editar_fecha" class="form-control form-control-sm"
+                                required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label form-label-sm fw-bold">Grado/Curso <span
+                                    class="text-danger">*</span></label>
+                            <select name="grado_curso_id" id="ranec_editar_grado" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Seleccionar —</option>
+                                @foreach($grados as $g)
+                                    <option value="{{ $g->id }}">{{ $g->gradocurso }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Alumno <span
+                                    class="text-danger">*</span></label>
+                            <select name="alumno_id" id="ranec_editar_alumno" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label form-label-sm fw-bold">Asignatura <span
+                                    class="text-danger">*</span></label>
+                            <select name="asignatura_id" id="ranec_editar_asignatura" class="form-select form-select-sm"
+                                required>
+                                <option value="">— Cargando —</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <label class="form-label form-label-sm fw-bold">Docente</label>
+                            <input type="text" id="ranec_editar_docente" class="form-control form-control-sm" readonly
+                                placeholder="(se completa automáticamente)">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label form-label-sm fw-bold">Detalle / Observación <span
+                                    class="text-danger">*</span></label>
+                            <textarea name="detalle" id="ranec_editar_detalle" class="form-control form-control-sm"
+                                rows="3" required></textarea>
                         </div>
                     </div>
                 </div>

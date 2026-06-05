@@ -140,4 +140,9 @@ class Alumno extends Model
     {
         return $this->hasMany(EntrevistaResponsable::class, 'alumno_id', 'id');
     }
+
+    public function registrosAnecdoticos()
+    {
+        return $this->hasMany(RegistroAnecdotico::class);
+    }
 }

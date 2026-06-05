@@ -60,11 +60,11 @@
                 @foreach($faltas as $falta)
                     <tr>
                         <td>{{ $falta->id }}</td>
-                        <td>{{ $falta->tipo_falta }}</td>
+                        <td>{{ $falta->indicador_falta }}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $falta->id }}"
-                                data-tipo_falta="{{ $falta->tipo_falta }}">
+                                data-indicador_falta="{{ $falta->indicador_falta }}">
                                 Editar
                             </button>
 
@@ -90,7 +90,7 @@
                     <h6 class="modal-title">Nueva Falta</h6>
                 </div>
                 <div class="modal-body p-2">
-                    <input type="text" name="tipo_falta" class="form-control form-control-sm"
+                    <input type="text" name="indicador_falta" class="form-control form-control-sm"
                         placeholder="Nombre de la falta" required>
                 </div>
                 <div class="modal-footer p-1">
@@ -158,11 +158,11 @@
                     console.log("SGA: Clic detectado en botón editar");
 
                     var id = $(this).data('id');
-                    var tipo_falta = $(this).data('tipo_falta');
+                    var indicador_falta = $(this).data('indicador_falta');
 
                     // Llenar campos
                     $('#formEditar').attr('action', '/indicadores_faltas/' + id);
-                    $('#edit_tipo_falta').val(tipo_falta);
+                    $('#edit_indicador_falta').val(indicador_falta);
 
                     // Forzar apertura del modal
                     var myModal = new bootstrap.Modal(document.getElementById('modalEditarFalta'));

@@ -28,6 +28,9 @@ use App\Http\Controllers\FaltaController;
 use App\Http\Controllers\Academica\AsistenciaController;
 use App\Http\Controllers\PortalResponsableController;
 use App\Http\Controllers\Academica\EntrevistaController;
+use App\Http\Controllers\Academica\RegistroAnecdoticoController;
+use App\Http\Controllers\Academica\AlumnoGradoController;
+
 
 
 Route::get('/', function () {
@@ -71,7 +74,10 @@ Route::middleware('auth')->group(function () {
     // ── Portal de Responsables (fuera de rrhh, URL limpia) ──
     Route::get('/portal-responsables', [PortalResponsableController::class, 'index'])
         ->name('portal_responsables.index');
+    Route::get('/portal-responsables/alumno/{id}/registros-anecdoticos', [AlumnoGradoController::class, 'getRegistrosAnecdoticosPortal'])
+        ->name('portal_responsables.alumno.registros-anecdoticos');
     Route::patch('inscripciones/{id}/alumno-nuevo', [InscripcionController::class, 'toggleAlumnoNuevo'])->name('inscripciones.toggleAlumnoNuevo');
+
 
 });
 
@@ -121,10 +127,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/asistencias/guardar-grilla', [AsistenciaController::class, 'guardarGrilla'])->name('asistencias.guardarGrilla');
         Route::get('/asistencias/{alumno}/por-alumno', [AsistenciaController::class, 'porAlumno'])->name('asistencias.porAlumno');
         Route::delete('/asistencias/{id}', [AsistenciaController::class, 'destroy'])->name('asistencias.destroy');
-        // 1. Rutas del Módulo Principal de Entrevistas
-        Route::get('entrevistas', [EntrevistaController::class, 'index'])->name('entrevistas.index');
 
-        // 2. CRUD para Entrevistas con Alumnos Directos
+        Route::get('registros-anecdoticos', [RegistroAnecdoticoController::class, 'index'])
+            ->name('academica.registros-anecdoticos.index');
+        Route::post('registros-anecdoticos', [RegistroAnecdoticoController::class, 'store'])
+            ->name('academica.registros-anecdoticos.store');
+        Route::put('registros-anecdoticos/{id}', [RegistroAnecdoticoController::class, 'update'])
+            ->name('academica.registros-anecdoticos.update');
+        Route::delete('registros-anecdoticos/{id}', [RegistroAnecdoticoController::class, 'destroy'])
+            ->name('academica.registros-anecdoticos.destroy');
+
+        Route::get('entrevistas', [EntrevistaController::class, 'index'])->name('entrevistas.index');
         Route::post('entrevistas/alumno', [EntrevistaController::class, 'storeAlumno'])->name('entrevistas.alumno.store');
         Route::put('entrevistas/alumno/{id}', [EntrevistaController::class, 'updateAlumno'])->name('entrevistas.alumno.update');
         Route::delete('entrevistas/alumno/{id}', [EntrevistaController::class, 'destroyAlumno'])->name('entrevistas.alumno.destroy');

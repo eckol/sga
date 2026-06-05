@@ -307,6 +307,33 @@
                             "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
                     });
 
+                    // ── DataTable de registros anecdóticos ──
+                    var dtRegistros = $('#tabla-registros-alumno').DataTable({
+                        "order": [[1, "desc"]],
+                        "pageLength": 5,
+                        "lengthMenu": [5, 10, 25],
+                        "columns": [
+                            { "title": "ID", "width": "40px" },
+                            { "title": "Fecha", "width": "85px" },
+                            { "title": "Asignatura", "width": "25%" },
+                            { "title": "Detalle" },
+                            { "title": "Editar", "orderable": false, "className": "text-center", "width": "50px" }
+                        ],
+                        "autoWidth": false,
+                        "language": {
+                            "search": "Buscar:",
+                            "lengthMenu": "Mostrar _MENU_",
+                            "paginate": { "next": "›", "previous": "‹" },
+                            "info": "_START_–_END_ de _TOTAL_",
+                            "infoEmpty": "0 registros",
+                            "zeroRecords": "Sin registros",
+                            "emptyTable": "Sin registros anecdóticos"
+                        },
+                        "dom": "<'row mb-1'<'col-sm-6'l><'col-sm-6'f>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row mt-1'<'col-sm-5'i><'col-sm-7'p>>"
+                    });
+
                     // ── DataTable de entrevistas ──
                     var dtEntrevistas = $('#tabla-entrevistas-alumno').DataTable({
                         "order": [[0, "desc"]],
@@ -370,6 +397,7 @@
                         $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
                         $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
                         dtFaltas.clear().draw();
+                        dtRegistros.clear().draw();
                         dtEntrevistas.clear().draw();
 
                         // Cargar detalles vía AJAX
@@ -388,22 +416,22 @@
                                 if (res.inscripciones && res.inscripciones.length > 0) {
                                     res.inscripciones.forEach(ins => {
                                         let btnEditIns = `<button type="button"
-                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-inscripcion"
-                                                        style="font-size:0.65rem;"
-                                                        data-ins='${JSON.stringify(ins)}'
-                                                        title="Editar inscripci\u00f3n">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>`;
+                                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-inscripcion"
+                                                                        style="font-size:0.65rem;"
+                                                                        data-ins='${JSON.stringify(ins)}'
+                                                                        title="Editar inscripci\u00f3n">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>`;
                                         html += `<tr>
-                                                                        <td>${ins.id}</td>
-                                                                        <td>${ins.fecha}</td>
-                                                                        <td>${ins.anio_lectivo}</td>
-                                                                        <td>${ins.grado_curso}</td>
-                                                                        <td>${ins.firmante_nombre || ''}</td>
-                                                                        <td>${ins.firmante_rol || ''}</td>
-                                                                        <td>${ins.estado}</td>
-                                                                        <td class="text-center">${btnEditIns}</td>
-                                                                    </tr>`;
+                                                                                        <td>${ins.id}</td>
+                                                                                        <td>${ins.fecha}</td>
+                                                                                        <td>${ins.anio_lectivo}</td>
+                                                                                        <td>${ins.grado_curso}</td>
+                                                                                        <td>${ins.firmante_nombre || ''}</td>
+                                                                                        <td>${ins.firmante_rol || ''}</td>
+                                                                                        <td>${ins.estado}</td>
+                                                                                        <td class="text-center">${btnEditIns}</td>
+                                                                                    </tr>`;
                                     });
                                 } else {
                                     html = '<tr><td colspan="8" class="text-center text-muted">Sin historial</td></tr>';
@@ -415,17 +443,17 @@
                                 if (res.faltas && res.faltas.length > 0) {
                                     res.faltas.forEach(f => {
                                         var boton = `<button type="button"
-                                                                    class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
-                                                                    style="font-size:0.65rem;"
-                                                                    data-id="${f.id}"
-                                                                    data-fecha="${f.fecha_raw ?? ''}"
-                                                                    data-grado="${f.grado_curso_id}"
-                                                                    data-alumno="${f.alumno_id}"
-                                                                    data-asignatura="${f.asignatura_id}"
-                                                                    data-indicador="${f.indicador_falta_id}"
-                                                                    title="Editar falta">
-                                                                    <i class="fas fa-edit"></i>
-                                                                    </button>`;
+                                                                                    class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                                                    style="font-size:0.65rem;"
+                                                                                    data-id="${f.id}"
+                                                                                    data-fecha="${f.fecha_raw ?? ''}"
+                                                                                    data-grado="${f.grado_curso_id}"
+                                                                                    data-alumno="${f.alumno_id}"
+                                                                                    data-asignatura="${f.asignatura_id}"
+                                                                                    data-indicador="${f.indicador_falta_id}"
+                                                                                    title="Editar falta">
+                                                                                    <i class="fas fa-edit"></i>
+                                                                                    </button>`;
                                         dtFaltas.row.add([
                                             f.id,
                                             f.fecha,
@@ -438,6 +466,32 @@
                                 }
                                 dtFaltas.draw();
 
+                                // Repoblar DataTable de Registros Anecdóticos
+                                dtRegistros.clear();
+                                if (res.registros_anecdoticos && res.registros_anecdoticos.length > 0) {
+                                    res.registros_anecdoticos.forEach(r => {
+                                        var boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-registro-anecdotico"
+                                                                    style="font-size:0.65rem;"
+                                                                    data-id="${r.id}"
+                                                                    data-fecha="${r.fecha_raw ?? ''}"
+                                                                    data-grado="${r.grado_curso_id}"
+                                                                    data-alumno="${r.alumno_id}"
+                                                                    data-asignatura="${r.asignatura_id}"
+                                                                    data-detalle="${r.detalle.replace(/"/g, '&quot;')}"
+                                                                    title="Editar registro">
+                                                                    <i class="fas fa-edit"></i>
+                                                                 </button>`;
+                                        dtRegistros.row.add([
+                                            r.id,
+                                            r.fecha,
+                                            r.asignatura || '—',
+                                            r.detalle,
+                                            boton
+                                        ]);
+                                    });
+                                }
+                                dtRegistros.draw();
+
                                 // Repoblar DataTable de Entrevistas
                                 dtEntrevistas.clear();
                                 if (res.entrevistas && res.entrevistas.length > 0) {
@@ -446,17 +500,17 @@
                                         let badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span>`;
 
                                         let boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-entrevista"
-                                                                                style="font-size:0.65rem;"
-                                                                                data-id="${e.id}"
-                                                                                data-tipo="${e.tipo}"
-                                                                                data-fecha="${e.fecha_raw}"
-                                                                                data-colaborador="${e.colaborador_id}"
-                                                                                data-motivo="${e.motivo}"
-                                                                                data-obs="${e.obs || ''}"
-                                                                                data-testigos='${JSON.stringify(e.testigos || [])}'
-                                                                                title="Editar entrevista">
-                                                                                <i class="fas fa-edit"></i>
-                                                                                </button>`;
+                                                                                                style="font-size:0.65rem;"
+                                                                                                data-id="${e.id}"
+                                                                                                data-tipo="${e.tipo}"
+                                                                                                data-fecha="${e.fecha_raw}"
+                                                                                                data-colaborador="${e.colaborador_id}"
+                                                                                                data-motivo="${e.motivo}"
+                                                                                                data-obs="${e.obs || ''}"
+                                                                                                data-testigos='${JSON.stringify(e.testigos || [])}'
+                                                                                                title="Editar entrevista">
+                                                                                                <i class="fas fa-edit"></i>
+                                                                                                </button>`;
                                         dtEntrevistas.row.add([
                                             e.fecha,
                                             badgeHtml,
@@ -473,6 +527,7 @@
                                 $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center text-danger">Error al cargar</td></tr>');
                                 dtFaltas.clear().draw();
                                 dtEntrevistas.clear().draw();
+                                dtRegistros.clear().draw();
                             });
 
                         new bootstrap.Modal(document.getElementById('modalEditar')).show();
@@ -542,6 +597,72 @@
                         bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
                         setTimeout(function () {
                             new bootstrap.Modal(document.getElementById('modalEditarFalta')).show();
+                        }, 300);
+                    });
+
+                    // ── Funciones auxiliares para el modal Editar Registro Anecdótico ──
+                    function ranecCargarAlumnos(gradoId, selectedId) {
+                        $('#ranec_editar_alumno').prop('disabled', true).html('<option>Cargando...</option>');
+                        $.get("{{ url('academica/faltas/alumnos-por-grado') }}/" + gradoId, function (data) {
+                            let opts = '<option value="">— Seleccionar alumno —</option>';
+                            data.forEach(a => {
+                                const sel = (a.id == selectedId) ? 'selected' : '';
+                                opts += `<option value="${a.id}" ${sel}>${a.apellidos}, ${a.nombres}</option>`;
+                            });
+                            $('#ranec_editar_alumno').prop('disabled', false).html(opts);
+                        });
+                    }
+
+                    function ranecCargarAsignaturas(gradoId, selectedId) {
+                        $('#ranec_editar_asignatura').prop('disabled', true).html('<option>Cargando...</option>');
+                        $('#ranec_editar_docente').val('');
+                        $.get("{{ url('academica/faltas/asignaturas-por-grado') }}/" + gradoId, function (data) {
+                            let opts = '<option value="">— Seleccionar asignatura —</option>';
+                            data.forEach(a => {
+                                const sel = (a.asignatura_id == selectedId) ? 'selected' : '';
+                                opts += `<option value="${a.asignatura_id}" data-docente="${a.docente}" ${sel}>${a.asignatura}</option>`;
+                            });
+                            $('#ranec_editar_asignatura').prop('disabled', false).html(opts);
+                            if (selectedId) {
+                                $('#ranec_editar_docente').val($('#ranec_editar_asignatura option:selected').data('docente') || '');
+                            }
+                        });
+                    }
+
+                    // Cambio de grado dentro del modal Editar Registro Anecdótico
+                    $(document).on('change', '#ranec_editar_grado', function () {
+                        ranecCargarAlumnos($(this).val(), null);
+                        ranecCargarAsignaturas($(this).val(), null);
+                    });
+
+                    $(document).on('change', '#ranec_editar_asignatura', function () {
+                        $('#ranec_editar_docente').val($(this).find('option:selected').data('docente') || '');
+                    });
+
+                    // ── Abrir modal Editar Registro Anecdótico ──
+                    $(document).on('click', '.btn-editar-registro-anecdotico', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+
+                        const id = $(this).data('id');
+                        const fecha = $(this).data('fecha');
+                        const gradoId = $(this).data('grado');
+                        const alumnoId = $(this).data('alumno');
+                        const asigId = $(this).data('asignatura');
+                        const detalle = $(this).data('detalle');
+
+                        $('#formEditarRegistroAnecdotico').attr('action', "{{ url('academica/registros-anecdoticos') }}/" + id);
+                        $('#ranec_editar_fecha').val(fecha);
+                        $('#ranec_editar_detalle').val(detalle);
+                        $('#ranec_editar_grado').val(gradoId);
+
+                        ranecCargarAlumnos(gradoId, alumnoId);
+                        ranecCargarAsignaturas(gradoId, asigId);
+
+                        bootstrap.Modal.getInstance(document.getElementById('modalEditar'))?.hide();
+                        setTimeout(function () {
+                            new bootstrap.Modal(document.getElementById('modalEditarRegistroAnecdotico')).show();
                         }, 300);
                     });
 

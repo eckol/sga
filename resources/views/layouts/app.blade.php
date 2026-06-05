@@ -303,6 +303,8 @@
                         docente</a>
                     <a href="{{ route('academica.horarios.index') }}" class="nav-link">Horarios de clase</a>
                     <a href="{{ route('academica.faltas.index') }}" class="nav-link">Faltas</a>
+                    <a href="{{ route('academica.registros-anecdoticos.index') }}" class="nav-link">Registros
+                        Anecdóticos</a>
                     <a href="{{ route('asistencias.index') }}" class="nav-link">Asistencia</a>
                     <a href="#" class="nav-link">Calificaciones</a>
                 </div>

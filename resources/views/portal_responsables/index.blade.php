@@ -167,6 +167,12 @@
                                 <i class="fas fa-triangle-exclamation me-1"></i>Faltas
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-reg-anecdoticos"
+                                type="button" id="tab-btn-reg-anecdoticos">
+                                <i class="fas fa-book-open me-1"></i>Reg. Anecdóticos
+                            </button>
+                        </li>
                         {{-- ── NUEVO TAB: Entrevistas ── --}}
                         <li class="nav-item">
                             <button class="nav-link py-1" data-bs-toggle="tab" data-bs-target="#masist-tab-entrevistas"
@@ -450,8 +456,32 @@
                             </div>
                         </div>
 
+
                         {{-- ══════════════════════════════════════════════════════
-                        Tab 7: Entrevistas ← NUEVO
+                        Tab 7: Registros anecdóticos ← NUEVO
+                        ══════════════════════════════════════════════════════ --}}
+                        <div class="tab-pane fade" id="masist-tab-reg-anecdoticos">
+                            <div class="table-responsive mt-1">
+                                <table class="table table-sm table-bordered table-hover" style="font-size:0.75rem;">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Asignatura</th>
+                                            <th>Docente</th>
+                                            <th>Detalle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="masist-reg-anecdoticos-body">
+                                        <tr>
+                                            <td colspan="4" class="text-center text-muted">Cargando...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {{-- ══════════════════════════════════════════════════════
+                        Tab 8: Entrevistas ← NUEVO
                         ══════════════════════════════════════════════════════ --}}
                         <div class="tab-pane fade" id="masist-tab-entrevistas">
                             <div class="table-responsive mt-1">
@@ -482,6 +512,9 @@
             </div>
         </div>
     </div>
+
+
+
 
     {{-- ══════════════════════════════════════════════════════════
     MODAL SECUNDARIO: Detalle de Entrevista (solo lectura)
@@ -536,13 +569,13 @@
     {{-- ══ MODAL DEUDA ══ --}}
     @if(isset($tieneDeuda) && $tieneDeuda)
         <div id="modalDeuda" style="
-            position: fixed; inset: 0; z-index: 9999;
-            background: rgba(0,0,0,0.75);
-            display: flex; align-items: center; justify-content: center;">
+                                            position: fixed; inset: 0; z-index: 9999;
+                                            background: rgba(0,0,0,0.75);
+                                            display: flex; align-items: center; justify-content: center;">
             <div style="
-                background: #fff; border-radius: 12px;
-                padding: 2rem; max-width: 480px; width: 90%;
-                text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                                                background: #fff; border-radius: 12px;
+                                                padding: 2rem; max-width: 480px; width: 90%;
+                                                text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
 
                 <i class="fas fa-exclamation-circle text-danger" style="font-size: 3rem;"></i>
                 <h5 class="mt-3 fw-bold text-danger">Acceso Restringido</h5>
@@ -586,6 +619,7 @@
             const CSRF = "{{ csrf_token() }}";
             const URL_POR_ALUMNO = "{{ url('academica/asistencias') }}";
             const URL_ENTREVISTAS = "{{ url('academica/entrevistas/alumno') }}";
+            const URL_REG_ANECDOTICOS = "{{ url('portal-responsables/alumno') }}";
 
             let _modalMes = new Date().getMonth() + 1;
             let _modalAnio = new Date().getFullYear();
@@ -617,6 +651,13 @@
                 cargarEntrevistasPortal(alumnoId);
             });
 
+            // ── Cargar registros anecdóticos cuando se activa ese tab ──
+            $('#tab-btn-reg-anecdoticos').on('shown.bs.tab', function () {
+                const alumnoId = parseInt($('#masist_alumno_id').val());
+                if (!alumnoId || !idsPermitidos.includes(alumnoId)) return;
+                cargarRegAnecdoticos(alumnoId);
+            });
+
             function cargarEntrevistasPortal(alumnoId) {
                 dtEntrevistasPortal.clear().draw();
 
@@ -636,17 +677,17 @@
 
                                 // Botón Ver detalle
                                 const btnVer = `<button type="button"
-                                                        class="btn btn-sm btn-outline-primary py-0 px-1 btn-ver-detalle-ent"
-                                                        style="font-size:0.65rem;"
-                                                        data-fecha="${e.fecha}"
-                                                        data-tipo="${e.tipo}"
-                                                        data-entrevistador="${e.entrevistador}"
-                                                        data-motivo="${e.motivo}"
-                                                        data-obs="${(e.obs || '').replace(/"/g, '&quot;')}"
-                                                        data-testigos='${JSON.stringify(e.testigos_nombres || [])}'
-                                                        title="Ver detalle">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>`;
+                                                                        class="btn btn-sm btn-outline-primary py-0 px-1 btn-ver-detalle-ent"
+                                                                        style="font-size:0.65rem;"
+                                                                        data-fecha="${e.fecha}"
+                                                                        data-tipo="${e.tipo}"
+                                                                        data-entrevistador="${e.entrevistador}"
+                                                                        data-motivo="${e.motivo}"
+                                                                        data-obs="${(e.obs || '').replace(/"/g, '&quot;')}"
+                                                                        data-testigos='${JSON.stringify(e.testigos_nombres || [])}'
+                                                                        title="Ver detalle">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </button>`;
 
                                 dtEntrevistasPortal.row.add([
                                     e.fecha,
@@ -662,6 +703,32 @@
                     })
                     .fail(function () {
                         dtEntrevistasPortal.clear().draw();
+                    });
+            }
+
+            function cargarRegAnecdoticos(alumnoId) {
+                $('#masist-reg-anecdoticos-body').html('<tr><td colspan="4" class="text-center text-muted">Cargando...</td></tr>');
+
+                $.get(`${URL_REG_ANECDOTICOS}/${alumnoId}/registros-anecdoticos`)
+                    .done(function (data) {
+                        const registros = data.registros_anecdoticos || [];
+                        if (registros.length === 0) {
+                            $('#masist-reg-anecdoticos-body').html('<tr><td colspan="4" class="text-center text-muted">Sin registros anecdóticos.</td></tr>');
+                            return;
+                        }
+                        let html = '';
+                        registros.forEach(function (r) {
+                            html += `<tr>
+                                    <td>${r.fecha || '—'}</td>
+                                    <td>${r.asignatura || '—'}</td>
+                                    <td>${r.colaborador_nombre || '—'}</td>
+                                    <td>${r.detalle || '—'}</td>
+                                </tr>`;
+                        });
+                        $('#masist-reg-anecdoticos-body').html(html);
+                    })
+                    .fail(function () {
+                        $('#masist-reg-anecdoticos-body').html('<tr><td colspan="4" class="text-danger text-center">Error al cargar registros.</td></tr>');
                     });
             }
 
@@ -748,6 +815,8 @@
 
                 // Limpiar tabla de entrevistas al abrir una nueva ficha
                 dtEntrevistasPortal.clear().draw();
+                // Limpiar tabla de registros anecdóticos al abrir una nueva ficha
+                $('#masist-reg-anecdoticos-body').html('<tr><td colspan="4" class="text-center text-muted">Cargando...</td></tr>');
 
                 $('#modalAlumnoAsist').modal('show');
                 cargarCalendarioModal(alumnoId, _modalMes, _modalAnio);
@@ -837,13 +906,13 @@
                             let htmlIns = '';
                             res.inscripciones.forEach(i => {
                                 htmlIns += `<tr>
-                                                            <td>${i.anio_lectivo}</td>
-                                                            <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
-                                                            <td>${i.grado?.gradocurso || '—'}</td>
-                                                            <td>${i.firmante_nombre || '—'}</td>
-                                                            <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
-                                                                style="font-size:0.65rem;">${i.estado || '—'}</span></td>
-                                                        </tr>`;
+                                                                            <td>${i.anio_lectivo}</td>
+                                                                            <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                                                            <td>${i.grado?.gradocurso || '—'}</td>
+                                                                            <td>${i.firmante_nombre || '—'}</td>
+                                                                            <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
+                                                                                style="font-size:0.65rem;">${i.estado || '—'}</span></td>
+                                                                        </tr>`;
                             });
                             $('#masist-inscripciones-body').html(htmlIns);
                         } else {
@@ -935,17 +1004,17 @@
                             });
                         }
                         let htmlRes = `<table class="table table-sm table-striped table-hover m-0" style="font-size:0.72rem;">
-                                                                <thead class="table-light">
-                                                                    <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
-                                                                </thead><tbody>`;
+                                                                                <thead class="table-light">
+                                                                                    <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
+                                                                                </thead><tbody>`;
                         for (let m = 1; m <= 12; m++) {
                             htmlRes += `<tr>
-                                                        <td>${nombreMes(m)}</td>
-                                                        <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
-                                                        <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
-                                                        <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
-                                                        <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
-                                                    </tr>`;
+                                                                        <td>${nombreMes(m)}</td>
+                                                                        <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
+                                                                        <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
+                                                                        <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
+                                                                        <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
+                                                                    </tr>`;
                         }
                         htmlRes += '</tbody></table>';
                         $('#masist-resumen').html(htmlRes);
