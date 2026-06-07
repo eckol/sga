@@ -323,9 +323,16 @@
                         fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
                     }
 
+                    // Guardar alumno activo para tabs lazy (Asistencia y Calendario)
+                    _asistAlumnoId = d.id;
+                    _asistCache    = {};
+                    _calExAlumnoId = d.id;
+                    _calExCache    = {};
+
                     // Limpiar campos de responsables y tabla de historial
                     $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
                     $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
+                    $('#cal-examenes-wrap').html('<div class="text-center text-muted py-3" style="font-size:0.75rem;"><div class="spinner-border spinner-border-sm me-2" role="status"></div>Cargando calendario...</div>');
 
                     // Limpiar DataTables mientras carga
                     dtFaltas.clear().draw();
@@ -727,12 +734,6 @@
                     }
                 });
 
-                // Guardar el alumno activo cuando se abre el modal
-                $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
-                    _asistAlumnoId = $(this).data('json').id;
-                    _asistCache    = {};
-                });
-
                 function cargarCalendariosAsistencia(alumnoId, anio) {
                     const cacheKey = `${alumnoId}|${anio}`;
                     if (_asistCache[cacheKey]) {
@@ -842,6 +843,61 @@
                     $('#asist-calendarios-wrap').html(html);
                 }
                 // ── Fin Tab Asistencia ────────────────────────────────────────
+
+                // ── Tab Calendario de Exámenes ───────────────────────────────
+                var _calExAlumnoId = null;
+                var _calExCache    = {};
+
+                $(document).on('shown.bs.tab', 'button[data-bs-target="#tab-calendario-examenes"]', function () {
+                    if (!_calExAlumnoId) return;
+                    if (_calExCache[_calExAlumnoId]) {
+                        renderCalendarioExamenes(_calExCache[_calExAlumnoId]);
+                        return;
+                    }
+                    $.get("{{ url('academica/alumnos') }}/" + _calExAlumnoId + "/calendario-examenes")
+                        .done(function (res) {
+                            _calExCache[_calExAlumnoId] = res;
+                            renderCalendarioExamenes(res);
+                        })
+                        .fail(function () {
+                            $('#cal-examenes-wrap').html('<p class="text-danger text-center" style="font-size:0.75rem;">Error al cargar el calendario.</p>');
+                        });
+                });
+
+                function renderCalendarioExamenes(res) {
+                    var examenes = res.examenes || [];
+                    if (examenes.length === 0) {
+                        $('#cal-examenes-wrap').html('<p class="text-muted text-center mt-2" style="font-size:0.75rem;">Sin fechas de exámenes registradas para este grado.</p>');
+                        return;
+                    }
+
+                    var grupos = {};
+                    examenes.forEach(function (e) {
+                        if (!grupos[e.etapa]) grupos[e.etapa] = {};
+                        if (!grupos[e.etapa][e.tipo_prueba]) grupos[e.etapa][e.tipo_prueba] = [];
+                        grupos[e.etapa][e.tipo_prueba].push(e);
+                    });
+
+                    var html = '';
+                    Object.keys(grupos).sort().forEach(function (etapa) {
+                        html += '<div class="mb-2">';
+                        html += '<div class="fw-bold text-white px-2 py-1 rounded-top mb-0" style="background:#1e3a5f;font-size:0.72rem;">Etapa: ' + etapa + '</div>';
+                        Object.keys(grupos[etapa]).sort().forEach(function (tipo) {
+                            html += '<div class="px-1 pb-1" style="border:1px solid #b0c8e8;border-top:none;border-radius:0 0 6px 6px;">';
+                            html += '<p class="fw-bold mb-1 mt-1" style="font-size:0.68rem;color:#2d6bb5;">' + tipo + '</p>';
+                            html += '<table class="table table-sm table-bordered mb-0" style="font-size:0.72rem;">';
+                            html += '<thead class="table-light"><tr><th>Fecha</th><th>Asignatura 1</th><th>Asignatura 2</th><th>Asignatura 3</th></tr></thead><tbody>';
+                            grupos[etapa][tipo].forEach(function (e) {
+                                html += '<tr><td>' + e.fecha + '</td><td>' + (e.asignatura1 || '—') + '</td><td>' + (e.asignatura2 || '—') + '</td><td>' + (e.asignatura3 || '—') + '</td></tr>';
+                            });
+                            html += '</tbody></table></div>';
+                        });
+                        html += '</div>';
+                    });
+
+                    $('#cal-examenes-wrap').html(html);
+                }
+                // ── Fin Tab Calendario de Exámenes ───────────────────────────
 
                 // ── Editar inscripción desde el historial del alumno ──────────
                 $(document).on('click', '.btn-editar-inscripcion', function () {

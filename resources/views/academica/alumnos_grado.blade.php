@@ -393,9 +393,16 @@
                             fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
                         }
 
+                        // Guardar alumno activo para tabs lazy (Asistencia y Calendario)
+                        _asistAlumnoId = d.id;
+                        _asistCache = {};
+                        _calExAlumnoId = d.id;
+                        _calExCache = {};
+
                         // Limpiar mientras carga
                         $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Cargando...');
                         $('#table-inscripciones-historial').html('<tr><td colspan="7" class="text-center">Cargando...</td></tr>');
+                        $('#cal-examenes-wrap').html('<div class="text-center text-muted py-3" style="font-size:0.75rem;"><div class="spinner-border spinner-border-sm me-2"></div>Cargando calendario...</div>');
                         dtFaltas.clear().draw();
                         dtRegistros.clear().draw();
                         dtEntrevistas.clear().draw();
@@ -416,22 +423,22 @@
                                 if (res.inscripciones && res.inscripciones.length > 0) {
                                     res.inscripciones.forEach(ins => {
                                         let btnEditIns = `<button type="button"
-                                                                        class="btn btn-warning btn-xs py-0 px-1 btn-editar-inscripcion"
-                                                                        style="font-size:0.65rem;"
-                                                                        data-ins='${JSON.stringify(ins)}'
-                                                                        title="Editar inscripci\u00f3n">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </button>`;
+                                                                                class="btn btn-warning btn-xs py-0 px-1 btn-editar-inscripcion"
+                                                                                style="font-size:0.65rem;"
+                                                                                data-ins='${JSON.stringify(ins)}'
+                                                                                title="Editar inscripci\u00f3n">
+                                                                                <i class="fas fa-edit"></i>
+                                                                            </button>`;
                                         html += `<tr>
-                                                                                        <td>${ins.id}</td>
-                                                                                        <td>${ins.fecha}</td>
-                                                                                        <td>${ins.anio_lectivo}</td>
-                                                                                        <td>${ins.grado_curso}</td>
-                                                                                        <td>${ins.firmante_nombre || ''}</td>
-                                                                                        <td>${ins.firmante_rol || ''}</td>
-                                                                                        <td>${ins.estado}</td>
-                                                                                        <td class="text-center">${btnEditIns}</td>
-                                                                                    </tr>`;
+                                                                                                <td>${ins.id}</td>
+                                                                                                <td>${ins.fecha}</td>
+                                                                                                <td>${ins.anio_lectivo}</td>
+                                                                                                <td>${ins.grado_curso}</td>
+                                                                                                <td>${ins.firmante_nombre || ''}</td>
+                                                                                                <td>${ins.firmante_rol || ''}</td>
+                                                                                                <td>${ins.estado}</td>
+                                                                                                <td class="text-center">${btnEditIns}</td>
+                                                                                            </tr>`;
                                     });
                                 } else {
                                     html = '<tr><td colspan="8" class="text-center text-muted">Sin historial</td></tr>';
@@ -443,17 +450,17 @@
                                 if (res.faltas && res.faltas.length > 0) {
                                     res.faltas.forEach(f => {
                                         var boton = `<button type="button"
-                                                                                    class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
-                                                                                    style="font-size:0.65rem;"
-                                                                                    data-id="${f.id}"
-                                                                                    data-fecha="${f.fecha_raw ?? ''}"
-                                                                                    data-grado="${f.grado_curso_id}"
-                                                                                    data-alumno="${f.alumno_id}"
-                                                                                    data-asignatura="${f.asignatura_id}"
-                                                                                    data-indicador="${f.indicador_falta_id}"
-                                                                                    title="Editar falta">
-                                                                                    <i class="fas fa-edit"></i>
-                                                                                    </button>`;
+                                                                                            class="btn btn-warning btn-xs py-0 px-1 btn-editar-falta"
+                                                                                            style="font-size:0.65rem;"
+                                                                                            data-id="${f.id}"
+                                                                                            data-fecha="${f.fecha_raw ?? ''}"
+                                                                                            data-grado="${f.grado_curso_id}"
+                                                                                            data-alumno="${f.alumno_id}"
+                                                                                            data-asignatura="${f.asignatura_id}"
+                                                                                            data-indicador="${f.indicador_falta_id}"
+                                                                                            title="Editar falta">
+                                                                                            <i class="fas fa-edit"></i>
+                                                                                            </button>`;
                                         dtFaltas.row.add([
                                             f.id,
                                             f.fecha,
@@ -471,16 +478,16 @@
                                 if (res.registros_anecdoticos && res.registros_anecdoticos.length > 0) {
                                     res.registros_anecdoticos.forEach(r => {
                                         var boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-registro-anecdotico"
-                                                                    style="font-size:0.65rem;"
-                                                                    data-id="${r.id}"
-                                                                    data-fecha="${r.fecha_raw ?? ''}"
-                                                                    data-grado="${r.grado_curso_id}"
-                                                                    data-alumno="${r.alumno_id}"
-                                                                    data-asignatura="${r.asignatura_id}"
-                                                                    data-detalle="${r.detalle.replace(/"/g, '&quot;')}"
-                                                                    title="Editar registro">
-                                                                    <i class="fas fa-edit"></i>
-                                                                 </button>`;
+                                                                            style="font-size:0.65rem;"
+                                                                            data-id="${r.id}"
+                                                                            data-fecha="${r.fecha_raw ?? ''}"
+                                                                            data-grado="${r.grado_curso_id}"
+                                                                            data-alumno="${r.alumno_id}"
+                                                                            data-asignatura="${r.asignatura_id}"
+                                                                            data-detalle="${r.detalle.replace(/"/g, '&quot;')}"
+                                                                            title="Editar registro">
+                                                                            <i class="fas fa-edit"></i>
+                                                                         </button>`;
                                         dtRegistros.row.add([
                                             r.id,
                                             r.fecha,
@@ -500,17 +507,17 @@
                                         let badgeHtml = `<span class="badge ${badgeClass}" style="font-size:0.6rem;">${e.tipo}</span>`;
 
                                         let boton = `<button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-entrevista"
-                                                                                                style="font-size:0.65rem;"
-                                                                                                data-id="${e.id}"
-                                                                                                data-tipo="${e.tipo}"
-                                                                                                data-fecha="${e.fecha_raw}"
-                                                                                                data-colaborador="${e.colaborador_id}"
-                                                                                                data-motivo="${e.motivo}"
-                                                                                                data-obs="${e.obs || ''}"
-                                                                                                data-testigos='${JSON.stringify(e.testigos || [])}'
-                                                                                                title="Editar entrevista">
-                                                                                                <i class="fas fa-edit"></i>
-                                                                                                </button>`;
+                                                                                                        style="font-size:0.65rem;"
+                                                                                                        data-id="${e.id}"
+                                                                                                        data-tipo="${e.tipo}"
+                                                                                                        data-fecha="${e.fecha_raw}"
+                                                                                                        data-colaborador="${e.colaborador_id}"
+                                                                                                        data-motivo="${e.motivo}"
+                                                                                                        data-obs="${e.obs || ''}"
+                                                                                                        data-testigos='${JSON.stringify(e.testigos || [])}'
+                                                                                                        title="Editar entrevista">
+                                                                                                        <i class="fas fa-edit"></i>
+                                                                                                        </button>`;
                                         dtEntrevistas.row.add([
                                             e.fecha,
                                             badgeHtml,
@@ -745,12 +752,6 @@
                         }
                     });
 
-                    // Guardar el alumno activo cuando se abre el modal
-                    $(document).on('click', '.btn-editar:not(.btn-editar-falta)', function () {
-                        _asistAlumnoId = $(this).data('json').id;
-                        _asistCache = {};
-                    });
-
                     function cargarCalendariosAsistencia(alumnoId, anio) {
                         const cacheKey = `${alumnoId}|${anio}`;
                         if (_asistCache[cacheKey]) {
@@ -860,6 +861,69 @@
                         $('#asist-calendarios-wrap').html(html);
                     }
                     // ── Fin Tab Asistencia ────────────────────────────────────────
+                    // ── Tab Calendario de Exámenes ──────────────────────────────────
+                    var _calExAlumnoId = null;
+                    var _calExCache = {};
+
+                    $(document).on('shown.bs.tab', 'button[data-bs-target="#tab-calendario-examenes"]', function () {
+                        if (!_calExAlumnoId) return;
+                        if (_calExCache[_calExAlumnoId]) {
+                            renderCalendarioExamenes(_calExCache[_calExAlumnoId]);
+                            return;
+                        }
+                        $.get("{{ url('academica/alumnos') }}/" + _calExAlumnoId + "/calendario-examenes")
+                            .done(function (res) {
+                                _calExCache[_calExAlumnoId] = res;
+                                renderCalendarioExamenes(res);
+                            })
+                            .fail(function () {
+                                $('#cal-examenes-wrap').html('<p class="text-danger text-center" style="font-size:0.75rem;">Error al cargar el calendario.</p>');
+                            });
+                    });
+
+                    function renderCalendarioExamenes(res) {
+                        var examenes = res.examenes || [];
+                        if (examenes.length === 0) {
+                            $('#cal-examenes-wrap').html('<p class="text-muted text-center mt-2" style="font-size:0.75rem;">Sin fechas de exámenes registradas para este grado.</p>');
+                            return;
+                        }
+
+                        // Agrupar por etapa → tipo_prueba
+                        var grupos = {};
+                        examenes.forEach(function (e) {
+                            var key = e.etapa;
+                            if (!grupos[key]) grupos[key] = {};
+                            if (!grupos[key][e.tipo_prueba]) grupos[key][e.tipo_prueba] = [];
+                            grupos[key][e.tipo_prueba].push(e);
+                        });
+
+                        var html = '';
+                        Object.keys(grupos).sort().forEach(function (etapa) {
+                            html += '<div class="mb-2">';
+                            html += '<div class="fw-bold text-white px-2 py-1 rounded-top mb-0" style="background:#1e3a5f;font-size:0.72rem;">Etapa: ' + etapa + '</div>';
+
+                            Object.keys(grupos[etapa]).sort().forEach(function (tipo) {
+                                html += '<div class="px-1 pb-1" style="border:1px solid #b0c8e8;border-top:none;border-radius:0 0 6px 6px;">';
+                                html += '<p class="fw-bold mb-1 mt-1" style="font-size:0.68rem;color:#2d6bb5;">' + tipo + '</p>';
+                                html += '<table class="table table-sm table-bordered mb-0" style="font-size:0.72rem;">';
+                                html += '<thead class="table-light"><tr><th>Fecha</th><th>Asignatura 1</th><th>Asignatura 2</th><th>Asignatura 3</th></tr></thead><tbody>';
+                                grupos[etapa][tipo].forEach(function (e) {
+                                    html += '<tr>';
+                                    html += '<td>' + e.fecha + '</td>';
+                                    html += '<td>' + (e.asignatura1 || '—') + '</td>';
+                                    html += '<td>' + (e.asignatura2 || '—') + '</td>';
+                                    html += '<td>' + (e.asignatura3 || '—') + '</td>';
+                                    html += '</tr>';
+                                });
+                                html += '</tbody></table></div>';
+                            });
+
+                            html += '</div>';
+                        });
+
+                        $('#cal-examenes-wrap').html(html);
+                    }
+                    // ── Fin Tab Calendario de Exámenes ───────────────────────────────
 
                     // ── Editar inscripción desde el historial del alumno ──────────
                     $(document).on('click', '.btn-editar-inscripcion', function () {

@@ -180,6 +180,13 @@
                                 <i class="fas fa-comments me-1"></i>Entrevistas
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button class="nav-link py-1" data-bs-toggle="tab"
+                                data-bs-target="#masist-tab-calendario-examenes" type="button"
+                                id="tab-btn-calendario-examenes">
+                                <i class="fas fa-calendar-alt me-1"></i>Cal. Exámenes
+                            </button>
+                        </li>
                     </ul>
 
                     <div class="tab-content pt-2">
@@ -502,6 +509,21 @@
                         </div>
                         {{-- ══ Fin Tab Entrevistas ══ --}}
 
+                        {{-- Tab: Calendario de Exámenes --}}
+                        <div class="tab-pane fade" id="masist-tab-calendario-examenes">
+                            <div class="d-flex justify-content-between align-items-center mt-2 mb-1">
+                                <h6 class="fw-bold text-secondary mb-0" style="font-size:0.75rem;">Calendario de Exámenes
+                                </h6>
+                            </div>
+                            <div id="masist-cal-examenes-wrap">
+                                <div class="text-center text-muted py-3" style="font-size:0.75rem;">
+                                    <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                    Cargando calendario...
+                                </div>
+                            </div>
+                        </div>
+                        {{-- ══ Fin Tab Calendario Exámenes ══ --}}
+
                     </div>
                 </div>
 
@@ -569,13 +591,13 @@
     {{-- ══ MODAL DEUDA ══ --}}
     @if(isset($tieneDeuda) && $tieneDeuda)
         <div id="modalDeuda" style="
-                                            position: fixed; inset: 0; z-index: 9999;
-                                            background: rgba(0,0,0,0.75);
-                                            display: flex; align-items: center; justify-content: center;">
+                                                    position: fixed; inset: 0; z-index: 9999;
+                                                    background: rgba(0,0,0,0.75);
+                                                    display: flex; align-items: center; justify-content: center;">
             <div style="
-                                                background: #fff; border-radius: 12px;
-                                                padding: 2rem; max-width: 480px; width: 90%;
-                                                text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                                                        background: #fff; border-radius: 12px;
+                                                        padding: 2rem; max-width: 480px; width: 90%;
+                                                        text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
 
                 <i class="fas fa-exclamation-circle text-danger" style="font-size: 3rem;"></i>
                 <h5 class="mt-3 fw-bold text-danger">Acceso Restringido</h5>
@@ -677,17 +699,17 @@
 
                                 // Botón Ver detalle
                                 const btnVer = `<button type="button"
-                                                                        class="btn btn-sm btn-outline-primary py-0 px-1 btn-ver-detalle-ent"
-                                                                        style="font-size:0.65rem;"
-                                                                        data-fecha="${e.fecha}"
-                                                                        data-tipo="${e.tipo}"
-                                                                        data-entrevistador="${e.entrevistador}"
-                                                                        data-motivo="${e.motivo}"
-                                                                        data-obs="${(e.obs || '').replace(/"/g, '&quot;')}"
-                                                                        data-testigos='${JSON.stringify(e.testigos_nombres || [])}'
-                                                                        title="Ver detalle">
-                                                                        <i class="fas fa-eye"></i>
-                                                                    </button>`;
+                                                                            class="btn btn-sm btn-outline-primary py-0 px-1 btn-ver-detalle-ent"
+                                                                            style="font-size:0.65rem;"
+                                                                            data-fecha="${e.fecha}"
+                                                                            data-tipo="${e.tipo}"
+                                                                            data-entrevistador="${e.entrevistador}"
+                                                                            data-motivo="${e.motivo}"
+                                                                            data-obs="${(e.obs || '').replace(/"/g, '&quot;')}"
+                                                                            data-testigos='${JSON.stringify(e.testigos_nombres || [])}'
+                                                                            title="Ver detalle">
+                                                                            <i class="fas fa-eye"></i>
+                                                                        </button>`;
 
                                 dtEntrevistasPortal.row.add([
                                     e.fecha,
@@ -719,11 +741,11 @@
                         let html = '';
                         registros.forEach(function (r) {
                             html += `<tr>
-                                    <td>${r.fecha || '—'}</td>
-                                    <td>${r.asignatura || '—'}</td>
-                                    <td>${r.colaborador_nombre || '—'}</td>
-                                    <td>${r.detalle || '—'}</td>
-                                </tr>`;
+                                        <td>${r.fecha || '—'}</td>
+                                        <td>${r.asignatura || '—'}</td>
+                                        <td>${r.colaborador_nombre || '—'}</td>
+                                        <td>${r.detalle || '—'}</td>
+                                    </tr>`;
                         });
                         $('#masist-reg-anecdoticos-body').html(html);
                     })
@@ -817,6 +839,10 @@
                 dtEntrevistasPortal.clear().draw();
                 // Limpiar tabla de registros anecdóticos al abrir una nueva ficha
                 $('#masist-reg-anecdoticos-body').html('<tr><td colspan="4" class="text-center text-muted">Cargando...</td></tr>');
+                // Inicializar tab Calendario de Exámenes
+                _calExAlumnoId = alumnoId;
+                _calExCache = {};
+                $('#masist-cal-examenes-wrap').html('<div class="text-center text-muted py-3" style="font-size:0.75rem;"><div class="spinner-border spinner-border-sm me-2" role="status"></div>Cargando calendario...</div>');
 
                 $('#modalAlumnoAsist').modal('show');
                 cargarCalendarioModal(alumnoId, _modalMes, _modalAnio);
@@ -889,11 +915,11 @@
                                 let htmlFaltas = '';
                                 a.faltas.forEach(f => {
                                     htmlFaltas += `<tr>
-                                                                <td>${f.fecha ? f.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
-                                                                <td>${f.indicador_falta?.indicador_falta || '—'}</td>
-                                                                <td>${f.asignatura?.asignatura || '—'}</td>
-                                                                <td>${f.docente || '—'}</td>
-                                                            </tr>`;
+                                                                    <td>${f.fecha ? f.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                                                    <td>${f.indicador_falta?.indicador_falta || '—'}</td>
+                                                                    <td>${f.asignatura?.asignatura || '—'}</td>
+                                                                    <td>${f.docente || '—'}</td>
+                                                                </tr>`;
                                 });
                                 $('#masist-faltas-body').html(htmlFaltas);
                             } else {
@@ -906,13 +932,13 @@
                             let htmlIns = '';
                             res.inscripciones.forEach(i => {
                                 htmlIns += `<tr>
-                                                                            <td>${i.anio_lectivo}</td>
-                                                                            <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
-                                                                            <td>${i.grado?.gradocurso || '—'}</td>
-                                                                            <td>${i.firmante_nombre || '—'}</td>
-                                                                            <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
-                                                                                style="font-size:0.65rem;">${i.estado || '—'}</span></td>
-                                                                        </tr>`;
+                                                                                <td>${i.anio_lectivo}</td>
+                                                                                <td>${i.fecha ? i.fecha.substring(0, 10).split('-').reverse().join('/') : '—'}</td>
+                                                                                <td>${i.grado?.gradocurso || '—'}</td>
+                                                                                <td>${i.firmante_nombre || '—'}</td>
+                                                                                <td><span class="badge ${i.estado === 'Matriculado' ? 'bg-success' : 'bg-secondary'}"
+                                                                                    style="font-size:0.65rem;">${i.estado || '—'}</span></td>
+                                                                            </tr>`;
                             });
                             $('#masist-inscripciones-body').html(htmlIns);
                         } else {
@@ -1004,17 +1030,17 @@
                             });
                         }
                         let htmlRes = `<table class="table table-sm table-striped table-hover m-0" style="font-size:0.72rem;">
-                                                                                <thead class="table-light">
-                                                                                    <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
-                                                                                </thead><tbody>`;
+                                                                                    <thead class="table-light">
+                                                                                        <tr><th>Mes</th><th class="text-center text-success">P</th><th class="text-center text-danger">A</th><th class="text-center text-warning">J</th><th class="text-center text-info">T</th></tr>
+                                                                                    </thead><tbody>`;
                         for (let m = 1; m <= 12; m++) {
                             htmlRes += `<tr>
-                                                                        <td>${nombreMes(m)}</td>
-                                                                        <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
-                                                                        <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
-                                                                        <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
-                                                                        <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
-                                                                    </tr>`;
+                                                                            <td>${nombreMes(m)}</td>
+                                                                            <td class="text-center fw-bold text-success">${porMes[m].Presente || 0}</td>
+                                                                            <td class="text-center fw-bold text-danger">${porMes[m].Ausente || 0}</td>
+                                                                            <td class="text-center fw-bold text-warning">${porMes[m].Justificado || 0}</td>
+                                                                            <td class="text-center fw-bold text-info">${porMes[m].Tardanza || 0}</td>
+                                                                        </tr>`;
                         }
                         htmlRes += '</tbody></table>';
                         $('#masist-resumen').html(htmlRes);
@@ -1029,6 +1055,58 @@
                 const n = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
                 return n[parseInt(m)] || '';
             }
+
+            // ── Tab Calendario de Exámenes ───────────────────────────────
+            var _calExAlumnoId = null;
+            var _calExCache = {};
+
+            $(document).on('shown.bs.tab', 'button[data-bs-target="#masist-tab-calendario-examenes"]', function () {
+                if (!_calExAlumnoId) return;
+                if (_calExCache[_calExAlumnoId]) {
+                    renderCalendarioExamenesPortal(_calExCache[_calExAlumnoId]);
+                    return;
+                }
+                $.get("{{ url('academica/alumnos') }}/" + _calExAlumnoId + "/calendario-examenes")
+                    .done(function (res) {
+                        _calExCache[_calExAlumnoId] = res;
+                        renderCalendarioExamenesPortal(res);
+                    })
+                    .fail(function () {
+                        $('#masist-cal-examenes-wrap').html('<p class="text-danger text-center" style="font-size:0.75rem;">Error al cargar el calendario.</p>');
+                    });
+            });
+
+            function renderCalendarioExamenesPortal(res) {
+                var examenes = res.examenes || [];
+                if (examenes.length === 0) {
+                    $('#masist-cal-examenes-wrap').html('<p class="text-muted text-center mt-2" style="font-size:0.75rem;">Sin fechas de exámenes registradas para este grado.</p>');
+                    return;
+                }
+                var grupos = {};
+                examenes.forEach(function (e) {
+                    if (!grupos[e.etapa]) grupos[e.etapa] = {};
+                    if (!grupos[e.etapa][e.tipo_prueba]) grupos[e.etapa][e.tipo_prueba] = [];
+                    grupos[e.etapa][e.tipo_prueba].push(e);
+                });
+                var html = '';
+                Object.keys(grupos).sort().forEach(function (etapa) {
+                    html += '<div class="mb-2">';
+                    html += '<div class="fw-bold text-white px-2 py-1 rounded-top mb-0" style="background:#1e3a5f;font-size:0.72rem;">Etapa: ' + etapa + '</div>';
+                    Object.keys(grupos[etapa]).sort().forEach(function (tipo) {
+                        html += '<div class="px-1 pb-1" style="border:1px solid #b0c8e8;border-top:none;border-radius:0 0 6px 6px;">';
+                        html += '<p class="fw-bold mb-1 mt-1" style="font-size:0.68rem;color:#2d6bb5;">' + tipo + '</p>';
+                        html += '<table class="table table-sm table-bordered mb-0" style="font-size:0.72rem;">';
+                        html += '<thead class="table-light"><tr><th>Fecha</th><th>Asignatura 1</th><th>Asignatura 2</th><th>Asignatura 3</th></tr></thead><tbody>';
+                        grupos[etapa][tipo].forEach(function (e) {
+                            html += '<tr><td>' + e.fecha + '</td><td>' + (e.asignatura1 || '—') + '</td><td>' + (e.asignatura2 || '—') + '</td><td>' + (e.asignatura3 || '—') + '</td></tr>';
+                        });
+                        html += '</tbody></table></div>';
+                    });
+                    html += '</div>';
+                });
+                $('#masist-cal-examenes-wrap').html(html);
+            }
+            // ── Fin Tab Calendario de Exámenes ───────────────────────────────
 
             // ── Flechas de navegación del modal ──
             $('#masist-btn-prev').on('click', function () {

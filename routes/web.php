@@ -154,6 +154,8 @@ Route::middleware(['auth'])->group(function () {
 
         // 4. API/AJAX interna para alimentar el Tab del modal del expediente del Alumno
         Route::get('entrevistas/alumno/{alumnoId}/json', [EntrevistaController::class, 'getEntrevistasPorAlumno'])->name('entrevistas.alumno.json');
+        Route::get('alumnos/{id}/calendario-examenes', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'getCalendarioExamenes'])
+            ->name('academica.alumnos.calendario-examenes');
     });
 });
 

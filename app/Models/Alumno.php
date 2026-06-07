@@ -65,46 +65,9 @@ class Alumno extends Model
         return $this->belongsTo(Parentesco::class);
     }
 
-    // ----------------------------------------------------------------
-    // Relación con Inscripciones e Historial Académico
-    // ----------------------------------------------------------------
-
-    public function inscripciones(): HasMany
-    {
-        // Un alumno tiene muchas inscripciones, vinculadas por el CID (String)
-        return $this->hasMany(Inscripcion::class, 'alumno_cid', 'cid');
-    }
-
-    // ----------------------------------------------------------------
-    // Relaciones con los Responsables Familiares
-    // ----------------------------------------------------------------
-
-    public function madre(): BelongsTo
-    {
-        return $this->belongsTo(Madre::class, 'cid_madre', 'cid');
-    }
-
-    public function padre(): BelongsTo
-    {
-        return $this->belongsTo(Padre::class, 'cid_padre', 'cid');
-    }
-
-    public function encargado(): BelongsTo
-    {
-        return $this->belongsTo(Encargado::class, 'cid_encargado', 'cid');
-    }
-
-    // ----------------------------------------------------------------
-    // Relación con Incidentes, Disciplina y Asistencia
-    // ----------------------------------------------------------------
-
-    public function faltas(): HasMany
-    {
-        return $this->hasMany(Falta::class, 'alumno_id', 'id');
-    }
-
     /**
-     * Asistencias del alumno a través de sus inscripciones.
+     * Relación HasManyThrough para traer las asistencias del alumno desde
+     * sus inscripciones.
      * Uso: $alumno->asistencias
      */
     public function asistencias(): HasManyThrough
@@ -117,6 +80,15 @@ class Alumno extends Model
             'cid',                          // Local key en alumnos
             'id'                            // Local key en inscripciones
         );
+    }
+
+    /**
+     * Relación con las inscripciones del alumno.
+     * Requerida por EntrevistaController para filtrar alumnos matriculados.
+     */
+    public function inscripciones(): HasMany
+    {
+        return $this->hasMany(\App\Models\Inscripcion::class, 'alumno_cid', 'cid');
     }
 
     // ----------------------------------------------------------------
@@ -141,8 +113,65 @@ class Alumno extends Model
         return $this->hasMany(EntrevistaResponsable::class, 'alumno_id', 'id');
     }
 
-    public function registrosAnecdoticos()
+    public function registrosAnecdoticos(): HasMany
     {
         return $this->hasMany(RegistroAnecdotico::class);
+    }
+
+    public function faltas(): HasMany
+    {
+        return $this->hasMany(Falta::class, 'alumno_id', 'id');
+    }
+
+    // ----------------------------------------------------------------
+    // RELACIONES CON RESPONSABLES (Madre, Padre, Encargado) Y EMAILS
+    // ----------------------------------------------------------------
+
+    public function madre(): BelongsTo
+    {
+        return $this->belongsTo(Madre::class, 'cid_madre', 'cid');
+    }
+
+    public function padre(): BelongsTo
+    {
+        return $this->belongsTo(Padre::class, 'cid_padre', 'cid');
+    }
+
+    public function encargado(): BelongsTo
+    {
+        return $this->belongsTo(Encargado::class, 'cid_encargado', 'cid');
+    }
+
+    /**
+     * Reúne todos los emails disponibles de los responsables de este alumno.
+     */
+    public function getResponsablesEmails(): array
+    {
+        $emails = [];
+
+        if ($this->madre && $this->madre->user && $this->madre->user->email) {
+            $emails[] = $this->madre->user->email;
+        }
+        if ($this->padre && $this->padre->user && $this->padre->user->email) {
+            $emails[] = $this->padre->user->email;
+        }
+        if ($this->encargado && $this->encargado->user && $this->encargado->user->email) {
+            $emails[] = $this->encargado->user->email;
+        }
+
+        // Respaldo secundario por si el correo está directamente en la tabla del responsable
+        if (empty($emails)) {
+            if ($this->madre && $this->madre->email) {
+                $emails[] = $this->madre->email;
+            }
+            if ($this->padre && $this->padre->email) {
+                $emails[] = $this->padre->email;
+            }
+            if ($this->encargado && $this->encargado->email) {
+                $emails[] = $this->encargado->email;
+            }
+        }
+
+        return array_unique(array_filter($emails));
     }
 }

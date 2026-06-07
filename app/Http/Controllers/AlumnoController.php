@@ -223,4 +223,52 @@ class AlumnoController extends Controller
         return response()->json(['success' => true]);
     }
 
+    /**
+     * Devuelve los exámenes del calendario para el grado_curso actual del alumno.
+     */
+    public function getCalendarioExamenes($alumnoId)
+    {
+        // Obtener el grado_curso_id de la inscripción activa del alumno en el año actual
+        $inscripcion = \App\Models\Inscripcion::where('alumno_id', $alumnoId)
+            ->where('anio_lectivo', date('Y'))
+            ->where('estado', 'Matriculado')
+            ->orderBy('fecha', 'desc')
+            ->first();
+
+        if (!$inscripcion) {
+            return response()->json(['examenes' => [], 'grado_curso' => null]);
+        }
+
+        $gradoCursoId = $inscripcion->grado_curso_id;
+
+        $examenes = \App\Models\CalendarioExamen::with([
+            'asignatura1_rel',
+            'asignatura2_rel',
+            'asignatura3_rel',
+            'grado_curso',
+        ])
+            ->where('grado_curso_id', $gradoCursoId)
+            ->orderBy('etapa')
+            ->orderBy('tipo_prueba')
+            ->orderBy('fecha')
+            ->get()
+            ->map(function ($e) {
+                return [
+                    'id' => $e->id,
+                    'fecha' => \Carbon\Carbon::parse($e->fecha)->format('d/m/Y'),
+                    'etapa' => $e->etapa,
+                    'tipo_prueba' => $e->tipo_prueba,
+                    'grado_curso' => $e->grado_curso->gradocurso ?? '—',
+                    'asignatura1' => $e->asignatura1_rel->asignatura ?? null,
+                    'asignatura2' => $e->asignatura2_rel->asignatura ?? null,
+                    'asignatura3' => $e->asignatura3_rel->asignatura ?? null,
+                ];
+            });
+
+        return response()->json([
+            'examenes' => $examenes,
+            'grado_curso' => $inscripcion->grado->gradocurso ?? null,
+        ]);
+    }
+
 }

@@ -213,6 +213,12 @@
                         <button class="nav-link py-1" id="entrevistas-tab" data-bs-toggle="tab"
                             data-bs-target="#tab-entrevistas" type="button">Entrevistas</button>
                     </li>
+                    <li class="nav-item">
+                        <button class="nav-link py-1" id="calendario-examenes-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab-calendario-examenes" type="button">
+                            <i class="fas fa-calendar-alt me-1"></i>Cal. Exámenes
+                        </button>
+                    </li>
                 </ul>
 
                 <div class="tab-content pt-2" id="modalAlumnoTabsContent">
@@ -730,6 +736,24 @@
                                     {{-- Se cargará vía AJAX --}}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    {{-- Tab 8: Calendario de Exámenes --}}
+                    <div class="tab-pane fade" id="tab-calendario-examenes" role="tabpanel">
+                        <div class="d-flex justify-content-between align-items-center mt-2 mb-1">
+                            <h6 class="fw-bold text-secondary mb-0" style="font-size: 0.75rem;">
+                                Calendario de Exámenes
+                            </h6>
+                            <a href="{{ route('academica.calendario-examenes.index') }}"
+                                class="btn btn-primary btn-xs py-1 px-2" style="font-size: 0.65rem;">
+                                Ir al Módulo <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </div>
+                        <div id="cal-examenes-wrap">
+                            <div class="text-center text-muted py-3" style="font-size:0.75rem;">
+                                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                Cargando calendario...
+                            </div>
                         </div>
                     </div>
                 </div>
