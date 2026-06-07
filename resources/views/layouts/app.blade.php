@@ -306,6 +306,9 @@
                     <a href="{{ route('academica.registros-anecdoticos.index') }}" class="nav-link">Registros
                         Anecdóticos</a>
                     <a href="{{ route('asistencias.index') }}" class="nav-link">Asistencia</a>
+                    <a href="{{ route('academica.calendario-examenes.index') }}" class="nav-link">Calendario Pruebas
+                        Escritas</a>
+
                     <a href="#" class="nav-link">Calificaciones</a>
                 </div>
 

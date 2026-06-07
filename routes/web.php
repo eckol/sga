@@ -22,6 +22,7 @@ use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\PeriodoLaboralController;
 use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\CalendarioExamenController;
 use App\Http\Controllers\IndicadoresFaltasController;
 use App\Http\Controllers\AsignaturaColaboradorController;
 use App\Http\Controllers\FaltaController;
@@ -114,6 +115,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('alumnos/{id}/toggle', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'toggleEstado'])->name('academica.alumnos.toggle');
         Route::get('horarios', [HorarioController::class, 'index'])->name('academica.horarios.index');
         Route::put('horarios/{id}', [HorarioController::class, 'update'])->name('academica.horarios.update');
+        Route::get('calendario-examenes', [CalendarioExamenController::class, 'index'])->name('academica.calendario-examenes.index');
+        Route::post('calendario-examenes', [CalendarioExamenController::class, 'store'])->name('academica.calendario-examenes.store');
+        Route::put('calendario-examenes/{id}', [CalendarioExamenController::class, 'update'])->name('academica.calendario-examenes.update');
+        Route::delete('calendario-examenes/{id}', [CalendarioExamenController::class, 'destroy'])->name('academica.calendario-examenes.destroy');
         Route::get('docentes-asignatura', [AsignaturaColaboradorController::class, 'index'])->name('academica.docentes-asignatura.index');
         Route::put('docentes-asignatura/{asignatura}/{grado}', [AsignaturaColaboradorController::class, 'update'])->name('academica.docentes-asignatura.update');
         Route::get('faltas', [FaltaController::class, 'index'])->name('academica.faltas.index');
