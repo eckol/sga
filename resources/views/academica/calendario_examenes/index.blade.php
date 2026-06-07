@@ -174,7 +174,7 @@
                 <i class="fas fa-calendar-alt me-2 text-primary"></i>Calendario de Pruebas Escritas
             </h2>
             {{-- Botón Agregar nuevo bloque de calendario --}}
-            <button class="btn btn-success btn-sm fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAgregarBloque">
+            <button class="btn btn-primary btn-sm fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAgregarBloque">
                 <i class="fas fa-plus-circle me-1"></i> Nuevo Bloque de Calendario
             </button>
         </div>

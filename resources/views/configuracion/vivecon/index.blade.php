@@ -57,16 +57,16 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->vive_con }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $item->id }}" data-vive_con="{{ $item->vive_con }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('vivecon.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

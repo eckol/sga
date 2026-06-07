@@ -66,16 +66,16 @@
                         <td>{{ $gc->turno == 'M' ? 'Mañana' : 'Tarde' }}</td>
                         <td>{{ $gc->ciclo->ciclo }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar-gc"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar-gc"
                                 style="font-size: 0.65rem;" data-id="{{ $gc->id }}" data-gradocurso="{{ $gc->gradocurso }}"
                                 data-turno="{{ $gc->turno }}" data-ciclo="{{ $gc->ciclo_id }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('gradoscursos.destroy', $gc->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

@@ -92,8 +92,8 @@
     <div class="card card-body p-2 shadow-sm">
         <div class="d-flex justify-content-between mb-2">
             <h6 class="fw-bold text-secondary"></h6>
-            <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nuevo Alumno</button>
+            <button class="btn btn-primary btn-sm fw-bold shadow-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
+                data-bs-target="#modalCrear"><i class="fas fa-plus-circle me-1"></i>Nuevo Alumno</button>
         </div>
 
         <table id="tabla-alumnos" class="table table-sm table-hover table-bordered table-xs">

@@ -24,12 +24,13 @@
                         <td>{{ $sexo->id }}</td>
                         <td>{{ $sexo->sexo }}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary btn-xs py-0 px-1" style="font-size: 0.65rem;">Editar</button>
+                            <button class="btn btn-warning btn-xs py-0 px-1" style="font-size: 0.65rem;"><i
+                                    class="fas fa-edit"></i></button>
 
                             <form action="{{ route('sexos.destroy', $sexo) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

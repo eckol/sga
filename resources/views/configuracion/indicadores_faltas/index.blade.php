@@ -62,10 +62,10 @@
                         <td>{{ $falta->id }}</td>
                         <td>{{ $falta->indicador_falta }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $falta->id }}"
                                 data-indicador_falta="{{ $falta->indicador_falta }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('indicadores_faltas.destroy', $falta->id) }}" method="POST"
@@ -73,7 +73,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

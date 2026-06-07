@@ -56,17 +56,17 @@
                         <td>{{ substr($hora->hora_inicio, 0, 5) }}</td>
                         <td>{{ substr($hora->hora_fin, 0, 5) }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $hora->id }}" data-modulo="{{ $hora->modulo }}"
                                 data-inicio="{{ substr($hora->hora_inicio, 0, 5) }}"
                                 data-fin="{{ substr($hora->hora_fin, 0, 5) }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('horas.destroy', $hora->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar este módulo?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar este módulo?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

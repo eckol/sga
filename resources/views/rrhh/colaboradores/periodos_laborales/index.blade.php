@@ -46,8 +46,8 @@
     <div class="card card-body p-2 shadow-sm">
         <div class="d-flex justify-content-between mb-2">
             <h6 class="fw-bold text-secondary"></h6>
-            <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                data-bs-target="#modalCrear">+ Nuevo Período Laboral</button>
+            <button class="btn btn-primary btn-sm fw-bold shadow-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
+                data-bs-target="#modalCrear"><i class="fas fa-plus-circle me-1"></i> Nuevo Período Laboral</button>
         </div>
 
         <table id="tabla-periodos" class="table table-sm table-hover table-bordered table-xs">
@@ -81,15 +81,15 @@
                         <td class="text-center"><small class="fw-bold text-dark">{{ $p->antiguedad }}</small></td>
                         <td><small>{{ $p->observacion ?? '-' }}</small></td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs btn-editar"
                                 data-id="{{ $p->id }}" data-json='{{ json_encode($p) }}'
                                 data-colaborador="{{ $p->colaborador->apellidos }}, {{ $p->colaborador->nombres }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
                             <form action="{{ route('periodos-laborales.destroy', $p->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs"
-                                    onclick="return confirm('¿Eliminar este período?')">Borrar</button>
+                                    onclick="return confirm('¿Eliminar este período?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

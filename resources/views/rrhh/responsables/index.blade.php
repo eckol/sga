@@ -65,9 +65,9 @@
                 <div class="tab-pane fade show active" id="tab-lista" role="tabpanel">
                     <div class="d-flex justify-content-between mb-2 mt-1">
                         <h6 class="fw-bold text-secondary mb-0" style="font-size:0.8rem;"></h6>
-                        <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                            data-bs-target="#modalCrear">
-                            <i class="fas fa-plus me-1"></i> Nuevo Registro
+                        <button class="btn btn-primary btn-sm fw-bold shadow-sm" style="font-size: 0.7rem;"
+                            data-bs-toggle="modal" data-bs-target="#modalCrear">
+                            <i class="fas fa-plus-circle me-1"></i> Nuevo Registro
                         </button>
                     </div>
 
@@ -93,7 +93,7 @@
                                     <td>{{ $reg->telefono2 ?? '-' }}</td>
                                     <td>{{ $reg->email ?? 'N/A' }}</td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                                        <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                             style="font-size: 0.65rem;" data-id="{{ $reg->id }}"
                                             data-nombre="{{ $reg->nombre }}" data-cid="{{ $reg->cid }}"
                                             data-profesion="{{ $reg->profesion }}" data-direccion="{{ $reg->direccion }}"
@@ -101,7 +101,7 @@
                                             data-tel1="{{ $reg->telefono1 }}" data-tel2="{{ $reg->telefono2 }}"
                                             data-email="{{ $reg->email }}" data-trabajo="{{ $reg->lugartrabajo }}"
                                             data-ruc="{{ $reg->ruc }}" data-dv="{{ $reg->dv }}">
-                                            Editar
+                                            <i class="fas fa-edit"></i>
                                         </button>
 
                                         <form action="{{ route('responsables.destroy', [$tipo, $reg->id]) }}" method="POST"
@@ -109,7 +109,8 @@
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-xs py-0 px-1"
                                                 style="font-size: 0.65rem;"
-                                                onclick="return confirm('¿Eliminar registro?')">Borrar</button>
+                                                onclick="return confirm('¿Eliminar registro?')"><i
+                                                    class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

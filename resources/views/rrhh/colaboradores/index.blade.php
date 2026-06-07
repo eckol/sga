@@ -56,9 +56,9 @@
                 </select>
             </div>
             <div class="col text-end">
-                <button class="btn btn-primary btn-sm" style="font-size: 0.7rem;" data-bs-toggle="modal"
-                    data-bs-target="#modalCrear">
-                    <i class="fas fa-plus me-1"></i> Nuevo Colaborador
+                <button class="btn btn-primary btn-sm fw-bold shadow-sm" style="font-size: 0.7rem;"
+                    data-bs-toggle="modal" data-bs-target="#modalCrear">
+                    <i class="fas fa-plus-circle me-1"></i> Nuevo Colaborador
                 </button>
             </div>
         </div>
@@ -102,15 +102,15 @@
                         <td style="display:none;">{{ \Carbon\Carbon::parse($col->fnac)->format('d/m/Y') }}</td>
                         <td style="display:none;">{{ $col->email_institucional ?? '-' }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $col->id }}" data-json='{{ json_encode($col) }}'>
-                                <i class="fas fa-edit"></i> Editar
+                                <i class="fas fa-edit"></i>
                             </button>
                             <form action="{{ route('colaboradores.destroy', $col->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
                                     onclick="return confirm('¿Borrar?')">
-                                    <i class="fas fa-trash"></i> Borrar
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </form>
                         </td>

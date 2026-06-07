@@ -273,7 +273,7 @@
                 <div class="menu-section-label">Gestión</div>
 
                 <button type="button" class="menu-header" data-target="menuAlumnado">
-                    <span><i class="fas fa-users me-1" style="width:13px;opacity:.7;"></i> Alumnado</span>
+                    <span><i class="fas fa-users me-1" style="width:13px;opacity:.7;"></i> Gestión de Alumnos</span>
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAlumnado">
@@ -285,7 +285,8 @@
                 </div>
 
                 <button type="button" class="menu-header" data-target="menuColaboradores">
-                    <span><i class="fas fa-id-badge me-1" style="width:13px;opacity:.7;"></i> Colaboradores</span>
+                    <span><i class="fas fa-id-badge me-1" style="width:13px;opacity:.7;"></i> Gestión de
+                        Empleados</span>
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuColaboradores">

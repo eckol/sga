@@ -57,10 +57,10 @@
                         <td>{{ $parentesco->id }}</td>
                         <td>{{ $parentesco->parentesco }}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-primary btn-xs py-0 px-1 btn-editar"
+                            <button type="button" class="btn btn-warning btn-xs py-0 px-1 btn-editar"
                                 style="font-size: 0.65rem;" data-id="{{ $parentesco->id }}"
                                 data-parentesco="{{ $parentesco->parentesco }}">
-                                Editar
+                                <i class="fas fa-edit"></i>
                             </button>
 
                             <form action="{{ route('parentescos.destroy', $parentesco->id) }}" method="POST"
@@ -68,7 +68,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-xs py-0 px-1" style="font-size: 0.65rem;"
-                                    onclick="return confirm('¿Borrar?')">Borrar</button>
+                                    onclick="return confirm('¿Borrar?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
