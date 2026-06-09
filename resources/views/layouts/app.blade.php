@@ -326,8 +326,8 @@
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuInscripciones">
-                    <a href="{{ route('aranceles.index') }}" class="nav-link">Aranceles</a>
                     <a href="{{ route('inscripciones.index') }}" class="nav-link">Inscripciones</a>
+                    <a href="{{ route('aranceles.index') }}" class="nav-link">Aranceles</a>
                 </div>
 
                 <button type="button" class="menu-header" data-target="menuPortalResponsables">
@@ -340,7 +340,7 @@
                 </div>
 
                 <button type="button" class="menu-header" data-target="menuAvisos">
-                    <span><i class="fas fa-envelope me-1" style="width:13px;opacity:.7;"></i> Avisos</span>
+                    <span><i class="fas fa-bullhorn me-1" style="width:13px;opacity:.7;"></i> Avisos</span>
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAvisos">

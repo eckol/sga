@@ -27,7 +27,8 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label mb-0 fw-bold">Cédula Id.</label>
-                                <input type="number" name="cid" class="form-control form-control-sm" required>
+                                <input type="number" name="cid" id="crear_cid" class="form-control form-control-sm"
+                                    required>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label mb-0 fw-bold">Fecha de Nac.</label>
@@ -86,7 +87,7 @@
 
                     <div class="col-md-3">
                         <label class="form-label mb-0 fw-bold">Email</label>
-                        <input type="email" name="email" class="form-control form-control-sm">
+                        <input type="email" name="email" id="crear_email" class="form-control form-control-sm">
                     </div>
                     <div class="col-md-2">
                         <label class="form-label mb-0 fw-bold">Passwd</label>
@@ -120,7 +121,7 @@
                         <input type="text" name="salud" class="form-control form-control-sm">
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-7">
                         <label class="form-label mb-0 fw-bold">Observaciones</label>
                         <input type="text" name="observaciones" class="form-control form-control-sm">
                     </div>
@@ -1430,3 +1431,43 @@
         </form>
     </div>
 </div>
+{{-- Auto-completar email a partir del CID --}}
+<script>
+    // Modal Crear
+    document.getElementById('crear_cid').addEventListener('input', function () {
+        const email = document.getElementById('crear_email');
+        if (!email.dataset.manualEdit) {
+            email.value = this.value ? this.value + '@cst.edu.py' : '';
+        }
+    });
+    document.getElementById('crear_email').addEventListener('input', function () {
+        const cid = document.getElementById('crear_cid').value;
+        if (this.value !== cid + '@cst.edu.py') {
+            this.dataset.manualEdit = '1';
+        } else {
+            delete this.dataset.manualEdit;
+        }
+    });
+    document.getElementById('modalCrear').addEventListener('show.bs.modal', function () {
+        delete document.getElementById('crear_email').dataset.manualEdit;
+    });
+
+    // Modal Editar
+    document.getElementById('edit_cid').addEventListener('input', function () {
+        const email = document.getElementById('edit_email');
+        if (!email.dataset.manualEdit) {
+            email.value = this.value ? this.value + '@cst.edu.py' : '';
+        }
+    });
+    document.getElementById('edit_email').addEventListener('input', function () {
+        const cid = document.getElementById('edit_cid').value;
+        if (this.value !== cid + '@cst.edu.py') {
+            this.dataset.manualEdit = '1';
+        } else {
+            delete this.dataset.manualEdit;
+        }
+    });
+    document.getElementById('modalEditar').addEventListener('show.bs.modal', function () {
+        delete document.getElementById('edit_email').dataset.manualEdit;
+    });
+</script>

@@ -48,18 +48,20 @@ class DashboardController extends Controller
 
         $totalAlumnos = $statsPorCiclo->sum('total');
 
-        // Últimos 5 alumnos inscriptos
+        // Últimos 5 alumnos inscriptos (matriculados)
         $ultimosAlumnos = Inscripcion::with(['alumno', 'grado'])
             ->where('anio_lectivo', $anioSeleccionado)
+            ->where('estado', 'Matriculado')
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
 
-        // Estadísticas de género
+        // Estadísticas de género (solo matriculados)
         $generosStats = \App\Models\Alumno::whereIn('cid', function ($query) use ($anioSeleccionado) {
             $query->select('alumno_cid')
                 ->from('inscripciones')
-                ->where('anio_lectivo', $anioSeleccionado);
+                ->where('anio_lectivo', $anioSeleccionado)
+                ->where('estado', 'Matriculado');
         })
             ->select('sexo_id', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
             ->groupBy('sexo_id')
@@ -77,8 +79,11 @@ class DashboardController extends Controller
         $presentes = Asistencia::where('fecha', $hoy)->where('estado', 'Presente')->count();
         $porcentajeAsistencia = $totalAsis > 0 ? round(($presentes / $totalAsis) * 100) : 0;
 
-        // 2. Finanzas (Cantidad de alumnos al día)
-        $alumnosAlDiaCount = Inscripcion::where('anio_lectivo', $anioSeleccionado)->where('al_dia', 1)->count();
+        // 2. Finanzas (Cantidad de alumnos matriculados al día)
+        $alumnosAlDiaCount = Inscripcion::where('anio_lectivo', $anioSeleccionado)
+            ->where('estado', 'Matriculado')
+            ->where('al_dia', 1)
+            ->count();
 
         // 3. Personal
         $totalColaboradores = Colaborador::count();
