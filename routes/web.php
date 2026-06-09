@@ -31,6 +31,7 @@ use App\Http\Controllers\PortalResponsableController;
 use App\Http\Controllers\Academica\EntrevistaController;
 use App\Http\Controllers\Academica\RegistroAnecdoticoController;
 use App\Http\Controllers\Academica\AlumnoGradoController;
+use App\Http\Controllers\Academica\AvisoController;
 
 
 
@@ -156,6 +157,23 @@ Route::middleware(['auth'])->group(function () {
         Route::get('entrevistas/alumno/{alumnoId}/json', [EntrevistaController::class, 'getEntrevistasPorAlumno'])->name('entrevistas.alumno.json');
         Route::get('alumnos/{id}/calendario-examenes', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'getCalendarioExamenes'])
             ->name('academica.alumnos.calendario-examenes');
+        // Rutas de Calendario de Exámenes en web.php
+        Route::resource('calendario-examenes', CalendarioExamenController::class)
+            ->except(['create', 'show', 'edit'])
+            ->names([
+                'index' => 'academica.calendario-examenes.index',
+                'store' => 'academica.calendario-examenes.store',
+                'update' => 'academica.calendario-examenes.update',
+                'destroy' => 'academica.calendario-examenes.destroy',
+            ]);
+
+        // Nueva ruta para el envío manual por bloque con el alias correcto
+        Route::post('calendario-examenes/notificar-bloque', [CalendarioExamenController::class, 'notificarBloque'])
+            ->name('academica.calendario-examenes.notificar-bloque');
+
+        Route::get('avisos', [AvisoController::class, 'index'])->name('academica.avisos.index');
+        Route::post('avisos', [AvisoController::class, 'store'])->name('academica.avisos.store');
+        Route::get('avisos/{aviso}', [AvisoController::class, 'show'])->name('academica.avisos.show');
     });
 });
 

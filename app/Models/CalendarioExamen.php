@@ -18,6 +18,10 @@ class CalendarioExamen extends Model
         'asignatura3',
     ];
 
+    protected $casts = [
+        'fecha' => 'date',
+    ];
+
     public function grado_curso()
     {
         return $this->belongsTo(GradoCurso::class, 'grado_curso_id');

@@ -16,20 +16,6 @@
         /* ── Tipografía y base ── */
         .form-select-sm, .form-control-sm { border-radius: 6px !important; }
 
-        /* ── Tamaño compacto (alineado con el resto del sistema) ── */
-        .form-select-sm,
-        .form-select-sm option,
-        .form-control-sm {
-            font-size: 0.75rem !important;
-            padding-top: 0.2rem;
-            padding-bottom: 0.2rem;
-        }
-        .form-label, .form-label-sm { font-size: 0.75rem !important; }
-        .btn-sm { font-size: 0.75rem !important; }
-        .page-link { padding: 0.25rem 0.5rem !important; font-size: 0.75rem !important; }
-        .alert { font-size: 0.78rem !important; }
-        .badge { font-size: 0.7rem !important; }
-
         /* ── Encabezado de bloque ── */
         .titulo-ciclo {
             background: linear-gradient(135deg, var(--cst-dark) 0%, var(--cst-navy) 100%);

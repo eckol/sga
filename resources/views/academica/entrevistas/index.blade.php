@@ -59,11 +59,13 @@
                 </p>
             </div>
             <div class="col-md-6 text-end">
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCrearAlumno">
-                    <i class="fas fa-plus"></i> Nueva Entrevista Alumno
+                <button class="btn btn-primary btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal"
+                    data-bs-target="#modalCrearAlumno">
+                    <i class="fas fa-plus-circle me-1"></i> Nueva Entrevista Alumno
                 </button>
-                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalCrearResponsable">
-                    <i class="fas fa-plus"></i> Nueva Acta Responsable
+                <button class="btn btn-success btn-sm" style="font-size: 0.75rem;" data-bs-toggle="modal"
+                    data-bs-target="#modalCrearResponsable">
+                    <i class="fas fa-plus-circle me-1"></i> Nueva Acta Responsable
                 </button>
             </div>
         </div>

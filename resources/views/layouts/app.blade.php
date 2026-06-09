@@ -273,7 +273,7 @@
                 <div class="menu-section-label">Gestión</div>
 
                 <button type="button" class="menu-header" data-target="menuAlumnado">
-                    <span><i class="fas fa-users me-1" style="width:13px;opacity:.7;"></i> Gestión de Alumnos</span>
+                    <span><i class="fas fa-users me-1" style="width:13px;opacity:.7;"></i> Alumnado</span>
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAlumnado">
@@ -285,8 +285,7 @@
                 </div>
 
                 <button type="button" class="menu-header" data-target="menuColaboradores">
-                    <span><i class="fas fa-id-badge me-1" style="width:13px;opacity:.7;"></i> Gestión de
-                        Empleados</span>
+                    <span><i class="fas fa-id-badge me-1" style="width:13px;opacity:.7;"></i> Empleados</span>
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuColaboradores">
@@ -295,7 +294,7 @@
                 </div>
 
                 <button type="button" class="menu-header" data-target="menuAcademica">
-                    <span><i class="fas fa-book-open me-1" style="width:13px;opacity:.7;"></i> Gestión Académica</span>
+                    <span><i class="fas fa-book-open me-1" style="width:13px;opacity:.7;"></i> Académica</span>
                     <span class="menu-arrow">&#9660;</span>
                 </button>
                 <div class="menu-links" id="menuAcademica">
@@ -338,6 +337,14 @@
                 </button>
                 <div class="menu-links" id="menuPortalResponsables">
                     <a href="{{ route('portal_responsables.index') }}" class="nav-link">Portal de Responsables</a>
+                </div>
+
+                <button type="button" class="menu-header" data-target="menuAvisos">
+                    <span><i class="fas fa-envelope me-1" style="width:13px;opacity:.7;"></i> Avisos</span>
+                    <span class="menu-arrow">&#9660;</span>
+                </button>
+                <div class="menu-links" id="menuAvisos">
+                    <a href="{{ route('academica.avisos.index') }}" class="nav-link">Avisos</a>
                 </div>
 
                 <div class="menu-section-label">Sistema</div>

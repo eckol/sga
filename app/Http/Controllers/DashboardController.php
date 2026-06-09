@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Inscripcion;
 use App\Models\Ciclo;
 use App\Models\GradoCurso;
+use App\Models\Asistencia;
+use App\Models\Colaborador;
+use App\Models\CalendarioExamen;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -45,6 +48,56 @@ class DashboardController extends Controller
 
         $totalAlumnos = $statsPorCiclo->sum('total');
 
-        return view('dashboard', compact('anios', 'anioSeleccionado', 'statsPorCiclo', 'totalAlumnos'));
+        // Últimos 5 alumnos inscriptos
+        $ultimosAlumnos = Inscripcion::with(['alumno', 'grado'])
+            ->where('anio_lectivo', $anioSeleccionado)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        // Estadísticas de género
+        $generosStats = \App\Models\Alumno::whereIn('cid', function ($query) use ($anioSeleccionado) {
+            $query->select('alumno_cid')
+                ->from('inscripciones')
+                ->where('anio_lectivo', $anioSeleccionado);
+        })
+            ->select('sexo_id', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
+            ->groupBy('sexo_id')
+            ->get()
+            ->pluck('total', 'sexo_id'); // [1 => masc, 2 => fem]
+
+        $countM = $generosStats->get(1, 0); // ID 1 = M
+        $countF = $generosStats->get(2, 0); // ID 2 = F
+
+        // --- NUEVOS KPIs ---
+        $hoy = date('Y-m-d');
+
+        // 1. % Asistencia Hoy
+        $totalAsis = Asistencia::where('fecha', $hoy)->count();
+        $presentes = Asistencia::where('fecha', $hoy)->where('estado', 'Presente')->count();
+        $porcentajeAsistencia = $totalAsis > 0 ? round(($presentes / $totalAsis) * 100) : 0;
+
+        // 2. Finanzas (Cantidad de alumnos al día)
+        $alumnosAlDiaCount = Inscripcion::where('anio_lectivo', $anioSeleccionado)->where('al_dia', 1)->count();
+
+        // 3. Personal
+        $totalColaboradores = Colaborador::count();
+
+        // 4. Exámenes del día
+        $examenesHoyCount = CalendarioExamen::where('fecha', $hoy)->count();
+
+        return view('dashboard', compact(
+            'anios',
+            'anioSeleccionado',
+            'statsPorCiclo',
+            'totalAlumnos',
+            'ultimosAlumnos',
+            'countM',
+            'countF',
+            'porcentajeAsistencia',
+            'alumnosAlDiaCount',
+            'totalColaboradores',
+            'examenesHoyCount'
+        ));
     }
 }
