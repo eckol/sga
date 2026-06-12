@@ -112,6 +112,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::prefix('academica')->group(function () {
         Route::get('alumnos-grado', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'index'])->name('academica.alumnos-grado');
+        Route::get('alumnos/{id}/imprimir-ficha', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'imprimirFicha'])->name('academica.alumnos.imprimir-ficha');
         Route::get('alumnos/{id}/detalles', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'getDetalles'])->name('academica.alumnos.detalles');
         Route::post('alumnos/{id}/toggle', [\App\Http\Controllers\Academica\AlumnoGradoController::class, 'toggleEstado'])->name('academica.alumnos.toggle');
         Route::get('horarios', [HorarioController::class, 'index'])->name('academica.horarios.index');

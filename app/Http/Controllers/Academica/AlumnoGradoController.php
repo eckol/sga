@@ -291,4 +291,75 @@ class AlumnoGradoController extends Controller
             'grado_curso' => $inscripcion->grado->gradocurso ?? null,
         ]);
     }
+
+    /**
+     * Genera la vista para imprimir la ficha completa del alumno.
+     */
+    public function imprimirFicha($id)
+    {
+        $alumno = \App\Models\Alumno::with([
+            'nacionalidad',
+            'ciudad',
+            'sexo',
+            'vivecon',
+            'madre.ciudad',
+            'padre.ciudad',
+            'encargado.ciudad',
+            'inscripciones' => function ($q) {
+                $q->orderBy('fecha', 'desc');
+            },
+            'inscripciones.grado',
+            'asistencias' => function ($q) {
+                $q->whereYear('asistencias.fecha', date('Y'));
+            },
+            'registrosAnecdoticos.asignatura',
+            'registrosAnecdoticos.gradoCurso',
+            'entrevistasAlumnos' => function ($q) {
+                $q->with('entrevistador')->orderBy('fecha', 'desc');
+            },
+            'entrevistasResponsables' => function ($q) {
+                $q->with('entrevistador')->orderBy('fecha', 'desc');
+            },
+            'faltas.indicadorFalta',
+            'faltas.gradoCurso',
+            'faltas.asignatura'
+        ])
+            ->findOrFail($id);
+
+        // Resumen de asistencia mensual
+        $asistenciaMensual = [];
+        $mesesNombres = [
+            2 => 'Febrero',
+            3 => 'Marzo',
+            4 => 'Abril',
+            5 => 'Mayo',
+            6 => 'Junio',
+            7 => 'Julio',
+            8 => 'Agosto',
+            9 => 'Septiembre',
+            10 => 'Octubre',
+            11 => 'Noviembre'
+        ];
+
+        foreach ($mesesNombres as $m => $nombre) {
+            $asistenciaMensual[$nombre] = [
+                'Presente' => 0,
+                'Ausente' => 0,
+                'Justificado' => 0,
+                'Tardanza' => 0
+            ];
+        }
+
+        foreach ($alumno->asistencias as $asist) {
+            $mesNum = (int) $asist->fecha->format('m');
+            if (isset($mesesNombres[$mesNum])) {
+                $nombreMes = $mesesNombres[$mesNum];
+                if (isset($asistenciaMensual[$nombreMes][$asist->estado])) {
+                    $asistenciaMensual[$nombreMes][$asist->estado]++;
+                }
+            }
+        }
+
+        return view('academica.alumnos.imprimir_ficha', compact('alumno', 'asistenciaMensual'));
+    }
 }
