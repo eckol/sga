@@ -174,6 +174,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('avisos', [AvisoController::class, 'index'])->name('academica.avisos.index');
         Route::post('avisos', [AvisoController::class, 'store'])->name('academica.avisos.store');
         Route::get('avisos/{aviso}', [AvisoController::class, 'show'])->name('academica.avisos.show');
+
+        // Docentes por Hora
+        Route::get('docentes-hora', [\App\Http\Controllers\DocenteHoraController::class, 'index'])->name('academica.docentes-hora.index');
+        Route::get('docentes-hora/data', [\App\Http\Controllers\DocenteHoraController::class, 'getData'])->name('academica.docentes-hora.data');
+        Route::put('docentes-hora/update', [\App\Http\Controllers\DocenteHoraController::class, 'update'])->name('academica.docentes-hora.update');
     });
 });
 

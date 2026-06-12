@@ -302,11 +302,12 @@
                     <a href="{{ route('academica.docentes-asignatura.index') }}" class="nav-link">Asignaturas por
                         docente</a>
                     <a href="{{ route('academica.horarios.index') }}" class="nav-link">Horarios de clase</a>
+                    <a href="{{ route('academica.docentes-hora.index') }}" class="nav-link">Horarios por docente</a>
                     <a href="{{ route('academica.faltas.index') }}" class="nav-link">Faltas</a>
                     <a href="{{ route('academica.registros-anecdoticos.index') }}" class="nav-link">Registros
-                        Anecdóticos</a>
+                        anecdóticos</a>
                     <a href="{{ route('asistencias.index') }}" class="nav-link">Asistencia</a>
-                    <a href="{{ route('academica.calendario-examenes.index') }}" class="nav-link">Calendario Pruebas
+                    <a href="{{ route('academica.calendario-examenes.index') }}" class="nav-link">Calendario pruebas
                         Escritas</a>
 
                     <a href="#" class="nav-link">Calificaciones</a>
