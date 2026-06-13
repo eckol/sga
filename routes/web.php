@@ -58,6 +58,8 @@ Route::middleware('auth')->group(function () {
     Route::get('aranceles/buscar', [ArancelController::class, 'getArancelByGrado'])->name('aranceles.buscar');
     Route::resource('aranceles', ArancelController::class)->except(['create', 'show', 'edit']);
     Route::resource('gradoscursos', GradoCursoController::class)->except(['create', 'show', 'edit']);
+    Route::get('inscripciones/{id}/contrato-pdf', [InscripcionController::class, 'generarContratoPdf'])
+        ->name('inscripciones.contrato-pdf');
     Route::resource('inscripciones', InscripcionController::class)->except(['create', 'show', 'edit']);
     Route::resource('horas', HoraController::class)->except(['create', 'show', 'edit']);
     Route::resource('estadosciviles', EstadoCivilController::class)->except(['create', 'show', 'edit']);

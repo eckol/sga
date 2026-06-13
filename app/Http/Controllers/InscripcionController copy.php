@@ -7,7 +7,6 @@ use App\Models\Alumno;
 use App\Models\GradoCurso;
 use App\Models\Arancel;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class InscripcionController extends Controller
 {
@@ -16,6 +15,7 @@ class InscripcionController extends Controller
         $inscripciones = Inscripcion::with(['alumno.madre', 'alumno.padre', 'alumno.encargado', 'grado'])->orderBy('fecha', 'desc')->get();
         $grados = GradoCurso::orderBy('gradocurso')->get();
 
+        // Generamos los años para el select (actual y el que viene)
         $anio_actual = date('Y');
         $anios = [$anio_actual, $anio_actual + 1];
 
@@ -33,10 +33,12 @@ class InscripcionController extends Controller
 
         $data = $request->all();
 
+        // Si no hay arancel y no se enviaron montos manuales, error.
         if (!$arancel && (empty($data['monto_matricula']) || empty($data['monto_anualidad']))) {
             return back()->with('error', 'No se encontraron aranceles definidos para el ciclo y año seleccionados y no se ingresaron montos manuales.');
         }
 
+        // Prioridad: 1. Request (si > 0), 2. Arancel
         if (empty($data['monto_matricula']) || $data['monto_matricula'] == 0) {
             $data['monto_matricula'] = $arancel ? $arancel->monto_matricula : 0;
         }
@@ -44,7 +46,6 @@ class InscripcionController extends Controller
             $data['monto_anualidad'] = $arancel ? $arancel->monto_anualidad : 0;
         }
 
-        // Resolver firmante y guardar su nombre
         $firmante_nombre = 'No especificado';
         if ($request->firmante_rol == 'Madre' && $alumno->cid_madre) {
             $persona = \App\Models\Madre::where('cid', $alumno->cid_madre)->first();
@@ -58,88 +59,9 @@ class InscripcionController extends Controller
         }
         $data['firmante_nombre'] = $firmante_nombre;
 
-        $inscripcion = Inscripcion::create($data);
+        Inscripcion::create($data);
 
-        // Redirigir al PDF del contrato recién creado
-        return redirect()->route('inscripciones.contrato-pdf', $inscripcion->id);
-    }
-
-    /**
-     * Genera el PDF del contrato de matrícula para una inscripción.
-     * GET /inscripciones/{id}/contrato-pdf
-     */
-    public function generarContratoPdf(int $id)
-    {
-        // Cargar inscripción con sus relaciones
-        $inscripcion = Inscripcion::with(['grado'])->findOrFail($id);
-
-        // Cargar alumno con ciudad y vivecon
-        $alumno = Alumno::with(['ciudad', 'vivecon'])
-            ->where('cid', $inscripcion->alumno_cid)
-            ->firstOrFail();
-
-        $grado = $inscripcion->grado;
-
-        // Resolver datos del firmante según el rol guardado en la inscripción
-        $firmante = $this->resolverFirmante($inscripcion->firmante_rol, $alumno);
-
-        if (!$firmante) {
-            abort(404, 'No se encontraron datos del firmante para generar el contrato.');
-        }
-
-        $pdf = Pdf::loadView('inscripciones.contrato_pdf', compact(
-            'inscripcion',
-            'alumno',
-            'grado',
-            'firmante'
-        ))
-            ->setPaper('Legal', 'portrait')
-            ->setOptions([
-                'defaultFont' => 'DejaVu Sans',
-                'isHtml5ParserEnabled' => true,
-                'isRemoteEnabled' => false,
-                'dpi' => 72,
-                'margin_top' => 10,
-                'margin_bottom' => 10,
-                'margin_left' => 10,
-                'margin_right' => 10,
-            ]);
-
-        $apellidos = str_replace(' ', '_', strtolower($alumno->apellidos));
-        $nombres = str_replace(' ', '_', strtolower($alumno->nombres));
-        $nombreArchivo = 'Contrato_' . $inscripcion->anio_lectivo . '_' . $apellidos . '_' . $nombres . '.pdf';
-
-        // Devolver inline para que el navegador lo muestre/imprima directamente
-        return $pdf->stream($nombreArchivo);
-    }
-
-    /**
-     * Devuelve el modelo del firmante (Madre, Padre o Encargado)
-     * con todos los campos que necesita el contrato.
-     */
-    private function resolverFirmante(string $rol, Alumno $alumno): ?\Illuminate\Database\Eloquent\Model
-    {
-        return match ($rol) {
-            'Madre' => $alumno->cid_madre
-            ? \App\Models\Madre::with('ciudad')
-                ->where('cid', $alumno->cid_madre)
-                ->first()
-            : null,
-
-            'Padre' => $alumno->cid_padre
-            ? \App\Models\Padre::with('ciudad')
-                ->where('cid', $alumno->cid_padre)
-                ->first()
-            : null,
-
-            'Encargado' => $alumno->cid_encargado
-            ? \App\Models\Encargado::with('ciudad')
-                ->where('cid', $alumno->cid_encargado)
-                ->first()
-            : null,
-
-            default => null,
-        };
+        return back()->with('success', 'Inscripción registrada');
     }
 
     public function update(Request $request, $id)
@@ -155,8 +77,11 @@ class InscripcionController extends Controller
         $alumno_cid = $inscripcion->alumno_cid;
         $inscripcion->delete();
 
+        // Verificar si existen otras inscripciones activas
         $otras = Inscripcion::where('alumno_cid', $alumno_cid)->where('estado', 'Matriculado')->count();
-        // (lógica de negocio adicional si se requiere)
+        if ($otras == 0) {
+            // No need to update matriculado, it has been removed from the alumnos table.
+        }
 
         return back()->with('success', 'Inscripción eliminada correctamente.');
     }

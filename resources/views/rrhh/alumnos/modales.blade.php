@@ -789,7 +789,12 @@
 
                 <div class="row g-2">
                     <div class="col-md-4">
-                        <label class="form-label">Año Lectivo</label>
+                        <label class="form-label mb-0 fw-bold">Fecha Inscripción</label>
+                        <input type="text" class="form-control form-control-sm bg-light text-center"
+                            value="{{ date('d/m/Y') }}" readonly tabindex="-1">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label mb-0 fw-bold">Año Lectivo</label>
                         <select name="anio_lectivo" id="ins_anio_lectivo" class="form-select form-select-sm">
                             @foreach($anios as $a)
                                 <option value="{{ $a }}" {{ $a > date('Y') ? 'selected' : '' }}>{{ $a }}</option>
@@ -797,12 +802,12 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label text-primary">Grado Actual</label>
+                        <label class="form-label mb-0 fw-bold text-primary">Grado Actual</label>
                         <input type="text" id="inscribir_grado_actual" class="form-control form-control-sm bg-light"
                             readonly>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Grado/Curso a Inscribir</label>
+                    <div class="col-md-5">
+                        <label class="form-label mb-0 fw-bold">Grado/Curso a Inscribir</label>
                         <select name="grado_curso_id" id="select_grado_nuevo" class="form-select form-select-sm"
                             required>
                             @foreach($grados as $g)
@@ -810,7 +815,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-7">
                         <label class="form-label mb-0 fw-bold">Quién firma el contrato</label>
                         <select name="firmante_rol" id="select_firmante" class="form-select form-select-sm" required>
                             <option value="Padre">Padre</option>
@@ -820,8 +825,8 @@
                     </div>
                     <div class="col-md-6 mt-1">
                         <label class="form-label mb-0 fw-bold">Procede de</label>
-                        <input type="text" name="procede" class="form-control form-control-sm" value="C.S.T."
-                            placeholder="Institución de origen">
+                        <input type="text" name="procede" id="ins_procede" class="form-control form-control-sm"
+                            value="C.S.T." placeholder="Institución de origen">
                     </div>
                     <div class="col-md-6 mt-1">
                         <label class="form-label mb-0 fw-bold">Forma de Pago</label>
@@ -887,7 +892,11 @@
                 </div>
             </div>
             <div class="modal-footer p-1">
-                <button type="submit" class="btn btn-success btn-sm w-100">Finalizar Inscripción e Imprimir</button>
+                {{-- El formulario ahora apunta a inscripciones.store que redirige al PDF --}}
+                {{-- Se abre en pestaña nueva para que el modal no se cierre bruscamente --}}
+                <button type="submit" class="btn btn-success btn-sm w-100" formtarget="_blank">
+                    <i class="fas fa-file-pdf me-1"></i> Finalizar Inscripción e Imprimir
+                </button>
             </div>
         </form>
     </div>
