@@ -323,6 +323,9 @@
                         fotoPreview.src = "{{ asset('img/alumnos/alumno.jpg') }}";
                     }
 
+                    // Calcular edad al abrir el modal
+                    calcularEdad(d.fnac, 'edit_edad');
+
                     // Guardar alumno activo para tabs lazy (Asistencia y Calendario)
                     _asistAlumnoId = d.id;
                     _asistCache    = {};

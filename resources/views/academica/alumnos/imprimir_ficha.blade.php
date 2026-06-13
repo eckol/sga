@@ -89,8 +89,8 @@
 
         .photo-container {
             float: right;
-            width: 80px;
-            height: 100px;
+            width: 130px;
+            height: 130px;
             border: 0px solid #ccc;
             text-align: center;
             margin-left: 10px;
@@ -153,9 +153,9 @@
     <div class="section">
         <div class="photo-container">
             @if($alumno->foto)
-                <img src="{{ asset('img/alumnos/' . $alumno->foto) }}" alt="Foto">
+                <img src="{{ asset('img/alumnos/' . $alumno->foto) }}" alt="Foto" width="220" height="220">
             @else
-                <img src="{{ asset('img/alumnos/alumno.jpg') }}" alt="Sin Foto">
+                <img src="{{ asset('img/alumnos/alumno.jpg') }}" alt="Sin Foto" width="220" height="220">
             @endif
         </div>
         <div class="section-title">Datos del Alumno</div>
@@ -170,6 +170,8 @@
                 {{ $alumno->nacionalidad->nacionalidad ?? 'N/A' }}</div>
             <div class="data-item"><span class="label">F. Nac.:</span>
                 {{ $alumno->fnac ? \Carbon\Carbon::parse($alumno->fnac)->format('d/m/Y') : 'N/A' }}</div>
+            <div class="data-item"><span class="label">Edad:</span>
+                {{ $alumno->fnac ? \Carbon\Carbon::parse($alumno->fnac)->age . ' años' : 'N/A' }}</div>
             <div class="data-item"><span class="label">Sexo:</span> {{ $alumno->sexo->sexo ?? 'N/A' }}</div>
         </div>
         <div class="data-row">
@@ -180,11 +182,10 @@
         <div class="data-row">
             <div class="data-item"><span class="label">Teléfono:</span> {{ $alumno->telefono }}</div>
             <div class="data-item"><span class="label">Email:</span> {{ $alumno->email }}</div>
-            <div class="data-item"><span class="label">Contraseña:</span> {{ $alumno->passwd }}</div>
-            <div class="data-item"><span class="label">Activo:</span> {{ $alumno->activo }}</div>
+            <div class="data-item"><span class="label">Email Activo:</span> {{ $alumno->activo }}</div>
+            <div class="data-item"><span class="label">Vive con:</span> {{ $alumno->vivecon->vive_con ?? 'N/A' }}</div>
         </div>
         <div class="data-row">
-            <div class="data-item"><span class="label">Vive con:</span> {{ $alumno->vivecon->vive_con ?? 'N/A' }}</div>
             <div class="data-item"><span class="label">Salud:</span> {{ $alumno->salud }}</div>
         </div>
         <div class="data-row">

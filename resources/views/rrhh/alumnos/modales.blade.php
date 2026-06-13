@@ -230,10 +230,10 @@
                                 class="col-md-3 text-center d-flex flex-column align-items-center justify-content-center">
                                 <img src="{{ asset('img/alumnos/alumno.jpg') }}" alt="Foto" id="preview_foto_editar"
                                     class="rounded-circle shadow mb-2"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
-                                <input type="file" name="foto" class="form-control form-control-xs mt-1"
-                                    accept="image/*" onchange="previewFoto(this, 'preview_foto_editar')"
-                                    style="font-size: 0.6rem;">
+                                    style="width: 172px; height: 172px; object-fit: cover; cursor: pointer;"
+                                    title="Clic para cambiar la foto">
+                                <input type="file" name="foto" id="foto_editar_input" accept="image/*"
+                                    style="display:none;" onchange="previewFoto(this, 'preview_foto_editar')">
                             </div>
                             <div class="col-md-9">
                                 <div class="row g-1">
@@ -252,10 +252,17 @@
                                         <input type="number" name="cid" id="edit_cid"
                                             class="form-control form-control-sm" required>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label class="form-label mb-0 fw-bold">Fecha de Nac.</label>
                                         <input type="date" name="fnac" id="edit_fnac"
-                                            class="form-control form-control-sm" required>
+                                            class="form-control form-control-sm" required
+                                            onchange="calcularEdad(this.value, 'edit_edad')">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label mb-0 fw-bold">Edad</label>
+                                        <input type="text" id="edit_edad"
+                                            class="form-control form-control-sm text-center" readonly tabindex="-1"
+                                            style="background:#f0f4fa; font-weight:bold;">
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label mb-0 fw-bold">Sexo</label>
@@ -920,6 +927,21 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function calcularEdad(fnac, campoId) {
+        if (!fnac) { document.getElementById(campoId).value = ''; return; }
+        var hoy = new Date();
+        var nac = new Date(fnac);
+        var edad = hoy.getFullYear() - nac.getFullYear();
+        var m = hoy.getMonth() - nac.getMonth();
+        if (m < 0 || (m === 0 && hoy.getDate() < nac.getDate())) edad--;
+        document.getElementById(campoId).value = edad;
+    }
+
+    // Clic en la foto de edición → abre el selector de archivo
+    document.getElementById('preview_foto_editar').addEventListener('click', function () {
+        document.getElementById('foto_editar_input').click();
+    });
 
     function abrirModalResponsableEditar(tipo, inputId) {
         const cid = document.getElementById(inputId).value;
