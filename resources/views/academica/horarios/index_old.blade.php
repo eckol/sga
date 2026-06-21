@@ -1,8 +1,4 @@
 <x-app-layout>
-    @push('styles')
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
-    @endpush
-
     <style>
         .grilla-horario th,
         .grilla-horario td {
@@ -12,7 +8,7 @@
             white-space: nowrap;
         }
 
-         .grilla-horario thead th {
+        .grilla-horario thead th {
             background-color: #1e3a5f;
             color: #fff;
             text-align: center;
@@ -134,11 +130,6 @@
         .asig-bg-18 { background-color: #dcefff !important; } /* Azul cielo */
         .asig-bg-19 { background-color: #f8fbff !important; } /* Gris muy claro */
         .asig-bg-20 { background-color: #f0f0f0 !important; } /* Gris */
-
-        .dt-buttons .btn {
-            font-size: 0.75rem;
-            margin-right: 5px;
-        }
     </style>
 
     <x-slot name="header">
@@ -149,11 +140,9 @@
     {{-- GRILLA 1: 7MO. GRADO A → 9NO. GRADO B                        --}}
     {{-- ══════════════════════════════════════════════════════════════ --}}
     <div class="mt-3 mb-4">
-        <div class="card card-body p-2 shadow-sm">
-            <div class="d-flex justify-content-between mb-2">
-                <h6 class="fw-bold text-secondary">3er. Ciclo E.E.B.</h6>
-            </div>
-            <table id="tabla-3er-ciclo" class="table table-sm table-bordered table-hover mb-0 grilla-horario">
+        <div class="titulo-grilla">📚 3ER. CICLO E.E.B.</div>
+        <div class="card-grilla">
+            <table class="table table-sm table-bordered table-hover mb-0 grilla-horario">
                 <thead>
                     <tr>
                         <th class="th-dia" style="width:60px">Día</th>
@@ -169,11 +158,9 @@
                     @foreach($dias as $numDia => $nombreDia)
                         @foreach($horas as $i => $hora)
                             <tr class="dia-{{ $numDia }}">
-                                <td class="td-dia text-center">
-                                    @if($i === 0)
-                                        {{ $nombreDia }}
-                                    @endif
-                                </td>
+                                @if($i === 0)
+                                    <td class="td-dia" rowspan="{{ count($horas) }}">{{ $nombreDia }}</td>
+                                @endif
                                 <td class="td-hora text-center">{{ $hora->modulo }}</td>
                                 <td class="td-hora text-center">{{ substr($hora->hora_inicio, 0, 5) }}</td>
                                 <td class="td-hora text-center">{{ substr($hora->hora_fin, 0, 5) }}</td>
@@ -213,11 +200,9 @@
     {{-- GRILLA 2: 1ER. CURSO A → 3ER. CURSO B                        --}}
     {{-- ══════════════════════════════════════════════════════════════ --}}
     <div class="mb-4">
-        <div class="card card-body p-2 shadow-sm">
-            <div class="d-flex justify-content-between mb-2">
-                <h6 class="fw-bold text-secondary">Educación Media</h6>
-            </div>
-            <table id="tabla-nivel-medio" class="table table-sm table-bordered table-hover mb-0 grilla-horario">
+        <div class="titulo-grilla">🎓 NIVEL MEDIO</div>
+        <div class="card-grilla">
+            <table class="table table-sm table-bordered table-hover mb-0 grilla-horario">
                 <thead>
                     <tr>
                         <th class="th-dia" style="width:60px">Día</th>
@@ -233,11 +218,9 @@
                     @foreach($dias as $numDia => $nombreDia)
                         @foreach($horas as $i => $hora)
                             <tr class="dia-{{ $numDia }}">
-                                <td class="td-dia text-center">
-                                    @if($i === 0)
-                                        {{ $nombreDia }}
-                                    @endif
-                                </td>
+                                @if($i === 0)
+                                    <td class="td-dia" rowspan="{{ count($horas) }}">{{ $nombreDia }}</td>
+                                @endif
                                 <td class="td-hora text-center">{{ $hora->modulo }}</td>
                                 <td class="td-hora text-center">{{ substr($hora->hora_inicio, 0, 5) }}</td>
                                 <td class="td-hora text-center">{{ substr($hora->hora_fin, 0, 5) }}</td>
@@ -344,105 +327,4 @@
         });
     </script>
 
-    @push('scripts')
-        <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-
-        <script>
-            window.onload = function () {
-                if (window.jQuery) {
-
-                    var opcionesDataTable = {
-                        dom: "<'row mb-2'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
-                             "<'row'<'col-sm-12'tr>>" +
-                             "<'row mt-2'<'col-sm-12'i>>",
-                        buttons: [
-                            {
-                                extend: 'excelHtml5',
-                                text: '<i class="fas fa-file-excel"></i> Excel',
-                                className: 'btn btn-success btn-sm',
-                                title: 'Colegio Privado Santa Teresita - Luque, Paraguay',
-                                messageTop: 'Horarios de Clase',
-                                exportOptions: {
-                                    modifier: { page: 'all' },
-                                    format: {
-                                        body: function (data, row, column, node) {
-                                            if ($(node).find('select').length > 0) {
-                                                return $(node).find('select option:selected').text().trim();
-                                            }
-                                            return data;
-                                        }
-                                    }
-                                }
-                            },
-                            {
-                                extend: 'pdfHtml5',
-                                text: '<i class="fas fa-file-pdf"></i> PDF',
-                                className: 'btn btn-danger btn-sm',
-                                title: 'Colegio Privado Santa Teresita - Luque, Paraguay',
-                                messageTop: 'Horarios de Clase',
-                                orientation: 'landscape',
-                                pageSize: 'A4',
-                                exportOptions: {
-                                    modifier: { page: 'all' }
-                                },
-                                customize: function (doc) {
-                                    if (doc.content[0]) doc.content[0].alignment = 'center';
-                                    if (doc.content[1]) {
-                                        doc.content[1].alignment = 'center';
-                                        doc.content[1].margin = [0, 0, 0, 15];
-                                    }
-                                    doc.styles.tableHeader.alignment = 'left';
-                                    doc.styles.tableBodyEven.alignment = 'left';
-                                    doc.styles.tableBodyOdd.alignment = 'left';
-                                }
-                            },
-                            {
-                                extend: 'print',
-                                text: '<i class="fas fa-print"></i> Imprimir',
-                                className: 'btn btn-secondary btn-sm',
-                                title: 'Colegio Privado Santa Teresita - Luque, Paraguay',
-                                messageTop: 'Horarios de Clase',
-                                exportOptions: {
-                                    modifier: { page: 'all' }
-                                },
-                                customize: function (win) {
-                                    $(win.document.body).css('text-align', 'center');
-                                    $(win.document.body).find('h1').css('text-align', 'center');
-                                    $(win.document.body).find('table')
-                                        .addClass('compact')
-                                        .css('margin', '0 auto')
-                                        .css('width', '100%');
-                                    $(win.document.body).find('table th, table td').css('text-align', 'left');
-                                }
-                            }
-                        ],
-                        language: {
-                            search: "Buscar:",
-                            info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                            infoEmpty: "Mostrando 0 a 0 de 0 registros",
-                            infoFiltered: "(filtrado de _MAX_ registros)",
-                            zeroRecords: "No se encontraron registros",
-                            emptyTable: "No hay datos disponibles en la tabla"
-                        },
-                        paging:    false,
-                        searching: true,
-                        info:      true,
-                        order:     []
-                    };
-
-                    $('#tabla-3er-ciclo').DataTable(opcionesDataTable);
-                    $('#tabla-nivel-medio').DataTable(opcionesDataTable);
-
-                } else {
-                    alert("Error crítico: jQuery no se ha cargado. Revise app.blade.php");
-                }
-            };
-        </script>
-    @endpush
 </x-app-layout>
