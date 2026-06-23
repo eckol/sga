@@ -32,6 +32,8 @@ use App\Http\Controllers\Academica\EntrevistaController;
 use App\Http\Controllers\Academica\RegistroAnecdoticoController;
 use App\Http\Controllers\Academica\AlumnoGradoController;
 use App\Http\Controllers\Academica\AvisoController;
+use App\Http\Controllers\TipoDocumentoController;
+use App\Http\Controllers\DocumentoController;
 
 
 
@@ -65,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('estadosciviles', EstadoCivilController::class)->except(['create', 'show', 'edit']);
     Route::resource('tiposcolaboradores', TipoColaboradorController::class)->except(['create', 'show', 'edit']);
     Route::resource('asignaturas', AsignaturaController::class)->except(['create', 'show', 'edit']);
+    Route::resource('tipos-documentos', TipoDocumentoController::class)->except(['create', 'show', 'edit']);
     Route::resource('indicadores_faltas', IndicadoresFaltasController::class)->except(['create', 'show', 'edit']);
     Route::resource('asignaturas-colaboradores', AsignaturaColaboradorController::class)
         ->only(['index', 'store', 'update', 'destroy'])
@@ -82,6 +85,10 @@ Route::middleware('auth')->group(function () {
         ->name('portal_responsables.alumno.registros-anecdoticos');
     Route::patch('inscripciones/{id}/alumno-nuevo', [InscripcionController::class, 'toggleAlumnoNuevo'])->name('inscripciones.toggleAlumnoNuevo');
 
+    // Procesar la carga de documentos (Array de archivos tipo FILE)
+    Route::post('/alumnos/{alumno}/documentos', [DocumentoController::class, 'store'])->name('alumnos.documentos.store');
+    // Descarga segura desde storage/app/private
+    Route::get('/documentos/{documento}', [DocumentoController::class, 'show'])->name('documentos.show');
 
 });
 

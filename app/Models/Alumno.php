@@ -174,4 +174,8 @@ class Alumno extends Model
 
         return array_unique(array_filter($emails));
     }
+    public function documentos(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\Documento::class);
+    }
 }

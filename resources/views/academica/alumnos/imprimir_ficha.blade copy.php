@@ -7,7 +7,7 @@
     <style>
         @page {
             size: 215.9mm 330mm;
-            /* Oficio */
+            /* Folio */
             margin-top: 15mm;
             margin-right: 15mm;
             margin-bottom: 15mm;
@@ -62,7 +62,7 @@
         }
 
         .section {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             clear: both;
         }
 
@@ -70,7 +70,7 @@
             font-size: 10pt;
             font-weight: bold;
             border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             padding-bottom: 2px;
             text-transform: uppercase;
         }
@@ -409,11 +409,11 @@
 
             @foreach($tiposRequeridos as $tipoId => $etiqueta)
                 @if($docsCargados->has($tipoId))
-                    <div style="margin-bottom: 20px;">
-                        <div class="label" style="font-size: 10pt; margin-bottom: 3px; text-decoration: none;">
+                    <div style="margin-bottom: 25px;">
+                        <div class="label" style="font-size: 10pt; margin-bottom: 5px; text-decoration: none;">
                             {{ $etiqueta }}</div>
                         <img src="{{ route('documentos.show', $docsCargados[$tipoId]->id) }}"
-                            style="max-width: 550px; max-height: 350px; border: 1px solid #ddd; padding: 2px; border-radius: 4px; object-fit: contain;">
+                            style="max-width: 500px; max-height: 350px; border: 1px solid #ddd; padding: 3px; border-radius: 4px; object-fit: contain;">
                     </div>
                 @endif
             @endforeach

@@ -1,0 +1,11 @@
+﻿id;tipo_documento
+1;Cédula Id. Alumno
+2;Partida Nacimiento
+3;Cédula  Id. Madre
+4;Cédula Id. Padre
+5;Cédula Id. Encargado
+6;Pasaporte
+7;Pasaporte Madre
+8;Pasaporte Padre
+9;Pasaporte Encargado
+10;Certificado Médico

@@ -367,6 +367,8 @@
                     <a href="{{ route('tiposcolaboradores.index') }}" class="nav-link">Tipos de Colaboradores</a>
                     <a href="{{ route('asignaturas.index') }}" class="nav-link">Asignaturas</a>
                     <a href="{{ route('indicadores_faltas.index') }}" class="nav-link">Indicadores de Faltas</a>
+                    <a href="{{ route('tipos-documentos.index') }}" class="nav-link">Tipos de documentos</a>
+
                 </div>
 
                 <button type="button" class="menu-header" data-target="menuSeguridad">

@@ -220,6 +220,13 @@
                             <i class="fas fa-calendar-alt me-1"></i>Cal. Exámenes
                         </button>
                     </li>
+                    <li class="nav-item">
+                        <button class="nav-link py-1" id="documentos-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab-documentos" type="button" role="tab" aria-controls="tab-documentos"
+                            aria-selected="false">
+                            Documentos
+                        </button>
+                    </li>
                 </ul>
 
                 <div class="tab-content pt-2" id="modalAlumnoTabsContent">
@@ -763,6 +770,51 @@
                                 Cargando calendario...
                             </div>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab-documentos" role="tabpanel" aria-labelledby="documentos-tab">
+                        {{-- NO USAR <form> aquí: está anidado dentro de #formEditar y el navegador lo ignora --}}
+                            {{-- En su lugar, el botón envia los archivos vía AJAX --}}
+                            <input type="hidden" id="doc_csrf_token" value="{{ csrf_token() }}">
+                            <div class="p-3">
+                                <p class="text-muted small">Formatos permitidos: .jpg, .jpeg. Almacenamiento protegido
+                                    de
+                                    forma privada.</p>
+
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover align-middle shadow-sm custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo de Documento</th>
+                                                <th>Seleccionar Archivo (.jpg)</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody-documentos-alumno">
+                                            @foreach(\App\Models\TipoDocumento::all() as $tipo)
+                                                <tr data-tipo-id="{{ $tipo->id }}">
+                                                    <td>
+                                                        <span class="fw-bold">{{ $tipo->tipo_documento }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="file" data-tipo-id="{{ $tipo->id }}"
+                                                            accept="image/jpeg, image/jpg"
+                                                            class="form-control form-control-sm doc-file-input">
+                                                    </td>
+                                                    <td class="estado-documento">
+                                                        <span class="badge bg-secondary">Pendiente</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="text-end mt-3">
+                                    <button type="button" id="btn-subir-documentos" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-upload"></i> Subir Documentación
+                                    </button>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

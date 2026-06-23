@@ -463,6 +463,25 @@
                                 });
                             }
                             dtEntrevistas.draw();
+
+                            // Guardar URL de subida para el botón de Documentos
+                            _docUploadUrl = "{{ url('alumnos') }}/" + d.id + "/documentos";
+
+                            // Limpiar estado
+                            $('#tbody-documentos-alumno tr').each(function() {
+                                $(this).find('.estado-documento').html('<span class="badge bg-secondary">Pendiente</span>');
+                            });
+
+                            if (res.documentos && res.documentos.length > 0) {
+                                res.documentos.forEach(doc => {
+                                    let tr = $('#tbody-documentos-alumno').find('tr[data-tipo-id="'+doc.tipo_documento_id+'"]');
+                                    if (tr.length > 0) {
+                                        let url = "{{ url('documentos') }}/" + doc.id;
+                                        let btn = `<a href="${url}" target="_blank" class="btn btn-xs btn-outline-success d-inline-flex align-items-center gap-1" title="Original: ${doc.nombre_original}"><i class="fas fa-eye"></i> Ver archivo</a>`;
+                                        tr.find('.estado-documento').html(btn);
+                                    }
+                                });
+                            }
                         })
                         .fail(function () {
                             $('#info_madre_nombre, #info_padre_nombre, #info_encargado_nombre').val('Error al cargar');
@@ -711,6 +730,88 @@
                 // Recargar montos si el usuario cambia grado o año en el modal
                 $(document).on('change', '#select_grado_nuevo, #ins_anio_lectivo', function() {
                     cargarMontosInscripcion();
+                });
+
+                // ── Envío AJAX de Documentos (sin form anidado) ─────────────
+                // Guardamos la URL de destino cuando se abre el modal de edición (ver más arriba)
+                var _docUploadUrl = '';
+
+                $(document).on('click', '#btn-subir-documentos', function() {
+                    if (!_docUploadUrl) {
+                        alert('Error interno: no se definió la URL de subida. Cierra y vuelve a abrir el modal.');
+                        return;
+                    }
+
+                    // Construir FormData manualmente (los <input type="file"> NO son parte de ningún form)
+                    var formData = new FormData();
+                    var hayArchivo = false;
+
+                    $('.doc-file-input').each(function() {
+                        var tipoId = $(this).data('tipo-id');
+                        var file   = this.files[0];
+                        if (file) {
+                            formData.append('documentos[' + tipoId + ']', file);
+                            hayArchivo = true;
+                        }
+                    });
+
+                    if (!hayArchivo) {
+                        alert('Seleccione al menos un archivo para subir.');
+                        return;
+                    }
+
+                    // Agregar CSRF token
+                    formData.append('_token', $('#doc_csrf_token').val());
+
+                    var $btn = $(this);
+                    $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-1"></span>Subiendo...');
+
+                    $.ajax({
+                        url:         _docUploadUrl,
+                        type:        'POST',
+                        data:        formData,
+                        processData: false,
+                        contentType: false,
+                        headers:     { 'X-Requested-With': 'XMLHttpRequest' },
+                        success: function(res) {
+                            if (res.success) {
+                                // Resetear todos a "Pendiente" primero
+                                $('#tbody-documentos-alumno tr').each(function() {
+                                    $(this).find('.estado-documento').html('<span class="badge bg-secondary">Pendiente</span>');
+                                });
+                                // Marcar los documentos guardados/existentes
+                                (res.documentos || []).forEach(function(doc) {
+                                    var tr = $('#tbody-documentos-alumno').find('tr[data-tipo-id="' + doc.tipo_documento_id + '"]');
+                                    if (tr.length) {
+                                        var docUrl = "{{ url('documentos') }}/" + doc.id;
+                                        var link = '<a href="' + docUrl + '" target="_blank" class="btn btn-xs btn-outline-success d-inline-flex align-items-center gap-1" title="' + doc.nombre_original + '"><i class="fas fa-eye"></i> Ver archivo</a>';
+                                        tr.find('.estado-documento').html(link);
+                                    }
+                                });
+                                // Limpiar los inputs file
+                                $('.doc-file-input').val('');
+                                // Feedback visual
+                                $btn.html('<i class="fas fa-check me-1"></i>¡Guardado!').addClass('btn-success').removeClass('btn-primary');
+                                setTimeout(function() {
+                                    $btn.prop('disabled', false)
+                                        .html('<i class="fas fa-upload"></i> Subir Documentación')
+                                        .removeClass('btn-success').addClass('btn-primary');
+                                }, 2500);
+                            }
+                        },
+                        error: function(xhr) {
+                            var msg = 'Error al subir. Verifique el formato (sólo jpg/jpeg, máx. 3 MB).';
+                            if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                                msg = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                            } else if (xhr.status === 419) {
+                                msg = 'Token CSRF expirado. Recargue la página e intente de nuevo.';
+                            } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                                msg = xhr.responseJSON.message;
+                            }
+                            alert(msg);
+                            $btn.prop('disabled', false).html('<i class="fas fa-upload"></i> Subir Documentación');
+                        }
+                    });
                 });
 
 

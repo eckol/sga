@@ -83,7 +83,8 @@ class AlumnoGradoController extends Controller
             'registrosAnecdoticos.asignatura',
             'registrosAnecdoticos.gradoCurso',
             'entrevistasAlumnos',
-            'entrevistasResponsables'
+            'entrevistasResponsables',
+            'documentos'
         ])
             ->findOrFail($id);
 
@@ -179,6 +180,13 @@ class AlumnoGradoController extends Controller
                     'grado_curso_id' => $r->grado_curso_id,
                     'alumno_id' => $r->alumno_id,
                     'detalle' => $r->detalle,
+                ];
+            }),
+            'documentos' => $alumno->documentos->map(function ($doc) {
+                return [
+                    'id' => $doc->id,
+                    'tipo_documento_id' => $doc->tipo_documento_id,
+                    'nombre_original' => $doc->nombre_original,
                 ];
             }),
         ]);
